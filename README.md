@@ -1,1 +1,1 @@
-#Some sort of Android application for the project in course TDA367
+#An awesome 2D game for the desktop. Developed for course TDA367.
