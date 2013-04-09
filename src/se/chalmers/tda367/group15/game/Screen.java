@@ -1,4 +1,4 @@
-package main;
+package se.chalmers.tda367.group15.game;
 
 import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;

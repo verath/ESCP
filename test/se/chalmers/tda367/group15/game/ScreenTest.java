@@ -1,4 +1,4 @@
-package main;
+package se.chalmers.tda367.group15.game;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import se.chalmers.tda367.group15.game.Screen;
 
 public class ScreenTest {
 	
