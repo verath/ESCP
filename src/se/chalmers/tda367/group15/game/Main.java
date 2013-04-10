@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 
 import se.chalmers.tda367.group15.game.models.PsychoHero;
 import se.chalmers.tda367.group15.game.models.PsychoHeroFactory;
+import se.chalmers.tda367.group15.game.models.PsychoHeroGame;
 
 /**
  * Starting point of the game.
@@ -14,8 +15,8 @@ import se.chalmers.tda367.group15.game.models.PsychoHeroFactory;
 public class Main {
 
 	public static void main(String[] args) {
-		final PsychoHero psychoHero = PsychoHeroFactory.getPsychoHero();
+		final PsychoHeroGame game = PsychoHeroFactory.createPsychoHeroGame();
 		
-		psychoHero.start();
+		game.start();
 	}
 }

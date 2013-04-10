@@ -5,7 +5,7 @@ package se.chalmers.tda367.group15.game.models;
  * @author Peter
  *
  */
-public class PsychoHero {
+public class PsychoHero implements PsychoHeroGame {
 	
 	/**
 	 * Starts the game

@@ -11,9 +11,9 @@ public class PsychoHeroFactory {
 	 * Creates a new PsychoHero game.
 	 * @return
 	 */
-	public static PsychoHero getPsychoHero() {
-		// TODO Auto-generated method stub
-		return null;
+	// TODO allow for specifying arguments to return a different PHGame
+	public static PsychoHeroGame createPsychoHeroGame() {
+		return new PsychoHero();
 	}
 
 }
