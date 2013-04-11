@@ -8,13 +8,28 @@ package se.chalmers.tda367.group15.game.models;
  */
 public class PsychoHero implements PsychoHeroGame {
 	private Thread gameThread;
+	private boolean isRunning = false;
 	
 	/**
-	 * Starts the game
+	 * Constructor for the PsychoHero game.
+	 */
+	public PsychoHero() {
+		gameThread = new Thread(new GameThread());
+	}
+	
+	/**
+	 * Starts the game loop.
 	 */
 	public void start() {
-		gameThread = new Thread(new GameThread());
+		isRunning = true;
 		gameThread.start();
+	}
+	
+	/**
+	 * Stops the game loop.
+	 */
+	public void stop() {
+		isRunning = false;
 	}
 
 	/**
@@ -26,7 +41,14 @@ public class PsychoHero implements PsychoHeroGame {
 	private class GameThread implements Runnable {
 		@Override
 		public void run() {
-			//TODO: Do stuff here.
+			while(isRunning) {
+				try {
+					// TODO: do stuff here.
+					Thread.sleep(20);
+	            } catch (InterruptedException e){
+	            }
+				
+			}
 		}
 
 	}
