@@ -11,8 +11,8 @@
 
 # Include libraries
 
-!/libs/*.jar
-!/libs/*.zip
+!/lib/*.jar
+!/lib/*.zip
 
 
 ########
