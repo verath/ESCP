@@ -6,20 +6,22 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import se.chalmers.tda367.group15.game.models.Room;
+
 public class RoomManagerTest {
 	
 	@Test(expected = RoomDoesNotExistException.class)
 	public void addRoomAboveNonExistingRoom() {
 		RoomManager rm = new RoomManager();
-		Room r1 = new Room();
-		Room r2 = new Room();
+		Room r1 = new BasicRoom();
+		Room r2 = new BasicRoom();
 		rm.addRoomAbove(r1, r2);
 	}
 	
 	@Test
 	public void addRoomAsStartingRoom() {
 		RoomManager rm = new RoomManager();
-		Room r1 = new Room();
+		Room r1 = new BasicRoom();
 		rm.addStartingRoom(r1);
 		assertEquals(r1, rm.getCurrentRoom());
 	}
@@ -27,8 +29,8 @@ public class RoomManagerTest {
 	@Test
 	public void addRoomAboveRoom(){
 		RoomManager rm = new RoomManager();
-		Room r1 = new Room();
-		Room r2 = new Room();
+		Room r1 = new BasicRoom();
+		Room r2 = new BasicRoom();
 		
 		rm.addStartingRoom(r1);
 		rm.addRoomAbove(r1, r2);
@@ -40,8 +42,8 @@ public class RoomManagerTest {
 	@Test
 	public void addRoomBelowRoom(){
 		RoomManager rm = new RoomManager();
-		Room r1 = new Room();
-		Room r2 = new Room();
+		Room r1 = new BasicRoom();
+		Room r2 = new BasicRoom();
 		
 		rm.addStartingRoom(r1);
 		rm.addRoomBelow(r1, r2);
@@ -53,8 +55,8 @@ public class RoomManagerTest {
 	@Test
 	public void addRoomLeftOfRoom(){
 		RoomManager rm = new RoomManager();
-		Room r1 = new Room();
-		Room r2 = new Room();
+		Room r1 = new BasicRoom();
+		Room r2 = new BasicRoom();
 		
 		rm.addStartingRoom(r1);
 		rm.addRoomLeftOf(r1, r2);
@@ -66,8 +68,8 @@ public class RoomManagerTest {
 	@Test
 	public void addRoomRightOfRoom(){
 		RoomManager rm = new RoomManager();
-		Room r1 = new Room();
-		Room r2 = new Room();
+		Room r1 = new BasicRoom();
+		Room r2 = new BasicRoom();
 		
 		rm.addStartingRoom(r1);
 		rm.addRoomRightOf(r1, r2);

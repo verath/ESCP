@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import se.chalmers.tda367.group15.game.models.Room;
+
 /**
  * A class for abstractly handling rooms.
  * 
