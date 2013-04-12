@@ -6,5 +6,5 @@ package se.chalmers.tda367.group15.game.models;
  *
  */
 public interface Player {
-
+	// This is a player FFW!
 }
