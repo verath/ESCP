@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
  * @author simon
  *
  */
-public class Hero extends Player implements AnimatedModel {
+public class Hero extends Player implements AnimatedModel{
 	private Image[] movementUp = new Image[1];
 	private Image[] movementDown = new Image[1];
 	private Image[] movementLeft = new Image[1];
