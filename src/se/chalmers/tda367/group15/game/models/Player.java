@@ -8,32 +8,59 @@ import org.newdawn.slick.Animation;
  *
  */
 public abstract class Player {
-	private float x, y, vel;
+	private float x, y, velocity;
 	
-	
+	/**
+	 * Method for getting the x coordinate of the player.
+	 * @return x coordinate
+	 */
 	public float getX() {
 		return x;
 	}
 	
+	/**
+	 * Method for getting the y coordinate of the player.
+	 * @return y coordinate
+	 */
 	public float getY() {
 		return y;
 	}
 	
-	public float getVel() {
-		return vel;
+	/**
+	 * Method for getting the movement velocity of the player.
+	 * @return the velocity
+	 */
+	public float getVelocity() {
+		return velocity;
 	}
 	
+	/**
+	 * Method for setting the x coordinate of the player.
+	 * @param x coordinate
+	 */
 	public void setX(float x) {
 		this.x = x;
 	}
 	
+	/**
+	 * Method for setting the y coordinate of the player.
+	 * @param y coordinate
+	 */
 	public void setY(float y) {
 		this.y = y;
 	}
 	
-	public void setVel(float vel) {
-		this.vel = vel;
+	/**
+	 * Method for setting the movement velocity of the player.
+	 * @param velocity
+	 */
+	public void setVelocity(float velocity) {
+		this.velocity = velocity;
 	}
 
-	public abstract Animation getSprite();
+	/**
+	 * Method for getting the current sprite animation of the player.
+	 * @return current sprite animation
+	 */
+	public abstract Animation getCurrentSprite();
 }

@@ -1,18 +1,28 @@
 package se.chalmers.tda367.group15.game.views;
 
+import se.chalmers.tda367.group15.game.models.AnimatedModel;
 import se.chalmers.tda367.group15.game.models.Hero;
-import se.chalmers.tda367.group15.game.models.Player;
 
-public class HeroView implements Renderable {
-	
-	private Player hero;
+public class HeroView implements Renderable, AnimatedModelView{
+
+	private Hero hero;
+
+	/**
+	 * Create a new hero view.
+	 */
 	public HeroView() {
 		hero = new Hero();
 	}
+
 	@Override
 	public void render() {
-		hero.getSprite().draw(hero.getX(), hero.getY());
+		hero.getCurrentSprite().draw(hero.getX(), hero.getY());
 
+	}
+
+	@Override
+	public AnimatedModel getAnimatedModel() {
+		return hero;
 	}
 
 }

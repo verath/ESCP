@@ -6,11 +6,8 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.tda367.group15.game.models.AnimatedObject;
-import se.chalmers.tda367.group15.game.models.Player;
-import se.chalmers.tda367.group15.game.models.PsychoHeroFactory;
+import se.chalmers.tda367.group15.game.models.AnimatedModel;
 import se.chalmers.tda367.group15.game.models.PsychoHeroGame;
 import se.chalmers.tda367.group15.game.models.SlickPsychoHero;
 import se.chalmers.tda367.group15.game.views.Renderable;
@@ -25,32 +22,28 @@ public class PsychoHeroController extends BasicGame {
 
 	private PsychoHeroGame game;
 	private List<Renderable> renderables;
-	private List<AnimatedObject> animations;
-	private TiledMap map;
+	private List<AnimatedModel> animations;
 	public PsychoHeroController(String title) {
 		super(title);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-//		for(Renderable r: renderables) {
-//			r.render();
-//		}
-		map.render(0, 0);
+		for(Renderable r: renderables) {
+			r.render();
+		}
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		game = PsychoHeroFactory.createPsychoHeroGame();
+		game = new SlickPsychoHero();
 		renderables = game.getRenderables();
-		animations = game.getAnimatedObjects();
-		map = new TiledMap("res/levels/untitled.tmx");
-		
+		animations = game.getAnimatedModels();
 	}
 
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
-		for(AnimatedObject a: animations) {
+		for(AnimatedModel a: animations) {
 			a.update(cont, delta);
 		}
 

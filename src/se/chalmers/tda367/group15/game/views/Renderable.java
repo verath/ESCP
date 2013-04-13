@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.views;
 
+
 /**
  * Interface that should be implemented by all renderable views
  * 
