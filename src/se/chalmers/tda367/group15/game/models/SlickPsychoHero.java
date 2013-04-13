@@ -22,11 +22,6 @@ public class SlickPsychoHero implements PsychoHeroGame {
 	private final Room testroom = new BasicRoom();
 
 	/**
-	 * The app container for the currently running Slick2d game. This container
-	 * allows us to start and stop the game.
-	 */
-
-	/**
 	 * Constructor for the PsychoHero game.
 	 * 
 	 * @param gameContainer
