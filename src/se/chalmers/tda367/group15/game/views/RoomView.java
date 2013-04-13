@@ -4,10 +4,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.models.Room;
+import se.chalmers.tda367.group15.game.models.room.RoomManager;
 
 public class RoomView implements Renderable {
 
-	private Room room;
+	private RoomManager roomManager;
 	private TiledMap map;
 
 	/**
@@ -15,10 +16,11 @@ public class RoomView implements Renderable {
 	 * @param the room assigned to the view
 	 * @param the path to the tiled map
 	 */
-	public RoomView(Room room) {
-		this.room = room;
+	public RoomView(Room startingroom) {
+		roomManager = new RoomManager();
+		roomManager.addStartingRoom(startingroom);
 		try {
-			map = new TiledMap(room.getTiledMapPath());
+			map = new TiledMap(roomManager.getCurrentRoom().getTiledMapPath());
 		} catch (SlickException e) {
 			System.out.println("HEJ");
 			e.printStackTrace();
@@ -32,14 +34,6 @@ public class RoomView implements Renderable {
 	 */
 	public TiledMap getTiledMap() {
 		return map;
-	}
-	
-	/**
-	 * Method for getting the room assigned to this object
-	 * @return
-	 */
-	public Room getRoom() {
-		return room;
 	}
 
 	public void render() {
