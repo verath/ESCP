@@ -1,5 +1,9 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.util.List;
+
+import se.chalmers.tda367.group15.game.views.Renderable;
+
 /**
  * Interface for a PsychoHeroGame. Used to allow for the possibility of
  * different implementations of the game.
@@ -17,4 +21,8 @@ public interface PsychoHeroGame {
 	 * Stops the game
 	 */
 	public void stop();
+	
+	public List<Renderable> getRenderables();
+	
+	public List<AnimatedObject> getAnimatedObjects();
 }
