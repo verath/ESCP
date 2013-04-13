@@ -6,6 +6,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.models.AnimatedObject;
 import se.chalmers.tda367.group15.game.models.Player;
@@ -25,15 +26,17 @@ public class PsychoHeroController extends BasicGame {
 	private PsychoHeroGame game;
 	private List<Renderable> renderables;
 	private List<AnimatedObject> animations;
+	private TiledMap map;
 	public PsychoHeroController(String title) {
 		super(title);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		for(Renderable r: renderables) {
-			r.render();
-		}
+//		for(Renderable r: renderables) {
+//			r.render();
+//		}
+		map.render(0, 0);
 	}
 
 	@Override
@@ -41,6 +44,7 @@ public class PsychoHeroController extends BasicGame {
 		game = PsychoHeroFactory.createPsychoHeroGame();
 		renderables = game.getRenderables();
 		animations = game.getAnimatedObjects();
+		map = new TiledMap("res/levels/untitled.tmx");
 		
 	}
 

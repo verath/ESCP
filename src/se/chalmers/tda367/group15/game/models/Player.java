@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.models;
 
+import org.newdawn.slick.Animation;
+
 /**
  * Interface for representing a player.
  * @author simon
@@ -32,4 +34,6 @@ public abstract class Player {
 	public void setVel(float vel) {
 		this.vel = vel;
 	}
+
+	public abstract Animation getSprite();
 }

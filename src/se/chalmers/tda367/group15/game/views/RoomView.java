@@ -17,11 +17,11 @@ public class RoomView implements Renderable {
 	 */
 	public RoomView(Room room) {
 		this.room = room;
-		try {
-			map = new TiledMap(room.getTiledMapPath());
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			map = new TiledMap(room.getTiledMapPath());
+//		} catch (SlickException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

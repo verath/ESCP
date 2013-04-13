@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
@@ -19,9 +20,11 @@ import se.chalmers.tda367.group15.game.views.RoomView;
  */
 public class SlickPsychoHero implements PsychoHeroGame {
 
-	private List<Renderable> renderables;
+	private List<Renderable> renderables = new ArrayList<Renderable>();
+	private List<AnimatedObject> animatedObjs = new ArrayList<AnimatedObject>();
 	private Renderable roomView, heroView;
 	private final Room testroom = new BasicRoom();
+	
 	/**
 	 * The app container for the currently running Slick2d game. This container
 	 * allows us to start and stop the game.
@@ -38,6 +41,9 @@ public class SlickPsychoHero implements PsychoHeroGame {
 		this.gameContainer = gameContainer;
 		roomView = new RoomView(testroom);
 		heroView = new HeroView();
+		renderables.add(roomView);
+//		renderables.add(heroView);
+		
 	}
 
 	/**
@@ -79,6 +85,6 @@ public class SlickPsychoHero implements PsychoHeroGame {
 	}
 
 	public List<AnimatedObject> getAnimatedObjects() {
-		return null;
+		return animatedObjs;
 	}
 }
