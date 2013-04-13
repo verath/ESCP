@@ -14,14 +14,12 @@ import se.chalmers.tda367.group15.game.views.Renderable;
 public interface PsychoHeroGame {
 
 	/**
-	 * Method for getting all the renderable object in the game.
-	 * @return renderable objects
+	 * Starts the game
 	 */
-	public List<Renderable> getRenderables();
+	public void start();
 
 	/**
-	 * Method for getting all the animated models in the game.
-	 * @return animated models
+	 * Stops the game
 	 */
-	public List<AnimatedModel> getAnimatedModels();
+	public void stop();
 }
