@@ -1,5 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.SlickException;
+
 /**
  * Class representing a Psycho Hero game using the Slick2d framework.
  * 
@@ -7,49 +10,41 @@ package se.chalmers.tda367.group15.game.models;
  * 
  */
 public class SlickPsychoHero implements PsychoHeroGame {
-	private Thread gameThread;
-	private boolean isRunning = false;
+
+	/**
+	 * The app container for the currently running Slick2d game. This container
+	 * allows us to start and stop the game.
+	 */
+	private final AppGameContainer gameContainer;
 
 	/**
 	 * Constructor for the PsychoHero game.
+	 * 
+	 * @param gameContainer
+	 *            The slick game container
 	 */
-	public SlickPsychoHero() {
-		gameThread = new Thread(new GameThread());
+	public SlickPsychoHero(final AppGameContainer gameContainer) {
+		this.gameContainer = gameContainer;
 	}
 
 	/**
-	 * Starts the game loop.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void start() {
-		isRunning = true;
-		gameThread.start();
-	}
-
-	/**
-	 * Stops the game loop.
-	 */
-	public void stop() {
-		isRunning = false;
-	}
-
-	/**
-	 * An inner class representing the thread used to run the game logic.
-	 * 
-	 * @author Peter
-	 * 
-	 */
-	private class GameThread implements Runnable {
-		@Override
-		public void run() {
-			while (isRunning) {
-				try {
-					// TODO: do stuff here.
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-				}
-
-			}
+		try {
+			gameContainer.start();
+		} catch (SlickException e) {
+			// TODO handle exception?
+			e.printStackTrace();
 		}
+	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void stop() {
+		gameContainer.exit();
 	}
 }

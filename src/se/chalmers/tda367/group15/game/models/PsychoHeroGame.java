@@ -8,5 +8,13 @@ package se.chalmers.tda367.group15.game.models;
  * 
  */
 public interface PsychoHeroGame {
+	/**
+	 * Starts the game
+	 */
 	public void start();
+	
+	/**
+	 * Stops the game
+	 */
+	public void stop();
 }
