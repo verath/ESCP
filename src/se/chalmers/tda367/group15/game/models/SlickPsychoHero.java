@@ -3,6 +3,8 @@ package se.chalmers.tda367.group15.game.models;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.constants.Constants;
+
 /**
  * Class representing a Psycho Hero game using the Slick2d framework.
  * 
@@ -31,12 +33,25 @@ public class SlickPsychoHero implements PsychoHeroGame {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void start() {
+	public void start() {	
+		// If we are debugging, PRINT THEM INFOS!
+		gameContainer.setVerbose(Constants.DEBUG);
+		
+		// TODO: Allow for changing this resolution
+		try {
+			gameContainer.setDisplayMode(800, 600, false);
+		} catch (SlickException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
 		try {
 			gameContainer.start();
 		} catch (SlickException e) {
 			// TODO handle exception?
 			e.printStackTrace();
+			return;
 		}
 	}
 

@@ -12,4 +12,10 @@ public class Constants {
 	 * The name of the game.
 	 */
 	public static final String GAME_NAME = "Psycho Hero";
+
+	/**
+	 * Boolean controlling whether we should print debug output or not.
+	 */
+	public static final boolean DEBUG = true;
+
 }
