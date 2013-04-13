@@ -42,7 +42,7 @@ public class RoomManager {
 	 * 
 	 * @return True if the room is attached, else False.
 	 */
-	private boolean roomExist(final Room room) {
+	public boolean roomExist(final Room room) {
 		// If room is null, we can discard it at once
 		if (room == null) {
 			return false;
