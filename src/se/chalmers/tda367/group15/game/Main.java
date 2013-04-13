@@ -2,7 +2,7 @@ package se.chalmers.tda367.group15.game;
 
 import javax.swing.SwingUtilities;
 
-import se.chalmers.tda367.group15.game.models.PsychoHero;
+import se.chalmers.tda367.group15.game.models.SlickPsychoHero;
 import se.chalmers.tda367.group15.game.models.PsychoHeroFactory;
 import se.chalmers.tda367.group15.game.models.PsychoHeroGame;
 

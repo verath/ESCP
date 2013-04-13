@@ -1,22 +1,22 @@
 package se.chalmers.tda367.group15.game.models;
 
 /**
- * Class representing the entire game.
+ * Class representing a Psycho Hero game using the Slick2d framework.
  * 
  * @author Peter
  * 
  */
-public class PsychoHero implements PsychoHeroGame {
+public class SlickPsychoHero implements PsychoHeroGame {
 	private Thread gameThread;
 	private boolean isRunning = false;
-	
+
 	/**
 	 * Constructor for the PsychoHero game.
 	 */
-	public PsychoHero() {
+	public SlickPsychoHero() {
 		gameThread = new Thread(new GameThread());
 	}
-	
+
 	/**
 	 * Starts the game loop.
 	 */
@@ -24,7 +24,7 @@ public class PsychoHero implements PsychoHeroGame {
 		isRunning = true;
 		gameThread.start();
 	}
-	
+
 	/**
 	 * Stops the game loop.
 	 */
@@ -41,13 +41,13 @@ public class PsychoHero implements PsychoHeroGame {
 	private class GameThread implements Runnable {
 		@Override
 		public void run() {
-			while(isRunning) {
+			while (isRunning) {
 				try {
 					// TODO: do stuff here.
 					Thread.sleep(20);
-	            } catch (InterruptedException e){
-	            }
-				
+				} catch (InterruptedException e) {
+				}
+
 			}
 		}
 

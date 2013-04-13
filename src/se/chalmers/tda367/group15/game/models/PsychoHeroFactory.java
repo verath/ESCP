@@ -13,7 +13,7 @@ public class PsychoHeroFactory {
 	 */
 	// TODO allow for specifying arguments to return a different PHGame
 	public static PsychoHeroGame createPsychoHeroGame() {
-		return new PsychoHero();
+		return new SlickPsychoHero();
 	}
 
 }
