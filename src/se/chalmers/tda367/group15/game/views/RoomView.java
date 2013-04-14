@@ -10,6 +10,7 @@ import se.chalmers.tda367.group15.game.views.room.RoomManager;
 public class RoomView implements View {
 
 	private final RoomManager roomManager;
+	private TiledMap map;
 
 	/**
 	 * Create a new room view
@@ -18,23 +19,16 @@ public class RoomView implements View {
 	 */
 	public RoomView(final RoomManager roomManager) {
 		this.roomManager = roomManager;
+
 	}
 
-
 	@Override
-	public void render(GameContainer container, Graphics g) {
-		TiledMap map;
-		try {
-			map = new TiledMap(roomManager.getCurrentRoom().getTiledMapPath());
-		} catch (SlickException e) {
-			e.printStackTrace();
-			return;
-		}
+	public void render(GameContainer container, Graphics g) throws SlickException {
 		map.render(0, 0);
 	}
 
 	@Override
-	public void init(GameContainer container) {
-		// TODO Load images here
+	public void init(GameContainer container) throws SlickException {
+		map = new TiledMap(roomManager.getCurrentRoom().getTiledMapPath());
 	}
 }

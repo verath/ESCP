@@ -23,7 +23,7 @@ public class HeroView implements View {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g) {
+	public void render(GameContainer container, Graphics g) throws SlickException {
 		Animation a = null;
 		switch(hero.getCurrentFacing()) {
 		case Down:
@@ -39,9 +39,8 @@ public class HeroView implements View {
 			a = right;
 			break;
 		}
-		if(a != null) {
-			a.draw(hero.getX(), hero.getY());
-		}
+		
+		a.draw(hero.getX(), hero.getY());
 	}
 
 	@Override
