@@ -24,18 +24,15 @@ public class PsychoHeroFactory {
 	// TODO allow for specifying arguments to return a different PsychoHeroGame
 	public static PsychoHeroGame createPsychoHeroGame() {
 
-		// Set up our game based starting point, ie. the main controller
 		PsychoHeroController slickGame = new PsychoHeroController(
 				Constants.GAME_NAME);
 
-		// Set up the container (this is kind of like the JFrame if one would
-		// have used swing)
+		// Set up the container (this is kind of like the JFrame in swing)
 		AppGameContainer gameContainer;
 		try {
 			gameContainer = new AppGameContainer(slickGame);
-			// If we are debugging, PRINT THEM INFOS!
 			gameContainer.setVerbose(Constants.DEBUG);
-			// TODO: Allow for changing this resolution
+			// TODO Allow for changing this resolution
 			gameContainer.setDisplayMode(1024, 768, false);
 		} catch (SlickException e) {
 			// TODO handle exception? Probably can't at this stage
@@ -43,8 +40,6 @@ public class PsychoHeroFactory {
 			return null;
 		}
 
-		// Finally set up our PsychoHeroGame representation for the slick
-		// implementation
 		SlickPsychoHero psychoHeroGame = new SlickPsychoHero(gameContainer);
 
 		return psychoHeroGame;
