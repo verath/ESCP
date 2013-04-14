@@ -9,7 +9,7 @@ import org.newdawn.slick.Input;
 /**
  * Class representing the model of a hero.
  * 
- * @author simon, Carl
+ * @author simon, Carl, tholene
  * 
  */
 public class Hero extends Player implements Model {
@@ -31,9 +31,9 @@ public class Hero extends Player implements Model {
 		// TODO fix hardcoded values..
 		setX(34f);
 		setY(34f);
-		setVelocity(0.5f);
-		this.heroPicWidth = 32;
-		this.heroPicHeight = 32;
+		setVelocity(0.15f);
+		this.heroPicWidth = 64;
+		this.heroPicHeight = 64;
 
 	}
 
@@ -45,10 +45,10 @@ public class Hero extends Player implements Model {
 		float mouseY = input.getMouseY();
 		rotation = Math.toDegrees( Math.atan2( ( heroPicHeight/2 + getY() - mouseY) , ( heroPicWidth/2 + getX() - mouseX ) ) ); // rotation in degrees starting to the left of model
 		
-		goingUp = input.isKeyDown(Input.KEY_UP);
-		goingDown = input.isKeyDown(Input.KEY_DOWN);
-		goingRight = input.isKeyDown(Input.KEY_RIGHT);
-		goingLeft = input.isKeyDown(Input.KEY_LEFT);
+		goingUp = input.isKeyDown(Input.KEY_W) || input.isKeyDown(Input.KEY_UP);
+		goingDown = input.isKeyDown(Input.KEY_S) || input.isKeyDown(Input.KEY_DOWN);
+		goingRight = input.isKeyDown(Input.KEY_D) || input.isKeyDown(Input.KEY_RIGHT);
+		goingLeft = input.isKeyDown(Input.KEY_A) || input.isKeyDown(Input.KEY_LEFT);
 		
 		// TODO fix ugly else if!
 		
@@ -93,5 +93,9 @@ public class Hero extends Player implements Model {
 
 	public double getDirection(){
 		return rotation;
+	}
+	
+	public boolean isMoving() {
+		return goingUp || goingDown || goingLeft || goingRight;
 	}
 }

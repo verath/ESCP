@@ -15,7 +15,7 @@ import se.chalmers.tda367.group15.game.models.Hero;
 /**
  * Class representing the model of a hero.
  * 
- * @author ?????, Carl
+ * @author ?????, Carl, tholene
  * 
  */
 public class HeroView implements View {
@@ -40,6 +40,14 @@ public class HeroView implements View {
 		float rotation = (float) hero.getDirection();
 		
 		if(heroMove != null) {
+			
+			/* We don't want to run the animation if we're not moving */
+			if(!hero.isMoving()) {
+				heroMove.setAutoUpdate(false);
+				heroMove.setCurrentFrame(1);
+			}else {
+				heroMove.setAutoUpdate(true);
+			}
 			heroMove.getCurrentFrame().setRotation( rotation );
 			heroMove.draw(hero.getX(), hero.getY());
 			
@@ -49,9 +57,20 @@ public class HeroView implements View {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		
-		Image[] movement = new Image[1];
-		movement[0] = new Image("res/animation/hero/left/g.png");
-		heroMove = new Animation(movement, 300, false);
+		Image[] movement = {new Image("res/animation/hero/unarmed/1.png"), 
+							new Image("res/animation/hero/unarmed/2.png"), 
+							new Image("res/animation/hero/unarmed/3.png"),
+							new Image("res/animation/hero/unarmed/4.png"),
+							new Image("res/animation/hero/unarmed/5.png"),
+							new Image("res/animation/hero/unarmed/6.png"),
+							new Image("res/animation/hero/unarmed/7.png"),
+							new Image("res/animation/hero/unarmed/8.png"), 
+							new Image("res/animation/hero/unarmed/9.png"),
+							new Image("res/animation/hero/unarmed/10.png"),
+							new Image("res/animation/hero/unarmed/11.png"),
+							new Image("res/animation/hero/unarmed/12.png")
+							};
+		heroMove = new Animation(movement, 80, true);
 	}
 
 }
