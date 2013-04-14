@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.room;
+package se.chalmers.tda367.group15.game.views.room;
 
 import java.awt.Point;
 import java.util.Map;

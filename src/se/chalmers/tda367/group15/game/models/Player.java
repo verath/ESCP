@@ -1,7 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-import org.newdawn.slick.Animation;
-
 /**
  * Interface for representing a player.
  * @author simon
@@ -58,9 +56,4 @@ public abstract class Player {
 		this.velocity = velocity;
 	}
 
-	/**
-	 * Method for getting the current sprite animation of the player.
-	 * @return current sprite animation
-	 */
-	public abstract Animation getCurrentSprite();
 }
