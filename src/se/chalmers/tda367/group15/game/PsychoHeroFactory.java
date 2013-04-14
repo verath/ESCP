@@ -54,6 +54,7 @@ public class PsychoHeroFactory {
 		try {
 			gameContainer = new AppGameContainer(slickGame);
 			gameContainer.setVerbose(Constants.DEBUG);
+			gameContainer.setTargetFrameRate(120);
 			// TODO Allow for changing this resolution
 			gameContainer.setDisplayMode(1024, 768, false);
 		} catch (SlickException e) {
