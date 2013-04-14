@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models;
+package se.chalmers.tda367.group15.game;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;

@@ -1,8 +1,4 @@
-package se.chalmers.tda367.group15.game.models;
-
-import java.util.List;
-
-import se.chalmers.tda367.group15.game.views.Renderable;
+package se.chalmers.tda367.group15.game;
 
 /**
  * Interface for a PsychoHeroGame. Used to allow for the possibility of
