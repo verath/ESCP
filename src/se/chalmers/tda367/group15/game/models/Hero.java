@@ -1,21 +1,27 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.awt.event.KeyEvent;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
+
 
 /**
  * Class representing the model of a hero.
  * 
- * @author simon
+ * @author simon, Carl
  * 
  */
 public class Hero extends Player implements Model {
 	
-	public enum Facing {
-		Up, Left, Right, Down;
-	}
+	private double rotation;
+	private boolean goingUp;
+	private boolean goingDown;
+	private boolean goingRight;
+	private boolean goingLeft;
+	private int heroPicWidth;
+	private int heroPicHeight;
 	
-	private Facing facing = Facing.Right;
 	
 	/**
 	 * Create a new Hero.
@@ -26,28 +32,66 @@ public class Hero extends Player implements Model {
 		setX(34f);
 		setY(34f);
 		setVelocity(0.5f);
+		this.heroPicWidth = 32;
+		this.heroPicHeight = 32;
 
 	}
 
 	@Override
 	public void update(GameContainer cont, int delta) {
 		Input input = cont.getInput();
-		if (input.isKeyDown(Input.KEY_UP)) {
-			facing = Facing.Up;
+		
+		float mouseX = input.getMouseX();
+		float mouseY = input.getMouseY();
+		rotation = Math.toDegrees( Math.atan2( ( heroPicHeight/2 + getY() - mouseY) , ( heroPicWidth/2 + getX() - mouseX ) ) ); // rotation in degrees starting to the left of model
+		
+		goingUp = input.isKeyDown(Input.KEY_UP);
+		goingDown = input.isKeyDown(Input.KEY_DOWN);
+		goingRight = input.isKeyDown(Input.KEY_RIGHT);
+		goingLeft = input.isKeyDown(Input.KEY_LEFT);
+		
+		// TODO fix ugly else if!
+		
+		if ( goingUp && goingLeft && !goingRight && !goingDown ) { // up & left
+			
+			this.setY( (float) (this.getY() - (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			this.setX( (float) (this.getX() - (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			
+		} else if ( goingUp && goingRight && !goingLeft && !goingDown ) { // up & right
+			
+			this.setY( (float) (this.getY() - (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			this.setX( (float) (this.getX() + (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			
+		} else if ( goingUp && !goingDown ) { // up
+			
 			this.setY(this.getY() - delta * this.getVelocity());
-		} else if (input.isKeyDown(Input.KEY_DOWN)) {
-			facing = Facing.Down;
+			
+		}else if ( goingLeft && goingDown && !goingUp && !goingRight ) { // down & left
+			
+			this.setY( (float) (this.getY() + (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			this.setX( (float) (this.getX() - (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			
+		} else if ( goingRight && goingDown && !goingUp && !goingLeft  ) { // down & right
+			
+			this.setY( (float) (this.getY() + (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			this.setX( (float) (this.getX() + (delta * this.getVelocity() * Math.sin( Math.PI / 4)) ) );
+			
+		} else if ( goingDown && !goingUp ) { // down
+			
 			this.setY(this.getY() + delta * this.getVelocity());
-		} else if (input.isKeyDown(Input.KEY_LEFT)) {
-			facing = Facing.Left;
+			
+		} else if ( goingLeft && !goingRight ) { // left
+			
 			this.setX(this.getX() - delta * this.getVelocity());
-		} else if (input.isKeyDown(Input.KEY_RIGHT)) {
-			facing = Facing.Right;
+			
+		} else if ( goingRight && !goingLeft ) { // right
+			
 			this.setX(this.getX() + delta * this.getVelocity());
 		}
+		
 	}
 
-	public Facing getCurrentFacing() {
-		return this.facing;
+	public double getDirection(){
+		return rotation;
 	}
 }
