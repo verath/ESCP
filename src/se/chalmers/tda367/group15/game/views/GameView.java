@@ -14,28 +14,48 @@ import org.newdawn.slick.SlickException;
  * 
  */
 public class GameView implements View {
+	/**
+	 * List of views that should be forwarded the render and init.
+	 */
 	private List<View> views = new ArrayList<View>();
 
+	/**
+	 * Creates a new GameView
+	 */
 	public GameView() {
 	}
-
-	public void render(GameContainer container, Graphics g) throws SlickException {
+	
+	@Override
+	public void render(GameContainer container, Graphics g)
+			throws SlickException {
 		for (View v : views) {
 			v.render(container, g);
 		}
 	}
 
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		for (View v : views) {
 			v.init(container);
 		}
 	}
-	
-	public boolean addView(View v) {
-		return views.add(v);
+
+	/**
+	 * Adds a view to the GameView, this will make it receiving render and init.
+	 * 
+	 * @param view
+	 */
+	public void addView(View view) {
+		views.add(view);
 	}
 
-	public boolean removeView(View v) {
-		return views.remove(v);
+	/**
+	 * Removes a view from the GameView, this will stop it from receiving render
+	 * and init.
+	 * 
+	 * @param view
+	 */
+	public void removeView(View view) {
+		views.remove(view);
 	}
 }

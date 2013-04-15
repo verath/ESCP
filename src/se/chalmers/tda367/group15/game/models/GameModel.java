@@ -13,10 +13,16 @@ import org.newdawn.slick.SlickException;
  * 
  */
 public class GameModel implements Model {
-	List<Model> models;
 
+	/**
+	 * List of models that should be forwarded the update.
+	 */
+	private List<Model> models = new ArrayList<Model>();
+
+	/**
+	 * Creates a new GameModel
+	 */
 	public GameModel() {
-		models = new ArrayList<Model>();
 	}
 
 	@Override
@@ -26,12 +32,24 @@ public class GameModel implements Model {
 			m.update(container, delta);
 		}
 	}
-	
-	public boolean addModel(Model m) {
-		return models.add(m);
+
+	/**
+	 * Adds a model to the GameModel. This will register the model for receiving
+	 * update calls.
+	 * 
+	 * @param model
+	 */
+	public void addModel(Model model) {
+		models.add(model);
 	}
 
-	public boolean removeModel(Model m) {
-		return models.remove(m);
+	/**
+	 * Removes a model from the GameModel. This will unregister the model for
+	 * receiving update calls.
+	 * 
+	 * @param model
+	 */
+	public void removeModel(Model model) {
+		models.remove(model);
 	}
 }
