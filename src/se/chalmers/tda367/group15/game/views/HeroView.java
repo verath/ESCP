@@ -42,10 +42,9 @@ public class HeroView implements View {
 
 		// We don't want to run the animation if we're not moving
 		if (!hero.isMoving()) {
-			heroMove.setAutoUpdate(false);
-			heroMove.setCurrentFrame(1);
-		} else {
-			heroMove.setAutoUpdate(true);
+			heroMove.stop();
+		} else if (heroMove.isStopped()) {
+			heroMove.start();
 		}
 		// rotates the current frame
 		g.rotate(hero.getX() + heroMove.getWidth()/2, hero.getY() + heroMove.getHeight()/2, rotation);
@@ -70,7 +69,7 @@ public class HeroView implements View {
 				new Image("res/animation/hero/unarmed/10.png"),
 				new Image("res/animation/hero/unarmed/11.png"),
 				new Image("res/animation/hero/unarmed/12.png") };
-		heroMove = new Animation(movement, 80, false);
+		heroMove = new Animation(movement, 80, true);
 	}
 
 }
