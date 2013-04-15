@@ -92,8 +92,6 @@ public class RoomManager {
 		} else {
 			rooms.put(STARTING_POINT, room);
 		}
-		
-		generateCollisionBounds();
 	}
 
 	private Point getRoomPosition(Room room) {
@@ -113,6 +111,12 @@ public class RoomManager {
 		}
 	}
 	
+	/**
+	 * Method for adding a room at a position relative to a reference room.
+	 * @param reference room
+	 * @param new room
+	 * @param relative position
+	 */
 	public void addRoom(final Room reference, final Room room, RelativePos relPos ) {
 		Point addPosition = getRoomPosition(reference);
 		switch(relPos) {
@@ -130,8 +134,6 @@ public class RoomManager {
 			break;
 		}
 		rooms.put(addPosition, room);
-
-		
 	}
 
 	/**
@@ -177,6 +179,9 @@ public class RoomManager {
 		return collisionBounds;
 	}
 	
+	/**
+	 * Generates the list of collision bounds for the current map.
+	 */
 	private void generateCollisionBounds() {
 		TiledMap map = null;
 		try {

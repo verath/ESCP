@@ -1,7 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-import java.awt.event.KeyEvent;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
@@ -41,6 +39,8 @@ public class Hero extends MovingModel implements Model {
 	public void update(GameContainer cont, int delta) {
 		Input input = cont.getInput();
 		
+		float oldX = getX();
+		float oldY = getY();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
 		rotation = Math.toDegrees( Math.atan2( ( heroPicHeight/2 + getY() - mouseY) , ( heroPicWidth/2 + getX() - mouseX ) ) ); // rotation in degrees starting to the left of model
@@ -89,6 +89,10 @@ public class Hero extends MovingModel implements Model {
 			this.setX(this.getX() + delta * this.getVelocity());
 		}
 		
+		if(isCollision()) {
+			setX(oldX);
+			setY(oldY);
+		}
 	}
 
 	public double getDirection(){

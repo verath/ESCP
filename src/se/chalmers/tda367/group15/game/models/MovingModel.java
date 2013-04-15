@@ -1,16 +1,12 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.views.room.RoomManager;
 
 /**
- * Interface for representing a player.
+ * Interface for representing a moving model.
  * @author simon
  *
  */
@@ -65,7 +61,11 @@ public abstract class MovingModel {
 		this.velocity = velocity;
 	}
 	
-	private boolean iscollision() {
+	/**
+	 * Method for checking if the model has collided with a blocked tile.
+	 * @return true if collision is detected, false otherwise
+	 */
+	public boolean isCollision() {
 		RoomManager manager = RoomManager.getInstance();
 		List<Rectangle2D.Float> collisionBounds = manager.getCollisionBounds();
 		Rectangle2D.Float tmp = new Rectangle2D.Float(getX(), getY(), 64, 64);

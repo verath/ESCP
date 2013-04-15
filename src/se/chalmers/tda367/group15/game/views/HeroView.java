@@ -1,13 +1,9 @@
 package se.chalmers.tda367.group15.game.views;
 
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.Hero;
@@ -23,7 +19,6 @@ public class HeroView implements View {
 	private final Hero hero;
 
 	private Animation heroMove;
-	private AffineTransformOp imgTransform;
 	
 	/**
 	 * Create a new hero view.
