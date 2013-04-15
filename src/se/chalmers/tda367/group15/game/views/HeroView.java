@@ -36,7 +36,6 @@ public class HeroView implements View {
 	@Override
 	public void render(GameContainer container, Graphics g) {
 		
-		
 		float rotation = (float) hero.getDirection();
 		
 		if(heroMove != null) {
@@ -48,7 +47,8 @@ public class HeroView implements View {
 			}else {
 				heroMove.setAutoUpdate(true);
 			}
-			heroMove.getCurrentFrame().setRotation( rotation );
+			// rotates the current frame
+			g.rotate(hero.getX() + 32, hero.getY() +32, rotation);
 			heroMove.draw(hero.getX(), hero.getY());
 			
 		}
@@ -70,7 +70,7 @@ public class HeroView implements View {
 							new Image("res/animation/hero/unarmed/11.png"),
 							new Image("res/animation/hero/unarmed/12.png")
 							};
-		heroMove = new Animation(movement, 80, true);
+		heroMove = new Animation(movement, 200, true);
 	}
 
 }
