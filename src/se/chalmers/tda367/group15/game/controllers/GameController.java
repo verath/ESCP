@@ -16,9 +16,27 @@ import se.chalmers.tda367.group15.game.views.GameView;
  */
 public class GameController extends BasicGame {
 
+	/**
+	 * The GameView, essentially a view container. Should receive render and
+	 * init.
+	 */
 	private final GameView gameView;
+
+	/**
+	 * The GameModel, essentially a model container. Should revive update.
+	 */
 	private final GameModel gameModel;
-	
+
+	/**
+	 * Creates a new GameController
+	 * 
+	 * @param title
+	 *            The title of the game
+	 * @param gameView
+	 *            The GameView that should receive render and init
+	 * @param gameModel
+	 *            The GameModel that should receive update
+	 */
 	public GameController(String title, GameView gameView, GameModel gameModel) {
 		super(title);
 		this.gameView = gameView;
@@ -26,7 +44,8 @@ public class GameController extends BasicGame {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g) throws SlickException {
+	public void render(GameContainer container, Graphics g)
+			throws SlickException {
 		gameView.render(container, g);
 	}
 
@@ -36,9 +55,9 @@ public class GameController extends BasicGame {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, int delta)
+			throws SlickException {
 		gameModel.update(container, delta);
 	}
-
 
 }

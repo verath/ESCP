@@ -10,7 +10,9 @@ import org.newdawn.slick.SlickException;
  * 
  */
 public class SlickPsychoHero implements PsychoHeroGame {
-
+	/**
+	 * The AppGameContainer associated with the current running SlickGame.
+	 */
 	private final AppGameContainer gameContainer;
 
 	/**
