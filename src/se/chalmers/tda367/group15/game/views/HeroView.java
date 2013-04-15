@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.views;
 
-import org.lwjgl.Sys;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -23,11 +22,6 @@ public class HeroView implements View {
 	private final Hero hero;
 
 	/**
-	 * Time when last render occurred. Have to keep track of this for animations
-	 */
-	private long lastUpdate = 0;
-
-	/**
 	 * The move animation
 	 */
 	private Animation heroMove;
@@ -39,15 +33,6 @@ public class HeroView implements View {
 	 */
 	public HeroView(final Hero hero) {
 		this.hero = hero;
-	}
-
-	/**
-	 * Get the accurate system time
-	 * 
-	 * @return The system time in milliseconds
-	 */
-	private long getTime() {
-		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 
 	@Override
