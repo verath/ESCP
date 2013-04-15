@@ -12,7 +12,7 @@ import org.newdawn.slick.Input;
  * @author simon, Carl, tholene
  * 
  */
-public class Hero extends Player implements Model {
+public class Hero extends MovingModel implements Model {
 	
 	private double rotation;
 	private boolean goingUp;

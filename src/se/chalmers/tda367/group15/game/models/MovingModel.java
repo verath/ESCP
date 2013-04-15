@@ -1,11 +1,20 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
+
+import se.chalmers.tda367.group15.game.views.room.RoomManager;
+
 /**
  * Interface for representing a player.
  * @author simon
  *
  */
-public abstract class Player {
+public abstract class MovingModel {
 	private float x, y, velocity;
 	
 	/**
@@ -54,6 +63,19 @@ public abstract class Player {
 	 */
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
+	}
+	
+	private boolean iscollision() {
+		RoomManager manager = RoomManager.getInstance();
+		List<Rectangle2D.Float> collisionBounds = manager.getCollisionBounds();
+		Rectangle2D.Float tmp = new Rectangle2D.Float(getX(), getY(), 64, 64);
+		boolean isCollision = false;
+		for(Rectangle2D.Float r: collisionBounds) {
+			if(r.intersects(tmp)) {
+				isCollision = true;
+			}
+		}
+		return isCollision;
 	}
 
 }
