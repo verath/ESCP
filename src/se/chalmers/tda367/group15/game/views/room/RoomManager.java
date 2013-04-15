@@ -141,6 +141,7 @@ public class RoomManager {
 	 */
 	public Room getCurrentRoom() {
 		return rooms.get(currentPosition);
+		
 	}
 
 	/**
@@ -182,7 +183,7 @@ public class RoomManager {
 	/**
 	 * Generates the list of collision bounds for the current map.
 	 */
-	private void generateCollisionBounds() {
+	public void generateCollisionBounds() {
 		TiledMap map = null;
 		try {
 			map = new TiledMap (this.getCurrentRoom().getTiledMapPath());
