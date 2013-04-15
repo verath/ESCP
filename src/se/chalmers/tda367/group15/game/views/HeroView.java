@@ -48,7 +48,7 @@ public class HeroView implements View {
 			heroMove.setAutoUpdate(true);
 		}
 		// rotates the current frame
-		g.rotate(hero.getX() + 32, hero.getY() + 32, rotation);
+		g.rotate(hero.getX() + heroMove.getWidth()/2, hero.getY() + heroMove.getHeight()/2, rotation);
 		heroMove.draw(hero.getX(), hero.getY());
 		g.resetTransform();
 
