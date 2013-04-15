@@ -36,7 +36,7 @@ public class HeroView implements View {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g) {
+	public void render(GameContainer container, Graphics g) throws SlickException {
 
 		float rotation = (float) hero.getRotation();
 
