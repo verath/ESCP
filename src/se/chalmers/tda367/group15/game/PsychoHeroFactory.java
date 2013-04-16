@@ -18,7 +18,7 @@ import se.chalmers.tda367.group15.game.views.room.RoomManager;
  * Factory class for a PsychoHeroGame.
  * 
  * @author Peter
- * 
+ * s
  */
 public class PsychoHeroFactory {
 

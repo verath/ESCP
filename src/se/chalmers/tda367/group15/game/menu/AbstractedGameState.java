@@ -28,7 +28,6 @@ public abstract class AbstractedGameState extends BasicGameState {
 	   
 	   @Override
 	   public final void init(GameContainer container, StateBasedGame game) {
-	     // resourceManager = ResourceManager.getInstance();
 	      this.setInput(container.getInput());
 	      this.container = container;
 	      this.game = game;

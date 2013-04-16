@@ -13,8 +13,7 @@ public class StateController extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		// TODO Auto-generated method stub
-
+		// while this comment is added this is done in PsychoHeroFactory
 	}
 
 }

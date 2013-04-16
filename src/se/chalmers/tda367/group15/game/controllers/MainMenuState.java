@@ -12,7 +12,7 @@ import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
  * Class originaly taken from tutorial for writing menus in Slick2D
  * Originaly posted on http://slick.javaunlimited.net/
  * by user shiroto
- * remade by Carl Jansson to suit our purposes.
+ * remade by Carl Jansson to suit our purpose.
  * Comments added by Carl Jansson.
  * 
  * @author Carl Jansson
