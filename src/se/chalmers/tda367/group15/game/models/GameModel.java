@@ -28,11 +28,10 @@ public class GameModel implements Model {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta,
-			RoomManager roomManager)
+	public void update(GameContainer container, int delta)
 			throws SlickException {
 		for (Model m : models) {
-			m.update(container, delta, roomManager);
+			m.update(container, delta);
 		}
 	}
 
@@ -43,6 +42,10 @@ public class GameModel implements Model {
 	 * @param model
 	 */
 	public void addModel(Model model) {
+		models.add(model);
+	}
+	
+	public void addModel(MovingModel model) {
 		models.add(model);
 	}
 

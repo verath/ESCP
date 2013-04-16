@@ -9,10 +9,8 @@ import se.chalmers.tda367.group15.game.room.RoomManager;
 public class BasicRoomModel extends AbstractRoomModel {
 
 	@Override
-	public void update(GameContainer container, int delta,
-			RoomManager roomManager) throws SlickException {
+	public void update(GameContainer container, int delta) throws SlickException {
 		// TODO Auto-generated method stub
-		System.out.println("aaa");
 		
 	}
 

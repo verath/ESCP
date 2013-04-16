@@ -28,11 +28,6 @@ public class GameController extends BasicGame {
 	 */
 	private final GameModel gameModel;
 
-	/**
-	 * The RoomManager, an abstract representation of the current room. Needed
-	 * to bridge the gap between collision detection using Slick and the models.
-	 */
-	private final RoomManager roomManager;
 
 	/**
 	 * Creates a new GameController
@@ -50,7 +45,6 @@ public class GameController extends BasicGame {
 		super(title);
 		this.gameView = gameView;
 		this.gameModel = gameModel;
-		this.roomManager = roomManager;
 	}
 
 	@Override
@@ -67,7 +61,7 @@ public class GameController extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		gameModel.update(container, delta, roomManager);
+		gameModel.update(container, delta);
 	}
 
 }

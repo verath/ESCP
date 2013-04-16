@@ -38,8 +38,7 @@ public class Hero extends MovingModel {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta,
-			RoomManager roomManager) throws SlickException {
+	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		float oldX = getX();
 		float oldY = getY();
@@ -73,10 +72,10 @@ public class Hero extends MovingModel {
 		this.setY(this.getY() - (delta * speedY));
 		this.setX(this.getX() - (delta * speedX));
 		
-		if(isCollision(roomManager.getCurrentRoom().getRoomModel().getCollisionBounds())) {
+		/*if(isCollision(roomManager.getCurrentRoom().getRoomModel().getCollisionBounds())) {
 			setX(oldX);
 			setY(oldY);
-		}
+		}*/
 	}
 
 	/**

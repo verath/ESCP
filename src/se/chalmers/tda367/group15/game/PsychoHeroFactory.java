@@ -7,6 +7,7 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.GameController;
 import se.chalmers.tda367.group15.game.models.GameModel;
 import se.chalmers.tda367.group15.game.models.Hero;
+import se.chalmers.tda367.group15.game.models.RoomModel;
 import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
 import se.chalmers.tda367.group15.game.room.Room;
 import se.chalmers.tda367.group15.game.room.RoomManager;
@@ -42,8 +43,14 @@ public class PsychoHeroFactory {
 		// Set up the room manager
 		RoomManager roomManager = new RoomManager();
 		roomManager.addStartingRoom(startingRoom);
+		
+		// Add a view representing the current room
 		RoomView roomView = new RoomView(roomManager);
 		gameView.addView(roomView);
+		
+		// Add a model representing the current room
+		RoomModel roomModel = new RoomModel(roomManager);
+		gameModel.addModel(roomModel);
 
 		// Set up the hero
 		Hero heroModel = new Hero();
