@@ -49,15 +49,14 @@ public class PsychoHeroFactory {
 		PlayState theGameState = new PlayState(gameView, gameModel, Constants.PLAYING);
 		MainMenuState theMainMenu = new MainMenuState( Constants.MAIN_MENU );
 		
+		// Create the state controller, add the states and set active state.
 		StateController theStateController = new StateController(Constants.GAME_NAME);
-
 		theStateController.addState(theGameState);
 		theStateController.addState(theMainMenu);
 		theStateController.enterState( Constants.MAIN_MENU );
 		// Set up the container (this is kind of like the JFrame in swing)
 		AppGameContainer gameContainer;
 		try {
-			//gameContainer = new AppGameContainer(slickGame);
 			gameContainer = new AppGameContainer(theStateController);
 			gameContainer.setVerbose(Constants.DEBUG);
 			gameContainer.setTargetFrameRate(120);
