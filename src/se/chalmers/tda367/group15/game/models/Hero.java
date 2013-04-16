@@ -11,7 +11,7 @@ import org.newdawn.slick.SlickException;
  * 
  */
 
-public class Hero extends MovingModel implements Model {
+public class Hero extends MovingModel {
 	
 	private double rotation;
 	private boolean goingUp;

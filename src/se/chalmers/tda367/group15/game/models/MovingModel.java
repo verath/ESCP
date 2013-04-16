@@ -10,7 +10,7 @@ import se.chalmers.tda367.group15.game.views.room.RoomManager;
  * @author simon
  *
  */
-public abstract class MovingModel {
+public abstract class MovingModel implements Model {
 	private float x, y, velocity;
 	
 	/**
