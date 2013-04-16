@@ -4,16 +4,14 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
-import se.chalmers.tda367.group15.game.controllers.GameController;
+import se.chalmers.tda367.group15.game.controllers.MainMenuState;
 import se.chalmers.tda367.group15.game.controllers.PlayState;
 import se.chalmers.tda367.group15.game.controllers.StateController;
-import se.chalmers.tda367.group15.game.menu.MainMenuState;
 import se.chalmers.tda367.group15.game.models.GameModel;
 import se.chalmers.tda367.group15.game.models.Hero;
 import se.chalmers.tda367.group15.game.views.GameView;
 import se.chalmers.tda367.group15.game.views.HeroView;
 import se.chalmers.tda367.group15.game.views.RoomView;
-import se.chalmers.tda367.group15.game.views.room.BasicRoom;
 import se.chalmers.tda367.group15.game.views.room.RoomManager;
 
 /**

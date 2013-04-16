@@ -11,6 +11,12 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.GameModel;
 import se.chalmers.tda367.group15.game.views.GameView;
 
+/**
+ * The main play controller for the slick2d implementation of PsychoHero.
+ * 
+ * @author Peter, Carl
+ * 
+ */
 public class PlayState extends BasicGameState {
 	
 	public final int ID;
@@ -25,6 +31,12 @@ public class PlayState extends BasicGameState {
 	 */
 	private final GameModel gameModel;
 
+	/**
+	 * Creates a new PlayState
+	 * 
+	 * @param gameView The GameView that should receive render and init
+	 * @param gameModel The GameModel that should receive update
+	 */
 	public PlayState(GameView gameView, GameModel gameModel, int id) {
 		ID = id;
 		this.gameView = gameView;

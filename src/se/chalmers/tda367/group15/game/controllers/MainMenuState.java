@@ -1,10 +1,22 @@
-package se.chalmers.tda367.group15.game.menu;
+package se.chalmers.tda367.group15.game.controllers;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.menu.Button;
+import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
 
+/**
+ * A class representing a main menu in a graphical application.
+ * Class originaly taken from tutorial for writing menus in Slick2D
+ * Originaly posted on http://slick.javaunlimited.net/
+ * by user shiroto
+ * remade by Carl Jansson to suit our purposes.
+ * Comments added by Carl Jansson.
+ * 
+ * @author Carl Jansson
+ */
 public class MainMenuState extends MenuBasedGameState {
 	private Image playImage;
 	private Image quitImage;

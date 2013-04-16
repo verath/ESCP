@@ -7,6 +7,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * A class for cutting down the implementation needed if using BasicGameState.
+ * Class taken from tutorial for writing menus in Slick2D
+ * Originaly posted on http://slick.javaunlimited.net/
+ * by user shiroto
+ * Comments added by Carl Jansson.
+ * 
+ * @author Carl Jansson
+ */
 public abstract class AbstractedGameState extends BasicGameState {
 	   protected GameContainer container;
 	   protected StateBasedGame game;
