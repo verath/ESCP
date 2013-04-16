@@ -67,8 +67,8 @@ public abstract class MovingModel {
 	 */
 	public boolean isCollision() {
 		RoomManager manager = RoomManager.getInstance();
-		manager.generateCollisionBounds();
-		List<Rectangle2D.Float> collisionBounds = manager.getCollisionBounds();
+		Room currentRoom = manager.getCurrentRoom();
+		List<Rectangle2D.Float> collisionBounds = currentRoom.getCollisionBounds();
 		Rectangle2D.Float tmp = new Rectangle2D.Float(getX(), getY(), 64, 64);
 		boolean isCollision = false;
 		for(Rectangle2D.Float r: collisionBounds) {
@@ -76,7 +76,6 @@ public abstract class MovingModel {
 				isCollision = true;
 			}
 		}
-		System.out.println(isCollision);
 		return isCollision;
 	}
 

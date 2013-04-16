@@ -3,13 +3,10 @@ package se.chalmers.tda367.group15.game.views.room;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Map.Entry;
-
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.models.Room;
 
@@ -44,11 +41,6 @@ public class RoomManager {
 	 * The current "position", used as key to query for the room from the map.
 	 */
 	private Point currentPosition = STARTING_POINT;
-	
-	/**
-	 * A list of the bounds of all blocked tiles in the current map.
-	 */
-	private List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
 
 	/**
 	 * RoomManager constructor
@@ -149,7 +141,6 @@ public class RoomManager {
 	 */
 	public void moveUp() {
 		currentPosition.translate(0, 1);
-		generateCollisionBounds();
 	}
 	
 	/**
@@ -157,7 +148,6 @@ public class RoomManager {
 	 */
 	public void moveDown() {
 		currentPosition.translate(0, -1);
-		generateCollisionBounds();
 	}
 	
 	/**
@@ -165,7 +155,6 @@ public class RoomManager {
 	 */
 	public void moveLeft() {
 		currentPosition.translate(-1, 0);
-		generateCollisionBounds();
 	}
 	
 	/**
@@ -173,33 +162,6 @@ public class RoomManager {
 	 */
 	public void moveRight() {
 		currentPosition.translate(1, 0);
-		generateCollisionBounds();
-	}
-	
-	public List<Rectangle2D.Float> getCollisionBounds() {
-		return collisionBounds;
-	}
-	
-	/**
-	 * Generates the list of collision bounds for the current map.
-	 */
-	public void generateCollisionBounds() {
-		TiledMap map = null;
-		try {
-			map = new TiledMap (this.getCurrentRoom().getTiledMapPath());
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
-		
-		for(int i = 0; i < map.getWidth(); i++) {
-			for(int j = 0; j < map.getHeight(); j++) {
-				int tileID = map.getTileId(i, j, 0);
-				String property = map.getTileProperty(tileID, "blocked", "false");
-				if(property.equals("true")) {
-					collisionBounds.add(new Rectangle2D.Float(i * 32, j * 32, 32, 32));
-				}
-			}
-		}
 	}
 
 }

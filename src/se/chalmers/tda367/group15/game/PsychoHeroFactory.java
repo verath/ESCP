@@ -36,7 +36,6 @@ public class PsychoHeroFactory {
 		
 		// Set up the room view and handler
 		RoomManager roomManager = RoomManager.getInstance();
-		roomManager.addStartingRoom(new BasicRoom());
 		RoomView roomView = new RoomView(roomManager);
 		gameView.addView(roomView);
 		

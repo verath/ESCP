@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
+import se.chalmers.tda367.group15.game.views.room.BasicRoom;
 import se.chalmers.tda367.group15.game.views.room.RoomManager;
 
 public class RoomView implements View {
@@ -29,6 +30,7 @@ public class RoomView implements View {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		map = new TiledMap(roomManager.getCurrentRoom().getTiledMapPath());
+		roomManager.addStartingRoom(new BasicRoom());
+		map = roomManager.getCurrentRoom().getTiledMap();
 	}
 }
