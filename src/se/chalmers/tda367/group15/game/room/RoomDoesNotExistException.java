@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.views.room;
+package se.chalmers.tda367.group15.game.room;
 
 public class RoomDoesNotExistException extends RuntimeException {
 	private static final long serialVersionUID = 7956667496071790859L;

@@ -3,15 +3,13 @@ package se.chalmers.tda367.group15.game.views;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.tda367.group15.game.views.room.BasicRoom;
-import se.chalmers.tda367.group15.game.views.room.RoomManager;
+import se.chalmers.tda367.group15.game.room.Room;
+import se.chalmers.tda367.group15.game.room.RoomManager;
 
 public class RoomView implements View {
 
 	private final RoomManager roomManager;
-	private TiledMap map;
 
 	/**
 	 * Create a new room view
@@ -20,17 +18,17 @@ public class RoomView implements View {
 	 */
 	public RoomView(final RoomManager roomManager) {
 		this.roomManager = roomManager;
-
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		map.render(0, 0);
+		roomManager.getCurrentRoom().getRoomView().render(container, g);
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		roomManager.addStartingRoom(new BasicRoom());
-		map = roomManager.getCurrentRoom().getTiledMap();
+		for(Room r : roomManager ) {
+			r.getRoomView().init(container);
+		}
 	}
 }

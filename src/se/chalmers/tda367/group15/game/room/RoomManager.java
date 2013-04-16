@@ -1,14 +1,11 @@
-package se.chalmers.tda367.group15.game.views.room;
+package se.chalmers.tda367.group15.game.room;
 
 import java.awt.Point;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import se.chalmers.tda367.group15.game.models.Room;
 
 /**
  * A class for abstractly handling rooms.
@@ -16,16 +13,12 @@ import se.chalmers.tda367.group15.game.models.Room;
  * @author Peter
  * 
  */
-public class RoomManager {
-	
-	public enum RelativePos {
+public class RoomManager implements Iterable<Room> {
+
+	public enum RelativePosition {
 		ABOVE, BELOW, LEFTOF, RIGHTOF;
 	}
-	
-	/**
-	 * The instance object of this class.
-	 */
-	public static RoomManager instance;
+
 	/**
 	 * The starting point of the first room.
 	 */
@@ -45,15 +38,8 @@ public class RoomManager {
 	/**
 	 * RoomManager constructor
 	 */
-	private RoomManager() {
+	public RoomManager() {
 		rooms = new HashMap<Point, Room>();
-	}
-	
-	public static RoomManager getInstance() {
-		if(instance == null) {
-			instance = new RoomManager();
-		}
-		return instance;
 	}
 
 	/**
@@ -86,6 +72,12 @@ public class RoomManager {
 		}
 	}
 
+	/**
+	 * Attempts to find the position of a room.
+	 * 
+	 * @param room
+	 * @return The position of the room
+	 */
 	private Point getRoomPosition(Room room) {
 		Point position = null;
 
@@ -98,20 +90,22 @@ public class RoomManager {
 		if (position == null) {
 			throw new RoomDoesNotExistException(
 					"The reference room did not exist.");
-		} else { 
+		} else {
 			return position;
 		}
 	}
-	
+
 	/**
 	 * Method for adding a room at a position relative to a reference room.
-	 * @param reference room
-	 * @param new room
-	 * @param relative position
+	 * 
+	 * @param reference
+	 * @param room
+	 * @param relativePosition
 	 */
-	public void addRoom(final Room reference, final Room room, RelativePos relPos ) {
+	public void addRoom(final Room reference, final Room room,
+			RelativePosition relativePosition) {
 		Point addPosition = getRoomPosition(reference);
-		switch(relPos) {
+		switch (relativePosition) {
 		case ABOVE:
 			addPosition.translate(0, 1);
 			break;
@@ -133,7 +127,7 @@ public class RoomManager {
 	 */
 	public Room getCurrentRoom() {
 		return rooms.get(currentPosition);
-		
+
 	}
 
 	/**
@@ -142,26 +136,31 @@ public class RoomManager {
 	public void moveUp() {
 		currentPosition.translate(0, 1);
 	}
-	
+
 	/**
 	 * Moves the room selector downwards
 	 */
 	public void moveDown() {
 		currentPosition.translate(0, -1);
 	}
-	
+
 	/**
 	 * Moves the room selector to the left
 	 */
 	public void moveLeft() {
 		currentPosition.translate(-1, 0);
 	}
-	
+
 	/**
 	 * Moves the room selector to the right
 	 */
 	public void moveRight() {
 		currentPosition.translate(1, 0);
+	}
+
+	@Override
+	public Iterator<Room> iterator() {
+		return rooms.values().iterator();
 	}
 
 }

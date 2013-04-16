@@ -6,6 +6,8 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.room.RoomManager;
+
 /**
  * A container class for all the models associated with the game.
  * 
@@ -26,10 +28,11 @@ public class GameModel implements Model {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
+	public void update(GameContainer container, int delta,
+			RoomManager roomManager)
 			throws SlickException {
 		for (Model m : models) {
-			m.update(container, delta);
+			m.update(container, delta, roomManager);
 		}
 	}
 

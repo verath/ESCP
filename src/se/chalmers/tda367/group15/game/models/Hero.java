@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.room.RoomManager;
+
 /**
  * Class representing the model of a hero.
  * 
@@ -36,8 +38,9 @@ public class Hero extends MovingModel {
 	}
 
 	@Override
-	public void update(GameContainer cont, int delta) throws SlickException {
-		Input input = cont.getInput();
+	public void update(GameContainer container, int delta,
+			RoomManager roomManager) throws SlickException {
+		Input input = container.getInput();
 		float oldX = getX();
 		float oldY = getY();
 		float mouseX = input.getMouseX();
@@ -70,7 +73,7 @@ public class Hero extends MovingModel {
 		this.setY(this.getY() - (delta * speedY));
 		this.setX(this.getX() - (delta * speedX));
 		
-		if(isCollision()) {
+		if(isCollision(roomManager.getCurrentRoom().getRoomModel().getCollisionBounds())) {
 			setX(oldX);
 			setY(oldY);
 		}

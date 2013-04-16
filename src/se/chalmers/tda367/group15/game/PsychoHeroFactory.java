@@ -7,11 +7,13 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.GameController;
 import se.chalmers.tda367.group15.game.models.GameModel;
 import se.chalmers.tda367.group15.game.models.Hero;
+import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
+import se.chalmers.tda367.group15.game.room.Room;
+import se.chalmers.tda367.group15.game.room.RoomManager;
 import se.chalmers.tda367.group15.game.views.GameView;
 import se.chalmers.tda367.group15.game.views.HeroView;
 import se.chalmers.tda367.group15.game.views.RoomView;
-import se.chalmers.tda367.group15.game.views.room.BasicRoom;
-import se.chalmers.tda367.group15.game.views.room.RoomManager;
+import se.chalmers.tda367.group15.game.views.room.BasicRoomView;
 
 /**
  * Factory class for a PsychoHeroGame.
@@ -30,23 +32,27 @@ public class PsychoHeroFactory {
 	 */
 	// TODO allow for specifying arguments to return a different PsychoHeroGame
 	public static PsychoHeroGame createPsychoHeroGame() {
-		
+
 		GameView gameView = new GameView();
 		GameModel gameModel = new GameModel();
-		
-		// Set up the room view and handler
-		RoomManager roomManager = RoomManager.getInstance();
+
+		// Set up the rooms
+		Room startingRoom = new Room(new BasicRoomView(), new BasicRoomModel());
+
+		// Set up the room manager
+		RoomManager roomManager = new RoomManager();
+		roomManager.addStartingRoom(startingRoom);
 		RoomView roomView = new RoomView(roomManager);
 		gameView.addView(roomView);
-		
+
 		// Set up the hero
 		Hero heroModel = new Hero();
 		HeroView heroView = new HeroView(heroModel);
 		gameView.addView(heroView);
 		gameModel.addModel(heroModel);
-		
-		GameController slickGame = new GameController(
-				Constants.GAME_NAME, gameView, gameModel);
+
+		GameController slickGame = new GameController(Constants.GAME_NAME,
+				gameView, gameModel, roomManager);
 
 		// Set up the container (this is kind of like the JFrame in swing)
 		AppGameContainer gameContainer;

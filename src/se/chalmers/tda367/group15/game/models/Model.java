@@ -3,6 +3,8 @@ package se.chalmers.tda367.group15.game.models;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.room.RoomManager;
+
 /**
  * An interface for a model in the game.
  * 
@@ -22,6 +24,6 @@ public interface Model {
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void update(GameContainer container, int delta)
+	public void update(GameContainer container, int delta, RoomManager roomManager)
 			throws SlickException;
 }

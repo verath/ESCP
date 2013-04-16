@@ -4,7 +4,6 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
@@ -14,45 +13,24 @@ import org.newdawn.slick.tiled.TiledMap;
  * @author simon
  * 
  */
-public abstract class Room {
+public abstract class AbstractRoomModel implements Model {
 
 	/**
 	 * A list of rectangles representing the collision bounds of all blocked
 	 * tiles in a tiled map.
 	 */
 	private List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
-	
-	/**
-	 * The tiled map used by this room.
-	 */
-	private TiledMap map;
-
-	public Room(String pathToMap) {
-		try {
-			map = new TiledMap(pathToMap);
-			generateCollisionBounds();
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
-	 * Method for getting the tiled map of the room
-	 * 
-	 * @return a TiledMap object
+	 * Generates rectangles representing the bounds of blocked tiles on the map.
+	 * Should only be called once for each map, and must not be called during
+	 * the game loop as this operation is expensive.
 	 */
-	public TiledMap getTiledMap() {
-		return map;
-	}
-
-	// Private method for generating rectangles representing the bounds of
-	// blocked tiles on the map.
-	private void generateCollisionBounds() {
+	public void generateCollisionBounds(final TiledMap map) {
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
-				int tileID = map.getTileId(i, j, 0);
-				String property = map.getTileProperty(tileID, "blocked",
+				int tileId = map.getTileId(i, j, 0);
+				String property = map.getTileProperty(tileId, "blocked",
 						"false");
 				if (property.equals("true")) {
 					collisionBounds.add(new Rectangle2D.Float(i * 32, j * 32,

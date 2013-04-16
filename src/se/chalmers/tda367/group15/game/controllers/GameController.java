@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.GameModel;
+import se.chalmers.tda367.group15.game.room.RoomManager;
 import se.chalmers.tda367.group15.game.views.GameView;
 
 /**
@@ -28,6 +29,12 @@ public class GameController extends BasicGame {
 	private final GameModel gameModel;
 
 	/**
+	 * The RoomManager, an abstract representation of the current room. Needed
+	 * to bridge the gap between collision detection using Slick and the models.
+	 */
+	private final RoomManager roomManager;
+
+	/**
 	 * Creates a new GameController
 	 * 
 	 * @param title
@@ -36,11 +43,14 @@ public class GameController extends BasicGame {
 	 *            The GameView that should receive render and init
 	 * @param gameModel
 	 *            The GameModel that should receive update
+	 * @param roomManager
 	 */
-	public GameController(String title, GameView gameView, GameModel gameModel) {
+	public GameController(String title, GameView gameView, GameModel gameModel,
+			RoomManager roomManager) {
 		super(title);
 		this.gameView = gameView;
 		this.gameModel = gameModel;
+		this.roomManager = roomManager;
 	}
 
 	@Override
@@ -57,7 +67,7 @@ public class GameController extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		gameModel.update(container, delta);
+		gameModel.update(container, delta, roomManager);
 	}
 
 }
