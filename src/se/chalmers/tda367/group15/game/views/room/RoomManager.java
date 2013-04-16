@@ -1,8 +1,11 @@
 package se.chalmers.tda367.group15.game.views.room;
 
 import java.awt.Point;
-import java.util.Map;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import se.chalmers.tda367.group15.game.models.Room;
@@ -14,6 +17,15 @@ import se.chalmers.tda367.group15.game.models.Room;
  * 
  */
 public class RoomManager {
+	
+	public enum RelativePos {
+		ABOVE, BELOW, LEFTOF, RIGHTOF;
+	}
+	
+	/**
+	 * The instance object of this class.
+	 */
+	public static RoomManager instance;
 	/**
 	 * The starting point of the first room.
 	 */
@@ -33,8 +45,15 @@ public class RoomManager {
 	/**
 	 * RoomManager constructor
 	 */
-	public RoomManager() {
+	private RoomManager() {
 		rooms = new HashMap<Point, Room>();
+	}
+	
+	public static RoomManager getInstance() {
+		if(instance == null) {
+			instance = new RoomManager();
+		}
+		return instance;
 	}
 
 	/**
@@ -85,59 +104,36 @@ public class RoomManager {
 	}
 	
 	/**
-	 * Adds a room above another room in the game.
-	 * 
-	 * @param reference
-	 * @param room
+	 * Method for adding a room at a position relative to a reference room.
+	 * @param reference room
+	 * @param new room
+	 * @param relative position
 	 */
-	public void addRoomAbove(final Room reference, final Room room) {
+	public void addRoom(final Room reference, final Room room, RelativePos relPos ) {
 		Point addPosition = getRoomPosition(reference);
-		addPosition.translate(0, 1);
+		switch(relPos) {
+		case ABOVE:
+			addPosition.translate(0, 1);
+			break;
+		case BELOW:
+			addPosition.translate(0, 1);
+			break;
+		case LEFTOF:
+			addPosition.translate(-1, 0);
+			break;
+		case RIGHTOF:
+			addPosition.translate(1, 0);
+			break;
+		}
 		rooms.put(addPosition, room);
 	}
-	
-	/**
-	 * Adds a room below another room in the game.
-	 * 
-	 * @param reference
-	 * @param room
-	 */
-	public void addRoomBelow(final Room reference, final Room room) {
-		Point addPosition = getRoomPosition(reference);
-		addPosition.translate(0, -1);
-		rooms.put(addPosition, room);
-	}
-	
-	/**
-	 * Adds a room to the left of another room in the game.
-	 * 
-	 * @param reference
-	 * @param room
-	 */
-	public void addRoomLeftOf(final Room reference, final Room room) {
-		Point addPosition = getRoomPosition(reference);
-		addPosition.translate(-1, 0);
-		rooms.put(addPosition, room);
-	}
-	
-	/**
-	 * Adds a room to the right of another room in the game.
-	 * 
-	 * @param reference
-	 * @param room
-	 */
-	public void addRoomRightOf(final Room reference, final Room room) {
-		Point addPosition = getRoomPosition(reference);
-		addPosition.translate(1, 0);
-		rooms.put(addPosition, room);
-	}
-	
 
 	/**
 	 * Returns the currently "selected" room
 	 */
 	public Room getCurrentRoom() {
 		return rooms.get(currentPosition);
+		
 	}
 
 	/**

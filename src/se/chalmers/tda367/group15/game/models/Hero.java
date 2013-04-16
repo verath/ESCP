@@ -10,8 +10,9 @@ import org.newdawn.slick.SlickException;
  * @author simon, Carl, tholene
  * 
  */
-public class Hero extends Player implements Model {
 
+public class Hero extends MovingModel implements Model {
+	
 	private double rotation;
 	private boolean goingUp;
 	private boolean goingDown;
@@ -37,7 +38,8 @@ public class Hero extends Player implements Model {
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
 		Input input = cont.getInput();
-
+		float oldX = getX();
+		float oldY = getY();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
 
@@ -64,9 +66,14 @@ public class Hero extends Player implements Model {
 			speedX = (float) (this.getVelocity() * Math.cos(direction));
 		}
 
+
 		this.setY(this.getY() - (delta * speedY));
 		this.setX(this.getX() - (delta * speedX));
-
+		
+		if(isCollision()) {
+			setX(oldX);
+			setY(oldY);
+		}
 	}
 
 	/**

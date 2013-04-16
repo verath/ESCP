@@ -1,11 +1,16 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.awt.geom.Rectangle2D;
+import java.util.List;
+
+import se.chalmers.tda367.group15.game.views.room.RoomManager;
+
 /**
- * Interface for representing a player.
+ * Interface for representing a moving model.
  * @author simon
  *
  */
-public abstract class Player {
+public abstract class MovingModel {
 	private float x, y, velocity;
 	
 	/**
@@ -54,6 +59,24 @@ public abstract class Player {
 	 */
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
+	}
+	
+	/**
+	 * Method for checking if the model has collided with a blocked tile.
+	 * @return true if collision is detected, false otherwise
+	 */
+	public boolean isCollision() {
+		RoomManager manager = RoomManager.getInstance();
+		Room currentRoom = manager.getCurrentRoom();
+		List<Rectangle2D.Float> collisionBounds = currentRoom.getCollisionBounds();
+		Rectangle2D.Float tmp = new Rectangle2D.Float(getX(), getY(), 64, 64);
+		boolean isCollision = false;
+		for(Rectangle2D.Float r: collisionBounds) {
+			if(r.intersects(tmp)) {
+				isCollision = true;
+			}
+		}
+		return isCollision;
 	}
 
 }

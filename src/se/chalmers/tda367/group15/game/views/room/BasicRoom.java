@@ -2,11 +2,12 @@ package se.chalmers.tda367.group15.game.views.room;
 
 import se.chalmers.tda367.group15.game.models.Room;
 
-public class BasicRoom implements Room {
+public class BasicRoom extends Room {
 
-	@Override
-	public String getTiledMapPath() {
-		return "res/levels/untitled.tmx";
+	private static final String MAP_PATH = "res/levels/untitled.tmx";
+
+	public BasicRoom() {
+		super(MAP_PATH);
 	}
 
 }
