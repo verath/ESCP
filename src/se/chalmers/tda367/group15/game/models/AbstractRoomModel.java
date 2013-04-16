@@ -1,6 +1,7 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import org.newdawn.slick.tiled.TiledMap;
  * @author simon
  * 
  */
-public abstract class AbstractRoomModel implements Model {
+public abstract class AbstractRoomModel implements CollidableModel, CollidingModel {
 
 	/**
 	 * A list of rectangles representing the collision bounds of all blocked
@@ -45,7 +46,8 @@ public abstract class AbstractRoomModel implements Model {
 	 * 
 	 * @return collision bounds
 	 */
-	public List<Rectangle2D.Float> getCollisionBounds() {
+	@Override
+	public List<Float> getCollisionBounds() {
 		return collisionBounds;
 	}
 }

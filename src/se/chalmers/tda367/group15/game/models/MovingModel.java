@@ -9,7 +9,7 @@ import java.util.List;
  * @author simon
  * 
  */
-public abstract class MovingModel implements Model {
+public abstract class MovingModel implements Model, CollidingModel {
 	private float x, y, velocity;
 
 	/**
@@ -68,20 +68,15 @@ public abstract class MovingModel implements Model {
 		this.velocity = velocity;
 	}
 
-	/*
-	 * RoomManager manager = RoomManager.getInstance(); Room currentRoom =
-	 * manager.getCurrentRoom(); List<Rectangle2D.Float> collisionBounds =
-	 * currentRoom .getCollisionBounds();
-	 */
-
 	/**
 	 * Method for checking if the model has collided with a blocked tile.
 	 * 
-	 * @param collisionBounds the collision bounds to check against
+	 * @param collisionBounds
+	 *            the collision bounds to check against
 	 * @return true if collision is detected, false otherwise
 	 */
 	public boolean isCollision(List<Rectangle2D.Float> collisionBounds) {
-		Rectangle2D.Float modelBounds = new Rectangle2D.Float(getX(), getY(), 64, 64);
+		Rectangle2D.Float modelBounds = getCollsionBounds();
 		boolean isCollision = false;
 		for (Rectangle2D.Float r : collisionBounds) {
 			if (r.intersects(modelBounds)) {
@@ -91,5 +86,11 @@ public abstract class MovingModel implements Model {
 		}
 		return isCollision;
 	}
+
+	@Override
+	public abstract Rectangle2D.Float getCollsionBounds();
+
+	@Override
+	public abstract void collide(List<Rectangle2D.Float> collisionBounds);
 
 }

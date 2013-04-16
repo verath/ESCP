@@ -6,8 +6,6 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.room.RoomManager;
-
 /**
  * A container class for all the models associated with the game.
  * 
@@ -20,6 +18,10 @@ public class GameModel implements Model {
 	 * List of models that should be forwarded the update.
 	 */
 	private List<Model> models = new ArrayList<Model>();
+	
+	private List<MovingModel> movingModels = new ArrayList<MovingModel>();
+	
+	private List<CollidableModel> collidingModels = new ArrayList<CollidableModel>();
 
 	/**
 	 * Creates a new GameModel
@@ -33,6 +35,13 @@ public class GameModel implements Model {
 		for (Model m : models) {
 			m.update(container, delta);
 		}
+		
+		for( CollidingModel moving : movingModels ) {
+			for(CollidableModel coliding : collidingModels ) {
+				if(moving == coliding) continue;
+				moving.collide(coliding.getCollisionBounds());
+			}
+		}
 	}
 
 	/**
@@ -43,11 +52,14 @@ public class GameModel implements Model {
 	 */
 	public void addModel(Model model) {
 		models.add(model);
+		if(model instanceof MovingModel) {
+			movingModels.add((MovingModel) model);
+		}
+		if(model instanceof CollidableModel) {
+			collidingModels.add((CollidableModel) model);
+		}
 	}
 	
-	public void addModel(MovingModel model) {
-		models.add(model);
-	}
 
 	/**
 	 * Removes a model from the GameModel. This will unregister the model for
