@@ -5,6 +5,9 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.GameController;
+import se.chalmers.tda367.group15.game.controllers.PlayState;
+import se.chalmers.tda367.group15.game.controllers.StateController;
+import se.chalmers.tda367.group15.game.menu.MainMenuState;
 import se.chalmers.tda367.group15.game.models.GameModel;
 import se.chalmers.tda367.group15.game.models.Hero;
 import se.chalmers.tda367.group15.game.views.GameView;
@@ -45,13 +48,19 @@ public class PsychoHeroFactory {
 		gameView.addView(heroView);
 		gameModel.addModel(heroModel);
 		
-		GameController slickGame = new GameController(
-				Constants.GAME_NAME, gameView, gameModel);
+		PlayState theGameState = new PlayState(gameView, gameModel, 1);
+		MainMenuState theMainMenu = new MainMenuState( 2 );
+		
+		StateController theStateController = new StateController(Constants.GAME_NAME);
 
+		theStateController.addState(theGameState);
+		theStateController.addState(theMainMenu);
+		theStateController.enterState(2);
 		// Set up the container (this is kind of like the JFrame in swing)
 		AppGameContainer gameContainer;
 		try {
-			gameContainer = new AppGameContainer(slickGame);
+			//gameContainer = new AppGameContainer(slickGame);
+			gameContainer = new AppGameContainer(theStateController);
 			gameContainer.setVerbose(Constants.DEBUG);
 			gameContainer.setTargetFrameRate(120);
 			// TODO Allow for changing this resolution

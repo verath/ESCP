@@ -36,7 +36,8 @@ public class HeroView implements View {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g) throws SlickException {
+	public void render(GameContainer container, Graphics g)
+			throws SlickException {
 
 		float rotation = (float) hero.getRotation();
 
@@ -47,7 +48,8 @@ public class HeroView implements View {
 			heroMove.start();
 		}
 		// rotates the current frame
-		g.rotate(hero.getX() + heroMove.getWidth()/2, hero.getY() + heroMove.getHeight()/2, rotation);
+		g.rotate(hero.getX() + heroMove.getWidth() / 2,
+				hero.getY() + heroMove.getHeight() / 2, rotation);
 		heroMove.draw(hero.getX(), hero.getY());
 		g.resetTransform();
 
