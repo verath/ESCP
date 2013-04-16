@@ -17,5 +17,12 @@ public class Constants {
 	 * Boolean controlling whether we should print debug output or not.
 	 */
 	public static final boolean DEBUG = true;
+	
+	
+	/**
+	 * Ints for controlling gamestate. They should all be uniqe.
+	 */
+	public static final int MAIN_MENU = 1;
+	public static final int PLAYING = 2;
 
 }

@@ -48,14 +48,14 @@ public class PsychoHeroFactory {
 		gameView.addView(heroView);
 		gameModel.addModel(heroModel);
 		
-		PlayState theGameState = new PlayState(gameView, gameModel, 1);
-		MainMenuState theMainMenu = new MainMenuState( 2 );
+		PlayState theGameState = new PlayState(gameView, gameModel, Constants.PLAYING);
+		MainMenuState theMainMenu = new MainMenuState( Constants.MAIN_MENU );
 		
 		StateController theStateController = new StateController(Constants.GAME_NAME);
 
 		theStateController.addState(theGameState);
 		theStateController.addState(theMainMenu);
-		theStateController.enterState(2);
+		theStateController.enterState( Constants.MAIN_MENU );
 		// Set up the container (this is kind of like the JFrame in swing)
 		AppGameContainer gameContainer;
 		try {
