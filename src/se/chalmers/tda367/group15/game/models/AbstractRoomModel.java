@@ -1,8 +1,7 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.newdawn.slick.tiled.TiledMap;
@@ -14,13 +13,14 @@ import org.newdawn.slick.tiled.TiledMap;
  * @author simon
  * 
  */
-public abstract class AbstractRoomModel implements CollidableModel, CollidingModel {
+public abstract class AbstractRoomModel implements CollidableModel,
+		CollidingModel {
 
 	/**
 	 * A list of rectangles representing the collision bounds of all blocked
 	 * tiles in a tiled map.
 	 */
-	private List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
+	private List<Rectangle2D.Float> collisionBounds = new LinkedList<Rectangle2D.Float>();
 
 	/**
 	 * Generates rectangles representing the bounds of blocked tiles on the map.
@@ -41,13 +41,8 @@ public abstract class AbstractRoomModel implements CollidableModel, CollidingMod
 		}
 	}
 
-	/**
-	 * Method for getting the rectangles representing the map's collisionbounds
-	 * 
-	 * @return collision bounds
-	 */
 	@Override
-	public List<Float> getCollisionBounds() {
+	public List<Rectangle2D.Float> getCollisionBounds() {
 		return collisionBounds;
 	}
 }

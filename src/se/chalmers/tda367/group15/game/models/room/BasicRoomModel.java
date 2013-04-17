@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.models.room;
 
-import java.awt.geom.Rectangle2D.Float;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -16,13 +16,10 @@ public class BasicRoomModel extends AbstractRoomModel {
 	}
 
 	@Override
-	public Float getCollsionBounds() {
-		return null;
-	}
-
-	@Override
-	public void collide(List<Float> collisionBounds) {
-		return;
+	public void collide(List<Rectangle2D.Float> collisionBounds) {
+		/*
+		 * for(Enemy e : enemy) e.collide(collisionBounds);
+		 */
 	}
 
 

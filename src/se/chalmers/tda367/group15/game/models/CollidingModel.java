@@ -10,21 +10,15 @@ import java.util.List;
  * @author Peter
  * 
  */
-public interface CollidingModel {
+public interface CollidingModel extends Model {
 
 	/**
-	 * Getter for the moving model's collision bounds
-	 * 
-	 * @return
-	 */
-	public abstract Rectangle2D.Float getCollsionBounds();
-
-	/**
-	 * Method called for the model for each applicable CollidingModel. Should
-	 * define the action taken by the model on collision.
+	 * Method called for the model after the update method. Should check
+	 * collision against the provided collidableModels and define the action
+	 * taken by the model on collision.
 	 * 
 	 * @param collisionBounds
-	 * @return
+	 *            The collision bounds that should be checked against
 	 */
 	public abstract void collide(List<Rectangle2D.Float> collisionBounds);
 

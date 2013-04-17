@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
-import java.awt.geom.Rectangle2D.Float;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 /**
@@ -10,10 +10,11 @@ import java.util.List;
  * 
  */
 public interface CollidableModel extends Model {
+
 	/**
-	 * Getter for the collision bounds defined by the model.
+	 * Method for getting the rectangles representing the map's collisionbounds
 	 * 
-	 * @return
+	 * @return collision bounds
 	 */
-	public List<Float> getCollisionBounds();
+	public List<Rectangle2D.Float> getCollisionBounds();
 }

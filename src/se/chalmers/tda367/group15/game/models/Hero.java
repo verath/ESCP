@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -16,7 +15,7 @@ import org.newdawn.slick.SlickException;
  */
 
 public class Hero extends MovingModel {
-	
+
 	private double rotation;
 	private boolean goingUp;
 	private boolean goingDown;
@@ -24,7 +23,7 @@ public class Hero extends MovingModel {
 	private boolean goingLeft;
 	private int width;
 	private int height;
-	
+
 	private float oldX, oldY;
 
 	/**
@@ -33,8 +32,8 @@ public class Hero extends MovingModel {
 	public Hero() {
 
 		// TODO fix hardcoded values..
-		setX(34f);
-		setY(34f);
+		setX(44f);
+		setY(44f);
 		setVelocity(0.15f);
 		this.width = 64;
 		this.height = 64;
@@ -42,7 +41,8 @@ public class Hero extends MovingModel {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, int delta)
+			throws SlickException {
 		Input input = container.getInput();
 		oldX = getX();
 		oldY = getY();
@@ -72,10 +72,9 @@ public class Hero extends MovingModel {
 			speedX = (float) (this.getVelocity() * Math.cos(direction));
 		}
 
-
 		this.setY(this.getY() - (delta * speedY));
 		this.setX(this.getX() - (delta * speedX));
-		
+
 	}
 
 	/**
@@ -101,17 +100,16 @@ public class Hero extends MovingModel {
 	}
 
 	@Override
-	public void collide(List<Rectangle2D.Float> collisionBounds) {
-		if( isCollision(collisionBounds) ) {
-			setX(oldX);
-			setY(oldY);
-		}
-		
+	protected Rectangle2D.Float getCollsionBounds() {
+		return new Rectangle2D.Float(getX(), getY(), 64, 64);
 	}
 
 	@Override
-	public Rectangle2D.Float getCollsionBounds() {
-		return new Float(getX(), getY(), 64, 64);
+	public void collide(List<Rectangle2D.Float> collisionBounds) {
+		if (isCollision(collisionBounds)) {
+			setX(oldX);
+			setY(oldY);
+		}
 	}
 
 }

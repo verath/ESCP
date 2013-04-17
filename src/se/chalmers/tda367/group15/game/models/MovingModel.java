@@ -3,13 +3,14 @@ package se.chalmers.tda367.group15.game.models;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
+
 /**
  * Interface for representing a moving model.
  * 
  * @author simon
  * 
  */
-public abstract class MovingModel implements Model, CollidingModel {
+public abstract class MovingModel implements CollidingModel {
 	private float x, y, velocity;
 
 	/**
@@ -67,7 +68,12 @@ public abstract class MovingModel implements Model, CollidingModel {
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
 	}
-
+	
+	/**
+	 * 
+	 */
+	protected abstract Rectangle2D.Float getCollsionBounds();
+	
 	/**
 	 * Method for checking if the model has collided with a blocked tile.
 	 * 
@@ -77,6 +83,7 @@ public abstract class MovingModel implements Model, CollidingModel {
 	 */
 	public boolean isCollision(List<Rectangle2D.Float> collisionBounds) {
 		Rectangle2D.Float modelBounds = getCollsionBounds();
+		
 		boolean isCollision = false;
 		for (Rectangle2D.Float r : collisionBounds) {
 			if (r.intersects(modelBounds)) {
@@ -86,11 +93,5 @@ public abstract class MovingModel implements Model, CollidingModel {
 		}
 		return isCollision;
 	}
-
-	@Override
-	public abstract Rectangle2D.Float getCollsionBounds();
-
-	@Override
-	public abstract void collide(List<Rectangle2D.Float> collisionBounds);
 
 }

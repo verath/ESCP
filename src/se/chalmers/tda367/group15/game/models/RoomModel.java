@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
-import java.awt.geom.Rectangle2D.Float;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -23,7 +23,7 @@ public class RoomModel implements CollidableModel {
 	}
 
 	@Override
-	public List<Float> getCollisionBounds() {
+	public List<Rectangle2D.Float> getCollisionBounds() {
 		return roomManager.getCurrentRoom().getRoomModel().getCollisionBounds();
 	}
 
