@@ -4,8 +4,14 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
 
+/**
+ * An abstract representation of a view for a room.
+ * 
+ * @author Peter
+ * 
+ */
 abstract public class AbstractRoomView implements View {
-	
+
 	/**
 	 * The tiled map used by this room.
 	 */
@@ -21,8 +27,7 @@ abstract public class AbstractRoomView implements View {
 	}
 
 	/**
-	 * Sets a TiledMap as the current TiledMap representing this room. This will
-	 * also trigger a (re)calculation of the room's collision bounds.
+	 * Sets a TiledMap as the current TiledMap representing this room.
 	 * 
 	 * @param map
 	 *            A TiledMap representing the room. Must not be null
@@ -31,5 +36,10 @@ abstract public class AbstractRoomView implements View {
 		this.map = map;
 	}
 
+	/**
+	 * Method for binding a room view to a room model.
+	 * 
+	 * @param roomModel
+	 */
 	public abstract void setRoomModel(AbstractRoomModel roomModel);
 }

@@ -3,18 +3,18 @@ package se.chalmers.tda367.group15.game.models;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-
 /**
- * Interface for representing a moving model.
+ * An abstract class for representing a moving model that can both collide and
+ * be collided with.
  * 
  * @author simon
  * 
  */
-public abstract class MovingModel implements CollidingModel {
+public abstract class MovingModel implements CollidingModel, CollidableModel {
 	private float x, y, velocity;
 
 	/**
-	 * Method for getting the x coordinate of the player.
+	 * Method for getting the x coordinate of the MovingModel.
 	 * 
 	 * @return x coordinate
 	 */
@@ -23,7 +23,7 @@ public abstract class MovingModel implements CollidingModel {
 	}
 
 	/**
-	 * Method for getting the y coordinate of the player.
+	 * Method for getting the y coordinate of the MovingModel.
 	 * 
 	 * @return y coordinate
 	 */
@@ -41,7 +41,7 @@ public abstract class MovingModel implements CollidingModel {
 	}
 
 	/**
-	 * Method for setting the x coordinate of the player.
+	 * Method for setting the x coordinate of the MovingModel.
 	 * 
 	 * @param x
 	 *            coordinate
@@ -51,7 +51,7 @@ public abstract class MovingModel implements CollidingModel {
 	}
 
 	/**
-	 * Method for setting the y coordinate of the player.
+	 * Method for setting the y coordinate of the MovingModel.
 	 * 
 	 * @param y
 	 *            coordinate
@@ -61,19 +61,14 @@ public abstract class MovingModel implements CollidingModel {
 	}
 
 	/**
-	 * Method for setting the movement velocity of the player.
+	 * Method for setting the movement velocity of the MovingModel.
 	 * 
 	 * @param velocity
 	 */
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
 	}
-	
-	/**
-	 * 
-	 */
-	protected abstract Rectangle2D.Float getCollsionBounds();
-	
+
 	/**
 	 * Method for checking if the model has collided with a blocked tile.
 	 * 
@@ -82,16 +77,20 @@ public abstract class MovingModel implements CollidingModel {
 	 * @return true if collision is detected, false otherwise
 	 */
 	public boolean isCollision(List<Rectangle2D.Float> collisionBounds) {
-		Rectangle2D.Float modelBounds = getCollsionBounds();
-		
+		List<Rectangle2D.Float> modelBounds = getCollisionBounds();
+
 		boolean isCollision = false;
-		for (Rectangle2D.Float r : collisionBounds) {
-			if (r.intersects(modelBounds)) {
-				isCollision = true;
-				break;
+		for (Rectangle2D.Float mb : modelBounds) {
+			for (Rectangle2D.Float r : collisionBounds) {
+				// Don't check against our own bounds
+				if (modelBounds.contains(r)) {
+					continue;
+				} else if (r.intersects(mb)) {
+					isCollision = true;
+					break;
+				}
 			}
 		}
 		return isCollision;
 	}
-
 }

@@ -20,8 +20,15 @@ public class GameModel implements Model {
 	 */
 	private List<Model> models = new ArrayList<Model>();
 
-	private List<CollidingModel> collidingModel = new ArrayList<CollidingModel>();
+	/**
+	 * A list of CollidingModel that has should receive a list of each
+	 * CollidableModel after each update.
+	 */
+	private List<CollidingModel> collidingModels = new ArrayList<CollidingModel>();
 
+	/**
+	 * A list of CollidableModel that will be sent to each CollidingModel.
+	 */
 	private List<CollidableModel> collidableModels = new ArrayList<CollidableModel>();
 
 	/**
@@ -36,7 +43,7 @@ public class GameModel implements Model {
 		for (Model m : models) {
 			m.update(container, delta);
 		}
-		
+
 		// Handle collisions
 		List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>(
 				collidableModels.size());
@@ -45,7 +52,7 @@ public class GameModel implements Model {
 			collisionBounds.addAll(m.getCollisionBounds());
 		}
 
-		for (CollidingModel m : collidingModel) {
+		for (CollidingModel m : collidingModels) {
 			m.collide(collisionBounds);
 		}
 	}
@@ -59,7 +66,7 @@ public class GameModel implements Model {
 	public void addModel(Model model) {
 		models.add(model);
 		if (model instanceof CollidingModel) {
-			collidingModel.add((CollidingModel) model);
+			collidingModels.add((CollidingModel) model);
 		}
 		if (model instanceof CollidableModel) {
 			collidableModels.add((CollidableModel) model);
@@ -74,5 +81,7 @@ public class GameModel implements Model {
 	 */
 	public void removeModel(Model model) {
 		models.remove(model);
+		collidingModels.remove(model);
+		collidableModels.remove(model);
 	}
 }

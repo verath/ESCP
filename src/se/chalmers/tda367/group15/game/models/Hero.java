@@ -1,6 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -27,6 +29,13 @@ public class Hero extends MovingModel {
 	private float oldX, oldY;
 
 	/**
+	 * A saved reference to the latest calculated collisionBounds for the Hero.
+	 * This is to allow us to filter out our own collision bounds in the collide
+	 * method.
+	 */
+	private List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
+
+	/**
 	 * Create a new Hero.
 	 */
 	public Hero() {
@@ -44,10 +53,12 @@ public class Hero extends MovingModel {
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		Input input = container.getInput();
-		oldX = getX();
-		oldY = getY();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
+
+		// Save current x and y values so when can go back there on collision
+		oldX = getX();
+		oldY = getY();
 
 		// Calculate facing depedning on where the mouse is relative
 		// to the center of the hero
@@ -75,6 +86,9 @@ public class Hero extends MovingModel {
 		this.setY(this.getY() - (delta * speedY));
 		this.setX(this.getX() - (delta * speedX));
 
+		// Calculate new collision bounds
+		calculateCollsionBounds();
+
 	}
 
 	/**
@@ -99,9 +113,12 @@ public class Hero extends MovingModel {
 		return (speedY != 0 || speedX != 0);
 	}
 
-	@Override
-	protected Rectangle2D.Float getCollsionBounds() {
-		return new Rectangle2D.Float(getX(), getY(), 64, 64);
+	/**
+	 * Calculates the collision bounds for hero
+	 */
+	private void calculateCollsionBounds() {
+		collisionBounds.clear();
+		collisionBounds.add(new Rectangle2D.Float(getX(), getY(), 64, 64));
 	}
 
 	@Override
@@ -110,6 +127,11 @@ public class Hero extends MovingModel {
 			setX(oldX);
 			setY(oldY);
 		}
+	}
+
+	@Override
+	public List<Float> getCollisionBounds() {
+		return collisionBounds;
 	}
 
 }

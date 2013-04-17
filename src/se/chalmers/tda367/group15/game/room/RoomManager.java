@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 /**
  * A class for abstractly handling rooms.
  * 
- * @author Peter
+ * @author Peter, Simon
  * 
  */
 public class RoomManager implements Iterable<Room> {

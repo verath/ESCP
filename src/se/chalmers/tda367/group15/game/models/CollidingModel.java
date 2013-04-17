@@ -4,8 +4,9 @@ import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 /**
- * A Colliding model is a model that should perform an action on collision with
- * another model.
+ * An interface describing a model that should perform an action when colliding
+ * with a CollidableModel.
+ * 
  * 
  * @author Peter
  * 
@@ -17,9 +18,14 @@ public interface CollidingModel extends Model {
 	 * collision against the provided collidableModels and define the action
 	 * taken by the model on collision.
 	 * 
+	 * Note: The parameter will also hold the model's own collision bounds if
+	 * the model also implements the CollidableModel interface. This must be
+	 * handled by the model itself.
+	 * 
 	 * @param collisionBounds
-	 *            The collision bounds that should be checked against
+	 *            A list of rectangles representing the collision bounds that
+	 *            collision should be checked against
 	 */
-	public abstract void collide(List<Rectangle2D.Float> collisionBounds);
+	public abstract void collide(final List<Rectangle2D.Float> collisionBounds);
 
 }

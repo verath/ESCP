@@ -7,8 +7,7 @@ import java.util.List;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
- * Abstract class for representing a room. This class holds all of the common
- * functionality that each room should have.
+ * Abstract class for representing a room model.
  * 
  * @author simon
  * 
@@ -24,7 +23,7 @@ public abstract class AbstractRoomModel implements CollidableModel,
 
 	/**
 	 * Generates rectangles representing the bounds of blocked tiles on the map.
-	 * Should only be called once for each map, and must not be called during
+	 * Should only be called once for each map, and should not be called during
 	 * the game loop as this operation is expensive.
 	 */
 	public void generateCollisionBounds(final TiledMap map) {
