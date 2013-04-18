@@ -12,6 +12,8 @@ import java.util.List;
  */
 public abstract class MovingModel implements CollidingModel, CollidableModel {
 	private float x, y, velocity;
+//	private Weapon currentWeapon;
+	private int health;
 
 	/**
 	 * Method for getting the x coordinate of the MovingModel.
@@ -92,5 +94,45 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 			}
 		}
 		return isCollision;
+	}
+	
+	/**
+	 * Method for getting the current weapon.
+	 * @return the current weapon
+	 */
+	public Weapon getCurrentWeapon() {
+		return weapon;
+	}
+	
+	/**
+	 * Method for setting the current weapon.
+	 * @param the new weapon to be set as current
+	 */
+	public void setCurrentWeapon(Weapon weapon) {
+		currentWeapon = weapon;
+	}
+	
+	/**
+	 * Method for setting the health.
+	 * @param health - preferably 0-100
+	 */
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	/**
+	 * Method for getting the health.
+	 * @return the health
+	 */
+	public int getHealth() {
+		return health;
+	}
+	
+	/**
+	 * Method for receiving damage.
+	 * @param the amount of damage that should be dealt
+	 */
+	public void takeDamage(int damage) {
+		health -= health;
 	}
 }
