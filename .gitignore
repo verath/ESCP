@@ -5,14 +5,10 @@
 *.class
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
 # Include libraries
-
-!/libs/*.jar
-!/libs/*.zip
 
 
 ########
