@@ -35,6 +35,11 @@ public class MainMenuState extends MenuBasedGameState {
 	 */
 	private int MENUX = 200;
 	private int MENUY = 100;
+	
+	/**
+	 * True if you have started a game.
+	 */
+	private boolean existsGameCurrently;
 
 	/**
 	 * creates a new main menu.
@@ -42,6 +47,7 @@ public class MainMenuState extends MenuBasedGameState {
 	 */
 	public MainMenuState(int id) {
 		super(id);
+		this.existsGameCurrently = false;
 	}
 
 	@Override
@@ -65,6 +71,7 @@ public class MainMenuState extends MenuBasedGameState {
 				@Override
 				public void performAction() {
 					// TODO should create a new game, not resume present.
+					existsGameCurrently = true;
 					game.enterState( Constants.GAME_STATE_PLAYING );
 					addResumeButton();
 				}
@@ -103,6 +110,13 @@ public class MainMenuState extends MenuBasedGameState {
 				e.printStackTrace();
 			}
 			this.addButton(resumeGameButton);
+		}
+	}
+
+	@Override
+	protected void escpAction() {
+		if ( existsGameCurrently ) {
+			game.enterState( Constants.GAME_STATE_PLAYING );
 		}
 	}
 }

@@ -33,6 +33,8 @@ public class PlayState extends BasicGameState {
 	private final HeroView heroView;
 
 	private final RoomController roomController;
+	
+	private boolean pendingEscpAction;
 
 	/**
 	 * Creates a new GameController
@@ -48,6 +50,8 @@ public class PlayState extends BasicGameState {
 	public PlayState(int ID) {
 		this.ID = ID;
 
+		pendingEscpAction = false;
+		
 		// Set up the rooms
 		BasicRoomModel roomModel = new BasicRoomModel();
 		BasicRoomView roomView = new BasicRoomView(roomModel);
@@ -79,7 +83,10 @@ public class PlayState extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 		
-		if ( container.getInput().isKeyDown(Input.KEY_ESCAPE)){
+		if ( container.getInput().isKeyPressed(Input.KEY_ESCAPE)){
+			pendingEscpAction = true;
+		} else if ( pendingEscpAction && !container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+			pendingEscpAction = false;
 			game.enterState(Constants.GAME_STATE_MAIN_MENU);
 		}
 		

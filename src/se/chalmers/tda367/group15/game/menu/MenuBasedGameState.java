@@ -17,6 +17,8 @@ import org.newdawn.slick.Input;
  * @author Carl Jansson
  */
 public abstract class MenuBasedGameState extends AbstractedGameState {
+	
+	private boolean pendingEscpAction;
 
 	/**
 	 * indicates mouse button i was just pressed.
@@ -38,6 +40,7 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 */
 	public MenuBasedGameState(int id) {
 		super(id);
+		pendingEscpAction = false;
 	}
 
 	@Override
@@ -46,6 +49,11 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	}
 
 	protected abstract void initButtons();
+	
+	/**
+	 * this method is called whenever escape is pressed.
+	 */
+	protected abstract void escpAction();
 	
 	@Override
 	public void render(Graphics g) {
@@ -58,6 +66,12 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	@Override
 	public void update(int delta) {
 		this.checkForButtonClicks();
+		if ( container.getInput().isKeyPressed(Input.KEY_ESCAPE)){
+			pendingEscpAction = true;
+		} else if ( pendingEscpAction && !container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+			pendingEscpAction = false;
+			this.escpAction();
+		}
 	}
 
 	@Override
