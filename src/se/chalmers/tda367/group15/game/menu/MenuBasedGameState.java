@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.menu;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -7,16 +9,16 @@ import org.newdawn.slick.Input;
 /**
  * A class with the purpose of making it easy to create menus in
  * a graphical environment.
- * Class taken from tutorial for writing menus in Slick2D
- * Originaly posted on http://slick.javaunlimited.net/
+ * Class based on tutorial for writing menus in Slick2D
+ * Originally posted on http://slick.javaunlimited.net/
  * by user shiroto
- * Comments added by Carl Jansson.
+ * remade to suit our purpose.
  * 
  * @author Carl Jansson
  */
 public abstract class MenuBasedGameState extends AbstractedGameState {
 	   protected boolean leftMouseButtonReleased;
-	   protected Button[] buttons;
+	   protected ArrayList<Button> buttons = new ArrayList<Button>();
 	   protected Image background;
 	   
 	   public MenuBasedGameState(int id) {
@@ -57,13 +59,21 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	   }
 	   
 	   private void clickButton() {
-	      for(Button b : buttons) {
+	      /*for(Button b : buttons) {
 	         if(b.isMouseOver())
 	            b.performAction();
+	      }*/
+	      for (int i = 0; i < buttons.size(); i++) {
+	    	  if ( buttons.get(i).isMouseOver() ) {
+	    		  buttons.get(i).performAction();
+	    	  }
 	      }
 	   }
 	   
 	   public final void setButtons(Button...buttons) {
-	      this.buttons = buttons;
+	      //this.buttons = buttons;
 	   }
+	   public final void addButton(Button aButton) {
+		      this.buttons.add(aButton);
+		   }
 	}

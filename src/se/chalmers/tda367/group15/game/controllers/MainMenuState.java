@@ -9,19 +9,34 @@ import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
 
 /**
  * A class representing a main menu in a graphical application.
- * Class originaly taken from tutorial for writing menus in Slick2D
- * Originaly posted on http://slick.javaunlimited.net/
+ * Class based on tutorial for writing menus in Slick2D
+ * Originally posted on http://slick.javaunlimited.net/
  * by user shiroto
- * remade by Carl Jansson to suit our purpose.
- * Comments added by Carl Jansson.
+ * remade to suit our purpose.
  * 
- * @author Carl Jansson
+ * @author Carl
  */
 public class MainMenuState extends MenuBasedGameState {
-	private Image playImage;
+	
+	/**
+	 * Images representing buttons
+	 */
+	private Image newGameImage;
 	private Image quitImage;
+	private Image resumeImage;
 	
+	/**
+	 * the background
+	 */
+	private Button resumeGameButton;
 	
+	/**
+	 * the upper left corner of button group
+	 */
+	private int MENUX = 200;
+	private int MENUY = 100;
+	
+
 	public MainMenuState(int id) {
 		super(id);
 	}
@@ -38,28 +53,52 @@ public class MainMenuState extends MenuBasedGameState {
 
 	@Override
 	public void initButtons() {
-		
+
 		try {
-			playImage = new Image("res/menu/play.png");
+			newGameImage = new Image("res/menu/newGame.png");
 			quitImage = new Image("res/menu/quit.png");
-			Button newGameButton = new Button(container, playImage, 100, 100) {
+			
+			Button newGameButton = new Button(container, newGameImage, MENUX, MENUY+50) {
 				@Override
 				public void performAction() {
 					game.enterState( Constants.GAME_STATE_PLAYING );
+					addResumeButton();
 				}
 			};
-			Button exitButton = new Button(container, quitImage, 100, 200) {
+			Button exitButton = new Button(container, quitImage, MENUX, MENUY+100) {
 				@Override
 				public void performAction() {
 					container.exit();
 				}
 			};
-			this.setButtons(newGameButton, exitButton);
 			
+			this.addButton(newGameButton);
+			this.addButton(exitButton);
+
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		
-		
+	}
+	
+	/**
+	 * Adds a resume button.
+	 * The existence of a resume button indicates that there is something to resume
+	 * and therefore this is done separately from the rest of the buttons.
+	 */
+	public void addResumeButton(){
+		if ( resumeGameButton == null){
+			try{
+				resumeImage = new Image("res/menu/resumeGame.png");
+				resumeGameButton = new Button(container, resumeImage, MENUX, MENUY) {
+					@Override
+					public void performAction() {
+						game.enterState( Constants.GAME_STATE_PLAYING );
+					}
+				};
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			this.addButton(resumeGameButton);
+		}
 	}
 }

@@ -20,7 +20,7 @@ public class Constants {
 	
 	
 	/**
-	 * Ints for controlling gamestate. They should all be unique.
+	 * the different states. They should each be a unique int.
 	 */
 	public static final int GAME_STATE_MAIN_MENU = 1;
 	public static final int GAME_STATE_PLAYING = 2;

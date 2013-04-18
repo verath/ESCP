@@ -10,7 +10,6 @@ import org.newdawn.slick.gui.MouseOverArea;
  * Class taken from tutorial for writing menus in Slick2D
  * Originally posted on http://slick.javaunlimited.net/
  * by user shiroto
- * Comments added by Carl Jansson.
  * 
  * @author Carl Jansson
  */
