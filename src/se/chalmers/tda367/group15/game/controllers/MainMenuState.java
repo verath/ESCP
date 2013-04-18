@@ -17,26 +17,29 @@ import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
  * @author Carl
  */
 public class MainMenuState extends MenuBasedGameState {
-	
+
 	/**
 	 * Images representing buttons
 	 */
 	private Image newGameImage;
 	private Image quitImage;
 	private Image resumeImage;
-	
+
 	/**
 	 * the background
 	 */
 	private Button resumeGameButton;
-	
+
 	/**
 	 * the upper left corner of button group
 	 */
 	private int MENUX = 200;
 	private int MENUY = 100;
-	
 
+	/**
+	 * creates a new main menu.
+	 * @param id 
+	 */
 	public MainMenuState(int id) {
 		super(id);
 	}
@@ -57,10 +60,11 @@ public class MainMenuState extends MenuBasedGameState {
 		try {
 			newGameImage = new Image("res/menu/newGame.png");
 			quitImage = new Image("res/menu/quit.png");
-			
+
 			Button newGameButton = new Button(container, newGameImage, MENUX, MENUY+50) {
 				@Override
 				public void performAction() {
+					// TODO should create a new game, not resume present.
 					game.enterState( Constants.GAME_STATE_PLAYING );
 					addResumeButton();
 				}
@@ -71,7 +75,7 @@ public class MainMenuState extends MenuBasedGameState {
 					container.exit();
 				}
 			};
-			
+
 			this.addButton(newGameButton);
 			this.addButton(exitButton);
 
@@ -79,7 +83,7 @@ public class MainMenuState extends MenuBasedGameState {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Adds a resume button.
 	 * The existence of a resume button indicates that there is something to resume

@@ -14,21 +14,21 @@ import org.newdawn.slick.gui.MouseOverArea;
  * @author Carl Jansson
  */
 public abstract class Button  {
-	   protected MouseOverArea moa;
-	   protected GUIContext guiContext;
-	   
-	   public Button(GUIContext guiContext, Image image, int x, int y) {
-	      this.guiContext = guiContext;
-	      moa = new MouseOverArea(guiContext, image, x, y);
-	   }
-	   
-	   public void render(Graphics g) {
-	      moa.render(guiContext, g);
-	   }
-	   
-	   public abstract void performAction();
-	   
-	   public boolean isMouseOver() {
-	      return moa.isMouseOver();
-	   }
+	protected MouseOverArea moa;
+	protected GUIContext guiContext;
+
+	public Button(GUIContext guiContext, Image image, int x, int y) {
+		this.guiContext = guiContext;
+		moa = new MouseOverArea(guiContext, image, x, y);
 	}
+
+	public void render(Graphics g) {
+		moa.render(guiContext, g);
+	}
+
+	public abstract void performAction();
+
+	public boolean isMouseOver() {
+		return moa.isMouseOver();
+	}
+}

@@ -17,63 +17,82 @@ import org.newdawn.slick.Input;
  * @author Carl Jansson
  */
 public abstract class MenuBasedGameState extends AbstractedGameState {
-	   protected boolean leftMouseButtonReleased;
-	   protected ArrayList<Button> buttons = new ArrayList<Button>();
-	   protected Image background;
-	   
-	   public MenuBasedGameState(int id) {
-	      super(id);
-	   }
 
-	   @Override
-	   public void init() {
-	      this.initButtons();
-	   }
-	   
-	   protected abstract void initButtons();
+	/**
+	 * indicates mouse button i was just pressed.
+	 */
+	protected boolean leftMouseButtonReleased;
+	
+	/**
+	 * List with all buttons on page.
+	 */
+	protected ArrayList<Button> buttons = new ArrayList<Button>();
+	
+	/**
+	 * The background for current menu page.
+	 */
+	protected Image background;
 
-	   @Override
-	   public void render(Graphics g) {
-	      background.draw();
-	      for(Button b : buttons)
-	         b.render(g);
-	   }
-
-	   @Override
-	   public void update(int delta) {
-	      this.checkForButtonClicks();
-	   }
-	   
-	   @Override
-	   public void mouseReleased(int button, int x, int y) {
-	      if (button == Input.MOUSE_LEFT_BUTTON) {
-	         leftMouseButtonReleased = true;
-	      }
-	   }
-	   
-	   protected final void checkForButtonClicks() {
-	      if(leftMouseButtonReleased) {
-	         leftMouseButtonReleased = false;
-	         this.clickButton();
-	      }
-	   }
-	   
-	   private void clickButton() {
-	      /*for(Button b : buttons) {
-	         if(b.isMouseOver())
-	            b.performAction();
-	      }*/
-	      for (int i = 0; i < buttons.size(); i++) {
-	    	  if ( buttons.get(i).isMouseOver() ) {
-	    		  buttons.get(i).performAction();
-	    	  }
-	      }
-	   }
-	   
-	   public final void setButtons(Button...buttons) {
-	      //this.buttons = buttons;
-	   }
-	   public final void addButton(Button aButton) {
-		      this.buttons.add(aButton);
-		   }
+	/**
+	 * @param id the state identification with which state is fetched.
+	 */
+	public MenuBasedGameState(int id) {
+		super(id);
 	}
+
+	@Override
+	public void init() {
+		this.initButtons();
+	}
+
+	protected abstract void initButtons();
+	
+	@Override
+	public void render(Graphics g) {
+		background.draw();
+		for (int i = 0; i < buttons.size(); i++) {
+			buttons.get(i).render(g);
+		}
+	}
+	
+	@Override
+	public void update(int delta) {
+		this.checkForButtonClicks();
+	}
+
+	@Override
+	public void mouseReleased(int button, int x, int y) {
+		if (button == Input.MOUSE_LEFT_BUTTON) {
+			leftMouseButtonReleased = true;
+		}
+	}
+
+	/**
+	 * Check if mouse clicked and perform action.
+	 */
+	protected final void checkForButtonClicks() {
+		if(leftMouseButtonReleased) {
+			leftMouseButtonReleased = false;
+			this.clickButton();
+		}
+	}
+
+	/**
+	 * goes through the buttons, checks if mouse is above and if it is performs action.
+	 */
+	private void clickButton() {
+		for (int i = 0; i < buttons.size(); i++) {
+			if ( buttons.get(i).isMouseOver() ) {
+				buttons.get(i).performAction();
+			}
+		}
+	}
+
+	/**
+	 * Adds button to ArayList buttons.
+	 * @param aButton the button to add to list.
+	 */
+	public final void addButton(Button aButton) {
+		this.buttons.add(aButton);
+	}
+}
