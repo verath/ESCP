@@ -25,7 +25,7 @@ import se.chalmers.tda367.group15.game.views.room.BasicRoomView;
  * @author Peter
  * 
  */
-public class PlayState extends BasicGameState {
+public class MainController extends BasicGameState {
 
 	private final int ID;
 
@@ -45,7 +45,7 @@ public class PlayState extends BasicGameState {
 	 *            The GameModel that should receive update
 	 * @param roomController
 	 */
-	public PlayState(int ID) {
+	public MainController(int ID) {
 		this.ID = ID;
 
 		// Set up the rooms
