@@ -45,7 +45,7 @@ public class MainMenuState extends MenuBasedGameState {
 			Button newGameButton = new Button(container, playImage, 100, 100) {
 				@Override
 				public void performAction() {
-					game.enterState( Constants.PLAYING );
+					game.enterState( Constants.GAME_STATE_PLAYING );
 				}
 			};
 			Button exitButton = new Button(container, quitImage, 100, 200) {

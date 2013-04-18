@@ -1,5 +1,10 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -12,7 +17,7 @@ import org.newdawn.slick.SlickException;
  */
 
 public class Hero extends MovingModel {
-	
+
 	private double rotation;
 	private boolean goingUp;
 	private boolean goingDown;
@@ -21,14 +26,23 @@ public class Hero extends MovingModel {
 	private int width;
 	private int height;
 
+	private float oldX, oldY;
+
+	/**
+	 * A saved reference to the latest calculated collisionBounds for the Hero.
+	 * This is to allow us to filter out our own collision bounds in the collide
+	 * method.
+	 */
+	private List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
+
 	/**
 	 * Create a new Hero.
 	 */
 	public Hero() {
 
 		// TODO fix hardcoded values..
-		setX(34f);
-		setY(34f);
+		setX(44f);
+		setY(44f);
 		setVelocity(0.15f);
 		this.width = 64;
 		this.height = 64;
@@ -36,12 +50,15 @@ public class Hero extends MovingModel {
 	}
 
 	@Override
-	public void update(GameContainer cont, int delta) throws SlickException {
-		Input input = cont.getInput();
-		float oldX = getX();
-		float oldY = getY();
+	public void update(GameContainer container, int delta)
+			throws SlickException {
+		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
+
+		// Save current x and y values so when can go back there on collision
+		oldX = getX();
+		oldY = getY();
 
 		// Calculate facing depedning on where the mouse is relative
 		// to the center of the hero
@@ -66,14 +83,12 @@ public class Hero extends MovingModel {
 			speedX = (float) (this.getVelocity() * Math.cos(direction));
 		}
 
-
 		this.setY(this.getY() - (delta * speedY));
 		this.setX(this.getX() - (delta * speedX));
-		
-		if(isCollision()) {
-			setX(oldX);
-			setY(oldY);
-		}
+
+		// Calculate new collision bounds
+		calculateCollsionBounds();
+
 	}
 
 	/**
@@ -97,4 +112,26 @@ public class Hero extends MovingModel {
 
 		return (speedY != 0 || speedX != 0);
 	}
+
+	/**
+	 * Calculates the collision bounds for hero
+	 */
+	private void calculateCollsionBounds() {
+		collisionBounds.clear();
+		collisionBounds.add(new Rectangle2D.Float(getX(), getY(), 64, 64));
+	}
+
+	@Override
+	public void collide(final List<Rectangle2D.Float> collisionBounds) {
+		if (isCollision(collisionBounds)) {
+			setX(oldX);
+			setY(oldY);
+		}
+	}
+
+	@Override
+	public List<Float> getCollisionBounds() {
+		return collisionBounds;
+	}
+
 }

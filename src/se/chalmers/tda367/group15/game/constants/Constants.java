@@ -22,8 +22,8 @@ public class Constants {
 	/**
 	 * Ints for controlling gamestate. They should all be unique.
 	 */
-	public static final int MAIN_MENU = 1;
-	public static final int PLAYING = 2;
+	public static final int GAME_STATE_MAIN_MENU = 1;
+	public static final int GAME_STATE_PLAYING = 2;
 	// TODO can they be enums instead?
 
 }

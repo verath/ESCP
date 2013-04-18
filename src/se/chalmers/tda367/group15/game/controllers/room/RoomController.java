@@ -1,31 +1,26 @@
-package se.chalmers.tda367.group15.game.views.room;
+package se.chalmers.tda367.group15.game.controllers.room;
 
 import java.awt.Point;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import se.chalmers.tda367.group15.game.models.Room;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 
 /**
  * A class for abstractly handling rooms.
  * 
- * @author Peter
+ * @author Peter, Simon
  * 
  */
-public class RoomManager {
-	
-	public enum RelativePos {
+public class RoomController {
+
+	public enum RelativePosition {
 		ABOVE, BELOW, LEFTOF, RIGHTOF;
 	}
-	
-	/**
-	 * The instance object of this class.
-	 */
-	public static RoomManager instance;
+
 	/**
 	 * The starting point of the first room.
 	 */
@@ -45,15 +40,8 @@ public class RoomManager {
 	/**
 	 * RoomManager constructor
 	 */
-	private RoomManager() {
+	public RoomController() {
 		rooms = new HashMap<Point, Room>();
-	}
-	
-	public static RoomManager getInstance() {
-		if(instance == null) {
-			instance = new RoomManager();
-		}
-		return instance;
 	}
 
 	/**
@@ -86,6 +74,12 @@ public class RoomManager {
 		}
 	}
 
+	/**
+	 * Attempts to find the position of a room.
+	 * 
+	 * @param room
+	 * @return The position of the room
+	 */
 	private Point getRoomPosition(Room room) {
 		Point position = null;
 
@@ -98,20 +92,22 @@ public class RoomManager {
 		if (position == null) {
 			throw new RoomDoesNotExistException(
 					"The reference room did not exist.");
-		} else { 
+		} else {
 			return position;
 		}
 	}
-	
+
 	/**
 	 * Method for adding a room at a position relative to a reference room.
-	 * @param reference room
-	 * @param new room
-	 * @param relative position
+	 * 
+	 * @param reference
+	 * @param room
+	 * @param relativePosition
 	 */
-	public void addRoom(final Room reference, final Room room, RelativePos relPos ) {
+	public void addRoom(final Room reference, final Room room,
+			RelativePosition relativePosition) {
 		Point addPosition = getRoomPosition(reference);
-		switch(relPos) {
+		switch (relativePosition) {
 		case ABOVE:
 			addPosition.translate(0, 1);
 			break;
@@ -133,7 +129,7 @@ public class RoomManager {
 	 */
 	public Room getCurrentRoom() {
 		return rooms.get(currentPosition);
-		
+
 	}
 
 	/**
@@ -142,26 +138,73 @@ public class RoomManager {
 	public void moveUp() {
 		currentPosition.translate(0, 1);
 	}
-	
+
 	/**
 	 * Moves the room selector downwards
 	 */
 	public void moveDown() {
 		currentPosition.translate(0, -1);
 	}
-	
+
 	/**
 	 * Moves the room selector to the left
 	 */
 	public void moveLeft() {
 		currentPosition.translate(-1, 0);
 	}
-	
+
 	/**
 	 * Moves the room selector to the right
 	 */
 	public void moveRight() {
 		currentPosition.translate(1, 0);
+	}
+
+	/**
+	 * Update the game logic here. No rendering should take place in this method
+	 * though it won't do any harm.
+	 * 
+	 * @param container
+	 *            The container holing this game
+	 * @param delta
+	 *            The amount of time thats passed since last update in
+	 *            milliseconds
+	 * @throws SlickException
+	 *             Throw to indicate an internal error
+	 */
+	public void update(GameContainer container, int delta) throws SlickException {
+		getCurrentRoom().getRoomModel().update(container, delta);
+	}
+
+	/**
+	 * Render the game's screen here.
+	 * 
+	 * @param container
+	 *            The container holing this game
+	 * @param g
+	 *            The graphics context that can be used to render. However,
+	 *            normal rendering routines can also be used.
+	 * @throws SlickException
+	 *             Throw to indicate a internal error
+	 */
+	public void render(GameContainer container, Graphics g) throws SlickException {
+		getCurrentRoom().getRoomView().render(container, g);
+	}
+
+	/**
+	 * Initialise the game. This can be used to load static resources. It's
+	 * called before the game loop starts
+	 * 
+	 * @param container
+	 *            The container holding the game
+	 * @throws SlickException
+	 *             Throw to indicate an internal error
+	 */
+	public void init(GameContainer container) throws SlickException {
+		for(Room r : rooms.values()) {
+			r.getRoomView().init(container);
+		}
+
 	}
 
 }

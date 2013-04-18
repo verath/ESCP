@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,17 @@ public class GameModel implements Model {
 	private List<Model> models = new ArrayList<Model>();
 
 	/**
+	 * A list of CollidingModel that has should receive a list of each
+	 * CollidableModel after each update.
+	 */
+	private List<CollidingModel> collidingModels = new ArrayList<CollidingModel>();
+
+	/**
+	 * A list of CollidableModel that will be sent to each CollidingModel.
+	 */
+	private List<CollidableModel> collidableModels = new ArrayList<CollidableModel>();
+
+	/**
 	 * Creates a new GameModel
 	 */
 	public GameModel() {
@@ -31,6 +43,18 @@ public class GameModel implements Model {
 		for (Model m : models) {
 			m.update(container, delta);
 		}
+
+		// Handle collisions
+		List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>(
+				collidableModels.size());
+
+		for (CollidableModel m : collidableModels) {
+			collisionBounds.addAll(m.getCollisionBounds());
+		}
+
+		for (CollidingModel m : collidingModels) {
+			m.collide(collisionBounds);
+		}
 	}
 
 	/**
@@ -41,6 +65,12 @@ public class GameModel implements Model {
 	 */
 	public void addModel(Model model) {
 		models.add(model);
+		if (model instanceof CollidingModel) {
+			collidingModels.add((CollidingModel) model);
+		}
+		if (model instanceof CollidableModel) {
+			collidableModels.add((CollidableModel) model);
+		}
 	}
 
 	/**
@@ -51,5 +81,7 @@ public class GameModel implements Model {
 	 */
 	public void removeModel(Model model) {
 		models.remove(model);
+		collidingModels.remove(model);
+		collidableModels.remove(model);
 	}
 }

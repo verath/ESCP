@@ -4,7 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 /**
- * An interface for a model in the game.
+ * An interface representing a model in the game.
  * 
  * @author Peter
  * 

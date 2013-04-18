@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.tda367.group15.game.constants.Constants;
+
 public class StateController extends StateBasedGame {
 
 	public StateController(String name) {
@@ -13,7 +15,11 @@ public class StateController extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		// while this comment is added this is done in PsychoHeroFactory
+		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
+		MainMenuState mainMenu = new MainMenuState( Constants.GAME_STATE_MAIN_MENU );
+		this.addState(playState);
+		this.addState(mainMenu);
+		this.enterState( Constants.GAME_STATE_MAIN_MENU );
 	}
 
 }
