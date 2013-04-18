@@ -5,16 +5,6 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.GameController;
-import se.chalmers.tda367.group15.game.models.GameModel;
-import se.chalmers.tda367.group15.game.models.Hero;
-import se.chalmers.tda367.group15.game.models.RoomModel;
-import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
-import se.chalmers.tda367.group15.game.room.Room;
-import se.chalmers.tda367.group15.game.room.RoomManager;
-import se.chalmers.tda367.group15.game.views.GameView;
-import se.chalmers.tda367.group15.game.views.HeroView;
-import se.chalmers.tda367.group15.game.views.RoomView;
-import se.chalmers.tda367.group15.game.views.room.BasicRoomView;
 
 /**
  * Factory class for a PsychoHeroGame.
@@ -34,32 +24,7 @@ public class PsychoHeroFactory {
 	// TODO allow for specifying arguments to return a different PsychoHeroGame
 	public static PsychoHeroGame createPsychoHeroGame() {
 
-		GameView gameView = new GameView();
-		GameModel gameModel = new GameModel();
-
-		// Set up the rooms
-		Room startingRoom = new Room(new BasicRoomView(), new BasicRoomModel());
-
-		// Set up the room manager
-		RoomManager roomManager = new RoomManager();
-		roomManager.addStartingRoom(startingRoom);
-		
-		// Add a view representing the current room
-		RoomView roomView = new RoomView(roomManager);
-		gameView.addView(roomView);
-		
-		// Add a model representing the current room
-		RoomModel roomModel = new RoomModel(roomManager);
-		gameModel.addModel(roomModel);
-
-		// Set up the hero
-		Hero heroModel = new Hero();
-		HeroView heroView = new HeroView(heroModel);
-		gameView.addView(heroView);
-		gameModel.addModel(heroModel);
-
-		GameController slickGame = new GameController(Constants.GAME_NAME,
-				gameView, gameModel, roomManager);
+		GameController slickGame = new GameController(Constants.GAME_NAME);
 
 		// Set up the container (this is kind of like the JFrame in swing)
 		AppGameContainer gameContainer;
@@ -79,5 +44,4 @@ public class PsychoHeroFactory {
 
 		return psychoHeroGame;
 	}
-
 }

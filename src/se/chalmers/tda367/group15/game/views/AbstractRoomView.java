@@ -2,8 +2,6 @@ package se.chalmers.tda367.group15.game.views;
 
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
-
 /**
  * An abstract representation of a view for a room.
  * 
@@ -36,10 +34,4 @@ abstract public class AbstractRoomView implements View {
 		this.map = map;
 	}
 
-	/**
-	 * Method for binding a room view to a room model.
-	 * 
-	 * @param roomModel
-	 */
-	public abstract void setRoomModel(AbstractRoomModel roomModel);
 }

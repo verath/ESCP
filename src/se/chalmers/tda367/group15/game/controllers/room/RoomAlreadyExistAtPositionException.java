@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.room;
+package se.chalmers.tda367.group15.game.controllers.room;
 
 public class RoomAlreadyExistAtPositionException extends RuntimeException {
 	private static final long serialVersionUID = -5312651513339462450L;

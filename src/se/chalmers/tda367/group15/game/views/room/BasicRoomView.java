@@ -5,7 +5,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
 import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
 import se.chalmers.tda367.group15.game.views.AbstractRoomView;
 
@@ -26,7 +25,8 @@ public class BasicRoomView extends AbstractRoomView {
 	 */
 	private BasicRoomModel roomModel;
 
-	public BasicRoomView() {
+	public BasicRoomView(BasicRoomModel roomModel) {
+		this.roomModel = roomModel;
 	}
 
 	@Override
@@ -45,13 +45,4 @@ public class BasicRoomView extends AbstractRoomView {
 		roomModel.generateCollisionBounds(map);
 	}
 
-	@Override
-	public void setRoomModel(AbstractRoomModel roomModel) {
-		if (roomModel instanceof BasicRoomModel) {
-			this.roomModel = (BasicRoomModel) roomModel;
-		} else {
-			throw new IllegalArgumentException(
-					"The roomModel provided was not the expected class.");
-		}
-	}
 }

@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.room;
+package se.chalmers.tda367.group15.game.controllers.room;
 
 import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
 import se.chalmers.tda367.group15.game.views.AbstractRoomView;
@@ -32,7 +32,6 @@ public class Room {
 			final AbstractRoomModel roomModel) {
 		this.roomModel = roomModel;
 		this.roomView = roomView;
-		roomView.setRoomModel(roomModel);
 	}
 
 	/**

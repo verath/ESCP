@@ -122,7 +122,7 @@ public class Hero extends MovingModel {
 	}
 
 	@Override
-	public void collide(List<Rectangle2D.Float> collisionBounds) {
+	public void collide(final List<Rectangle2D.Float> collisionBounds) {
 		if (isCollision(collisionBounds)) {
 			setX(oldX);
 			setY(oldY);
