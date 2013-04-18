@@ -9,11 +9,10 @@ import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * A class for cutting down the implementation needed if using BasicGameState.
- * Class taken from tutorial for writing menus in Slick2D
- * Originally posted on http://slick.javaunlimited.net/
- * by user shiroto
+ * Class taken from tutorial for writing menus in Slick2D Originally 
+ * posted on http://slick.javaunlimited.net/ by user shiroto.
  * 
- * @author Carl
+ * @author unknown, shiroto?
  */
 public abstract class AbstractedGameState extends BasicGameState {
 	   protected GameContainer container;

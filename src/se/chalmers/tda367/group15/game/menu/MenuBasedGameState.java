@@ -9,10 +9,9 @@ import org.newdawn.slick.Input;
 /**
  * A class with the purpose of making it easy to create menus in
  * a graphical environment.
- * Class based on tutorial for writing menus in Slick2D
- * Originally posted on http://slick.javaunlimited.net/
- * by user shiroto
- * remade to suit our purpose.
+ * Class based on tutorial for writing menus in Slick2D Originally 
+ * posted on http://slick.javaunlimited.net/ by user shiroto.
+ * Remade to suit our purpose.
  * 
  * @author Carl Jansson
  */

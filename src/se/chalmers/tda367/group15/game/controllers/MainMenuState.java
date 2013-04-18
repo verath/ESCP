@@ -9,10 +9,9 @@ import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
 
 /**
  * A class representing a main menu in a graphical application.
- * Class based on tutorial for writing menus in Slick2D
- * Originally posted on http://slick.javaunlimited.net/
- * by user shiroto
- * remade to suit our purpose.
+ * Class based on tutorial for writing menus in Slick2D Originally 
+ * posted on http://slick.javaunlimited.net/ by user shiroto.
+ * Remade to suit our purpose.
  * 
  * @author Carl
  */
@@ -24,9 +23,10 @@ public class MainMenuState extends MenuBasedGameState {
 	private Image newGameImage;
 	private Image quitImage;
 	private Image resumeImage;
+	private Image optionsImage;
 
 	/**
-	 * the background
+	 * Resume button created separately, therefore you need to be able to see if it is null.
 	 */
 	private Button resumeGameButton;
 
@@ -66,7 +66,9 @@ public class MainMenuState extends MenuBasedGameState {
 		try {
 			newGameImage = new Image("res/menu/newGame.png");
 			quitImage = new Image("res/menu/quit.png");
+			optionsImage = new Image("res/menu/options.png");
 
+			// Start a new game.
 			Button newGameButton = new Button(container, newGameImage, MENUX, MENUY+50) {
 				@Override
 				public void performAction() {
@@ -76,7 +78,15 @@ public class MainMenuState extends MenuBasedGameState {
 					addResumeButton();
 				}
 			};
-			Button exitButton = new Button(container, quitImage, MENUX, MENUY+100) {
+			// open options
+			Button optionsButton = new Button(container, optionsImage, MENUX, MENUY+100) {
+				@Override
+				public void performAction() {
+					game.enterState( Constants.GAME_STATE_OPTIONS_MENU );
+				}
+			};
+			// Quit application
+			Button exitButton = new Button(container, quitImage, MENUX, MENUY+150) {
 				@Override
 				public void performAction() {
 					container.exit();
@@ -84,6 +94,7 @@ public class MainMenuState extends MenuBasedGameState {
 			};
 
 			this.addButton(newGameButton);
+			this.addButton(optionsButton);
 			this.addButton(exitButton);
 
 		} catch (SlickException e) {

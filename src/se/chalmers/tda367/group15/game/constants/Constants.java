@@ -24,6 +24,6 @@ public class Constants {
 	 */
 	public static final int GAME_STATE_MAIN_MENU = 1;
 	public static final int GAME_STATE_PLAYING = 2;
-	// TODO can they be enums instead?
+	public static final int GAME_STATE_OPTIONS_MENU = 3;
 
 }
