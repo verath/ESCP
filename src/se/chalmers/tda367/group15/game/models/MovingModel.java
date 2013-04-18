@@ -12,7 +12,7 @@ import java.util.List;
  */
 public abstract class MovingModel implements CollidingModel, CollidableModel {
 	private float x, y, velocity;
-	private Weapon currentWeapon;
+//	private Weapon currentWeapon;
 	private int health;
 
 	/**
