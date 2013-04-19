@@ -126,7 +126,7 @@ public class Hero extends MovingModel {
 	 */
 	private void calculateCollisionBounds() {
 		collisionBounds.clear();
-		collisionBounds.add(new Rectangle2D.Float(getX(), getY(), 64, 64));
+		collisionBounds.add(new Rectangle2D.Float(getX()+9, getY()+4, 44, 56));
 	}
 
 	@Override

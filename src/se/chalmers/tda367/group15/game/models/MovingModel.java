@@ -97,7 +97,7 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 		List<Rectangle2D.Float> rects = new ArrayList<Rectangle2D.Float>();
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
-				int tileId = map.getTileId(i, j, 0);
+				int tileId = map.getTileId(i, j, 1);
 				String property = map.getTileProperty(tileId, "blocked",
 						"false");
 				if (property.equals("true")) {
