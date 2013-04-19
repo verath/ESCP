@@ -1,8 +1,10 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -71,6 +73,8 @@ public class MainController extends BasicGameState {
 		heroModel = new Hero();
 		heroView = new HeroView(heroModel);
 		roomController.init(container);
+		
+		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
 	}
 
 	@Override
