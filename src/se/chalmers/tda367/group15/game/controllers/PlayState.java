@@ -29,10 +29,10 @@ public class PlayState extends BasicGameState {
 
 	private final int ID;
 
-	private final Hero heroModel;
-	private final HeroView heroView;
+	private Hero heroModel;
+	private HeroView heroView;
 
-	private final RoomController roomController;
+	private RoomController roomController;
 	
 	private boolean pendingEscpAction;
 
@@ -75,6 +75,7 @@ public class PlayState extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		startNewGame();
 		roomController.init(container);
 		heroView.init(container);
 	}
@@ -108,6 +109,23 @@ public class PlayState extends BasicGameState {
 	@Override
 	public int getID() {
 		return ID;
+	}
+	
+	public void startNewGame(){
+		pendingEscpAction = false;
+		
+		// Set up the rooms
+		BasicRoomModel roomModel = new BasicRoomModel();
+		BasicRoomView roomView = new BasicRoomView(roomModel);
+		Room startingRoom = new Room(roomView, roomModel);
+
+		// Set up the room manager
+		roomController = new RoomController();
+		roomController.addStartingRoom(startingRoom);
+
+		// Set up the hero
+		heroModel = new Hero();
+		heroView = new HeroView(heroModel);
 	}
 
 }

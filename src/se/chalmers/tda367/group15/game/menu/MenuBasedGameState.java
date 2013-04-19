@@ -30,6 +30,11 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	protected ArrayList<Button> buttons = new ArrayList<Button>();
 	
 	/**
+	 * List with all checkButtons on page.
+	 */
+	protected ArrayList<CheckBox> checkButtons = new ArrayList<CheckBox>();
+	
+	/**
 	 * The background for current menu page.
 	 */
 	protected Image background;
@@ -47,6 +52,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 		this.initButtons();
 	}
 
+	/**
+	 * In this method you create all buttons.
+	 */
 	protected abstract void initButtons();
 	
 	/**
@@ -59,6 +67,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 		background.draw();
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).render(g);
+		}
+		for (int i = 0; i < checkButtons.size(); i++) {
+			checkButtons.get(i).render(g);
 		}
 	}
 	
@@ -99,6 +110,11 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 				buttons.get(i).performAction();
 			}
 		}
+		for (int i = 0; i < checkButtons.size(); i++) {
+			if ( checkButtons.get(i).isMouseOver() ) {
+				checkButtons.get(i).performAction();
+			}
+		}
 	}
 
 	/**
@@ -107,5 +123,13 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 */
 	public final void addButton(Button aButton) {
 		this.buttons.add(aButton);
+	}
+	
+	/**
+	 * Adds button to ArayList buttons.
+	 * @param aButton the button to add to list.
+	 */
+	public final void addCheckButton(CheckBox aButton) {
+		this.checkButtons.add(aButton);
 	}
 }

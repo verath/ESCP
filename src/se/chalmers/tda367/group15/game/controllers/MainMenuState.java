@@ -72,8 +72,14 @@ public class MainMenuState extends MenuBasedGameState {
 			Button newGameButton = new Button(container, newGameImage, MENUX, MENUY+50) {
 				@Override
 				public void performAction() {
-					// TODO should create a new game, not resume present.
-					existsGameCurrently = true;
+					
+					try { // Init PlayState to reset game.
+						( (PlayState) game.getState( Constants.GAME_STATE_PLAYING ) ).init(container, game);
+						existsGameCurrently = true;
+					} catch (SlickException e) {
+						e.printStackTrace();
+					}
+					
 					game.enterState( Constants.GAME_STATE_PLAYING );
 					addResumeButton();
 				}
