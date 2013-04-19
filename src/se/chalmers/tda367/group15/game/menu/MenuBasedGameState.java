@@ -14,6 +14,7 @@ import org.newdawn.slick.Input;
  * Remade to suit our purpose.
  * 
  * @author Carl Jansson
+ * @version 3.0
  */
 public abstract class MenuBasedGameState extends AbstractedGameState {
 	

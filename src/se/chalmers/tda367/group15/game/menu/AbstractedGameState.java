@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * posted on http://slick.javaunlimited.net/ by user shiroto.
  * 
  * @author unknown, shiroto?
+ * @version 1.1
  */
 public abstract class AbstractedGameState extends BasicGameState {
 	   protected GameContainer container;

@@ -49,7 +49,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 		try {
 			backImage = new Image("res/menu/returnButton.png");
 			
-			// return to main menu
+			// Activate buttons
 			Button returnButton = new Button(container, backImage, MENUX, MENUY) {
 				@Override
 				public void performAction() {
@@ -62,7 +62,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		
+		// Activate checkboxes
 		CheckBox vSyncBox = new CheckBox(container, "Activate V-Sync", false, MENUX, MENUY+50){
 			@Override
 			public void performAction() {
