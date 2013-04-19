@@ -21,6 +21,7 @@ import se.chalmers.tda367.group15.game.utils.FileNameSorter;
 public class HeroView implements View {
 
 	private Image[] unarmed;
+	private Image[] axe;
 	/**
 	 * The hero model this view is representing
 	 */
@@ -38,20 +39,12 @@ public class HeroView implements View {
 	 */
 	public HeroView(final Hero hero) {
 		this.hero = hero;
-		File folder = new File("res/animation/hero/unarmed");
-		File[] files = folder.listFiles();
-		Arrays.sort(files, new FileNameSorter());
-		unarmed = new Image[files.length];
-
-		for (int i = 0; i < files.length; i++) {
-			try {
-				unarmed[i] = new Image(files[i].getPath());
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	
+		unarmed = getImages("res/animation/hero/unarmed");
+		axe = getImages("res/animation/hero/axe");
+		
 		heroMove = new Animation(unarmed, 80, true);
+
 	}
 
 	@Override
@@ -72,6 +65,23 @@ public class HeroView implements View {
 		heroMove.draw(hero.getX(), hero.getY());
 		g.resetTransform();
 
+	}
+	
+	private Image[] getImages(String path) {
+		File folder = new File(path);
+		File[] files = folder.listFiles();
+		Arrays.sort(files, new FileNameSorter());
+		Image[] image = new Image[files.length];
+
+		for (int i = 0; i < files.length; i++) {
+			try {
+				image[i] = new Image(files[i].getPath());
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return image;
 	}
 
 }
