@@ -22,6 +22,26 @@
     <property name="blocked" value="true"/>
    </properties>
   </tile>
+  <tile id="64">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="66">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tile Layer 1" width="32" height="24">
   <data encoding="base64" compression="zlib">
@@ -30,7 +50,7 @@
  </layer>
  <layer name="Tile Layer 2" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztwzENAAAIA7CJwb9GHCzh42iTJt0cAwAAfy3x/QGx
+   eJxjYMAPVKDYEYmNjpHlaAUU8cgp0dDeUftH7R/s9jsNsP30ALSyH1R2KUOxIw5xdDl8ZhDCzmj6qAHokf5G7aeN/cSmHUcG3GmUWukIHxjM5R897McXxkM5/RELBtr/Ax3/A20/rfI4ABLnDXs=
   </data>
  </layer>
 </map>
