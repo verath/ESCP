@@ -1,9 +1,5 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -29,10 +25,11 @@ public class MainController extends BasicGameState {
 
 	private final int ID;
 
-	private final Hero heroModel;
-	private final HeroView heroView;
+	private Hero heroModel;
+	private HeroView heroView;
 
-	private final RoomController roomController;
+	private RoomController roomController;
+	private MovementController moveController;
 
 	/**
 	 * Creates a new GameController
@@ -47,19 +44,6 @@ public class MainController extends BasicGameState {
 	 */
 	public MainController(int ID) {
 		this.ID = ID;
-
-		// Set up the rooms
-		BasicRoomModel roomModel = new BasicRoomModel();
-		BasicRoomView roomView = new BasicRoomView(roomModel);
-		Room startingRoom = new Room(roomView, roomModel);
-
-		// Set up the room manager
-		roomController = new RoomController();
-		roomController.addStartingRoom(startingRoom);
-
-		// Set up the hero
-		heroModel = new Hero();
-		heroView = new HeroView(heroModel);
 	}
 
 	@Override
@@ -71,8 +55,22 @@ public class MainController extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		// Set up the rooms
+		BasicRoomModel roomModel = new BasicRoomModel();
+		BasicRoomView roomView = new BasicRoomView(roomModel);
+		Room startingRoom = new Room(roomView, roomModel);
+
+		// Set up the room manager
+		roomController = new RoomController();
+		roomController.addStartingRoom(startingRoom);
+		
+		// Set up move controller
+		moveController = new MovementController();
+
+		// Set up the hero
+		heroModel = new Hero();
+		heroView = new HeroView(heroModel);
 		roomController.init(container);
-		heroView.init(container);
 	}
 
 	@Override
@@ -84,17 +82,19 @@ public class MainController extends BasicGameState {
 		}
 		
 		roomController.update(container, delta);
+		moveController.update(container, delta);
 		heroModel.update(container, delta);
+		
 
 		// Handle collisions
-		List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
-
-		collisionBounds.addAll(heroModel.getCollisionBounds());
-		collisionBounds.addAll(roomController.getCurrentRoom().getRoomModel()
-				.getCollisionBounds());
-
-		heroModel.collide(collisionBounds);
-		roomController.getCurrentRoom().getRoomModel().collide(collisionBounds);
+//		List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
+//
+//		collisionBounds.addAll(heroModel.getCollisionBounds());
+//		collisionBounds.addAll(roomController.getCurrentRoom().getRoomModel()
+//				.getCollisionBounds());
+//
+//		heroModel.collide(collisionBounds);
+//		roomController.getCurrentRoom().getRoomModel().collide(collisionBounds);
 	}
 
 

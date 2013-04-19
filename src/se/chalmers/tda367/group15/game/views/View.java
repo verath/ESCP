@@ -24,15 +24,4 @@ public interface View {
 	 */
 	public void render(GameContainer container, Graphics g)
 			throws SlickException;
-
-	/**
-	 * Initialise the game. This can be used to load static resources. It's
-	 * called before the game loop starts
-	 * 
-	 * @param container
-	 *            The container holding the game
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
-	 */
-	public void init(GameContainer container) throws SlickException;
 }

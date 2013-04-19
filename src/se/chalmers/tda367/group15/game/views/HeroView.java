@@ -38,6 +38,20 @@ public class HeroView implements View {
 	 */
 	public HeroView(final Hero hero) {
 		this.hero = hero;
+		File folder = new File("res/animation/hero/unarmed");
+		File[] files = folder.listFiles();
+		Arrays.sort(files, new FileNameSorter());
+		unarmed = new Image[files.length];
+
+		for (int i = 0; i < files.length; i++) {
+			try {
+				unarmed[i] = new Image(files[i].getPath());
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		heroMove = new Animation(unarmed, 80, true);
 	}
 
 	@Override
@@ -58,21 +72,6 @@ public class HeroView implements View {
 		heroMove.draw(hero.getX(), hero.getY());
 		g.resetTransform();
 
-	}
-
-	@Override
-	public void init(GameContainer container) throws SlickException {
-		// Set up the move animation
-		File folder = new File("res/animation/hero/unarmed");
-		File[] files = folder.listFiles();
-		Arrays.sort(files, new FileNameSorter());
-		unarmed = new Image[files.length];
-		
-		for(int i = 0; i < files.length; i++) {
-			System.out.println(files[i].getPath());
-			unarmed[i] = new Image(files[i].getPath());
-		}
-		heroMove = new Animation(unarmed, 80, true);
 	}
 
 }
