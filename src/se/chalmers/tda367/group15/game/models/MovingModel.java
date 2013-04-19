@@ -1,7 +1,13 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
+
+import se.chalmers.tda367.group15.game.models.weapons.Weapon;
 
 /**
  * An abstract class for representing a moving model that can both collide and
@@ -12,7 +18,7 @@ import java.util.List;
  */
 public abstract class MovingModel implements CollidingModel, CollidableModel {
 	private float x, y, velocity;
-//	private Weapon currentWeapon;
+	private Weapon currentWeapon;
 	private int health;
 
 	/**
@@ -81,17 +87,41 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 	public boolean isCollision(List<Rectangle2D.Float> collisionBounds) {
 		List<Rectangle2D.Float> modelBounds = getCollisionBounds();
 
-		boolean isCollision = false;
-		for (Rectangle2D.Float mb : modelBounds) {
-			for (Rectangle2D.Float r : collisionBounds) {
-				// Don't check against our own bounds
-				if (modelBounds.contains(r)) {
-					continue;
-				} else if (r.intersects(mb)) {
-					isCollision = true;
-					break;
+		TiledMap map = null;
+		try {
+			map = new TiledMap("res/levels/untitled.tmx");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Rectangle2D.Float> rects = new ArrayList<Rectangle2D.Float>();
+		for (int i = 0; i < map.getWidth(); i++) {
+			for (int j = 0; j < map.getHeight(); j++) {
+				int tileId = map.getTileId(i, j, 0);
+				String property = map.getTileProperty(tileId, "blocked",
+						"false");
+				if (property.equals("true")) {
+					rects.add(new Rectangle2D.Float(i * 32, j * 32,
+							32, 32));
 				}
 			}
+		}
+		boolean isCollision = false;
+		for(Rectangle2D.Float r : rects) {
+			if(modelBounds.get(0).intersects(r)) {
+				isCollision = true;
+		}
+//		boolean isCollision = false;
+//		for (Rectangle2D.Float mb : modelBounds) {
+//			for (Rectangle2D.Float r : collisionBounds) {
+//				// Don't check against our own bounds
+//				if (modelBounds.contains(r)) {
+//					continue;
+//				} else if (r.intersects(mb)) {
+//					isCollision = true;
+//					break;
+//				}
+//			}
 		}
 		return isCollision;
 	}
@@ -101,7 +131,7 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 	 * @return the current weapon
 	 */
 	public Weapon getCurrentWeapon() {
-		return weapon;
+		return currentWeapon;
 	}
 	
 	/**

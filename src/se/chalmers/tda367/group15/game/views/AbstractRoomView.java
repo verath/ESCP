@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.views;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
@@ -33,5 +35,7 @@ abstract public class AbstractRoomView implements View {
 	protected void setTiledMap(final TiledMap map) {
 		this.map = map;
 	}
+
+	public abstract void init(GameContainer container) throws SlickException;
 
 }

@@ -84,10 +84,18 @@ public class Hero extends MovingModel {
 		}
 
 		this.setY(this.getY() - (delta * speedY));
+		calculateCollisionBounds();
+		if(isCollision(collisionBounds)) {
+			setY(oldY);
+		}
+		
 		this.setX(this.getX() - (delta * speedX));
-
+		calculateCollisionBounds();
+		if(isCollision(collisionBounds)) {
+			setX(oldX);
+		}
 		// Calculate new collision bounds
-		calculateCollsionBounds();
+		calculateCollisionBounds();
 
 	}
 
@@ -116,7 +124,7 @@ public class Hero extends MovingModel {
 	/**
 	 * Calculates the collision bounds for hero
 	 */
-	private void calculateCollsionBounds() {
+	private void calculateCollisionBounds() {
 		collisionBounds.clear();
 		collisionBounds.add(new Rectangle2D.Float(getX(), getY(), 64, 64));
 	}
