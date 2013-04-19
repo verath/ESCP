@@ -26,7 +26,8 @@ public class BasicRoomView extends AbstractRoomView {
 	private BasicRoomModel roomModel;
 
 	public BasicRoomView(BasicRoomModel roomModel) {
-		this.roomModel = roomModel;
+		super(roomModel, MAP_PATH);
+		
 	}
 
 	@Override
@@ -35,14 +36,5 @@ public class BasicRoomView extends AbstractRoomView {
 		getTiledMap().render(0, 0);
 	}
 
-	@Override
-	public void init(GameContainer container) throws SlickException {
-		// Load the map now that we have OpenGL
-		TiledMap map = new TiledMap(MAP_PATH);
-		super.setTiledMap(map);
-		// Make sure we also forward it to our model, so that it can generate
-		// collisionBounds
-		roomModel.generateCollisionBounds(map);
-	}
 
 }

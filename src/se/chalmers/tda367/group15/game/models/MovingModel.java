@@ -16,10 +16,12 @@ import se.chalmers.tda367.group15.game.models.weapons.Weapon;
  * @author simon
  * 
  */
-public abstract class MovingModel implements CollidingModel, CollidableModel {
+public abstract class MovingModel {
 	private float x, y, velocity;
 	private Weapon currentWeapon;
 	private int health;
+	private int width, height;
+	private Rectangle2D.Float bounds;
 
 	/**
 	 * Method for getting the x coordinate of the MovingModel.
@@ -37,6 +39,24 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 	 */
 	public float getY() {
 		return y;
+	}
+
+	/**
+	 * Method for getting the width of the model.
+	 * 
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Method for getting the height of the model.
+	 * 
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
 	}
 
 	/**
@@ -69,6 +89,26 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 	}
 
 	/**
+	 * Method for setting the width of the model.
+	 * 
+	 * @param the
+	 *            width to be set
+	 */
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	/**
+	 * Method for setting the height of the model.
+	 * 
+	 * @param the
+	 *            height to be set
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	/**
 	 * Method for setting the movement velocity of the MovingModel.
 	 * 
 	 * @param velocity
@@ -78,91 +118,62 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 	}
 
 	/**
-	 * Method for checking if the model has collided with a blocked tile.
-	 * 
-	 * @param collisionBounds
-	 *            the collision bounds to check against
-	 * @return true if collision is detected, false otherwise
-	 */
-	public boolean isCollision(List<Rectangle2D.Float> collisionBounds) {
-		List<Rectangle2D.Float> modelBounds = getCollisionBounds();
-
-		TiledMap map = null;
-		try {
-			map = new TiledMap("res/levels/untitled.tmx");
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<Rectangle2D.Float> rects = new ArrayList<Rectangle2D.Float>();
-		for (int i = 0; i < map.getWidth(); i++) {
-			for (int j = 0; j < map.getHeight(); j++) {
-				int tileId = map.getTileId(i, j, 0);
-				String property = map.getTileProperty(tileId, "blocked",
-						"false");
-				if (property.equals("true")) {
-					rects.add(new Rectangle2D.Float(i * 32, j * 32,
-							32, 32));
-				}
-			}
-		}
-		boolean isCollision = false;
-		for(Rectangle2D.Float r : rects) {
-			if(modelBounds.get(0).intersects(r)) {
-				isCollision = true;
-		}
-//		boolean isCollision = false;
-//		for (Rectangle2D.Float mb : modelBounds) {
-//			for (Rectangle2D.Float r : collisionBounds) {
-//				// Don't check against our own bounds
-//				if (modelBounds.contains(r)) {
-//					continue;
-//				} else if (r.intersects(mb)) {
-//					isCollision = true;
-//					break;
-//				}
-//			}
-		}
-		return isCollision;
-	}
-	
-	/**
 	 * Method for getting the current weapon.
+	 * 
 	 * @return the current weapon
 	 */
 	public Weapon getCurrentWeapon() {
 		return currentWeapon;
 	}
-	
+
 	/**
 	 * Method for setting the current weapon.
-	 * @param the new weapon to be set as current
+	 * 
+	 * @param the
+	 *            new weapon to be set as current
 	 */
 	public void setCurrentWeapon(Weapon weapon) {
 		currentWeapon = weapon;
 	}
-	
+
 	/**
 	 * Method for setting the health.
-	 * @param health - preferably 0-100
+	 * 
+	 * @param health
+	 *            - preferably 0-100
 	 */
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	
+
 	/**
 	 * Method for getting the health.
+	 * 
 	 * @return the health
 	 */
 	public int getHealth() {
 		return health;
 	}
-	
+
 	/**
 	 * Method for receiving damage.
-	 * @param the amount of damage that should be dealt
+	 * 
+	 * @param the
+	 *            amount of damage that should be dealt
 	 */
 	public void takeDamage(int damage) {
 		health -= health;
+	}
+
+	/**
+	 * Method for getting the collision bounds of the model.
+	 * 
+	 * @return a rectangle representing the collision bounds
+	 */
+	public Rectangle2D.Float getBounds() {
+		if (bounds == null) {
+			bounds = new Rectangle2D.Float(x, y, width, height);
+		}
+		return bounds;
 	}
 }

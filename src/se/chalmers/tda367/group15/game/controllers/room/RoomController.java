@@ -173,7 +173,6 @@ public class RoomController {
 	 *             Throw to indicate an internal error
 	 */
 	public void update(GameContainer container, int delta) throws SlickException {
-		getCurrentRoom().getRoomModel().update(container, delta);
 	}
 
 	/**
@@ -192,7 +191,7 @@ public class RoomController {
 	}
 
 	/**
-	 * Initialise the game. This can be used to load static resources. It's
+	 * Initialize the game. This can be used to load static resources. It's
 	 * called before the game loop starts
 	 * 
 	 * @param container
@@ -201,9 +200,6 @@ public class RoomController {
 	 *             Throw to indicate an internal error
 	 */
 	public void init(GameContainer container) throws SlickException {
-		for(Room r : rooms.values()) {
-			r.getRoomView().init(container);
-		}
 
 	}
 
