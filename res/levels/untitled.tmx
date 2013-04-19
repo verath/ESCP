@@ -43,14 +43,17 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tile Layer 1" width="32" height="24">
+ <layer name="Floor" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztzTkBACAQA8EghccIB/41ERWk2WLq2ZJWyLFuLWTw8/Pz8/Pz8/Pzf/6vzZCyB/1GEbM=
+   eJztwwENAAAMw6DOv+kLOSSsmqqq+uIBEw4DAQ==
   </data>
  </layer>
- <layer name="Tile Layer 2" width="32" height="24">
+ <layer name="Walls" width="32" height="24">
+  <properties>
+   <property name="blocked" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYMAPVKDYEYmNjpHlaAUU8cgp0dDeUftH7R/s9jsNsP30ALSyH1R2KUOxIw5xdDl8ZhDCzmj6qAHokf5G7aeN/cSmHUcG3GmUWukIHxjM5R897McXxkM5/RELBtr/Ax3/A20/rfI4ABLnDXs=
+   eJxzZGBgUCYCO5IpR8hMRQbiAD51xJqBTd+o/aP2D3X7HQfYfnLBYLAfuexCDkf0Mg1fGJNS/qHbQQ1/0SP9jdpPG/uJTTuODLjT6EDn/4Eu/+hhP74wHsrpb6jYP9DhT6v0R2r+p3b7GwCkDRoU
   </data>
  </layer>
 </map>

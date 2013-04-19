@@ -82,6 +82,8 @@ public class MainController extends BasicGameState {
 		heroModel = new Hero();
 		heroView = new HeroView(heroModel);
 		roomController.init(container);
+
+		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
 	}
 
 	@Override

@@ -1,12 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
 
 public class DummyEnemy extends MovingModel {
 

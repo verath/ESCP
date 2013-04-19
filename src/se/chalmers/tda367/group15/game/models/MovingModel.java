@@ -1,11 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.models.weapons.Weapon;
 
@@ -115,6 +110,7 @@ public abstract class MovingModel {
 	 */
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
+
 	}
 
 	/**

@@ -3,7 +3,6 @@ package se.chalmers.tda367.group15.game.views.room;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
 import se.chalmers.tda367.group15.game.views.AbstractRoomView;
