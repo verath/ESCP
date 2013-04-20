@@ -6,15 +6,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class HeroTest {
-	private static Hero testedModel;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		testedModel = new Hero();
+		
 	}
 
 	@Test
 	public void testSetInvalidLocation() {
+		Hero testedModel = new Hero();
+		
 		// Allow either gracefully handling of invalid locations, or exception
 		// as both methods make sense
 		try {
