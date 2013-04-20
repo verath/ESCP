@@ -1,7 +1,7 @@
 package se.chalmers.tda367.group15.game.database;
 
 /**
- * A class representing a score for a name.
+ * A Score that can be inserted into the database.
  * 
  * @author Peter
  * 
@@ -18,11 +18,6 @@ public class Score {
 	private final int score;
 
 	/**
-	 * A string representing the date this score was saved to the database.
-	 */
-	private final String time;
-
-	/**
 	 * Creates a new score. The name can not be null
 	 * 
 	 * @param name
@@ -35,24 +30,6 @@ public class Score {
 
 		this.name = name;
 		this.score = score;
-		this.time = null;
-	}
-
-	/**
-	 * Creates a new Score with a set time. The name can not be null
-	 * 
-	 * @param name
-	 * @param score
-	 * @param time
-	 */
-	public Score(String name, int score, String time) {
-		if (name == null) {
-			throw new IllegalArgumentException("name may not be null");
-		}
-
-		this.name = name;
-		this.score = score;
-		this.time = time;
 	}
 
 	public String getName() {
@@ -63,7 +40,38 @@ public class Score {
 		return score;
 	}
 
-	public String getTime() {
-		return time;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + score;
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Score))
+			return false;
+		Score other = (Score) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (score != other.score)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Score [name=" + name + ", score=" + score + "]";
+	}
+
+
 }
