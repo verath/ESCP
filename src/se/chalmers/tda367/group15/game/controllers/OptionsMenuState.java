@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -43,12 +44,12 @@ public class OptionsMenuState extends MenuBasedGameState {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	protected void initButtons() {
 		try {
 			backImage = new Image("res/menu/returnButton.png");
-			
+
 			// Activate buttons
 			Button returnButton = new Button(container, backImage, MENUX, MENUY) {
 				@Override
@@ -56,9 +57,9 @@ public class OptionsMenuState extends MenuBasedGameState {
 					game.enterState( Constants.GAME_STATE_MAIN_MENU );
 				}
 			};
-			
+
 			this.addButton(returnButton);
-			
+
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -84,9 +85,33 @@ public class OptionsMenuState extends MenuBasedGameState {
 				container.setSoundOn(this.isChecked());
 			}
 		};
+		CheckBox toggleFullScreen = new CheckBox(container, "toggle fullscreen", false, MENUX, MENUY+200){
+			@Override
+			public void performAction() {
+				super.performAction();
+				AppGameContainer gameContainer;
+				try {
+					gameContainer = new AppGameContainer(game);
+					gameContainer.setVerbose(Constants.DEBUG);
+					gameContainer.setTargetFrameRate(120);
+
+					if ( this.isChecked() ) {
+						gameContainer.setDisplayMode(1366, 768, true);
+					} else {
+						gameContainer.setDisplayMode(1024, 768, false);
+					}
+				} catch (SlickException e1) {
+					e1.printStackTrace();
+
+				}
+			}
+		};
+
+
 		this.addCheckButton(vSyncBox);
 		this.addCheckButton(musicBox);
 		this.addCheckButton(soundBox);
+		this.addCheckButton(toggleFullScreen);
 	}
 
 	@Override

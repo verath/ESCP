@@ -1,6 +1,7 @@
 package se.chalmers.tda367.group15.game;
 
 import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
@@ -27,11 +28,12 @@ public class PsychoHeroFactory {
 		
 		// Create the state controller, add the states and set active state.
 		StateController stateController = new StateController(Constants.GAME_NAME);
+		ScalableGame scalableGame = new ScalableGame(stateController, 1024, 768, true);
 
 		// Set up the container (this is kind of like the JFrame in swing)
 		AppGameContainer gameContainer;
 		try {
-			gameContainer = new AppGameContainer(stateController);
+			gameContainer = new AppGameContainer(scalableGame);
 			gameContainer.setVerbose(Constants.DEBUG);
 			gameContainer.setTargetFrameRate(120);
 			// TODO Allow for changing this resolution
