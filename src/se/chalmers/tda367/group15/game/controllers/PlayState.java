@@ -29,11 +29,11 @@ public class PlayState extends BasicGameState {
 
 	private final int ID;
 
-	private final Hero heroModel;
-	private final HeroView heroView;
+	private Hero heroModel;
+	private HeroView heroView;
 
-	private final RoomController roomController;
-	
+	private RoomController roomController;
+
 	private boolean pendingEscpAction;
 
 	/**
@@ -49,9 +49,19 @@ public class PlayState extends BasicGameState {
 	 */
 	public PlayState(int ID) {
 		this.ID = ID;
+	}
 
+	@Override
+	public void render(GameContainer container, StateBasedGame game, Graphics g)
+			throws SlickException {
+		roomController.render(container, g);
+		heroView.render(container, g);
+	}
+
+	@Override
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		pendingEscpAction = false;
-		
+
 		// Set up the rooms
 		BasicRoomModel roomModel = new BasicRoomModel();
 		BasicRoomView roomView = new BasicRoomView(roomModel);
@@ -64,17 +74,7 @@ public class PlayState extends BasicGameState {
 		// Set up the hero
 		heroModel = new Hero();
 		heroView = new HeroView(heroModel);
-	}
 
-	@Override
-	public void render(GameContainer container, StateBasedGame game, Graphics g)
-			throws SlickException {
-		roomController.render(container, g);
-		heroView.render(container, g);
-	}
-
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		roomController.init(container);
 		heroView.init(container);
 	}
@@ -82,14 +82,14 @@ public class PlayState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-		
+
 		if ( container.getInput().isKeyPressed(Input.KEY_ESCAPE)){
 			pendingEscpAction = true;
 		} else if ( pendingEscpAction && !container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = false;
 			game.enterState(Constants.GAME_STATE_MAIN_MENU);
 		}
-		
+
 		roomController.update(container, delta);
 		heroModel.update(container, delta);
 

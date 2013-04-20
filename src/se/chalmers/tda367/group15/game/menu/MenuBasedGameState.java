@@ -9,12 +9,12 @@ import org.newdawn.slick.Input;
 /**
  * A class with the purpose of making it easy to create menus in
  * a graphical environment.
- * Class based on tutorial for writing menus in Slick2D
- * Originally posted on http://slick.javaunlimited.net/
- * by user shiroto
- * remade to suit our purpose.
+ * Class based on tutorial for writing menus in Slick2D Originally 
+ * posted on http://slick.javaunlimited.net/ by user shiroto.
+ * Remade to suit our purpose.
  * 
  * @author Carl Jansson
+ * @version 3.0
  */
 public abstract class MenuBasedGameState extends AbstractedGameState {
 	
@@ -29,6 +29,11 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 * List with all buttons on page.
 	 */
 	protected ArrayList<Button> buttons = new ArrayList<Button>();
+	
+	/**
+	 * List with all checkButtons on page.
+	 */
+	protected ArrayList<CheckBox> checkButtons = new ArrayList<CheckBox>();
 	
 	/**
 	 * The background for current menu page.
@@ -48,6 +53,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 		this.initButtons();
 	}
 
+	/**
+	 * In this method you create all buttons.
+	 */
 	protected abstract void initButtons();
 	
 	/**
@@ -60,6 +68,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 		background.draw();
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).render(g);
+		}
+		for (int i = 0; i < checkButtons.size(); i++) {
+			checkButtons.get(i).render(g);
 		}
 	}
 	
@@ -100,6 +111,11 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 				buttons.get(i).performAction();
 			}
 		}
+		for (int i = 0; i < checkButtons.size(); i++) {
+			if ( checkButtons.get(i).isMouseOver() ) {
+				checkButtons.get(i).performAction();
+			}
+		}
 	}
 
 	/**
@@ -108,5 +124,13 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 */
 	public final void addButton(Button aButton) {
 		this.buttons.add(aButton);
+	}
+	
+	/**
+	 * Adds button to ArayList buttons.
+	 * @param aButton the button to add to list.
+	 */
+	public final void addCheckButton(CheckBox aButton) {
+		this.checkButtons.add(aButton);
 	}
 }

@@ -29,8 +29,10 @@ public class StateController extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MainMenuState mainMenu = new MainMenuState( Constants.GAME_STATE_MAIN_MENU );
+		OptionsMenuState optionsMenu = new OptionsMenuState( Constants.GAME_STATE_OPTIONS_MENU );
 		this.addState(playState);
 		this.addState(mainMenu);
+		this.addState(optionsMenu);
 		this.enterState( Constants.GAME_STATE_MAIN_MENU );
 	}
 
