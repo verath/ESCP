@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.DbUtils;
+
 /**
  * A database for holding statistics about the game, such as (high)scores.
  * 
@@ -16,6 +18,7 @@ import java.util.List;
  * 
  */
 public class PsychoHeroDatabase {
+
 	/**
 	 * The database file used for the database
 	 */
@@ -28,15 +31,33 @@ public class PsychoHeroDatabase {
 	 * @throws ClassNotFoundException
 	 */
 	public PsychoHeroDatabase() throws ClassNotFoundException {
-
 		// Load the database class
 		Class.forName("org.sqlite.JDBC");
 
-		Connection con = null;
-		try {
-			con = DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_NAME);
+		// Setup the database
+		setupDatabase();
+	}
 
-			Statement stmt = con.createStatement();
+	/**
+	 * Creates a Connection to the database
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	private Connection getConnection() throws SQLException {
+		return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_NAME);
+	}
+
+	/**
+	 * Creates and set up the database if it doesn't alredy exist
+	 */
+	private void setupDatabase() {
+
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
 			stmt.setQueryTimeout(30);
 
 			// Set up scores table
@@ -48,13 +69,8 @@ public class PsychoHeroDatabase {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					System.err.println(e.getMessage());
-				}
-			}
+			DbUtils.closeQuietly(stmt);
+			DbUtils.closeQuietly(conn);
 		}
 	}
 
@@ -77,11 +93,12 @@ public class PsychoHeroDatabase {
 	 * @param scores
 	 */
 	public void addScores(List<Score> scores) {
-		Connection con = null;
-		try {
-			con = DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_NAME);
 
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO scores "
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement("INSERT INTO scores "
 					+ "(score, name, time_added) VALUES "
 					+ "(?, ?, datetime('now'))");
 			stmt.setQueryTimeout(30);
@@ -93,19 +110,13 @@ public class PsychoHeroDatabase {
 				stmt.setString(2, s.getName());
 				stmt.addBatch();
 			}
-
 			stmt.executeBatch();
 
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					System.err.println(e.getMessage());
-				}
-			}
+			DbUtils.closeQuietly(stmt);
+			DbUtils.closeQuietly(conn);
 		}
 	}
 
@@ -119,52 +130,47 @@ public class PsychoHeroDatabase {
 	 *         be found.
 	 */
 	public List<Score> getHighscores(int limit) {
-		List<Score> results = null;
 
-		if (limit == 0) {
-			return results;
-		} else if (limit > 0) {
+		List<Score> results = null;
+		
+		// If we have a set limit, we know we will not get more than that amount
+		// of results
+		if (limit > 0) {
 			results = new ArrayList<Score>(limit);
 		} else {
 			results = new ArrayList<Score>();
 		}
 
-		Connection con = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_NAME);
+			conn = getConnection();
 
-			PreparedStatement stmt;
-			if (limit > 0) {
-				stmt = con.prepareStatement("SELECT * FROM scores LIMIT ? "
+			if (limit >= 0) {
+				stmt = conn.prepareStatement("SELECT * FROM scores LIMIT ? "
 						+ "ORDER BY score DESC");
 				stmt.setInt(1, limit);
 			} else {
-				stmt = con.prepareStatement("SELECT * FROM scores "
+				// If we don't have a limit, return all results
+				stmt = conn.prepareStatement("SELECT * FROM scores "
 						+ "ORDER BY score DESC");
 			}
 
 			stmt.setQueryTimeout(30);
 
-			ResultSet rs = stmt.executeQuery();
-
+			// Run query and get results
+			rs = stmt.executeQuery();
 			while (rs.next()) {
 				results.add(new Score(rs.getString("name"), rs.getInt("score"),
 						rs.getString("time_added")));
 			}
-
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					System.err.println(e.getMessage());
-				}
-			}
+			DbUtils.closeQuietly(conn, stmt, rs);
 		}
 
 		return results;
-
 	}
 }
