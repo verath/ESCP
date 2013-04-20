@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -94,21 +93,10 @@ public class OptionsMenuState extends MenuBasedGameState {
 			@Override
 			public void performAction() {
 				super.performAction();
-				AppGameContainer gameContainer;
 				try {
-					gameContainer = new AppGameContainer(game);
-					gameContainer.setVerbose(Constants.DEBUG);
-					gameContainer.setTargetFrameRate(120);
-
-					if (this.isChecked()) {
-						gameContainer.setDisplayMode(1366, 768, true);
-					} else {
-						gameContainer.setDisplayMode(Constants.GAME_WIDTH,
-								Constants.GAME_HEIGHT, false);
-					}
-				} catch (SlickException e1) {
-					e1.printStackTrace();
-
+					((StateController) game).setAppFullScreen(this.isChecked());
+				} catch (SlickException e) {
+					e.printStackTrace();
 				}
 			}
 		};
