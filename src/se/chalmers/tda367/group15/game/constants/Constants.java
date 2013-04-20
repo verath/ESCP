@@ -26,4 +26,9 @@ public class Constants {
 	public static final int GAME_STATE_PLAYING = 2;
 	public static final int GAME_STATE_OPTIONS_MENU = 3;
 
+	/**
+	 * The resolution of the games maps.
+	 */
+	public static final int GAME_WIDTH = 1024;
+	public static final int GAME_HEIGHT = 768;
 }

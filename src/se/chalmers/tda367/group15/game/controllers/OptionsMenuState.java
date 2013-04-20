@@ -29,6 +29,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 
 	/**
 	 * Creates a new options menu.
+	 * 
 	 * @param id
 	 */
 	public OptionsMenuState(int id) {
@@ -54,7 +55,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 			Button returnButton = new Button(container, backImage, MENUX, MENUY) {
 				@Override
 				public void performAction() {
-					game.enterState( Constants.GAME_STATE_MAIN_MENU );
+					game.enterState(Constants.GAME_STATE_MAIN_MENU);
 				}
 			};
 
@@ -64,28 +65,32 @@ public class OptionsMenuState extends MenuBasedGameState {
 			e.printStackTrace();
 		}
 		// Activate checkboxes
-		CheckBox vSyncBox = new CheckBox(container, "Activate V-Sync", false, MENUX, MENUY+50){
+		CheckBox vSyncBox = new CheckBox(container, "Activate V-Sync", false,
+				MENUX, MENUY + 50) {
 			@Override
 			public void performAction() {
 				super.performAction();
 				container.setVSync(this.isChecked());
 			}
 		};
-		CheckBox musicBox = new CheckBox(container, "Activate Music", true, MENUX, MENUY+100){
+		CheckBox musicBox = new CheckBox(container, "Activate Music", true,
+				MENUX, MENUY + 100) {
 			@Override
 			public void performAction() {
 				super.performAction();
 				container.setMusicOn(this.isChecked());
 			}
 		};
-		CheckBox soundBox = new CheckBox(container, "Activate Sound", true, MENUX, MENUY+150){
+		CheckBox soundBox = new CheckBox(container, "Activate Sound", true,
+				MENUX, MENUY + 150) {
 			@Override
 			public void performAction() {
 				super.performAction();
 				container.setSoundOn(this.isChecked());
 			}
 		};
-		CheckBox toggleFullScreen = new CheckBox(container, "toggle fullscreen", false, MENUX, MENUY+200){
+		CheckBox toggleFullScreen = new CheckBox(container,
+				"toggle fullscreen", false, MENUX, MENUY + 200) {
 			@Override
 			public void performAction() {
 				super.performAction();
@@ -95,10 +100,11 @@ public class OptionsMenuState extends MenuBasedGameState {
 					gameContainer.setVerbose(Constants.DEBUG);
 					gameContainer.setTargetFrameRate(120);
 
-					if ( this.isChecked() ) {
+					if (this.isChecked()) {
 						gameContainer.setDisplayMode(1366, 768, true);
 					} else {
-						gameContainer.setDisplayMode(1024, 768, false);
+						gameContainer.setDisplayMode(Constants.GAME_WIDTH,
+								Constants.GAME_HEIGHT, false);
 					}
 				} catch (SlickException e1) {
 					e1.printStackTrace();
@@ -106,7 +112,6 @@ public class OptionsMenuState extends MenuBasedGameState {
 				}
 			}
 		};
-
 
 		this.addCheckButton(vSyncBox);
 		this.addCheckButton(musicBox);
@@ -116,7 +121,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 
 	@Override
 	protected void escpAction() {
-		game.enterState( Constants.GAME_STATE_MAIN_MENU );
+		game.enterState(Constants.GAME_STATE_MAIN_MENU);
 	}
 
 }

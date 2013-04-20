@@ -6,14 +6,13 @@ import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.gui.MouseOverArea;
 
 /**
- * A class for representation buttons in a graphical environment.
- * Class taken from tutorial for writing menus in Slick2D
- * Originally posted on http://slick.javaunlimited.net/
- * by user shiroto
+ * A class for representation buttons in a graphical environment. Class taken
+ * from tutorial for writing menus in Slick2D Originally posted on
+ * http://slick.javaunlimited.net/ by user shiroto
  * 
  * @author Carl Jansson
  */
-public abstract class Button  {
+public abstract class Button {
 	protected MouseOverArea moa;
 	protected GUIContext guiContext;
 

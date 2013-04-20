@@ -59,7 +59,8 @@ public class PlayState extends BasicGameState {
 	}
 
 	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+	public void init(GameContainer container, StateBasedGame game)
+			throws SlickException {
 		pendingEscpAction = false;
 
 		// Set up the rooms
@@ -83,9 +84,10 @@ public class PlayState extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 
-		if ( container.getInput().isKeyPressed(Input.KEY_ESCAPE)){
+		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = true;
-		} else if ( pendingEscpAction && !container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+		} else if (pendingEscpAction
+				&& !container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = false;
 			game.enterState(Constants.GAME_STATE_MAIN_MENU);
 		}
@@ -103,7 +105,6 @@ public class PlayState extends BasicGameState {
 		heroModel.collide(collisionBounds);
 		roomController.getCurrentRoom().getRoomModel().collide(collisionBounds);
 	}
-
 
 	@Override
 	public int getID() {
