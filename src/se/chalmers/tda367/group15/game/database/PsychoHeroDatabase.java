@@ -25,12 +25,30 @@ public class PsychoHeroDatabase {
 	public static final String DB_FILE_NAME = "PsychoHero.db";
 
 	/**
+	 * A flag indicating whether we are using an in-memory database or not. This
+	 * is currently only used for testing
+	 */
+	private final boolean ramDatabase;
+
+	/**
+	 * The connection to the database.
+	 */
+	private Connection connection;
+
+	/**
 	 * Creates a new PsychoHeroDatabase and sets up the database structure if
 	 * needed.
 	 * 
+	 * @param tempDatabase
+	 *            If set to true, the database used by this instance will be
+	 *            stored in the ram (and will therefore not be persistent)
 	 * @throws ClassNotFoundException
 	 */
-	public PsychoHeroDatabase() throws ClassNotFoundException {
+	public PsychoHeroDatabase(boolean tempDatabase)
+			throws ClassNotFoundException {
+
+		this.ramDatabase = tempDatabase;
+
 		// Load the database class
 		Class.forName("org.sqlite.JDBC");
 
@@ -39,13 +57,34 @@ public class PsychoHeroDatabase {
 	}
 
 	/**
-	 * Creates a Connection to the database
+	 * Creates a Connection to the database if there is no current one.
 	 * 
 	 * @return
 	 * @throws SQLException
 	 */
 	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:sqlite:" + DB_FILE_NAME);
+		if (connection == null || connection.isClosed()) {
+			if (ramDatabase) {
+				connection = DriverManager
+						.getConnection("jdbc:sqlite::memory:");
+			} else {
+				connection = DriverManager.getConnection("jdbc:sqlite:"
+						+ DB_FILE_NAME);
+			}
+		}
+		return connection;
+	}
+
+	/**
+	 * Closes a connection to the database. If the database is ram-based, this
+	 * method does nothing.
+	 * 
+	 * @param conn
+	 */
+	private void closeConnection(Connection conn) {
+		if (!ramDatabase) {
+			DbUtils.closeQuietly(conn);
+		}
 	}
 
 	/**
@@ -70,7 +109,7 @@ public class PsychoHeroDatabase {
 			System.err.println(e.getMessage());
 		} finally {
 			DbUtils.closeQuietly(stmt);
-			DbUtils.closeQuietly(conn);
+			closeConnection(conn);
 		}
 	}
 
@@ -84,7 +123,7 @@ public class PsychoHeroDatabase {
 	public void addScore(Score score) {
 		List<Score> s = new ArrayList<Score>(1);
 		s.add(score);
-		addScores(s);
+		addScore(s);
 	}
 
 	/**
@@ -92,7 +131,7 @@ public class PsychoHeroDatabase {
 	 * 
 	 * @param scores
 	 */
-	public void addScores(List<Score> scores) {
+	public void addScore(List<Score> scores) {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -116,7 +155,7 @@ public class PsychoHeroDatabase {
 			System.err.println(e.getMessage());
 		} finally {
 			DbUtils.closeQuietly(stmt);
-			DbUtils.closeQuietly(conn);
+			closeConnection(conn);
 		}
 	}
 
@@ -132,7 +171,7 @@ public class PsychoHeroDatabase {
 	public List<Score> getHighscores(int limit) {
 
 		List<Score> results = null;
-		
+
 		// If we have a set limit, we know we will not get more than that amount
 		// of results
 		if (limit > 0) {
@@ -148,8 +187,8 @@ public class PsychoHeroDatabase {
 			conn = getConnection();
 
 			if (limit >= 0) {
-				stmt = conn.prepareStatement("SELECT * FROM scores LIMIT ? "
-						+ "ORDER BY score DESC");
+				stmt = conn.prepareStatement("SELECT * FROM scores "
+						+ "ORDER BY score DESC LIMIT ?");
 				stmt.setInt(1, limit);
 			} else {
 				// If we don't have a limit, return all results
@@ -162,15 +201,28 @@ public class PsychoHeroDatabase {
 			// Run query and get results
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				results.add(new Score(rs.getString("name"), rs.getInt("score"),
-						rs.getString("time_added")));
+				results.add(new DatabaseScore(rs.getString("name"), rs
+						.getInt("score"), rs.getString("time_added")));
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
+			System.err.println(e.getSQLState());
 		} finally {
-			DbUtils.closeQuietly(conn, stmt, rs);
+			DbUtils.closeQuietly(stmt);
+			DbUtils.closeQuietly(rs);
+			closeConnection(conn);
 		}
 
 		return results;
+	}
+
+	/**
+	 * Returns all scores, sorted by highest to lowest.
+	 * 
+	 * @return A list of max length Score objects, or null if no results could
+	 *         be found.
+	 */
+	public List<Score> getHighscores() {
+		return getHighscores(-1);
 	}
 }
