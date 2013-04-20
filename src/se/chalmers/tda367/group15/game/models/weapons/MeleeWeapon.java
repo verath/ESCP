@@ -6,7 +6,7 @@ package se.chalmers.tda367.group15.game.models.weapons;
  * @author tholene
  * 
  */
-public class MeleeWeapon extends Weapon {
+public abstract class MeleeWeapon extends Weapon {
 
 	/**
 	 * Create a new melee weapon.

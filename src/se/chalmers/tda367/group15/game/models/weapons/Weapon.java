@@ -1,6 +1,15 @@
 package se.chalmers.tda367.group15.game.models.weapons;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.Random;
+
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import se.chalmers.tda367.group15.game.models.Hero;
+import se.chalmers.tda367.group15.game.utils.FileNameSorter;
 
 /**
  * An abstract definition of a weapon in the game. Every weapon should be able
@@ -87,5 +96,44 @@ public abstract class Weapon {
 	 */
 	public int getDamage() {
 		return baseDamage + randomGenerator.nextInt(maxDamage);
+	}
+
+	/**
+	 * The image of the hero is changed dependning on the weapon he is currently
+	 * using. This method will return the images corresponding to the weapon
+	 * calling the method due to polymorphism.
+	 * 
+	 * @return the images for the weapon calling the method.
+	 */
+	public abstract Image[] getImages();
+
+	/**
+	 * This method returns the images of a folder in an alphabetical order so
+	 * that the animation runs correctly.
+	 * 
+	 * @param weapon
+	 *            the name of the weapon's folder. Only provide the last level
+	 *            of the hierarchy due to the implementation;
+	 *            "res/animation/hero/" + weapon.
+	 * @return a sorted array of images corresponding to the path given.
+	 */
+	protected Image[] sortImages(String weapon) {
+		File folder = new File("res/animation/hero/" + weapon);
+		if (folder != null) {
+			File[] files = folder.listFiles();
+			if (files != null) {
+				Arrays.sort(files, new FileNameSorter());
+				Image[] sortedImages = new Image[files.length];
+				for (int i = 0; i < files.length; i++) {
+					try {
+						sortedImages[i] = new Image(files[i].getPath());
+					} catch (SlickException e) {
+						e.printStackTrace();
+					}
+				}
+				return sortedImages;
+			}
+		}
+		return null;
 	}
 }

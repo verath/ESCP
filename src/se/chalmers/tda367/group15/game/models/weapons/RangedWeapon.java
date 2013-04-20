@@ -6,7 +6,7 @@ package se.chalmers.tda367.group15.game.models.weapons;
  * @author tholene
  * 
  */
-public class RangedWeapon extends Weapon {
+public abstract class RangedWeapon extends Weapon {
 
 	private int ammo;
 
