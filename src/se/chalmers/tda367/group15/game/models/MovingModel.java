@@ -167,9 +167,7 @@ public abstract class MovingModel {
 	 * @return a rectangle representing the collision bounds
 	 */
 	public Rectangle2D.Float getBounds() {
-		if (bounds == null) {
-			bounds = new Rectangle2D.Float(x, y, width, height);
-		}
-		return bounds;
+			
+		return new Rectangle2D.Float(x, y, width, height);
 	}
 }

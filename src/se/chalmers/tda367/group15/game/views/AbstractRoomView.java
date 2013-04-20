@@ -23,7 +23,7 @@ abstract public class AbstractRoomView implements View {
 	 */
 	private TiledMap map = null;
 	private AbstractRoomModel roomModel;
-	
+
 	private List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
 
 	public AbstractRoomView(BasicRoomModel roomModel, String mapPath) {
@@ -55,19 +55,20 @@ abstract public class AbstractRoomView implements View {
 	protected void setTiledMap(final TiledMap map) {
 		this.map = map;
 	}
-	
+
 	public List<Rectangle2D.Float> getCollisionBounds() {
 		return collisionBounds;
 	}
+
 	private void generateCollisionBounds() {
 		for (int x = 0; x < map.getWidth(); x++) {
 			for (int y = 0; y < map.getHeight(); y++) {
-				int tileId = map.getTileId(x, y, 0);
+				int tileId = map.getTileId(x, y, 1);
 				String property = map.getTileProperty(tileId, "blocked",
 						"false");
 				if (property.equals("true")) {
-					System.out.println(x + "," + y);
-					collisionBounds.add(new Rectangle2D.Float(x * 32, y * 32, 32, 32));
+					collisionBounds.add(new Rectangle2D.Float(x * 32, y * 32,
+							32, 32));
 				}
 			}
 		}

@@ -8,5 +8,5 @@ import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
  *
  */
 public class BasicRoomModel extends AbstractRoomModel {
-
+	
 }

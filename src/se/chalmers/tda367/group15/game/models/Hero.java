@@ -21,7 +21,6 @@ public class Hero extends MovingModel {
 	 */
 	public Hero() {
 
-		// TODO fix hardcoded values..
 		setX(44f);
 		setY(44f);
 		setVelocity(0.15f);

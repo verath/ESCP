@@ -169,6 +169,8 @@ public class RoomController {
 	 * @param delta
 	 *            The amount of time thats passed since last update in
 	 *            milliseconds
+	 * @param staticBounds 
+	 * @param movingModels 
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
@@ -188,19 +190,6 @@ public class RoomController {
 	 */
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		getCurrentRoom().getRoomView().render(container, g);
-	}
-
-	/**
-	 * Initialize the game. This can be used to load static resources. It's
-	 * called before the game loop starts
-	 * 
-	 * @param container
-	 *            The container holding the game
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
-	 */
-	public void init(GameContainer container) throws SlickException {
-
 	}
 
 }
