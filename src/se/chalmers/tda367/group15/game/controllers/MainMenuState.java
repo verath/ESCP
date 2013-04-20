@@ -120,6 +120,7 @@ public class MainMenuState extends MenuBasedGameState {
 				resumeGameButton = new Button(container, resumeImage, MENUX, MENUY) {
 					@Override
 					public void performAction() {
+						// Returns to currently active game.
 						game.enterState( Constants.GAME_STATE_PLAYING );
 					}
 				};
@@ -132,7 +133,9 @@ public class MainMenuState extends MenuBasedGameState {
 
 	@Override
 	protected void escpAction() {
+		// Escape only usable if game started.
 		if ( existsGameCurrently ) {
+			// Returns you to game.
 			game.enterState( Constants.GAME_STATE_PLAYING );
 		}
 	}

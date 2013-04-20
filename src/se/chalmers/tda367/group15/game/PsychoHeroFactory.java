@@ -6,7 +6,7 @@ import se.chalmers.tda367.group15.game.controllers.StateController;
 /**
  * Factory class for a PsychoHeroGame.
  * 
- * @author Peter s
+ * @author Peter, Carl
  */
 public class PsychoHeroFactory {
 
@@ -14,8 +14,7 @@ public class PsychoHeroFactory {
 	 * Creates a new PsychoHero game.
 	 * 
 	 * @return A game implementing the PsychoHeroGame interface (suitable for
-	 *         the input parameter). Returns null if a game could not be
-	 *         created.
+	 *         the input parameter).
 	 */
 	public static PsychoHeroGame createPsychoHeroGame() {
 

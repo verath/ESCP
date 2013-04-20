@@ -12,6 +12,7 @@ import se.chalmers.tda367.group15.game.constants.Constants;
  * a container for the different states.
  * 
  * @author Carl
+ * @version 2.0
  */
 public class StateController extends StateBasedGame {
 

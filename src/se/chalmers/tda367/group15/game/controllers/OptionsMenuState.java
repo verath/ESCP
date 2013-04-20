@@ -50,7 +50,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 		try {
 			backImage = new Image("res/menu/returnButton.png");
 
-			// Activate buttons
+			// Button for returning to main menu.
 			Button returnButton = new Button(container, backImage, MENUX, MENUY) {
 				@Override
 				public void performAction() {
@@ -63,7 +63,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		// Activate checkboxes
+		// checkboxe for slick function V-Sync
 		CheckBox vSyncBox = new CheckBox(container, "Activate V-Sync", false,
 				MENUX, MENUY + 50) {
 			@Override
@@ -72,6 +72,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 				container.setVSync(this.isChecked());
 			}
 		};
+		// checkboxe for slick function music.
 		CheckBox musicBox = new CheckBox(container, "Activate Music", true,
 				MENUX, MENUY + 100) {
 			@Override
@@ -80,6 +81,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 				container.setMusicOn(this.isChecked());
 			}
 		};
+		// checkboxe for slick function sound.
 		CheckBox soundBox = new CheckBox(container, "Activate Sound", true,
 				MENUX, MENUY + 150) {
 			@Override
@@ -88,6 +90,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 				container.setSoundOn(this.isChecked());
 			}
 		};
+		// checkboxe for toggling fullscreen.
 		CheckBox toggleFullScreen = new CheckBox(container,
 				"toggle fullscreen", false, MENUX, MENUY + 200) {
 			@Override
@@ -109,6 +112,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 
 	@Override
 	protected void escpAction() {
+		// escape returns you to main menu.
 		game.enterState(Constants.GAME_STATE_MAIN_MENU);
 	}
 
