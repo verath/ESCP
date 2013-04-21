@@ -49,7 +49,13 @@ public class DummyEnemyView implements View{
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+		float rotation = (float) model.getRotation();
+
+		// rotates the current frame
+		g.rotate(model.getX() + model.getWidth() / 2,
+				model.getY() + model.getHeight() / 2, 180);
 		moveAnimation.draw(model.getX(), model.getY());
+		g.resetTransform();
 	}
 
 }
