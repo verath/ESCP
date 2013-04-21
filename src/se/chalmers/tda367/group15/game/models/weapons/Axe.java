@@ -1,6 +1,10 @@
 package se.chalmers.tda367.group15.game.models.weapons;
 
+<<<<<<< HEAD
 import org.newdawn.slick.Animation;
+=======
+import org.newdawn.slick.Image;
+>>>>>>> 42fec40af04fdae02b0966a814da01ceea2b2a6e
 
 /**
  * Placeholder class for an Axe. We might not use axes in the future, but this
