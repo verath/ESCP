@@ -100,12 +100,12 @@ public abstract class Weapon {
 
 	/**
 	 * The image of the hero is changed dependning on the weapon he is currently
-	 * using. This method will return the images corresponding to the weapon
+	 * using. This method will return the animation corresponding to the weapon
 	 * calling the method due to polymorphism.
 	 * 
-	 * @return the images for the weapon calling the method.
+	 * @return the animation for the weapon calling the method.
 	 */
-	public abstract Image[] getImages();
+	public abstract Animation getAnimation();
 
 	/**
 	 * This method returns the images of a folder in an alphabetical order so

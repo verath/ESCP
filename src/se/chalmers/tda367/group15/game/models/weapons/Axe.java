@@ -1,8 +1,6 @@
 package se.chalmers.tda367.group15.game.models.weapons;
 
-import org.newdawn.slick.Image;
-
-import se.chalmers.tda367.group15.game.models.Hero;
+import org.newdawn.slick.Animation;
 
 /**
  * Placeholder class for an Axe. We might not use axes in the future, but this
@@ -20,8 +18,8 @@ public class Axe extends MeleeWeapon {
 	}
 
 	@Override
-	public Image[] getImages() {
-		return sortImages("axe");
+	public Animation getAnimation() {
+		return new Animation(sortImages("axe"), 80, false);
 	}
 
 }
