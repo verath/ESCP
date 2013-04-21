@@ -33,12 +33,16 @@ public class Hero extends MovingModel {
 	 * Returns the angle the hero is currently facing in degrees. The angle
 	 * starts from the left of the hero.
 	 * 
-	 * @return
+	 * @return The angle in degrees
 	 */
 	public double getRotation() {
 		return rotation;
 	}
 	
+	/**
+	 * Method for setting the rotation angle that the hero should be facing. 
+	 * @param rotation
+	 */
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
 	}

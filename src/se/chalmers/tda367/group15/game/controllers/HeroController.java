@@ -16,8 +16,17 @@ public class HeroController implements MovingModelController {
 	private HeroView view;
 	private Hero model;
 
+	/**
+	 * A room controller set by the constructor of the class. The room
+	 * controller is used to get collision bounds from the current room.
+	 */
 	private RoomController roomController;
 
+	/**
+	 * Create a new controller for the hero.
+	 * 
+	 * @param roomController
+	 */
 	public HeroController(RoomController roomController) {
 		model = new Hero();
 		view = new HeroView(model);
@@ -25,6 +34,9 @@ public class HeroController implements MovingModelController {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(GameContainer container, int delta) {
 		Input input = container.getInput();
@@ -66,6 +78,9 @@ public class HeroController implements MovingModelController {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
@@ -75,7 +90,8 @@ public class HeroController implements MovingModelController {
 	public boolean isCollision(float newX, float newY) {
 		List<Rectangle2D.Float> staticBounds = roomController.getCurrentRoom()
 				.getRoomView().getCollisionBounds();
-		// TODO collisionbounds for the hero is 2px smaller than it should.
+		// TODO collisionbounds for the hero is 2px smaller than it should. Just
+		// as a quickfix for moving through doors..
 		Rectangle2D.Float hero = new Rectangle2D.Float(newX + 2, newY + 2,
 				model.getWidth() - 2, model.getHeight() - 2);
 		for (Rectangle2D.Float bound : staticBounds) {

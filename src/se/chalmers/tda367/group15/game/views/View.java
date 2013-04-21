@@ -12,10 +12,10 @@ import org.newdawn.slick.SlickException;
  */
 public interface View {
 	/**
-	 * Render the game's screen here.
+	 * Render a view here.
 	 * 
 	 * @param container
-	 *            The container holing this game
+	 *            The container holding this game
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.

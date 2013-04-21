@@ -1,14 +1,6 @@
 package se.chalmers.tda367.group15.game.models.weapons;
 
-import java.io.File;
-import java.util.Arrays;
-
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-
-import se.chalmers.tda367.group15.game.models.Hero;
-import se.chalmers.tda367.group15.game.utils.FileNameSorter;
 
 /**
  * Placeholder class for a pistol. We might not use pistols (probably bigger

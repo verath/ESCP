@@ -44,6 +44,9 @@ public class MainController extends BasicGameState {
 		this.ID = ID;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
@@ -53,6 +56,9 @@ public class MainController extends BasicGameState {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -71,6 +77,9 @@ public class MainController extends BasicGameState {
 		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
@@ -85,6 +94,9 @@ public class MainController extends BasicGameState {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getID() {
 		return ID;

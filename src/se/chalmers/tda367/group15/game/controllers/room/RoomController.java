@@ -17,6 +17,12 @@ import org.newdawn.slick.SlickException;
  */
 public class RoomController {
 
+	/**
+	 * Enum for representing a relative position in the game map.
+	 * 
+	 * @author simon
+	 * 
+	 */
 	public enum RelativePosition {
 		ABOVE, BELOW, LEFTOF, RIGHTOF;
 	}
@@ -169,26 +175,29 @@ public class RoomController {
 	 * @param delta
 	 *            The amount of time thats passed since last update in
 	 *            milliseconds
-	 * @param staticBounds 
-	 * @param movingModels 
+	 * @param staticBounds
+	 * @param movingModels
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, int delta)
+			throws SlickException {
 	}
 
 	/**
-	 * Render the game's screen here.
+	 * Method for telling the room view of the current room to render it's tiled
+	 * map
 	 * 
 	 * @param container
-	 *            The container holing this game
+	 *            The container holding this game
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
 	 * @throws SlickException
 	 *             Throw to indicate a internal error
 	 */
-	public void render(GameContainer container, Graphics g) throws SlickException {
+	public void render(GameContainer container, Graphics g)
+			throws SlickException {
 		getCurrentRoom().getRoomView().render(container, g);
 	}
 

@@ -22,13 +22,15 @@ public class BasicRoomView extends AbstractRoomView {
 	/**
 	 * The model this view is representing.
 	 */
-	private BasicRoomModel roomModel;
 
 	public BasicRoomView(BasicRoomModel roomModel) {
-		super(roomModel, MAP_PATH);
+		super(MAP_PATH);
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {

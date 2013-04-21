@@ -13,9 +13,9 @@ import se.chalmers.tda367.group15.game.models.Hero;
 import se.chalmers.tda367.group15.game.utils.FileNameSorter;
 
 /**
- * Class representing the model of a hero.
+ * Class representing the view of a hero.
  * 
- * @author ?????, Carl, tholene
+ * @author Simon, Carl, tholene
  * 
  */
 public class HeroView implements View {
@@ -54,6 +54,9 @@ public class HeroView implements View {
 		heroMove = new Animation(unarmed, 80, true);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {

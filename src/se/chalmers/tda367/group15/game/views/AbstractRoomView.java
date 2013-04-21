@@ -7,9 +7,6 @@ import java.util.List;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
-import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
-
 /**
  * An abstract representation of a view for a room.
  * 
@@ -22,12 +19,10 @@ abstract public class AbstractRoomView implements View {
 	 * The tiled map used by this room.
 	 */
 	private TiledMap map = null;
-	private AbstractRoomModel roomModel;
 
 	private List<Rectangle2D.Float> collisionBounds = new ArrayList<Rectangle2D.Float>();
 
-	public AbstractRoomView(BasicRoomModel roomModel, String mapPath) {
-		this.roomModel = roomModel;
+	public AbstractRoomView(String mapPath) {
 		try {
 			map = new TiledMap(mapPath);
 		} catch (SlickException e) {
@@ -56,6 +51,12 @@ abstract public class AbstractRoomView implements View {
 		this.map = map;
 	}
 
+	/**
+	 * Method for getting the collision bounds of the blocked object in the
+	 * tiled map.
+	 * 
+	 * @return A list of rectangles representing collision bounds.
+	 */
 	public List<Rectangle2D.Float> getCollisionBounds() {
 		return collisionBounds;
 	}
@@ -67,6 +68,7 @@ abstract public class AbstractRoomView implements View {
 				String property = map.getTileProperty(tileId, "blocked",
 						"false");
 				if (property.equals("true")) {
+					// assuming that the map is created with 32x32 tiles
 					collisionBounds.add(new Rectangle2D.Float(x * 32, y * 32,
 							32, 32));
 				}
