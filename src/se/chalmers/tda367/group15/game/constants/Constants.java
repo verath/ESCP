@@ -18,7 +18,6 @@ public class Constants {
 	 */
 	public static final boolean DEBUG = true;
 	
-	
 	/**
 	 * the different states. They should each be a unique int.
 	 */
