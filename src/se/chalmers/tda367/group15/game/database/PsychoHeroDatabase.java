@@ -168,16 +168,16 @@ public class PsychoHeroDatabase {
 	 * @return A list of max length Score objects, or null if no results could
 	 *         be found.
 	 */
-	public List<Score> getHighscores(int limit) {
+	public List<DatabaseScore> getHighscores(int limit) {
 
-		List<Score> results = null;
+		List<DatabaseScore> results = null;
 
 		// If we have a set limit, we know we will not get more than that amount
 		// of results
 		if (limit > 0) {
-			results = new ArrayList<Score>(limit);
+			results = new ArrayList<DatabaseScore>(limit);
 		} else {
-			results = new ArrayList<Score>();
+			results = new ArrayList<DatabaseScore>();
 		}
 
 		Connection conn = null;
@@ -202,7 +202,8 @@ public class PsychoHeroDatabase {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				results.add(new DatabaseScore(rs.getString("name"), rs
-						.getInt("score"), rs.getString("time_added")));
+						.getInt("score"), rs.getString("time_added"), rs
+						.getInt("id")));
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -222,7 +223,7 @@ public class PsychoHeroDatabase {
 	 * @return A list of max length Score objects, or null if no results could
 	 *         be found.
 	 */
-	public List<Score> getHighscores() {
+	public List<DatabaseScore> getHighscores() {
 		return getHighscores(-1);
 	}
 }
