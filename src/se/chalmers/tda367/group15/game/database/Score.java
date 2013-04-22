@@ -32,10 +32,29 @@ public class Score {
 		this.score = score;
 	}
 
+	/**
+	 * Creates a Score from another Score object.
+	 * 
+	 * @param score
+	 */
+	public Score(Score score) {
+		this(score.name, score.score);
+	}
+
+	/**
+	 * Gets the name of the player associated with this Score object.
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Gets the score associated with this Score object.
+	 * 
+	 * @return
+	 */
 	public int getScore() {
 		return score;
 	}
@@ -55,7 +74,7 @@ public class Score {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Score))
+		if (getClass() != obj.getClass())
 			return false;
 		Score other = (Score) obj;
 		if (name == null) {
@@ -72,6 +91,5 @@ public class Score {
 	public String toString() {
 		return "Score [name=" + name + ", score=" + score + "]";
 	}
-
 
 }
