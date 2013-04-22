@@ -13,15 +13,23 @@ import org.newdawn.slick.Image;
  */
 public class Unarmed extends MeleeWeapon{
 	 
+	private static Animation animation;
+	
 	public Unarmed() {
 		super("Unarmed", 5, 10, 500, true);
 	}
 
 	@Override
 	public Animation getAnimation() {
-		Image[] image = sortImages("unarmed");
-		Animation animation = new Animation(image, 80, true);
+		if (animation == null)
+			initAnimation();
 		return animation;
+	}
+
+	@Override
+	protected void initAnimation() {
+		Image[] image = sortImages("unarmed");
+		animation = new Animation(image, 80, true);
 	}
 
 }

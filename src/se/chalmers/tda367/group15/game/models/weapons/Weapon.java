@@ -117,23 +117,26 @@ public abstract class Weapon {
 	 * @return a sorted array of images corresponding to the path given.
 	 * @throws SlickException
 	 */
-	protected Image[] sortImages(String weapon){
-		 File folder = new File("res/animation/hero/" + weapon);
-		 if (folder != null) {
-		 File[] files = folder.listFiles();
-		 if (files != null) {
-		 Arrays.sort(files, new FileNameSorter());
-		 Image[] sortedImages = new Image[files.length];
-		 for (int i = 0; i < files.length; i++) {
-		 try {
-		 sortedImages[i] = new Image(files[i].getPath());
-		 } catch (SlickException e) {
-		 e.printStackTrace();
-		 }
-		 }
-		 return sortedImages;
-		 }
-		 }
-		 return null;
+	protected Image[] sortImages(String weapon) {
+		File folder = new File("res/animation/hero/" + weapon);
+		if (folder != null) {
+			File[] files = folder.listFiles();
+			if (files != null) {
+				Arrays.sort(files, new FileNameSorter());
+				Image[] sortedImages = new Image[files.length];
+				for (int i = 0; i < files.length; i++) {
+					try {
+						sortedImages[i] = new Image(files[i].getPath());
+						System.out.println(sortedImages[i]);
+					} catch (SlickException e) {
+						e.printStackTrace();
+					}
+				}
+				return sortedImages;
+			}
+		}
+		return null;
 	}
+
+	protected abstract void initAnimation();
 }

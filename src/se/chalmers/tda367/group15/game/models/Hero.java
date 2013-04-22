@@ -1,5 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
+import se.chalmers.tda367.group15.game.models.weapons.Unarmed;
+
+
 
 /**
  * Class representing the model of a hero.
@@ -15,6 +18,8 @@ public class Hero extends MovingModel {
 	private boolean goingDown;
 	private boolean goingRight;
 	private boolean goingLeft;
+	
+	private boolean isMoving;
 
 	/**
 	 * Create a new Hero.
@@ -26,7 +31,7 @@ public class Hero extends MovingModel {
 		setVelocity(0.15f);
 		setWidth(64);
 		setHeight(64);
-
+		setCurrentWeapon(new Unarmed());
 	}
 
 	/**
@@ -52,10 +57,10 @@ public class Hero extends MovingModel {
 	 * 
 	 * @return True if hero is moving.
 	 */
+	public void setMoving(boolean moving) {
+		isMoving = moving;
+	}
 	public boolean isMoving() {
-		int speedY = (goingUp ? 1 : 0) - (goingDown ? 1 : 0);
-		int speedX = (goingLeft ? 1 : 0) - (goingRight ? 1 : 0);
-
-		return (speedY != 0 || speedX != 0);
+		return true;
 	}
 }

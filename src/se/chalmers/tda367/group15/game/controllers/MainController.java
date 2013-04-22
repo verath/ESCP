@@ -6,6 +6,7 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -14,6 +15,7 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.room.Room;
 import se.chalmers.tda367.group15.game.controllers.room.RoomController;
 import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
+import se.chalmers.tda367.group15.game.models.weapons.WeaponLoader;
 import se.chalmers.tda367.group15.game.views.room.BasicRoomView;
 
 /**
@@ -71,10 +73,13 @@ public class MainController extends BasicGameState {
 		roomController = new RoomController();
 		roomController.addStartingRoom(startingRoom);
 
+		// le weapons
+		WeaponLoader.initWeapons();
 		// Set up move controllers
 		moveControllers.add(new HeroController(roomController));
 		moveControllers.add(new EnemyController(roomController));
 		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
+		
 	}
 
 	/**

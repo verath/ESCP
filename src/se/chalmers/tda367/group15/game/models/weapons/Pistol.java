@@ -2,6 +2,7 @@ package se.chalmers.tda367.group15.game.models.weapons;
 
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Image;
 
 /**
  * Placeholder class for a pistol. We might not use pistols (probably bigger
@@ -13,14 +14,25 @@ import org.newdawn.slick.Animation;
  * 
  */
 public class Pistol extends RangedWeapon {
-
+	
+	private static Animation animation;
+	
 	public Pistol() {
 		super("Pistol", 10, 20, 500, false);
 	}
-
+	
 	@Override
 	public Animation getAnimation() {
-		return new Animation(sortImages("pistol"), 80, false);
+		if (animation == null)
+			initAnimation();
+		return animation;
 	}
+
+	@Override
+	protected void initAnimation() {
+		Image[] image = sortImages("pistol");
+		animation = new Animation(image, 80, true);
+	}
+
 
 }

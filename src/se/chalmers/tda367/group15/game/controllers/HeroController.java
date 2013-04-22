@@ -15,6 +15,11 @@ import se.chalmers.tda367.group15.game.views.HeroView;
 public class HeroController implements MovingModelController {
 	private HeroView view;
 	private Hero model;
+	
+	private boolean goingUp;
+	private boolean goingDown;
+	private boolean goingLeft;
+	private boolean goingRight;
 
 	/**
 	 * A room controller set by the constructor of the class. The room
@@ -49,13 +54,13 @@ public class HeroController implements MovingModelController {
 				/ 2 + model.getY() - mouseY),
 				(model.getWidth() / 2 + model.getX() - mouseX))));
 
-		boolean goingUp = input.isKeyDown(Input.KEY_W)
+		goingUp = input.isKeyDown(Input.KEY_W)
 				|| input.isKeyDown(Input.KEY_UP);
-		boolean goingDown = input.isKeyDown(Input.KEY_S)
+		goingDown = input.isKeyDown(Input.KEY_S)
 				|| input.isKeyDown(Input.KEY_DOWN);
-		boolean goingRight = input.isKeyDown(Input.KEY_D)
+		goingRight = input.isKeyDown(Input.KEY_D)
 				|| input.isKeyDown(Input.KEY_RIGHT);
-		boolean goingLeft = input.isKeyDown(Input.KEY_A)
+		goingLeft = input.isKeyDown(Input.KEY_A)
 				|| input.isKeyDown(Input.KEY_LEFT);
 
 		// Calculate move direction and move
@@ -75,7 +80,9 @@ public class HeroController implements MovingModelController {
 			model.setX(newX);
 		if (!isCollision(model.getX(), newY))
 			model.setY(newY);
-
+		
+		boolean moving = true; 
+		model.setMoving(moving);
 	}
 
 	/**
