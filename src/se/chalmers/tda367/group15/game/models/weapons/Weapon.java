@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -114,24 +115,25 @@ public abstract class Weapon {
 	 *            of the hierarchy due to the implementation;
 	 *            "res/animation/hero/" + weapon.
 	 * @return a sorted array of images corresponding to the path given.
+	 * @throws SlickException
 	 */
-	protected Image[] sortImages(String weapon) {
-		File folder = new File("res/animation/hero/" + weapon);
-		if (folder != null) {
-			File[] files = folder.listFiles();
-			if (files != null) {
-				Arrays.sort(files, new FileNameSorter());
-				Image[] sortedImages = new Image[files.length];
-				for (int i = 0; i < files.length; i++) {
-					try {
-						sortedImages[i] = new Image(files[i].getPath());
-					} catch (SlickException e) {
-						e.printStackTrace();
-					}
-				}
-				return sortedImages;
-			}
-		}
-		return null;
+	protected Image[] sortImages(String weapon){
+		 File folder = new File("res/animation/hero/" + weapon);
+		 if (folder != null) {
+		 File[] files = folder.listFiles();
+		 if (files != null) {
+		 Arrays.sort(files, new FileNameSorter());
+		 Image[] sortedImages = new Image[files.length];
+		 for (int i = 0; i < files.length; i++) {
+		 try {
+		 sortedImages[i] = new Image(files[i].getPath());
+		 } catch (SlickException e) {
+		 e.printStackTrace();
+		 }
+		 }
+		 return sortedImages;
+		 }
+		 }
+		 return null;
 	}
 }

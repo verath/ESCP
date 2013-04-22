@@ -1,6 +1,7 @@
 package se.chalmers.tda367.group15.game.models.weapons;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Image;
 
 /**
  * The unarmed "weapon". The hero starts with this "weapon".
@@ -18,7 +19,9 @@ public class Unarmed extends MeleeWeapon{
 
 	@Override
 	public Animation getAnimation() {
-		return new Animation(sortImages("unarmed"), 80, true);
+		Image[] image = sortImages("unarmed");
+		Animation animation = new Animation(image, 80, true);
+		return animation;
 	}
 
 }
