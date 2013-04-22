@@ -72,4 +72,15 @@ public class PsychoHeroDatabaseTest {
 		// Make sure the highest score is returned
 		assertTrue(result.getScore() == 4 && result.getName().equals("Test2"));
 	}
+	
+	@Test
+	public void testGetEmptyHighscore() throws ClassNotFoundException {
+		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+
+		// Get 1 from the highscore list
+		List<DatabaseScore> result = psh.getHighscores();
+
+		// Make sure the highest score is returned
+		assertTrue(result.isEmpty());
+	}
 }
