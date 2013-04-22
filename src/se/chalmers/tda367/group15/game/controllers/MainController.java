@@ -11,10 +11,9 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.controllers.room.BasicRoom;
 import se.chalmers.tda367.group15.game.controllers.room.Room;
 import se.chalmers.tda367.group15.game.controllers.room.RoomController;
-import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
-import se.chalmers.tda367.group15.game.views.room.BasicRoomView;
 
 /**
  * The main controller for the slick2d implementation of PsychoHero.
@@ -63,17 +62,15 @@ public class MainController extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		// Set up the rooms
-		BasicRoomModel roomModel = new BasicRoomModel();
-		BasicRoomView roomView = new BasicRoomView(roomModel);
-		Room startingRoom = new Room(roomView, roomModel);
+		Room startingRoom = new BasicRoom();
 
 		// Set up the room manager
 		roomController = new RoomController();
 		roomController.addStartingRoom(startingRoom);
+		roomController.init(container, game);
 
 		// Set up move controllers
 		moveControllers.add(new HeroController(roomController));
-		moveControllers.add(new EnemyController(roomController));
 		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
 	}
 
