@@ -16,6 +16,7 @@ public abstract class MovingModel {
 	private Weapon currentWeapon;
 	private int health;
 	private int width, height;
+	private double rotation;
 	private Rectangle2D.Float bounds;
 
 	/**
@@ -169,5 +170,13 @@ public abstract class MovingModel {
 	public Rectangle2D.Float getBounds() {
 			
 		return new Rectangle2D.Float(x, y, width, height);
+	}
+
+	public double getRotation() {
+		return rotation;
+	}
+	
+	public void setRotation(double rotation) {
+		this.rotation = rotation;
 	}
 }
