@@ -104,6 +104,8 @@ public class PlayState extends BasicGameState {
 		for (MovingModelController c : moveControllers) {
 			c.update(container, delta);
 		}
+		
+		
 	}
 
 	/**

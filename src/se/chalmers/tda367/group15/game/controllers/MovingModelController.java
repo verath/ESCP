@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.models.MovingModel;
+
 /**
  * Interface that should be implemented by all controllers handling moving
  * models.
@@ -40,4 +42,10 @@ public interface MovingModelController {
 	 */
 	public abstract void update(GameContainer container, int delta)
 			throws SlickException;
+
+	/**
+	 * Method for returning the model this controller is handling
+	 * @return model
+	 */
+	public abstract MovingModel getModel();
 }

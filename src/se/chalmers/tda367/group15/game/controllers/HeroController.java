@@ -1,8 +1,5 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D;
-import java.util.List;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -10,6 +7,7 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.controllers.room.RoomController;
 import se.chalmers.tda367.group15.game.models.Hero;
+import se.chalmers.tda367.group15.game.models.MovingModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
 public class HeroController implements MovingModelController {
@@ -76,9 +74,7 @@ public class HeroController implements MovingModelController {
 		float newX = model.getX() - (delta * speedX);
 		float newY = model.getY() - (delta * speedY);
 
-		if (!isCollision(newX, model.getY()))
 			model.setX(newX);
-		if (!isCollision(model.getX(), newY))
 			model.setY(newY);
 		
 		boolean moving = true; 
@@ -94,19 +90,8 @@ public class HeroController implements MovingModelController {
 		view.render(container, g);
 	}
 
-	public boolean isCollision(float newX, float newY) {
-		List<Rectangle2D.Float> staticBounds = roomController.getCurrentRoom()
-				.getCollisionBounds();
-		// TODO collisionbounds for the hero is 2px smaller than it should. Just
-		// as a quickfix for moving through doors..
-		Rectangle2D.Float hero = new Rectangle2D.Float(newX + 2, newY + 2,
-				model.getWidth() - 2, model.getHeight() - 2);
-		for (Rectangle2D.Float bound : staticBounds) {
-			if (hero.intersects(bound)) {
-				return true;
-			}
-		}
-
-		return false;
+	@Override
+	public MovingModel getModel() {
+		return model;
 	}
 }
