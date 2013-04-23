@@ -1,6 +1,9 @@
 package se.chalmers.tda367.group15.game.database;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +11,12 @@ import java.util.List;
 import org.junit.Test;
 
 public class PsychoHeroDatabaseTest {
+	
+	@Test
+	public void testConnectToDatabase() throws ClassNotFoundException {
+		PsychoHeroDatabase psh = new PsychoHeroDatabase();
+		assertNotNull(psh);
+	}
 
 	@Test
 	public void testAddScoreToDatabase() throws ClassNotFoundException {
@@ -16,9 +25,15 @@ public class PsychoHeroDatabaseTest {
 		Score score = new Score("Test", 200);
 		psh.addScore(score);
 
+		DatabaseScore dbResult = psh.getHighscores(1).get(0);
+
+		// Make sure it now has a time and an id above -1
+		assertFalse(dbResult.getTime().isEmpty());
+		assertFalse(dbResult.getId() < 0);
+
 		// We have to "up-cast" it to a Score, as the object returned
 		// by the database class is a DatabaseScore, holding more information.
-		Score result = new Score(psh.getHighscores(1).get(0));
+		Score result = new Score(dbResult);
 
 		assertEquals(score, result);
 	}
@@ -72,7 +87,7 @@ public class PsychoHeroDatabaseTest {
 		// Make sure the highest score is returned
 		assertTrue(result.getScore() == 4 && result.getName().equals("Test2"));
 	}
-	
+
 	@Test
 	public void testGetEmptyHighscore() throws ClassNotFoundException {
 		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);

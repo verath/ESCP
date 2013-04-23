@@ -2,13 +2,8 @@ package se.chalmers.tda367.group15.game.models;
 
 import static org.junit.Assert.assertTrue;
 
-import java.awt.geom.Rectangle2D.Float;
-import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
 
 public class MovingModelTest {
 	
@@ -16,21 +11,7 @@ public class MovingModelTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		testedModel = new MovingModel() {
-			@Override
-			public List<Float> getCollisionBounds() {
-				return null;
-			}
-			
-			@Override
-			public void update(GameContainer container, int delta)
-					throws SlickException {
-			}
-			
-			@Override
-			public void collide(List<Float> collisionBounds) {
-			}
-		};
+		testedModel = new MovingModel() {};
 	}
 	
 	@Test
