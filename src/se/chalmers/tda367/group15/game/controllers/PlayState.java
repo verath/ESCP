@@ -126,6 +126,7 @@ public class PlayState extends BasicGameState {
 		dynamicBounds.put(heroController.getModel(), heroController.getModel()
 				.getBounds());
 
+		// check collision against static objects
 		for (MovingModelController controller : modelControllers) {
 			for (Rectangle2D.Float blockedTile : staticBounds) {
 				MovingModel model = controller.getModel();
@@ -134,9 +135,9 @@ public class PlayState extends BasicGameState {
 					controller.collisionDetected();
 				}
 			}
-
 		}
 
+		// check collision against dynamic/moving objects
 		for (MovingModelController controller : modelControllers) {
 			for (MovingModel model2 : dynamicBounds.keySet()) {
 				MovingModel model1 = controller.getModel();

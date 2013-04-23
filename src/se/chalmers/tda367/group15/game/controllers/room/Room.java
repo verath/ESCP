@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers.room;
 
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
 
