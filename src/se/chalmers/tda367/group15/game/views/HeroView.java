@@ -3,24 +3,26 @@ package se.chalmers.tda367.group15.game.views;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.Hero;
+import se.chalmers.tda367.group15.game.models.weapons.Unarmed;
 
 /**
- * Class representing the model of a hero.
+ * Class representing the view of a hero.
  * 
- * @author ?????, Carl, tholene
+ * @author Simon, Carl, tholene
  * 
  */
 public class HeroView implements View {
 
+	private Animation unarmed;
+	
 	/**
 	 * The hero model this view is representing
 	 */
 	private final Hero hero;
-
+	
 	/**
 	 * The move animation
 	 */
@@ -33,8 +35,12 @@ public class HeroView implements View {
 	 */
 	public HeroView(final Hero hero) {
 		this.hero = hero;
+		heroMove = hero.getCurrentWeapon().getAnimation();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
@@ -43,6 +49,7 @@ public class HeroView implements View {
 
 		// We don't want to run the animation if we're not moving
 		if (!hero.isMoving()) {
+			System.out.println("NOT MOVING");
 			heroMove.stop();
 		} else if (heroMove.isStopped()) {
 			heroMove.start();
@@ -53,25 +60,6 @@ public class HeroView implements View {
 		heroMove.draw(hero.getX(), hero.getY());
 		g.resetTransform();
 
-	}
-
-	@Override
-	public void init(GameContainer container) throws SlickException {
-
-		// Set up the move animation
-		Image[] movement = { new Image("res/animation/hero/unarmed/1.png"),
-				new Image("res/animation/hero/unarmed/2.png"),
-				new Image("res/animation/hero/unarmed/3.png"),
-				new Image("res/animation/hero/unarmed/4.png"),
-				new Image("res/animation/hero/unarmed/5.png"),
-				new Image("res/animation/hero/unarmed/6.png"),
-				new Image("res/animation/hero/unarmed/7.png"),
-				new Image("res/animation/hero/unarmed/8.png"),
-				new Image("res/animation/hero/unarmed/9.png"),
-				new Image("res/animation/hero/unarmed/10.png"),
-				new Image("res/animation/hero/unarmed/11.png"),
-				new Image("res/animation/hero/unarmed/12.png") };
-		heroMove = new Animation(movement, 80, true);
 	}
 
 }

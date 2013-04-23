@@ -1,52 +1,24 @@
 package se.chalmers.tda367.group15.game.controllers.room;
 
-import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
-import se.chalmers.tda367.group15.game.views.AbstractRoomView;
+import java.awt.geom.Rectangle2D;
+import java.util.List;
 
-/**
- * A Room object holding a view and a model representing a room. A room can be
- * seen as a level in the game.
- * 
- * @author Peter
- * 
- */
-public class Room {
-	/**
-	 * The view representing this room
-	 */
-	private final AbstractRoomView roomView;
+import org.newdawn.slick.Graphics;
 
-	/**
-	 * The model representing this room
-	 */
-	private final AbstractRoomModel roomModel;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
-	/**
-	 * Creates a new Room with the provided view and model. None of the
-	 * arguments may be null.
-	 * 
-	 * @param roomView
-	 * @param roomModel
-	 */
-	public Room(final AbstractRoomView roomView,
-			final AbstractRoomModel roomModel) {
-		this.roomModel = roomModel;
-		this.roomView = roomView;
-	}
+public abstract class Room {
 
-	/**
-	 * Gets the view associated with the room.
-	 * @return
-	 */
-	public AbstractRoomView getRoomView() {
-		return roomView;
-	}
-	
-	/**
-	 * Gets the model associated with the room.
-	 * @return
-	 */
-	public AbstractRoomModel getRoomModel() {
-		return roomModel;
-	}
+	public abstract void update(GameContainer container, int delta)
+			throws SlickException;
+
+	public abstract void render(GameContainer container, Graphics g)
+			throws SlickException;
+
+	public abstract void init(GameContainer container, StateBasedGame game)
+			throws SlickException;
+
+	public abstract List<Rectangle2D.Float> getCollisionBounds();
 }

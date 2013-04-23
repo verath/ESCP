@@ -38,6 +38,7 @@ public class StateController extends StateBasedGame {
 				Constants.GAME_STATE_MAIN_MENU);
 		OptionsMenuState optionsMenu = new OptionsMenuState(
 				Constants.GAME_STATE_OPTIONS_MENU);
+
 		this.addState(playState);
 		this.addState(mainMenu);
 		this.addState(optionsMenu);
