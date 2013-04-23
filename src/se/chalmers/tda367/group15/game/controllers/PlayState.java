@@ -14,12 +14,11 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.room.BasicRoom;
 import se.chalmers.tda367.group15.game.controllers.room.Room;
 import se.chalmers.tda367.group15.game.controllers.room.RoomController;
-//import se.chalmers.tda367.group15.game.models.weapons.WeaponLoader;
 
 /**
  * The main controller for the slick2d implementation of PsychoHero.
  * 
- * @author Peter
+ * @author Carl Jansson, Peter, Simon Persson
  * 
  */
 public class PlayState extends BasicGameState {
@@ -33,13 +32,7 @@ public class PlayState extends BasicGameState {
 	/**
 	 * Creates a new GameController
 	 * 
-	 * @param title
-	 *            The title of the game
-	 * @param gameView
-	 *            The GameView that should receive render and init
-	 * @param gameModel
-	 *            The GameModel that should receive update
-	 * @param roomController
+	 * @param ID The int used to identify the state.
 	 */
 	public PlayState(int ID) {
 		this.ID = ID;
@@ -70,9 +63,6 @@ public class PlayState extends BasicGameState {
 		roomController = new RoomController();
 		roomController.addStartingRoom(startingRoom);
 		roomController.init(container, game);
-
-		// le weapons
-		// WeaponLoader.initWeapons();
 		
 		// Set up move controllers
 		moveControllers.clear();
@@ -88,6 +78,7 @@ public class PlayState extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 
+		// Check for escp action
 		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = true;
 		} else if (pendingEscpAction

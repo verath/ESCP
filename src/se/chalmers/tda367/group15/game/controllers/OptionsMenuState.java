@@ -9,9 +9,10 @@ import se.chalmers.tda367.group15.game.menu.CheckBox;
 import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
 
 /**
- * A screen with different settings you can choose between.
+ * A state with different settings you can choose between.
  * 
  * @author Carl Jansson
+ * @version 2.0
  */
 public class OptionsMenuState extends MenuBasedGameState {
 
@@ -22,14 +23,17 @@ public class OptionsMenuState extends MenuBasedGameState {
 	private int MENUY = 100;
 
 	/**
-	 * Creates a new options menu.
+	 * Creates a new OptionsMenuState.
 	 * 
-	 * @param id
+	 * @param id The int used to identify the state.
 	 */
 	public OptionsMenuState(int id) {
 		super(id);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void init() {
 		this.initButtons();
@@ -40,6 +44,9 @@ public class OptionsMenuState extends MenuBasedGameState {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void initButtons() {
 		try {
@@ -53,7 +60,6 @@ public class OptionsMenuState extends MenuBasedGameState {
 					game.enterState(Constants.GAME_STATE_MAIN_MENU);
 				}
 			};
-
 			this.addMenuItem(returnButton);
 
 		} catch (SlickException e) {
@@ -106,6 +112,9 @@ public class OptionsMenuState extends MenuBasedGameState {
 		this.addMenuItem(toggleFullScreen);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void escpAction() {
 		// escape returns you to main menu.

@@ -8,19 +8,21 @@ import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.gui.MouseOverArea;
 
 /**
- * A class for representation a CheckBox in a graphical environment.
+ * A class for representation a CheckBox in a graphical environment. Class is
+ * extension by me to tutorial for writing menus in Slick2D Originally posted on
+ * http://slick.javaunlimited.net/ by user shiroto
  * 
  * @author Carl Jansson
  */
-public class CheckBox implements MenuItem{
+public class CheckBox implements MenuItem {
 
 	/**
-	 * the area compromising the checkbox.
+	 * the area and pictures compromising the checkbox.
 	 */
 	protected MouseOverArea moa;
 
 	/**
-	 * the area to paint in
+	 * the container to paint in
 	 */
 	protected GUIContext guiContext;
 
@@ -28,7 +30,7 @@ public class CheckBox implements MenuItem{
 	 * Empty checkbox.
 	 */
 	private Image boxImg;
-	
+
 	/**
 	 * Empty checkbox with mouse over.
 	 */
@@ -38,7 +40,7 @@ public class CheckBox implements MenuItem{
 	 * filled checkbox.
 	 */
 	private Image CheckedBoxImg;
-	
+
 	/**
 	 * Mouse over filled box.
 	 */
@@ -48,12 +50,12 @@ public class CheckBox implements MenuItem{
 	 * Image of the currently active box
 	 */
 	private Image theNormalImg;
-	
+
 	/**
 	 * Image of currently active box when mouse is over.
 	 */
 	private Image theNormalImgMO;
-	
+
 	/**
 	 * Image of currently active box when mouse down over it.
 	 */
@@ -78,10 +80,15 @@ public class CheckBox implements MenuItem{
 	 * creates a new checkbox.
 	 * 
 	 * @param guiContext
+	 *            the container.
 	 * @param text
+	 *            A String to display with the box.
 	 * @param value
+	 *            whatever the default value is checked or not.
 	 * @param x
+	 *            x coordinate for box upper left corner.
 	 * @param y
+	 *            y coordinate for box upper left corner.
 	 */
 	public CheckBox(GUIContext guiContext, String text, boolean value, int x,
 			int y) {
@@ -95,7 +102,11 @@ public class CheckBox implements MenuItem{
 		createMoa();
 		updateMoa();
 	}
-	private void loadPictures(){
+
+	/**
+	 * Load the pictures necessary to make a complete checkbox.
+	 */
+	private void loadPictures() {
 		try {
 			boxImg = new Image("res/menu/checkBox.png");
 			CheckedBoxImg = new Image("res/menu/checkBox2.png");
@@ -106,6 +117,9 @@ public class CheckBox implements MenuItem{
 		}
 	}
 
+	/**
+	 * Paint the checkbox and the String.
+	 */
 	public void render(Graphics g) {
 		moa.render(guiContext, g);
 		Color tmpC = g.getColor();
@@ -115,7 +129,11 @@ public class CheckBox implements MenuItem{
 	}
 
 	/**
-	 * This method MUST be called with super from implementation!!!
+	 * IMPORTANT!
+	 * 
+	 * Changes the box status. If it is checked or not. In implementation it can
+	 * also contain what to do when value is changed. This method MUST be called
+	 * with super from implementation!!!
 	 */
 	public void performAction() {
 		if (checked) {
@@ -127,18 +145,21 @@ public class CheckBox implements MenuItem{
 	}
 
 	/**
-	 * creates moa with proper picture.
+	 * creates moa with a default picture used simply to get right bounds.
 	 */
 	private void createMoa() {
 		moa = new MouseOverArea(guiContext, boxImg, xPos, yPos);
 	}
-	
+
+	/**
+	 * Changes pictures used to correct.
+	 */
 	public void updateMoa() {
 		if (checked) {
 			theNormalImg = CheckedBoxImg;
 			theNormalImgMO = CheckedBoxImgMO;
 			theNormalImgMDown = boxImg;
-			
+
 		} else {
 			theNormalImg = boxImg;
 			theNormalImgMO = boxImgMO;

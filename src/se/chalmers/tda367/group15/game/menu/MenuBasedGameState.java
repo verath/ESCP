@@ -10,10 +10,10 @@ import org.newdawn.slick.Input;
  * A class with the purpose of making it easy to create menus in a graphical
  * environment. Class based on tutorial for writing menus in Slick2D Originally
  * posted on http://slick.javaunlimited.net/ by user shiroto. Remade to suit our
- * purpose.
+ * purpose. Comments added by Carl Jansson
  * 
- * @author Carl Jansson
- * @version 3.0
+ * @author unknown, shiroto?, Carl Jansson
+ * @version 4.0
  */
 public abstract class MenuBasedGameState extends AbstractedGameState {
 
@@ -43,6 +43,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 		pendingEscpAction = false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void init() {
 		this.initButtons();
@@ -58,6 +61,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 */
 	protected abstract void escpAction();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(Graphics g) {
 		background.draw();
@@ -66,6 +72,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(int delta) {
 		this.checkForButtonClicks();
@@ -78,6 +87,9 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void mouseReleased(int button, int x, int y) {
 		if (button == Input.MOUSE_LEFT_BUTTON) {
