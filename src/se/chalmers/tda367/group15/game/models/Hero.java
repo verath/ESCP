@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
-import se.chalmers.tda367.group15.game.models.weapons.Unarmed;
+import se.chalmers.tda367.group15.game.models.weapons.Pistol;
 
 
 
@@ -31,7 +31,7 @@ public class Hero extends MovingModel {
 		setVelocity(0.15f);
 		setWidth(64);
 		setHeight(64);
-		setCurrentWeapon(new Unarmed());
+		setCurrentWeapon(new Pistol());
 	}
 
 	/**
