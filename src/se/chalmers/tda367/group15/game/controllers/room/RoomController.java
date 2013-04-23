@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * A class for abstractly handling rooms.
@@ -182,6 +183,7 @@ public class RoomController {
 	 */
 	public void update(GameContainer container, int delta)
 			throws SlickException {
+		getCurrentRoom().update(container, delta);
 	}
 
 	/**
@@ -198,7 +200,14 @@ public class RoomController {
 	 */
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		getCurrentRoom().getRoomView().render(container, g);
+		getCurrentRoom().render(container, g);
 	}
+	
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		for(Room room : rooms.values()) {
+			room.init(container, game);
+		}
+	}
+
 
 }

@@ -96,7 +96,7 @@ public class HeroController implements MovingModelController {
 
 	public boolean isCollision(float newX, float newY) {
 		List<Rectangle2D.Float> staticBounds = roomController.getCurrentRoom()
-				.getRoomView().getCollisionBounds();
+				.getCollisionBounds();
 		// TODO collisionbounds for the hero is 2px smaller than it should. Just
 		// as a quickfix for moving through doors..
 		Rectangle2D.Float hero = new Rectangle2D.Float(newX + 2, newY + 2,
