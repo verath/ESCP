@@ -57,6 +57,16 @@ public class PsychoHeroDatabase {
 	}
 
 	/**
+	 * Creates a new PsychoHeroDatabase and sets up the database structure if
+	 * needed.
+	 * 
+	 * @throws ClassNotFoundException
+	 */
+	public PsychoHeroDatabase() throws ClassNotFoundException {
+		this(false);
+	}
+
+	/**
 	 * Creates a Connection to the database if there is no current one.
 	 * 
 	 * @return
