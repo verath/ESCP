@@ -33,5 +33,10 @@ public class DummyEnemyController implements MovingModelController{
 	public MovingModel getModel() {
 		return model;
 	}
+	@Override
+	public void collisionDetected() {
+			System.out.println("FiendeKrock!");
+	}
+
 	
 }

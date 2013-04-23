@@ -43,9 +43,7 @@ public interface MovingModelController {
 	public abstract void update(GameContainer container, int delta)
 			throws SlickException;
 
-	/**
-	 * Method for returning the model this controller is handling
-	 * @return model
-	 */
 	public abstract MovingModel getModel();
+
+	public abstract void collisionDetected();
 }
