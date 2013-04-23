@@ -2,13 +2,8 @@ package se.chalmers.tda367.group15.game.models;
 
 import static org.junit.Assert.assertTrue;
 
-import java.awt.geom.Rectangle2D.Float;
-import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
 
 public class MovingModelTest {
 	
