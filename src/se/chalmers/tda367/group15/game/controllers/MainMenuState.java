@@ -17,14 +17,6 @@ import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
 public class MainMenuState extends MenuBasedGameState {
 
 	/**
-	 * Images representing buttons
-	 */
-	private Image newGameImage;
-	private Image quitImage;
-	private Image resumeImage;
-	private Image optionsImage;
-
-	/**
 	 * Resume button created separately, therefore you need to be able to see if
 	 * it is null.
 	 */
@@ -65,12 +57,15 @@ public class MainMenuState extends MenuBasedGameState {
 	public void initButtons() {
 
 		try {
-			newGameImage = new Image("res/menu/newGame.png");
-			quitImage = new Image("res/menu/quit.png");
-			optionsImage = new Image("res/menu/options.png");
-
+			Image newGameImage = new Image("res/menu/newGame.png");
+			Image newGameImageMO = new Image("res/menu/newGameMO.png");
+			Image quitImage = new Image("res/menu/quit.png");
+			Image quitImageMO = new Image("res/menu/quitMO.png");
+			Image optionsImage = new Image("res/menu/options.png");
+			Image optionsImageMO = new Image("res/menu/optionsMO.png");
+			
 			// Start a new game.
-			Button newGameButton = new Button(container, newGameImage, MENUX,
+			Button newGameButton = new Button(container, newGameImage, newGameImageMO, MENUX,
 					MENUY + 50) {
 				@Override
 				public void performAction() {
@@ -88,7 +83,7 @@ public class MainMenuState extends MenuBasedGameState {
 				}
 			};
 			// open options
-			Button optionsButton = new Button(container, optionsImage, MENUX,
+			Button optionsButton = new Button(container, optionsImage, optionsImageMO, MENUX,
 					MENUY + 100) {
 				@Override
 				public void performAction() {
@@ -96,7 +91,7 @@ public class MainMenuState extends MenuBasedGameState {
 				}
 			};
 			// Quit application
-			Button exitButton = new Button(container, quitImage, MENUX,
+			Button exitButton = new Button(container, quitImage, quitImageMO, MENUX,
 					MENUY + 150) {
 				@Override
 				public void performAction() {
@@ -104,9 +99,9 @@ public class MainMenuState extends MenuBasedGameState {
 				}
 			};
 
-			this.addButton(newGameButton);
-			this.addButton(optionsButton);
-			this.addButton(exitButton);
+			this.addMenuItem(newGameButton);
+			this.addMenuItem(optionsButton);
+			this.addMenuItem(exitButton);
 
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -121,8 +116,9 @@ public class MainMenuState extends MenuBasedGameState {
 	public void addResumeButton() {
 		if (resumeGameButton == null) {
 			try {
-				resumeImage = new Image("res/menu/resumeGame.png");
-				resumeGameButton = new Button(container, resumeImage, MENUX,
+				Image resumeImage = new Image("res/menu/resumeGame.png");
+				Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
+				resumeGameButton = new Button(container, resumeImage, resumeImageMO, MENUX,
 						MENUY) {
 					@Override
 					public void performAction() {
@@ -133,7 +129,7 @@ public class MainMenuState extends MenuBasedGameState {
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
-			this.addButton(resumeGameButton);
+			this.addMenuItem(resumeGameButton);
 		}
 	}
 

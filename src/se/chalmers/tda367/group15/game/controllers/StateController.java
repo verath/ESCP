@@ -91,6 +91,9 @@ public class StateController extends StateBasedGame {
 		return gameContainer;
 	}
 	
+	/**
+	 * Enter a new State and set appropriate cursor.
+	 */
 	@Override
 	public void enterState(int ID){
 		super.enterState(ID);
@@ -99,7 +102,7 @@ public class StateController extends StateBasedGame {
 			if ( ID == Constants.GAME_STATE_PLAYING ) {
 				this.getContainer().setMouseCursor("res/tiles/crosshair.png", 16, 16);
 			} else {
-				this.getContainer().setMouseCursor("res/menu/cursor.png", 16, 16);
+				this.getContainer().setMouseCursor("res/menu/cursor.png", 0, 0);
 			}
 		} catch ( SlickException e ) {
 			e.printStackTrace();

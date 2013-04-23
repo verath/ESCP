@@ -12,7 +12,7 @@ import org.newdawn.slick.gui.MouseOverArea;
  * 
  * @author Carl Jansson
  */
-public class CheckBox {
+public class CheckBox implements MenuItem{
 
 	/**
 	 * the area compromising the checkbox.
@@ -28,16 +28,36 @@ public class CheckBox {
 	 * Empty checkbox.
 	 */
 	private Image boxImg;
+	
+	/**
+	 * Empty checkbox with mouse over.
+	 */
+	private Image boxImgMO;
 
 	/**
 	 * filled checkbox.
 	 */
 	private Image CheckedBoxImg;
+	
+	/**
+	 * Mouse over filled box.
+	 */
+	private Image CheckedBoxImgMO;
 
 	/**
 	 * Image of the currently active box
 	 */
-	private Image theImg;
+	private Image theNormalImg;
+	
+	/**
+	 * Image of currently active box when mouse is over.
+	 */
+	private Image theNormalImgMO;
+	
+	/**
+	 * Image of currently active box when mouse down over it.
+	 */
+	private Image theNormalImgMDown;
 
 	/**
 	 * Is box checked.
@@ -71,13 +91,19 @@ public class CheckBox {
 		this.xPos = x;
 		this.yPos = y;
 
+		loadPictures();
+		createMoa();
+		updateMoa();
+	}
+	private void loadPictures(){
 		try {
 			boxImg = new Image("res/menu/checkBox.png");
 			CheckedBoxImg = new Image("res/menu/checkBox2.png");
+			CheckedBoxImgMO = new Image("res/menu/checkBox2MO.png");
+			boxImgMO = new Image("res/menu/checkBoxMO.png");
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		createMoa();
 	}
 
 	public void render(Graphics g) {
@@ -97,19 +123,30 @@ public class CheckBox {
 		} else {
 			checked = true;
 		}
-		createMoa();
+		updateMoa();
 	}
 
 	/**
 	 * creates moa with proper picture.
 	 */
-	public void createMoa() {
+	private void createMoa() {
+		moa = new MouseOverArea(guiContext, boxImg, xPos, yPos);
+	}
+	
+	public void updateMoa() {
 		if (checked) {
-			theImg = CheckedBoxImg;
+			theNormalImg = CheckedBoxImg;
+			theNormalImgMO = CheckedBoxImgMO;
+			theNormalImgMDown = boxImg;
+			
 		} else {
-			theImg = boxImg;
+			theNormalImg = boxImg;
+			theNormalImgMO = boxImgMO;
+			theNormalImgMDown = CheckedBoxImg;
 		}
-		moa = new MouseOverArea(guiContext, theImg, xPos, yPos);
+		moa.setNormalImage(theNormalImg);
+		moa.setMouseOverImage(theNormalImgMO);
+		moa.setMouseDownImage(theNormalImgMDown);
 	}
 
 	/**

@@ -23,16 +23,11 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 * indicates mouse button i was just pressed.
 	 */
 	protected boolean leftMouseButtonReleased;
-
+	
 	/**
-	 * List with all buttons on page.
+	 * List with all MenuItems on page.
 	 */
-	protected ArrayList<Button> buttons = new ArrayList<Button>();
-
-	/**
-	 * List with all checkButtons on page.
-	 */
-	protected ArrayList<CheckBox> checkButtons = new ArrayList<CheckBox>();
+	protected ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
 
 	/**
 	 * The background for current menu page.
@@ -66,11 +61,8 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	@Override
 	public void render(Graphics g) {
 		background.draw();
-		for (int i = 0; i < buttons.size(); i++) {
-			buttons.get(i).render(g);
-		}
-		for (int i = 0; i < checkButtons.size(); i++) {
-			checkButtons.get(i).render(g);
+		for ( int i = 0; i < menuItems.size(); i++) {
+			menuItems.get(i).render(g);
 		}
 	}
 
@@ -108,35 +100,20 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 * action.
 	 */
 	private void clickButton() {
-		for (int i = 0; i < buttons.size(); i++) {
-			if (buttons.get(i).isMouseOver()) {
-				buttons.get(i).performAction();
-			}
-		}
-		for (int i = 0; i < checkButtons.size(); i++) {
-			if (checkButtons.get(i).isMouseOver()) {
-				checkButtons.get(i).performAction();
+		for ( int i = 0; i < menuItems.size(); i++ ) {
+			if ( menuItems.get(i).isMouseOver() ) {
+				menuItems.get(i).performAction();
 			}
 		}
 	}
 
 	/**
-	 * Adds button to ArayList buttons.
+	 * Adds a MenuItem to ArayList menuItems.
 	 * 
-	 * @param aButton
-	 *            the button to add to list.
+	 * @param item
+	 *            the item to add to list.
 	 */
-	public final void addButton(Button aButton) {
-		this.buttons.add(aButton);
-	}
-
-	/**
-	 * Adds button to ArayList buttons.
-	 * 
-	 * @param aButton
-	 *            the button to add to list.
-	 */
-	public final void addCheckButton(CheckBox aButton) {
-		this.checkButtons.add(aButton);
+	public final void addMenuItem(MenuItem item) {
+		this.menuItems.add(item);
 	}
 }

@@ -16,11 +16,6 @@ import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
 public class OptionsMenuState extends MenuBasedGameState {
 
 	/**
-	 * Images representing buttons
-	 */
-	private Image backImage;
-
-	/**
 	 * the upper left corner of button group
 	 */
 	private int MENUX = 200;
@@ -48,17 +43,18 @@ public class OptionsMenuState extends MenuBasedGameState {
 	@Override
 	protected void initButtons() {
 		try {
-			backImage = new Image("res/menu/returnButton.png");
+			Image backImage = new Image("res/menu/returnButton.png");
+			Image backImageMO = new Image("res/menu/returnButtonMO.png");
 
 			// Button for returning to main menu.
-			Button returnButton = new Button(container, backImage, MENUX, MENUY) {
+			Button returnButton = new Button(container, backImage, backImageMO, MENUX, MENUY) {
 				@Override
 				public void performAction() {
 					game.enterState(Constants.GAME_STATE_MAIN_MENU);
 				}
 			};
 
-			this.addButton(returnButton);
+			this.addMenuItem(returnButton);
 
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -104,10 +100,10 @@ public class OptionsMenuState extends MenuBasedGameState {
 			}
 		};
 
-		this.addCheckButton(vSyncBox);
-		this.addCheckButton(musicBox);
-		this.addCheckButton(soundBox);
-		this.addCheckButton(toggleFullScreen);
+		this.addMenuItem(vSyncBox);
+		this.addMenuItem(musicBox);
+		this.addMenuItem(soundBox);
+		this.addMenuItem(toggleFullScreen);
 	}
 
 	@Override
