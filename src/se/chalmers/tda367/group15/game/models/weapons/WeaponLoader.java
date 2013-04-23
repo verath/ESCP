@@ -10,7 +10,7 @@ import java.util.List;
 public class WeaponLoader {
 	
 	/**
-	 * Simply initialize the images for all the weapons currently implemented.
+	 * Initialize the images for all the weapons currently implemented.
 	 */
 	public static void initWeapons() {
 		List<Weapon> weapons = new ArrayList<Weapon>();
