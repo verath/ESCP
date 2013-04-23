@@ -6,7 +6,6 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -15,10 +14,7 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.room.BasicRoom;
 import se.chalmers.tda367.group15.game.controllers.room.Room;
 import se.chalmers.tda367.group15.game.controllers.room.RoomController;
-import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
 //import se.chalmers.tda367.group15.game.models.weapons.WeaponLoader;
-import se.chalmers.tda367.group15.game.views.room.BasicRoomView;
-
 
 /**
  * The main controller for the slick2d implementation of PsychoHero.
@@ -26,7 +22,7 @@ import se.chalmers.tda367.group15.game.views.room.BasicRoomView;
  * @author Peter
  * 
  */
-public class MainController extends BasicGameState {
+public class PlayState extends BasicGameState {
 
 	private final int ID;
 
@@ -45,7 +41,7 @@ public class MainController extends BasicGameState {
 	 *            The GameModel that should receive update
 	 * @param roomController
 	 */
-	public MainController(int ID) {
+	public PlayState(int ID) {
 		this.ID = ID;
 	}
 
@@ -60,7 +56,6 @@ public class MainController extends BasicGameState {
 			c.render(container, g);
 		}
 	}
-
 
 	/**
 	 * {@inheritDoc}
@@ -77,11 +72,17 @@ public class MainController extends BasicGameState {
 		roomController.init(container, game);
 
 		// le weapons
-//		WeaponLoader.initWeapons();
-		// Set up move controllers
-		moveControllers.add(new HeroController(roomController));
-		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
+		// WeaponLoader.initWeapons();
 		
+		// Set up move controllers
+		moveControllers.clear();
+		
+		// Add hero
+		moveControllers.add(new HeroController(roomController));
+		
+		// Set Cursor
+		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
+
 	}
 
 	/**
@@ -90,12 +91,20 @@ public class MainController extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
+
+		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+			pendingEscpAction = true;
+		} else if (pendingEscpAction
+				&& !container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+			pendingEscpAction = false;
+			game.enterState(Constants.GAME_STATE_MAIN_MENU);
+		}
+
 		roomController.update(container, delta);
 		for (MovingModelController c : moveControllers) {
 			c.update(container, delta);
 		}
 	}
-
 
 	/**
 	 * {@inheritDoc}

@@ -3,9 +3,8 @@ package se.chalmers.tda367.group15.game.controllers.room;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-import org.newdawn.slick.Graphics;
-
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 

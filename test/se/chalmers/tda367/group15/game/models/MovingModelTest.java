@@ -16,21 +16,7 @@ public class MovingModelTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		testedModel = new MovingModel() {
-			@Override
-			public List<Float> getCollisionBounds() {
-				return null;
-			}
-			
-			@Override
-			public void update(GameContainer container, int delta)
-					throws SlickException {
-			}
-			
-			@Override
-			public void collide(List<Float> collisionBounds) {
-			}
-		};
+		testedModel = new MovingModel() {};
 	}
 	
 	@Test
