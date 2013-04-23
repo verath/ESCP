@@ -10,6 +10,13 @@ import org.junit.Test;
 public class PsychoHeroDatabaseTest {
 
 	@Test
+	public void testConnectToDatabase() throws ClassNotFoundException {
+		PsychoHeroDatabase psh = new PsychoHeroDatabase();
+		assertNotNull(psh);
+	}
+	
+	
+	@Test
 	public void testAddScoreToDatabase() throws ClassNotFoundException {
 		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
 
