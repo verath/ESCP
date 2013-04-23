@@ -79,10 +79,6 @@ public class PlayState extends BasicGameState {
 		
 		// Add hero
 		moveControllers.add(new HeroController(roomController));
-		
-		// Set Cursor
-		container.setMouseCursor("res/tiles/crosshair.png", 16, 16);
-
 	}
 
 	/**

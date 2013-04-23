@@ -90,5 +90,20 @@ public class StateController extends StateBasedGame {
 	public AppGameContainer getTheAppContainer() {
 		return gameContainer;
 	}
+	
+	@Override
+	public void enterState(int ID){
+		super.enterState(ID);
+		
+		try {
+			if ( ID == Constants.GAME_STATE_PLAYING ) {
+				this.getContainer().setMouseCursor("res/tiles/crosshair.png", 16, 16);
+			} else {
+				this.getContainer().setMouseCursor("res/menu/cursor.png", 16, 16);
+			}
+		} catch ( SlickException e ) {
+			e.printStackTrace();
+		}
+	}
 
 }
