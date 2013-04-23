@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * A class for abstractly handling rooms.
@@ -17,6 +18,12 @@ import org.newdawn.slick.SlickException;
  */
 public class RoomController {
 
+	/**
+	 * Enum for representing a relative position in the game map.
+	 * 
+	 * @author simon
+	 * 
+	 */
 	public enum RelativePosition {
 		ABOVE, BELOW, LEFTOF, RIGHTOF;
 	}
@@ -169,42 +176,38 @@ public class RoomController {
 	 * @param delta
 	 *            The amount of time thats passed since last update in
 	 *            milliseconds
+	 * @param staticBounds
+	 * @param movingModels
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void update(GameContainer container, int delta) throws SlickException {
-		getCurrentRoom().getRoomModel().update(container, delta);
+	public void update(GameContainer container, int delta)
+			throws SlickException {
+		getCurrentRoom().update(container, delta);
 	}
 
 	/**
-	 * Render the game's screen here.
+	 * Method for telling the room view of the current room to render it's tiled
+	 * map
 	 * 
 	 * @param container
-	 *            The container holing this game
+	 *            The container holding this game
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
 	 * @throws SlickException
 	 *             Throw to indicate a internal error
 	 */
-	public void render(GameContainer container, Graphics g) throws SlickException {
-		getCurrentRoom().getRoomView().render(container, g);
+	public void render(GameContainer container, Graphics g)
+			throws SlickException {
+		getCurrentRoom().render(container, g);
 	}
-
-	/**
-	 * Initialise the game. This can be used to load static resources. It's
-	 * called before the game loop starts
-	 * 
-	 * @param container
-	 *            The container holding the game
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
-	 */
-	public void init(GameContainer container) throws SlickException {
-		for(Room r : rooms.values()) {
-			r.getRoomView().init(container);
+	
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		for(Room room : rooms.values()) {
+			room.init(container, game);
 		}
-
 	}
+
 
 }

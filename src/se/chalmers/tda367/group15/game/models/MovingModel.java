@@ -1,7 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
-import java.util.List;
+
+import se.chalmers.tda367.group15.game.models.weapons.Weapon;
 
 /**
  * An abstract class for representing a moving model that can both collide and
@@ -10,8 +11,13 @@ import java.util.List;
  * @author simon
  * 
  */
-public abstract class MovingModel implements CollidingModel, CollidableModel {
+public abstract class MovingModel {
 	private float x, y, velocity;
+	private Weapon currentWeapon;
+	private int health;
+	private int width, height;
+	private double rotation;
+	private Rectangle2D.Float bounds;
 
 	/**
 	 * Method for getting the x coordinate of the MovingModel.
@@ -29,6 +35,24 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 	 */
 	public float getY() {
 		return y;
+	}
+
+	/**
+	 * Method for getting the width of the model.
+	 * 
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Method for getting the height of the model.
+	 * 
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
 	}
 
 	/**
@@ -61,36 +85,98 @@ public abstract class MovingModel implements CollidingModel, CollidableModel {
 	}
 
 	/**
+	 * Method for setting the width of the model.
+	 * 
+	 * @param the
+	 *            width to be set
+	 */
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	/**
+	 * Method for setting the height of the model.
+	 * 
+	 * @param the
+	 *            height to be set
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	/**
 	 * Method for setting the movement velocity of the MovingModel.
 	 * 
 	 * @param velocity
 	 */
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
+
 	}
 
 	/**
-	 * Method for checking if the model has collided with a blocked tile.
+	 * Method for getting the current weapon.
 	 * 
-	 * @param collisionBounds
-	 *            the collision bounds to check against
-	 * @return true if collision is detected, false otherwise
+	 * @return the current weapon
 	 */
-	public boolean isCollision(List<Rectangle2D.Float> collisionBounds) {
-		List<Rectangle2D.Float> modelBounds = getCollisionBounds();
+	public Weapon getCurrentWeapon() {
+		return currentWeapon;
+	}
 
-		boolean isCollision = false;
-		for (Rectangle2D.Float mb : modelBounds) {
-			for (Rectangle2D.Float r : collisionBounds) {
-				// Don't check against our own bounds
-				if (modelBounds.contains(r)) {
-					continue;
-				} else if (r.intersects(mb)) {
-					isCollision = true;
-					break;
-				}
-			}
-		}
-		return isCollision;
+	/**
+	 * Method for setting the current weapon.
+	 * 
+	 * @param the
+	 *            new weapon to be set as current
+	 */
+	public void setCurrentWeapon(Weapon weapon) {
+		currentWeapon = weapon;
+	}
+
+	/**
+	 * Method for setting the health.
+	 * 
+	 * @param health
+	 *            - preferably 0-100
+	 */
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	/**
+	 * Method for getting the health.
+	 * 
+	 * @return the health
+	 */
+	public int getHealth() {
+		return health;
+	}
+
+	/**
+	 * Method for receiving damage.
+	 * 
+	 * @param the
+	 *            amount of damage that should be dealt
+	 */
+	public void takeDamage(int damage) {
+		health -= health;
+	}
+
+	/**
+	 * Method for getting the collision bounds of the model.
+	 * 
+	 * @return a rectangle representing the collision bounds
+	 */
+	public Rectangle2D.Float getBounds() {
+			
+		return new Rectangle2D.Float(x, y, width, height);
+	}
+
+	public double getRotation() {
+		return rotation;
+	}
+	
+	public void setRotation(double rotation) {
+		this.rotation = rotation;
 	}
 }
