@@ -27,7 +27,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 	/**
 	 * Used to store variables between restarts.
 	 */
-	Preferences prefSettings;
+	private Preferences prefSettings;
 
 	/**
 	 * Creates a new OptionsMenuState.
@@ -90,10 +90,12 @@ public class OptionsMenuState extends MenuBasedGameState {
 
 	/**
 	 * Create the checkboxes used in this state.
+	 * 
+	 * Get variable using preferences, set the setting and then create the box.
 	 */
 	private void initCheckBoxes() {
 
-		// checkboxe for slick function V-Sync
+		// checkbox for V-Sync
 		boolean vSync = prefSettings.getBoolean("V-Sync", false);
 		checkActionVSync(vSync);
 		CheckBox vSyncBox = new CheckBox(container, "Activate V-Sync", vSync,
@@ -104,7 +106,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 				checkActionVSync(this.isChecked());
 			}
 		};
-		// checkboxe for slick function music.
+		// checkbox for music.
 		boolean music = prefSettings.getBoolean("Music", true);
 		checkActionMusic(music);
 		CheckBox musicBox = new CheckBox(container, "Activate Music", music,
@@ -115,7 +117,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 				checkActionMusic(this.isChecked());
 			}
 		};
-		// checkboxe for slick function sound.
+		// checkbox for sound.
 		boolean sound = prefSettings.getBoolean("Sound", true);
 		checkActionSound(sound);
 		CheckBox soundBox = new CheckBox(container, "Activate Sound", sound,
@@ -126,7 +128,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 				checkActionSound(this.isChecked());
 			}
 		};
-		// checkboxe for toggling fullscreen.
+		// checkbox for toggling fullscreen.
 		boolean fullScreen = prefSettings.getBoolean("Fullscreen", false);
 		checkActionFullScreen(fullScreen);
 		CheckBox toggleFullScreen = new CheckBox(container,
