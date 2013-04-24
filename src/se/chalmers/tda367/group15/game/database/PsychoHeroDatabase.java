@@ -19,10 +19,20 @@ import org.apache.commons.dbutils.DbUtils;
  */
 public class PsychoHeroDatabase {
 
+	private static final String SCORES_COLUMN_NAME = "name";
+
+	private static final String SCORES_COLUMN_TIME_ADDED = "time_added";
+
+	private static final String SCORES_COLUMN_SCORE = "score";
+
+	private static final String SCORES_COLUMN_ID = "id";
+
+	private static final String TABLE_SCORES = "scores";
+
 	/**
 	 * The database file used for the database
 	 */
-	public static final String DB_FILE_NAME = "PsychoHero.db";
+	private static final String DB_FILE_NAME = "PsychoHero.db";
 
 	/**
 	 * A flag indicating whether we are using an in-memory database or not. This
@@ -110,10 +120,11 @@ public class PsychoHeroDatabase {
 			stmt.setQueryTimeout(30);
 
 			// Set up scores table
-			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS scores ("
-					+ "id integer PRIMARY KEY AUTOINCREMENT, "
-					+ "score integer NOT NULL, " + "name string NOT NULL,"
-					+ "time_added datetime NOT NULL)");
+			stmt.executeUpdate(String.format("CREATE TABLE IF NOT EXISTS %s ("
+					+ "%s INTEGER PRIMARY KEY, " + "%s INTEGER NOT NULL, "
+					+ "%s STRING NOT NULL, " + "%s DATETIME NOT NULL)",
+					TABLE_SCORES, SCORES_COLUMN_ID, SCORES_COLUMN_SCORE,
+					SCORES_COLUMN_NAME, SCORES_COLUMN_TIME_ADDED));
 
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -147,9 +158,12 @@ public class PsychoHeroDatabase {
 		PreparedStatement stmt = null;
 		try {
 			conn = getConnection();
-			stmt = conn.prepareStatement("INSERT INTO scores "
-					+ "(score, name, time_added) VALUES "
-					+ "(?, ?, datetime('now'))");
+			stmt = conn
+					.prepareStatement(String
+							.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, datetime('now'))",
+									TABLE_SCORES, SCORES_COLUMN_SCORE,
+									SCORES_COLUMN_NAME,
+									SCORES_COLUMN_TIME_ADDED));
 			stmt.setQueryTimeout(30);
 
 			// Add all queries as a batch and execute all at once instead of
@@ -197,13 +211,14 @@ public class PsychoHeroDatabase {
 			conn = getConnection();
 
 			if (limit >= 0) {
-				stmt = conn.prepareStatement("SELECT * FROM scores "
-						+ "ORDER BY score DESC LIMIT ?");
-				stmt.setInt(1, limit);
+				stmt = conn.prepareStatement(String.format(
+						"SELECT * FROM %s ORDER BY %s DESC LIMIT %d",
+						TABLE_SCORES, SCORES_COLUMN_SCORE, limit));
 			} else {
 				// If we don't have a limit, return all results
-				stmt = conn.prepareStatement("SELECT * FROM scores "
-						+ "ORDER BY score DESC");
+				stmt = conn.prepareStatement(String.format(
+						"SELECT * FROM %s ORDER BY %s DESC", TABLE_SCORES,
+						SCORES_COLUMN_SCORE));
 			}
 
 			stmt.setQueryTimeout(30);
@@ -211,9 +226,10 @@ public class PsychoHeroDatabase {
 			// Run query and get results
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				results.add(new DatabaseScore(rs.getString("name"), rs
-						.getInt("score"), rs.getString("time_added"), rs
-						.getInt("id")));
+				results.add(new DatabaseScore(rs.getString(SCORES_COLUMN_NAME),
+						rs.getInt(SCORES_COLUMN_SCORE), rs
+								.getString(SCORES_COLUMN_TIME_ADDED), rs
+								.getInt(SCORES_COLUMN_ID)));
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
