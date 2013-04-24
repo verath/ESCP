@@ -48,13 +48,13 @@ public abstract class MenuBasedGameState extends AbstractedGameState {
 	 */
 	@Override
 	public void init() {
-		this.initButtons();
+		this.initMenuItems();
 	}
 
 	/**
 	 * In this method you create all buttons.
 	 */
-	protected abstract void initButtons();
+	protected abstract void initMenuItems();
 
 	/**
 	 * this method is called whenever escape is pressed.
