@@ -14,6 +14,7 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.room.BasicRoom;
 import se.chalmers.tda367.group15.game.controllers.room.Room;
 import se.chalmers.tda367.group15.game.controllers.room.RoomController;
+import se.chalmers.tda367.group15.game.models.weapons.WeaponLoader;
 
 /**
  * The main controller for the slick2d implementation of PsychoHero.
@@ -32,7 +33,8 @@ public class PlayState extends BasicGameState {
 	/**
 	 * Creates a new GameController
 	 * 
-	 * @param ID The int used to identify the state.
+	 * @param ID
+	 *            The int used to identify the state.
 	 */
 	public PlayState(int ID) {
 		this.ID = ID;
@@ -59,16 +61,20 @@ public class PlayState extends BasicGameState {
 		// Set up the rooms
 		Room startingRoom = new BasicRoom();
 
+		// Initialize weapons
+		WeaponLoader.initWeapons();
+
 		// Set up the room manager
 		roomController = new RoomController();
 		roomController.addStartingRoom(startingRoom);
 		roomController.init(container, game);
-		
+
 		// Set up move controllers
 		moveControllers.clear();
-		
+
 		// Add hero
 		moveControllers.add(new HeroController(roomController));
+
 	}
 
 	/**
