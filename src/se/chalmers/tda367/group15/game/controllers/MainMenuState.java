@@ -50,7 +50,7 @@ public class MainMenuState extends MenuBasedGameState {
 	 */
 	@Override
 	public void init() {
-		this.initButtons();
+		this.initMenuItems();
 		try {
 			background = new Image("res/menu/background.png");
 		} catch (SlickException e) {
@@ -62,7 +62,7 @@ public class MainMenuState extends MenuBasedGameState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initButtons() {
+	public void initMenuItems() {
 		try {
 			this.createButtons();
 		} catch (SlickException e) {
