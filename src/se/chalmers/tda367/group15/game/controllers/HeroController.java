@@ -76,8 +76,7 @@ public class HeroController extends MovingModelController {
 			model.setY(newY);
 		}
 
-		boolean moving = true;
-		model.setMoving(moving);
+		model.setMoving(speedY != 0 || speedX != 0);
 	}
 
 	/**
