@@ -5,19 +5,120 @@ import java.awt.geom.Rectangle2D;
 import se.chalmers.tda367.group15.game.models.weapons.Weapon;
 
 /**
- * An abstract class for representing a moving model that can both collide and
- * be collided with.
+ * An abstract class for representing a moving model.
  * 
  * @author simon
  * 
  */
 public abstract class MovingModel {
-	private float x, y, velocity;
+	
+	/**
+	 * The currently equipped weapon
+	 */
 	private Weapon currentWeapon;
+
+	/**
+	 * The current health
+	 */
 	private int health;
-	private int width, height;
-	private double rotation;
+
+	/**
+	 * The height of the model
+	 */
+	private float height;
+
+	/**
+	 * Flag for whether the model is currently moving or not
+	 */
 	private boolean isMoving;
+
+	/**
+	 * The angle the model is facing.
+	 */
+	private double rotation;
+
+	/**
+	 * Velocity of the model, pixels per mili-second
+	 */
+	private float velocity;
+
+	/**
+	 * The width of the model
+	 */
+	private float width;
+
+	/**
+	 * Current x-coordinate of the model
+	 */
+	private float x;
+
+	/**
+	 * Current y-coordinate of the model
+	 */
+	private float y;
+
+	/**
+	 * Method for getting the collision bounds of the model.
+	 * 
+	 * @return a rectangle representing the collision bounds
+	 */
+	public Rectangle2D.Float getBounds() {
+		return new Rectangle2D.Float(x, y, width, height);
+	}
+
+	/**
+	 * Method for getting the current weapon.
+	 * 
+	 * @return the current weapon
+	 */
+	public Weapon getCurrentWeapon() {
+		return currentWeapon;
+	}
+
+	/**
+	 * Method for getting the health.
+	 * 
+	 * @return the health
+	 */
+	public int getHealth() {
+		return health;
+	}
+
+	/**
+	 * Method for getting the height of the model.
+	 * 
+	 * @return the height
+	 */
+	public float getHeight() {
+		return height;
+	}
+
+	/**
+	 * Method for getting the rotation angle of the model.
+	 * 
+	 * @return the rotation angle, in degrees.
+	 */
+	public double getRotation() {
+		return rotation;
+	}
+
+	/**
+	 * Method for getting the movement velocity of the player.
+	 * 
+	 * @return the velocity
+	 */
+	public float getVelocity() {
+		return velocity;
+	}
+
+	/**
+	 * Method for getting the width of the model.
+	 * 
+	 * @return the width
+	 */
+	public float getWidth() {
+		return width;
+	}
 
 	/**
 	 * Method for getting the x coordinate of the MovingModel.
@@ -38,89 +139,12 @@ public abstract class MovingModel {
 	}
 
 	/**
-	 * Method for getting the width of the model.
+	 * Method for checking wether the model is moving or not.
 	 * 
-	 * @return the width
+	 * @return True if model is moving, false otherwise.
 	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Method for getting the height of the model.
-	 * 
-	 * @return the height
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * Method for getting the movement velocity of the player.
-	 * 
-	 * @return the velocity
-	 */
-	public float getVelocity() {
-		return velocity;
-	}
-
-	/**
-	 * Method for setting the x coordinate of the MovingModel.
-	 * 
-	 * @param x
-	 *            coordinate
-	 */
-	public void setX(float x) {
-		this.x = x;
-	}
-
-	/**
-	 * Method for setting the y coordinate of the MovingModel.
-	 * 
-	 * @param y
-	 *            coordinate
-	 */
-	public void setY(float y) {
-		this.y = y;
-	}
-
-	/**
-	 * Method for setting the width of the model.
-	 * 
-	 * @param the
-	 *            width to be set
-	 */
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	/**
-	 * Method for setting the height of the model.
-	 * 
-	 * @param the
-	 *            height to be set
-	 */
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	/**
-	 * Method for setting the movement velocity of the MovingModel.
-	 * 
-	 * @param velocity
-	 */
-	public void setVelocity(float velocity) {
-		this.velocity = velocity;
-
-	}
-
-	/**
-	 * Method for getting the current weapon.
-	 * 
-	 * @return the current weapon
-	 */
-	public Weapon getCurrentWeapon() {
-		return currentWeapon;
+	public boolean isMoving() {
+		return isMoving;
 	}
 
 	/**
@@ -144,12 +168,73 @@ public abstract class MovingModel {
 	}
 
 	/**
-	 * Method for getting the health.
+	 * Method for setting the height of the model.
 	 * 
-	 * @return the health
+	 * @param the
+	 *            height to be set
 	 */
-	public int getHealth() {
-		return health;
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
+	/**
+	 * Method for setting wether the model is moving or not
+	 * 
+	 * @param isMoving
+	 *            Should true if model is moving, false otherwise
+	 */
+	public void setMoving(boolean isMoving) {
+		this.isMoving = isMoving;
+	}
+
+	/**
+	 * Method for setting the rotation angle of the model.
+	 * 
+	 * @param rotation
+	 *            The roration angle, in degrees.
+	 */
+	public void setRotation(double rotation) {
+		this.rotation = rotation;
+	}
+
+	/**
+	 * Method for setting the movement velocity of the MovingModel.
+	 * 
+	 * @param velocity
+	 */
+	public void setVelocity(float velocity) {
+		this.velocity = velocity;
+
+	}
+
+	/**
+	 * Method for setting the width of the model.
+	 * 
+	 * @param the
+	 *            width to be set
+	 */
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	/**
+	 * Method for setting the x coordinate of the MovingModel.
+	 * 
+	 * @param x
+	 *            coordinate
+	 */
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	/**
+	 * Method for setting the y coordinate of the MovingModel.
+	 * 
+	 * @param y
+	 *            coordinate
+	 */
+	public void setY(float y) {
+		this.y = y;
 	}
 
 	/**
@@ -159,48 +244,6 @@ public abstract class MovingModel {
 	 *            amount of damage that should be dealt
 	 */
 	public void takeDamage(int damage) {
-		health -= health;
-	}
-
-	/**
-	 * Method for getting the collision bounds of the model.
-	 * 
-	 * @return a rectangle representing the collision bounds
-	 */
-	public Rectangle2D.Float getBounds() {
-
-		return new Rectangle2D.Float(x, y, width, height);
-	}
-
-	/**
-	 * Method for getting the rotation angle of the model.
-	 * @return the rotation angle, in degrees.
-	 */
-	public double getRotation() {
-		return rotation;
-	}
-
-	/**
-	 * Method for setting the rotation angle of the model.
-	 * @param rotation The roration angle, in degrees.
-	 */
-	public void setRotation(double rotation) {
-		this.rotation = rotation;
-	}
-
-	/**
-	 * Method for setting wether the model is moving or not
-	 * @param isMoving Should true if model is moving, false otherwise
-	 */
-	public void setMoving(boolean isMoving) {
-		this.isMoving = isMoving;
-	}
-
-	/**
-	 * Method for checking wether the model is moving or not.
-	 * @return True if model is moving, false otherwise.
-	 */
-	public boolean isMoving() {
-		return isMoving;
+		health -= damage;
 	}
 }

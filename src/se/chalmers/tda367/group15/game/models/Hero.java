@@ -16,7 +16,6 @@ public class Hero extends MovingModel {
 	 * Create a new Hero.
 	 */
 	public Hero() {
-
 		setX(44f);
 		setY(44f);
 		setVelocity(0.15f);
