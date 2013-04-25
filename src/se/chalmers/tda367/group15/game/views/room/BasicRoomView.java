@@ -4,7 +4,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
 import se.chalmers.tda367.group15.game.views.AbstractRoomView;
 
 /**
@@ -23,9 +22,9 @@ public class BasicRoomView extends AbstractRoomView {
 	 * The model this view is representing.
 	 */
 
-	public BasicRoomView(BasicRoomModel roomModel) {
+	public BasicRoomView() {
 		super(MAP_PATH);
-		
+
 	}
 
 	/**
@@ -36,6 +35,5 @@ public class BasicRoomView extends AbstractRoomView {
 			throws SlickException {
 		getTiledMap().render(0, 0);
 	}
-
 
 }

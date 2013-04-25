@@ -5,7 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.models.Hero;
+import se.chalmers.tda367.group15.game.models.MovingModel;
 
 /**
  * Class representing the view of a hero.
@@ -20,7 +20,7 @@ public class HeroView implements View {
 	/**
 	 * The hero model this view is representing
 	 */
-	private final Hero hero;
+	private final MovingModel hero;
 	
 	/**
 	 * The move animation
@@ -32,7 +32,7 @@ public class HeroView implements View {
 	 * 
 	 * @param heroModel
 	 */
-	public HeroView(final Hero hero) {
+	public HeroView(final MovingModel hero) {
 		this.hero = hero;
 		heroMove = hero.getCurrentWeapon().getAnimation();
 	}

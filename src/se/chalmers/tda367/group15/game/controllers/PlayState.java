@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,19 +91,8 @@ public class PlayState extends BasicGameState {
 			game.enterState(Constants.GAME_STATE_MAIN_MENU);
 		}
 
-		heroController.update(container, delta);
-		roomController.update(container, delta);
-
-		collide();
-	}
-
-	private void collide() {
+		// get current room
 		Room currentRoom = roomController.getCurrentRoom();
-
-		// get all controllers from the current room, and add heroController
-		List<MovingModelController> modelControllers = new ArrayList<MovingModelController>();
-		modelControllers.addAll(currentRoom.getControllers());
-		modelControllers.add(heroController);
 
 		// get all static bounds
 		List<Rectangle2D.Float> staticBounds = currentRoom.getStaticBounds();
@@ -114,30 +102,10 @@ public class PlayState extends BasicGameState {
 		dynamicBounds.putAll(currentRoom.getDynamicBounds());
 		dynamicBounds.put(heroController.getModel(), heroController.getModel()
 				.getBounds());
-
-		// check collision against static objects
-		for (MovingModelController controller : modelControllers) {
-			Rectangle2D.Float modelBound = controller.getModel().getBounds();
-			for (Rectangle2D.Float blockedTile : staticBounds) {
-				if (modelBound.intersects(blockedTile)) {
-					controller.collisionDetected();
-				}
-			}
-		}
-
-		// check collision against dynamic/moving objects
-		for (MovingModelController controller : modelControllers) {
-			MovingModel model1 = controller.getModel();
-			for (MovingModel model2 : dynamicBounds.keySet()) {
-				if (model1 != model2) {
-					boolean isCollision = model1.getBounds().intersects(
-							model2.getBounds());
-					if (isCollision) {
-						controller.collisionDetected();
-					}
-				}
-			}
-		}
+		
+		heroController.update(container, delta, staticBounds, dynamicBounds);
+		roomController.update(container, delta, staticBounds, dynamicBounds);
+		
 	}
 
 	/**

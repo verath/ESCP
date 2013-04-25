@@ -1,5 +1,9 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.geom.Rectangle2D.Float;
+import java.util.List;
+import java.util.Map;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -9,15 +13,12 @@ import se.chalmers.tda367.group15.game.models.Hero;
 import se.chalmers.tda367.group15.game.models.MovingModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
-public class HeroController implements MovingModelController {
-	private HeroView view;
-	private Hero model;
+public class HeroController extends MovingModelController {
 
 	private boolean goingUp;
 	private boolean goingDown;
 	private boolean goingLeft;
 	private boolean goingRight;
-	private float oldX, oldY;
 
 	/**
 	 * Create a new controller for the hero.
@@ -25,23 +26,25 @@ public class HeroController implements MovingModelController {
 	 * @param roomController
 	 */
 	public HeroController() {
-		model = new Hero();
-		view = new HeroView(model);
+		setModel(new Hero());
+		setView(new HeroView(getModel()));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(GameContainer container, int delta) {
+	public void update(GameContainer container, int delta,
+			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds) {
+		MovingModel model = getModel();
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
 
 		// Calculate facing depending on where the mouse is relative
 		// to the center of the hero
-		((Hero) model).setRotation(Math.toDegrees(Math.atan2((model.getHeight()
-				/ 2 + model.getY() - mouseY),
+		((Hero) getModel()).setRotation(Math.toDegrees(Math.atan2(
+				(model.getHeight() / 2 + model.getY() - mouseY),
 				(model.getWidth() / 2 + model.getX() - mouseX))));
 
 		goingUp = input.isKeyDown(Input.KEY_W) || input.isKeyDown(Input.KEY_UP);
@@ -62,14 +65,18 @@ public class HeroController implements MovingModelController {
 			speedX = (float) (model.getVelocity() * Math.cos(direction));
 		}
 
-		oldX = model.getX();
-		oldY = model.getY();
+		float newX = model.getX() - (delta * speedX);
+		float newY = model.getY() - (delta * speedY);
 
-		model.setX(oldX - (delta * speedX));
-		model.setY(oldY - (delta * speedY));
-		
-		boolean moving = true;
-		model.setMoving(moving);
+		if (!isCollision(newX, model.getY(), staticBounds, dynamicBounds)) {
+			model.setX(newX);
+		}
+
+		if (!isCollision(model.getX(), newY, staticBounds, dynamicBounds)) {
+			model.setY(newY);
+		}
+
+		model.setMoving(speedY != 0 || speedX != 0);
 	}
 
 	/**
@@ -78,17 +85,6 @@ public class HeroController implements MovingModelController {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		view.render(container, g);
-	}
-
-	@Override
-	public MovingModel getModel() {
-		return model;
-	}
-
-	@Override
-	public void collisionDetected() {
-		model.setX(oldX);
-		model.setY(oldY);
+		getView().render(container, g);
 	}
 }

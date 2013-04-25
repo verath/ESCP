@@ -1,7 +1,9 @@
 package se.chalmers.tda367.group15.game.controllers.room;
 
 import java.awt.Point;
+import java.awt.geom.Rectangle2D.Float;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -9,6 +11,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import se.chalmers.tda367.group15.game.models.MovingModel;
 
 /**
  * A class for abstractly handling rooms.
@@ -176,14 +180,17 @@ public class RoomController {
 	 * @param delta
 	 *            The amount of time thats passed since last update in
 	 *            milliseconds
+	 * @param dynamicBounds
+	 * @param staticBounds
 	 * @param staticBounds
 	 * @param movingModels
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void update(GameContainer container, int delta)
+	public void update(GameContainer container, int delta,
+			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds)
 			throws SlickException {
-		getCurrentRoom().update(container, delta);
+		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
 	}
 
 	/**
@@ -202,12 +209,22 @@ public class RoomController {
 			throws SlickException {
 		getCurrentRoom().render(container, g);
 	}
-	
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		for(Room room : rooms.values()) {
+
+	/**
+	 * Methof for sending init call to all the rooms.
+	 * 
+	 * @param container
+	 *            The container holding this game.
+	 * @param game
+	 *            The game.
+	 * @throws SlickException
+	 *             Throw to indicate an internal error.
+	 */
+	public void init(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		for (Room room : rooms.values()) {
 			room.init(container, game);
 		}
 	}
-
 
 }

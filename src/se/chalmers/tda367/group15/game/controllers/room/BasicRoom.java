@@ -26,6 +26,9 @@ public class BasicRoom extends Room {
 	private List<Rectangle2D.Float> staticBounds;
 	private Map<MovingModel, Rectangle2D.Float> dynamicBounds;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -57,16 +60,23 @@ public class BasicRoom extends Room {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void update(GameContainer container, int delta)
+	public void update(GameContainer container, int delta,
+			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds)
 			throws SlickException {
 
 		// tell enemy controllers to move
 		for (MovingModelController controller : enemyControllers) {
-			controller.update(container, delta);
+			controller.update(container, delta, staticBounds, dynamicBounds);
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
@@ -90,16 +100,25 @@ public class BasicRoom extends Room {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<MovingModelController> getControllers() {
 		return enemyControllers;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Float> getStaticBounds() {
 		return staticBounds;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Map<MovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
 		for(MovingModel model : dynamicBounds.keySet()) {
