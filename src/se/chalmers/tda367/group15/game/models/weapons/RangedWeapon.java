@@ -36,4 +36,8 @@ public abstract class RangedWeapon extends Weapon {
 		// somehow aswell. firingspeed is important here!
 	}
 
+	public int getAmmo() {
+		return ammo;
+	}
+
 }

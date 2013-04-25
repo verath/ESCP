@@ -47,7 +47,7 @@ public abstract class Weapon {
 		this.name = name;
 		this.baseDamage = baseDamage;
 		this.maxDamage = maxDamage - baseDamage;
-		this.firingSpeed = firingSpeed;
+		this.setFiringSpeed(firingSpeed);
 		this.isEquipped = isEquipped;
 	}
 
@@ -139,4 +139,12 @@ public abstract class Weapon {
 	}
 
 	protected abstract void initAnimation();
+
+	public int getFiringSpeed() {
+		return firingSpeed;
+	}
+
+	public void setFiringSpeed(int firingSpeed) {
+		this.firingSpeed = firingSpeed;
+	}
 }

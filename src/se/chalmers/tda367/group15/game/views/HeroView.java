@@ -14,8 +14,6 @@ import se.chalmers.tda367.group15.game.models.MovingModel;
  * 
  */
 public class HeroView implements View {
-
-	private Animation unarmed;
 	
 	/**
 	 * The hero model this view is representing
