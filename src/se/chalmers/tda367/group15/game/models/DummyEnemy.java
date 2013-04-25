@@ -13,11 +13,11 @@ public class DummyEnemy extends MovingModel {
 	 * Creates a new dummy enemy.
 	 */
 	public DummyEnemy() {
-		setX(32f);
+		setX(64f);
 		setY(128f);
 		setVelocity(0.1f);
-		setWidth(32);
-		setHeight(32);
+		setWidth(64);
+		setHeight(64);
 		setRotation(180);
 	}
 

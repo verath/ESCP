@@ -1,42 +1,32 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D;
-import java.util.List;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.controllers.room.RoomController;
 import se.chalmers.tda367.group15.game.models.Hero;
+import se.chalmers.tda367.group15.game.models.MovingModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
 public class HeroController implements MovingModelController {
 	private HeroView view;
 	private Hero model;
-	
+
 	private boolean goingUp;
 	private boolean goingDown;
 	private boolean goingLeft;
 	private boolean goingRight;
-
-	/**
-	 * A room controller set by the constructor of the class. The room
-	 * controller is used to get collision bounds from the current room.
-	 */
-	private RoomController roomController;
+	private float oldX, oldY;
 
 	/**
 	 * Create a new controller for the hero.
 	 * 
 	 * @param roomController
 	 */
-	public HeroController(RoomController roomController) {
+	public HeroController() {
 		model = new Hero();
 		view = new HeroView(model);
-		this.roomController = roomController;
-
 	}
 
 	/**
@@ -54,8 +44,7 @@ public class HeroController implements MovingModelController {
 				/ 2 + model.getY() - mouseY),
 				(model.getWidth() / 2 + model.getX() - mouseX))));
 
-		goingUp = input.isKeyDown(Input.KEY_W)
-				|| input.isKeyDown(Input.KEY_UP);
+		goingUp = input.isKeyDown(Input.KEY_W) || input.isKeyDown(Input.KEY_UP);
 		goingDown = input.isKeyDown(Input.KEY_S)
 				|| input.isKeyDown(Input.KEY_DOWN);
 		goingRight = input.isKeyDown(Input.KEY_D)
@@ -73,15 +62,13 @@ public class HeroController implements MovingModelController {
 			speedX = (float) (model.getVelocity() * Math.cos(direction));
 		}
 
-		float newX = model.getX() - (delta * speedX);
-		float newY = model.getY() - (delta * speedY);
+		oldX = model.getX();
+		oldY = model.getY();
 
-		if (!isCollision(newX, model.getY()))
-			model.setX(newX);
-		if (!isCollision(model.getX(), newY))
-			model.setY(newY);
+		model.setX(oldX - (delta * speedX));
+		model.setY(oldY - (delta * speedY));
 		
-		boolean moving = true; 
+		boolean moving = true;
 		model.setMoving(moving);
 	}
 
@@ -94,19 +81,14 @@ public class HeroController implements MovingModelController {
 		view.render(container, g);
 	}
 
-	public boolean isCollision(float newX, float newY) {
-		List<Rectangle2D.Float> staticBounds = roomController.getCurrentRoom()
-				.getCollisionBounds();
-		// TODO collisionbounds for the hero is 2px smaller than it should. Just
-		// as a quickfix for moving through doors..
-		Rectangle2D.Float hero = new Rectangle2D.Float(newX + 2, newY + 2,
-				model.getWidth() - 2, model.getHeight() - 2);
-		for (Rectangle2D.Float bound : staticBounds) {
-			if (hero.intersects(bound)) {
-				return true;
-			}
-		}
+	@Override
+	public MovingModel getModel() {
+		return model;
+	}
 
-		return false;
+	@Override
+	public void collisionDetected() {
+		model.setX(oldX);
+		model.setY(oldY);
 	}
 }

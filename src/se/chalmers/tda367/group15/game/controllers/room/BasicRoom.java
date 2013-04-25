@@ -3,39 +3,56 @@ package se.chalmers.tda367.group15.game.controllers.room;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.tda367.group15.game.models.AbstractRoomModel;
+import se.chalmers.tda367.group15.game.controllers.DummyEnemyController;
+import se.chalmers.tda367.group15.game.controllers.MovingModelController;
 import se.chalmers.tda367.group15.game.models.DummyEnemy;
 import se.chalmers.tda367.group15.game.models.MovingModel;
-import se.chalmers.tda367.group15.game.models.room.BasicRoomModel;
-import se.chalmers.tda367.group15.game.views.DummyEnemyView;
-import se.chalmers.tda367.group15.game.views.View;
 
 public class BasicRoom extends Room {
 
-	private AbstractRoomModel roomModel;
 	private TiledMap map;
-	private List<MovingModel> movingModels = new ArrayList<MovingModel>();
-	private List<View> enemyViews = new ArrayList<View>();
-	private List<Rectangle2D.Float> staticBounds = new ArrayList<Rectangle2D.Float>();
+	private List<MovingModelController> enemyControllers = new ArrayList<MovingModelController>();
+	private List<Rectangle2D.Float> staticBounds;
+	private Map<MovingModel, Rectangle2D.Float> dynamicBounds;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		this.roomModel = new BasicRoomModel();
+
+		staticBounds = new ArrayList<Rectangle2D.Float>();
+		dynamicBounds = new HashMap<MovingModel, Rectangle2D.Float>();
+
 		this.map = new TiledMap("res/levels/untitled.tmx");
-		this.movingModels = roomModel.getMovingModels();
-		for (MovingModel model : movingModels) {
-			// Använd en factory, typ:
-			// EnemyViewFactory.createView(model)
-			enemyViews.add(new DummyEnemyView((DummyEnemy) model));
+
+		// add static collision bounds
+		for (int i = 0; i < map.getWidth(); i++) {
+			for (int j = 0; j < map.getHeight(); j++) {
+				int tileID = map.getTileId(i, j, 1);
+				String property = map.getTileProperty(tileID, "blocked", "false");
+				if(property.equals("true")) {
+					staticBounds.add(new Rectangle2D.Float(i * 32, j * 32, 32, 32));
+				}
+			}
+		}
+
+		// create an enemy, and add controller for that enemy to the update list
+		DummyEnemy e1 = new DummyEnemy();
+		enemyControllers.add(new DummyEnemyController(e1));
+
+		for (MovingModelController controller : enemyControllers) {
+			MovingModel model = controller.getModel();
+			dynamicBounds.put(model, model.getBounds());
 		}
 
 	}
@@ -43,47 +60,52 @@ public class BasicRoom extends Room {
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		for (MovingModel model : movingModels) {
-			float newX = model.getX() + (model.getVelocity() * delta);
-			float newY = model.getY();
 
-			if (isCollision(newX, newY)) {
-				model.setRotation(model.getRotation() + 180);
-			}
-
-			if (model.getRotation() == 180) {
-				model.setX(model.getX() + (model.getVelocity() * delta));
-			} else {
-				model.setX(model.getX() - (model.getVelocity() * delta));
-
-			}
+		// tell enemy controllers to move
+		for (MovingModelController controller : enemyControllers) {
+			controller.update(container, delta);
 		}
-
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+
+		// render map
 		map.render(0, 0);
-		for (View view : enemyViews) {
-			view.render(container, g);
-		}
-	}
 
-	public boolean isCollision(float newX, float newY) {
-		Rectangle2D.Float enemy = new Rectangle2D.Float(newX, newY, 64, 64);
-		for (Rectangle2D.Float bound : staticBounds) {
-			if (enemy.intersects(bound)) {
-				return true;
-			}
+		// tell enemy controllers to render all enemy views
+		for (MovingModelController controller : enemyControllers) {
+			controller.render(container, g);
 		}
-
-		return false;
+		
+		g.setColor(Color.red);
+		for(Rectangle2D.Float e : staticBounds) {
+			g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
+		}
+		
+		for(MovingModelController controller : enemyControllers) {
+			Rectangle2D.Float e = controller.getModel().getBounds();
+			g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
+		}
 	}
 
 	@Override
-	public List<Float> getCollisionBounds() {
+	public List<MovingModelController> getControllers() {
+		return enemyControllers;
+	}
+
+	@Override
+	public List<Float> getStaticBounds() {
 		return staticBounds;
+	}
+
+	public Map<MovingModel, Rectangle2D.Float> getDynamicBounds() {
+		// update bounds
+		for(MovingModel model : dynamicBounds.keySet()) {
+			dynamicBounds.put(model, model.getBounds());
+		}
+		return dynamicBounds;
 	}
 
 }

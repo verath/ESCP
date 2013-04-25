@@ -1,7 +1,10 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,6 +17,7 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.room.BasicRoom;
 import se.chalmers.tda367.group15.game.controllers.room.Room;
 import se.chalmers.tda367.group15.game.controllers.room.RoomController;
+import se.chalmers.tda367.group15.game.models.MovingModel;
 import se.chalmers.tda367.group15.game.models.weapons.WeaponLoader;
 
 /**
@@ -28,13 +32,13 @@ public class PlayState extends BasicGameState {
 
 	private boolean pendingEscpAction;
 	private RoomController roomController;
-	private List<MovingModelController> moveControllers = new ArrayList<MovingModelController>();
+	private MovingModelController heroController;
 
 	/**
 	 * Creates a new GameController
 	 * 
 	 * @param ID
-	 *            The int used to identify the state.
+	 *            The id used to identify the state.
 	 */
 	public PlayState(int ID) {
 		this.ID = ID;
@@ -47,9 +51,7 @@ public class PlayState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		roomController.render(container, g);
-		for (MovingModelController c : moveControllers) {
-			c.render(container, g);
-		}
+		heroController.render(container, g);
 	}
 
 	/**
@@ -69,11 +71,8 @@ public class PlayState extends BasicGameState {
 		roomController.addStartingRoom(startingRoom);
 		roomController.init(container, game);
 
-		// Set up move controllers
-		moveControllers.clear();
-
-		// Add hero
-		moveControllers.add(new HeroController(roomController));
+		// Set up the hero controller
+		heroController = new HeroController();
 
 	}
 
@@ -84,7 +83,7 @@ public class PlayState extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 
-		// Check for escp action
+		// Check for esc key
 		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = true;
 		} else if (pendingEscpAction
@@ -93,9 +92,51 @@ public class PlayState extends BasicGameState {
 			game.enterState(Constants.GAME_STATE_MAIN_MENU);
 		}
 
+		heroController.update(container, delta);
 		roomController.update(container, delta);
-		for (MovingModelController c : moveControllers) {
-			c.update(container, delta);
+
+		collide();
+	}
+
+	private void collide() {
+		Room currentRoom = roomController.getCurrentRoom();
+
+		// get all controllers from the current room, and add heroController
+		List<MovingModelController> modelControllers = new ArrayList<MovingModelController>();
+		modelControllers.addAll(currentRoom.getControllers());
+		modelControllers.add(heroController);
+
+		// get all static bounds
+		List<Rectangle2D.Float> staticBounds = currentRoom.getStaticBounds();
+
+		// get all dynamic bounds
+		Map<MovingModel, Rectangle2D.Float> dynamicBounds = new HashMap<MovingModel, Rectangle2D.Float>();
+		dynamicBounds.putAll(currentRoom.getDynamicBounds());
+		dynamicBounds.put(heroController.getModel(), heroController.getModel()
+				.getBounds());
+
+		// check collision against static objects
+		for (MovingModelController controller : modelControllers) {
+			Rectangle2D.Float modelBound = controller.getModel().getBounds();
+			for (Rectangle2D.Float blockedTile : staticBounds) {
+				if (modelBound.intersects(blockedTile)) {
+					controller.collisionDetected();
+				}
+			}
+		}
+
+		// check collision against dynamic/moving objects
+		for (MovingModelController controller : modelControllers) {
+			MovingModel model1 = controller.getModel();
+			for (MovingModel model2 : dynamicBounds.keySet()) {
+				if (model1 != model2) {
+					boolean isCollision = model1.getBounds().intersects(
+							model2.getBounds());
+					if (isCollision) {
+						controller.collisionDetected();
+					}
+				}
+			}
 		}
 	}
 
