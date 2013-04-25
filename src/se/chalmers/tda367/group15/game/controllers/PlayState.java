@@ -102,10 +102,10 @@ public class PlayState extends BasicGameState {
 		dynamicBounds.putAll(currentRoom.getDynamicBounds());
 		dynamicBounds.put(heroController.getModel(), heroController.getModel()
 				.getBounds());
-		
+
 		heroController.update(container, delta, staticBounds, dynamicBounds);
 		roomController.update(container, delta, staticBounds, dynamicBounds);
-		
+
 	}
 
 	/**

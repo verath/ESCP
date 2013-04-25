@@ -2,6 +2,7 @@ package se.chalmers.tda367.group15.game.controllers;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -16,6 +17,7 @@ import se.chalmers.tda367.group15.game.constants.Constants;
  */
 public class StateController extends StateBasedGame {
 
+	private boolean pendingFullScreenAction;
 	private AppGameContainer gameContainer;
 
 	/**
@@ -66,6 +68,26 @@ public class StateController extends StateBasedGame {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * 
+	 * Also checks for Ctrl+enter to temporary change between fullscreen and
+	 * windowed.
+	 */
+	public final void update(GameContainer container, int delta)
+			throws SlickException {
+		super.update(container, delta);
+
+		if (container.getInput().isKeyDown(Input.KEY_LCONTROL)
+				&& container.getInput().isKeyDown(Input.KEY_ENTER)) {
+			pendingFullScreenAction = true;
+		} else if (pendingFullScreenAction
+				&& !container.getInput().isKeyDown(Input.KEY_ENTER)) {
+			pendingFullScreenAction = false;
+			this.setAppFullScreen(!container.isFullscreen());
+		}
+	}
+
+	/**
 	 * Sett AppContainer to fullscreen or windowed.
 	 * 
 	 * @param fullscreen
@@ -90,21 +112,22 @@ public class StateController extends StateBasedGame {
 	public AppGameContainer getTheAppContainer() {
 		return gameContainer;
 	}
-	
+
 	/**
 	 * Enter a new State and set appropriate cursor.
 	 */
 	@Override
-	public void enterState(int ID){
+	public void enterState(int ID) {
 		super.enterState(ID);
-		
+
 		try {
-			if ( ID == Constants.GAME_STATE_PLAYING ) {
-				this.getContainer().setMouseCursor("res/tiles/crosshair.png", 16, 16);
+			if (ID == Constants.GAME_STATE_PLAYING) {
+				this.getContainer().setMouseCursor("res/tiles/crosshair.png",
+						16, 16);
 			} else {
 				this.getContainer().setMouseCursor("res/menu/cursor.png", 0, 0);
 			}
-		} catch ( SlickException e ) {
+		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 	}
