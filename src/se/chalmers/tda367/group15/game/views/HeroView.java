@@ -48,7 +48,6 @@ public class HeroView implements View {
 
 		// We don't want to run the animation if we're not moving
 		if (!hero.isMoving()) {
-			System.out.println("NOT MOVING");
 			heroMove.stop();
 		} else if (heroMove.isStopped()) {
 			heroMove.start();
