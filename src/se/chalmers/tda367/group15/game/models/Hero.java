@@ -14,12 +14,7 @@ import se.chalmers.tda367.group15.game.models.weapons.Pistol;
 public class Hero extends MovingModel {
 
 	private double rotation;
-	private boolean goingUp;
-	private boolean goingDown;
-	private boolean goingRight;
-	private boolean goingLeft;
-	
-	private boolean isMoving;
+
 
 	/**
 	 * Create a new Hero.
@@ -50,17 +45,5 @@ public class Hero extends MovingModel {
 	 */
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
-	}
-
-	/**
-	 * Returns whether the hero is moving or not.
-	 * 
-	 * @return True if hero is moving.
-	 */
-	public void setMoving(boolean moving) {
-		isMoving = moving;
-	}
-	public boolean isMoving() {
-		return true;
 	}
 }

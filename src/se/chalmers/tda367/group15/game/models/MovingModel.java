@@ -17,7 +17,7 @@ public abstract class MovingModel {
 	private int health;
 	private int width, height;
 	private double rotation;
-	private Rectangle2D.Float bounds;
+	private boolean isMoving;
 
 	/**
 	 * Method for getting the x coordinate of the MovingModel.
@@ -168,15 +168,39 @@ public abstract class MovingModel {
 	 * @return a rectangle representing the collision bounds
 	 */
 	public Rectangle2D.Float getBounds() {
-			
+
 		return new Rectangle2D.Float(x, y, width, height);
 	}
 
+	/**
+	 * Method for getting the rotation angle of the model.
+	 * @return the rotation angle, in degrees.
+	 */
 	public double getRotation() {
 		return rotation;
 	}
-	
+
+	/**
+	 * Method for setting the rotation angle of the model.
+	 * @param rotation The roration angle, in degrees.
+	 */
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
+	}
+
+	/**
+	 * Method for setting wether the model is moving or not
+	 * @param isMoving Should true if model is moving, false otherwise
+	 */
+	public void setMoving(boolean isMoving) {
+		this.isMoving = isMoving;
+	}
+
+	/**
+	 * Method for checking wether the model is moving or not.
+	 * @return True if model is moving, false otherwise.
+	 */
+	public boolean isMoving() {
+		return isMoving;
 	}
 }
