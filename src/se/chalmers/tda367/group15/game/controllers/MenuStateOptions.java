@@ -11,7 +11,9 @@ import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.CheckBox;
 
 /**
- * A state with different settings you can choose between.
+ * A state with different settings you can choose between. Class based on
+ * tutorial for writing menus in Slick2D Originally posted on
+ * http://slick.javaunlimited.net/ by user shiroto. Remade to suit our purpose.
  * 
  * @author Carl Jansson
  * @version 2.0

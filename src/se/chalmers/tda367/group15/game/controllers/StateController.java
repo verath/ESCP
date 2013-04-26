@@ -77,6 +77,7 @@ public class StateController extends StateBasedGame {
 			throws SlickException {
 		super.update(container, delta);
 
+		// Alt + enter change between windowed and fullscreen.
 		if (container.getInput().isKeyDown(Input.KEY_LALT)
 				&& container.getInput().isKeyDown(Input.KEY_ENTER)) {
 			pendingFullScreenAction = true;
@@ -131,5 +132,4 @@ public class StateController extends StateBasedGame {
 			e.printStackTrace();
 		}
 	}
-
 }
