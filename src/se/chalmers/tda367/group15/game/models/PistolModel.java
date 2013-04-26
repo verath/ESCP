@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 
 import org.newdawn.slick.Animation;
@@ -13,11 +13,11 @@ import org.newdawn.slick.Image;
  * @author tholene
  * 
  */
-public class Pistol extends RangedWeapon {
+public class PistolModel extends AbstractRangedWeaponModel {
 	
 	private static Animation animation;
 	
-	public Pistol() {
+	public PistolModel() {
 		super("Pistol", 10, 20, 500, false);
 	}
 	

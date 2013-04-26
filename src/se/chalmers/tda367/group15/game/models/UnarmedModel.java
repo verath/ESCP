@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
@@ -11,11 +11,11 @@ import org.newdawn.slick.Image;
  * @author tholene
  * 
  */
-public class Unarmed extends MeleeWeapon{
+public class UnarmedModel extends AbstractMeleeWeapon{
 	 
 	private static Animation animation;
 	
-	public Unarmed() {
+	public UnarmedModel() {
 		super("Unarmed", 5, 10, 500, true);
 	}
 

@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.controllers.room;
+package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.Point;
 import java.awt.geom.Rectangle2D.Float;
@@ -12,7 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import se.chalmers.tda367.group15.game.models.MovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
  * A class for abstractly handling rooms.
@@ -20,7 +20,7 @@ import se.chalmers.tda367.group15.game.models.MovingModel;
  * @author Peter, Simon
  * 
  */
-public class RoomController {
+public class RoomsController {
 
 	/**
 	 * Enum for representing a relative position in the game map.
@@ -41,7 +41,7 @@ public class RoomController {
 	 * A 2-dimensional array of rooms, describing the layout of the rooms in the
 	 * game.
 	 */
-	private Map<Point, Room> rooms;
+	private Map<Point, AbstractRoomController> rooms;
 
 	/**
 	 * The current "position", used as key to query for the room from the map.
@@ -51,8 +51,8 @@ public class RoomController {
 	/**
 	 * RoomManager constructor
 	 */
-	public RoomController() {
-		rooms = new HashMap<Point, Room>();
+	public RoomsController() {
+		rooms = new HashMap<Point, AbstractRoomController>();
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class RoomController {
 	 * 
 	 * @return True if the room is attached, else False.
 	 */
-	public boolean roomExist(final Room room) {
+	public boolean roomExist(final AbstractRoomController room) {
 		// If room is null, we can discard it at once
 		if (room == null) {
 			return false;
@@ -77,7 +77,7 @@ public class RoomController {
 	 *            The room that should be set as the starting room. Must not be
 	 *            null.
 	 */
-	public void addStartingRoom(final Room room) {
+	public void addStartingRoom(final AbstractRoomController room) {
 		if (rooms.containsKey(STARTING_POINT)) {
 			throw new RoomAlreadyExistAtPositionException();
 		} else {
@@ -91,10 +91,10 @@ public class RoomController {
 	 * @param room
 	 * @return The position of the room
 	 */
-	private Point getRoomPosition(Room room) {
+	private Point getRoomPosition(AbstractRoomController room) {
 		Point position = null;
 
-		for (Entry<Point, Room> entry : rooms.entrySet()) {
+		for (Entry<Point, AbstractRoomController> entry : rooms.entrySet()) {
 			if (entry.getValue().equals(room)) {
 				position = new Point(entry.getKey());
 			}
@@ -115,7 +115,7 @@ public class RoomController {
 	 * @param room
 	 * @param relativePosition
 	 */
-	public void addRoom(final Room reference, final Room room,
+	public void addRoom(final AbstractRoomController reference, final AbstractRoomController room,
 			RelativePosition relativePosition) {
 		Point addPosition = getRoomPosition(reference);
 		switch (relativePosition) {
@@ -138,7 +138,7 @@ public class RoomController {
 	/**
 	 * Returns the currently "selected" room
 	 */
-	public Room getCurrentRoom() {
+	public AbstractRoomController getCurrentRoom() {
 		return rooms.get(currentPosition);
 
 	}
@@ -188,7 +188,7 @@ public class RoomController {
 	 *             Throw to indicate an internal error
 	 */
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds)
+			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
 	}
@@ -222,7 +222,7 @@ public class RoomController {
 	 */
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		for (Room room : rooms.values()) {
+		for (AbstractRoomController room : rooms.values()) {
 			room.init(container, game);
 		}
 	}

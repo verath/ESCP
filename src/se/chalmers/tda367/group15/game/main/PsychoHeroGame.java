@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game;
+package se.chalmers.tda367.group15.game.main;
 
 /**
  * Interface for a PsychoHeroGame. Used to allow for the possibility of

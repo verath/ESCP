@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
-import se.chalmers.tda367.group15.game.models.weapons.Pistol;
+
 
 
 
@@ -11,16 +11,16 @@ import se.chalmers.tda367.group15.game.models.weapons.Pistol;
  * 
  */
 
-public class Hero extends MovingModel {
+public class HeroModel extends AbstractMovingModel {
 	/**
 	 * Create a new Hero.
 	 */
-	public Hero() {
+	public HeroModel() {
 		setX(44f);
 		setY(44f);
 		setVelocity(0.15f);
 		setWidth(64);
 		setHeight(64);
-		setCurrentWeapon(new Pistol());
+		setCurrentWeapon(new PistolModel());
 	}
 }

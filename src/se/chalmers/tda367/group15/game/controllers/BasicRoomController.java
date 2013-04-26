@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.controllers.room;
+package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
@@ -14,17 +14,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-import se.chalmers.tda367.group15.game.controllers.DummyEnemyController;
-import se.chalmers.tda367.group15.game.controllers.MovingModelController;
-import se.chalmers.tda367.group15.game.models.DummyEnemy;
-import se.chalmers.tda367.group15.game.models.MovingModel;
+import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
-public class BasicRoom extends Room {
+public class BasicRoomController extends AbstractRoomController {
 
 	private TiledMap map;
-	private List<MovingModelController> enemyControllers = new ArrayList<MovingModelController>();
+	private List<AbstractMovingModelController> enemyControllers = new ArrayList<AbstractMovingModelController>();
 	private List<Rectangle2D.Float> staticBounds;
-	private Map<MovingModel, Rectangle2D.Float> dynamicBounds;
+	private Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
 
 	/**
 	 * {@inheritDoc}
@@ -34,7 +32,7 @@ public class BasicRoom extends Room {
 			throws SlickException {
 
 		staticBounds = new ArrayList<Rectangle2D.Float>();
-		dynamicBounds = new HashMap<MovingModel, Rectangle2D.Float>();
+		dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
 
 		this.map = new TiledMap("res/levels/untitled.tmx");
 
@@ -50,11 +48,11 @@ public class BasicRoom extends Room {
 		}
 
 		// create an enemy, and add controller for that enemy to the update list
-		DummyEnemy e1 = new DummyEnemy();
+		DummyEnemyModel e1 = new DummyEnemyModel();
 		enemyControllers.add(new DummyEnemyController(e1));
 
-		for (MovingModelController controller : enemyControllers) {
-			MovingModel model = controller.getModel();
+		for (AbstractMovingModelController controller : enemyControllers) {
+			AbstractMovingModel model = controller.getModel();
 			dynamicBounds.put(model, model.getBounds());
 		}
 
@@ -65,11 +63,11 @@ public class BasicRoom extends Room {
 	 */
 	@Override
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds)
+			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 
 		// tell enemy controllers to move
-		for (MovingModelController controller : enemyControllers) {
+		for (AbstractMovingModelController controller : enemyControllers) {
 			controller.update(container, delta, staticBounds, dynamicBounds);
 		}
 	}
@@ -85,7 +83,7 @@ public class BasicRoom extends Room {
 		map.render(0, 0);
 
 		// tell enemy controllers to render all enemy views
-		for (MovingModelController controller : enemyControllers) {
+		for (AbstractMovingModelController controller : enemyControllers) {
 			controller.render(container, g);
 		}
 		
@@ -94,7 +92,7 @@ public class BasicRoom extends Room {
 			g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
 		}
 		
-		for(MovingModelController controller : enemyControllers) {
+		for(AbstractMovingModelController controller : enemyControllers) {
 			Rectangle2D.Float e = controller.getModel().getBounds();
 			g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
 		}
@@ -104,7 +102,7 @@ public class BasicRoom extends Room {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<MovingModelController> getControllers() {
+	public List<AbstractMovingModelController> getControllers() {
 		return enemyControllers;
 	}
 
@@ -119,9 +117,9 @@ public class BasicRoom extends Room {
 	/**
 	 * {@inheritDoc}
 	 */
-	public Map<MovingModel, Rectangle2D.Float> getDynamicBounds() {
+	public Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
-		for(MovingModel model : dynamicBounds.keySet()) {
+		for(AbstractMovingModel model : dynamicBounds.keySet()) {
 			dynamicBounds.put(model, model.getBounds());
 		}
 		return dynamicBounds;

@@ -8,17 +8,17 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.models.DummyEnemy;
-import se.chalmers.tda367.group15.game.models.MovingModel;
+import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 
-public class DummyEnemyController extends MovingModelController {
+public class DummyEnemyController extends AbstractMovingModelController {
 
 	/**
 	 * Create a new dummy enemy controller
 	 * @param model the DummyEnemy model
 	 */
-	public DummyEnemyController(DummyEnemy model) {
+	public DummyEnemyController(DummyEnemyModel model) {
 		setModel(model);
 		setView(new DummyEnemyView(getModel()));
 	}
@@ -38,9 +38,9 @@ public class DummyEnemyController extends MovingModelController {
 	 */
 	@Override
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds)
+			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
-		MovingModel model = getModel();
+		AbstractMovingModel model = getModel();
 
 		float newX;
 		if (model.getRotation() == 180) {

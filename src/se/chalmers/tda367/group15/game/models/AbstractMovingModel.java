@@ -2,7 +2,7 @@ package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
 
-import se.chalmers.tda367.group15.game.models.weapons.Weapon;
+
 
 /**
  * An abstract class for representing a moving model.
@@ -10,12 +10,12 @@ import se.chalmers.tda367.group15.game.models.weapons.Weapon;
  * @author simon
  * 
  */
-public abstract class MovingModel {
+public abstract class AbstractMovingModel {
 	
 	/**
 	 * The currently equipped weapon
 	 */
-	private Weapon currentWeapon;
+	private AbstractWeaponModel currentWeapon;
 
 	/**
 	 * The current health
@@ -71,7 +71,7 @@ public abstract class MovingModel {
 	 * 
 	 * @return the current weapon
 	 */
-	public Weapon getCurrentWeapon() {
+	public AbstractWeaponModel getCurrentWeapon() {
 		return currentWeapon;
 	}
 
@@ -153,7 +153,7 @@ public abstract class MovingModel {
 	 * @param the
 	 *            new weapon to be set as current
 	 */
-	public void setCurrentWeapon(Weapon weapon) {
+	public void setCurrentWeapon(AbstractWeaponModel weapon) {
 		currentWeapon = weapon;
 	}
 

@@ -10,11 +10,11 @@ import org.junit.Test;
 
 public class MovingModelTest {
 
-	private static MovingModel testedModel;
+	private static AbstractMovingModel testedModel;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		testedModel = new MovingModel() {
+		testedModel = new AbstractMovingModel() {
 		};
 	}
 

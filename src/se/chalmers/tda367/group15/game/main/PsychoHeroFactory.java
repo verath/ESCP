@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game;
+package se.chalmers.tda367.group15.game.main;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.controllers.StateController;

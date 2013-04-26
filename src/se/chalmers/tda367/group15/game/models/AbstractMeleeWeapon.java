@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 /**
  * A weapon that can only be used in melee range.
@@ -6,7 +6,7 @@ package se.chalmers.tda367.group15.game.models.weapons;
  * @author tholene
  * 
  */
-public abstract class MeleeWeapon extends Weapon {
+public abstract class AbstractMeleeWeapon extends AbstractWeaponModel {
 
 	/**
 	 * Create a new melee weapon.
@@ -20,7 +20,7 @@ public abstract class MeleeWeapon extends Weapon {
 	 * @param isEquipped
 	 *            Is the weapon equipped?
 	 */
-	public MeleeWeapon(String name, int baseDamage, int maxDamage,
+	public AbstractMeleeWeapon(String name, int baseDamage, int maxDamage,
 			int firingSpeed, boolean isEquipped) {
 		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
 	}
