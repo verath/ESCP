@@ -17,7 +17,12 @@ public class Constants {
 	 * Boolean controlling whether we should print debug output or not.
 	 */
 	public static final boolean DEBUG = true;
-	
+
+	/**
+	 * Boolean controlling whether collision bounds should be drawn.
+	 */
+	public static boolean SHOW_BOUNDS = true;
+
 	/**
 	 * the different states. They should each be a unique int.
 	 */

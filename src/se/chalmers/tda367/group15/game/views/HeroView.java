@@ -8,6 +8,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
@@ -21,7 +22,7 @@ public class HeroView implements View {
 	/**
 	 * The hero model this view is representing
 	 */
-	private final AbstractMovingModel hero;
+	private final AbstractMovingModel model;
 
 	/**
 	 * The move animation
@@ -34,7 +35,7 @@ public class HeroView implements View {
 	 * @param heroModel
 	 */
 	public HeroView(final AbstractMovingModel hero) {
-		this.hero = hero;
+		this.model = hero;
 		heroMove = hero.getCurrentWeapon().getAnimation();
 	}
 
@@ -45,24 +46,27 @@ public class HeroView implements View {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 
-		float rotation = (float) hero.getRotation();
+		float rotation = (float) model.getRotation();
 
 		// We don't want to run the animation if we're not moving
-		if (!hero.isMoving()) {
+		if (!model.isMoving()) {
 			heroMove.stop();
 		} else if (heroMove.isStopped()) {
 			heroMove.start();
 		}
 		// rotates the current frame
-		g.rotate(hero.getX() + hero.getWidth() / 2,
-				hero.getY() + hero.getHeight() / 2, rotation);
-		heroMove.draw(hero.getX() - hero.getOffset(),
-				hero.getY() - hero.getOffset());
+		g.rotate(model.getX() + model.getWidth() / 2,
+				model.getY() + model.getHeight() / 2, rotation);
+		heroMove.draw(model.getX() - model.getOffset(),
+				model.getY() - model.getOffset());
 		g.resetTransform();
-		g.setColor(Color.red);
-		Rectangle2D.Float e = hero.getBounds();
-		g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
-				(int) e.getHeight());
+		if(Constants.SHOW_BOUNDS) {
+			g.setColor(Color.yellow);
+			Rectangle2D.Float e = model.getBounds();
+			g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
+					(int) e.getHeight());
+		}
+		
 	}
 
 }

@@ -14,6 +14,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
+import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
@@ -87,14 +88,11 @@ public class BasicRoomController extends AbstractRoomController {
 			controller.render(container, g);
 		}
 		
-		g.setColor(Color.red);
-		for(Rectangle2D.Float e : staticBounds) {
-			g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
-		}
-		
-		for(AbstractMovingModelController controller : enemyControllers) {
-			Rectangle2D.Float e = controller.getModel().getBounds();
-			g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
+		if(Constants.SHOW_BOUNDS) {
+			g.setColor(Color.red);
+			for(Rectangle2D.Float e : staticBounds) {
+				g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
+			}
 		}
 	}
 

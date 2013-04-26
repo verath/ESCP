@@ -79,6 +79,9 @@ public class PlayState extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 
+		Input input = container.getInput();
+		if(input.isKeyPressed(Input.KEY_COMMA))
+			Constants.SHOW_BOUNDS = !Constants.SHOW_BOUNDS;
 		// Check for esc key
 		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = true;
