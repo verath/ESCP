@@ -70,14 +70,14 @@ public class StateController extends StateBasedGame {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * Also checks for Ctrl+enter to temporary change between fullscreen and
-	 * windowed.
+	 * Also checks for alt+enter to temporary change between fullscreen and
+	 * windowed. IF PLAYING THIS CAN BREAK YOUR GAME!
 	 */
 	public final void update(GameContainer container, int delta)
 			throws SlickException {
 		super.update(container, delta);
 
-		if (container.getInput().isKeyDown(Input.KEY_LCONTROL)
+		if (container.getInput().isKeyDown(Input.KEY_LALT)
 				&& container.getInput().isKeyDown(Input.KEY_ENTER)) {
 			pendingFullScreenAction = true;
 		} else if (pendingFullScreenAction
