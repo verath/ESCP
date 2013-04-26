@@ -2,8 +2,6 @@ package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
 
-
-
 /**
  * An abstract class for representing a moving model.
  * 
@@ -11,7 +9,7 @@ import java.awt.geom.Rectangle2D;
  * 
  */
 public abstract class AbstractMovingModel {
-	
+
 	/**
 	 * The currently equipped weapon
 	 */
@@ -31,6 +29,12 @@ public abstract class AbstractMovingModel {
 	 * Flag for whether the model is currently moving or not
 	 */
 	private boolean isMoving;
+
+	/**
+	 * The amount of pixels from the edge of the image itself, to the preferred
+	 * collision bound rectangle
+	 */
+	private int offset;
 
 	/**
 	 * The angle the model is facing.
@@ -91,6 +95,15 @@ public abstract class AbstractMovingModel {
 	 */
 	public float getHeight() {
 		return height;
+	}
+
+	/**
+	 * Method for getting the location offset
+	 * 
+	 * @return the location offset as an integer
+	 */
+	public int getOffset() {
+		return offset;
 	}
 
 	/**
@@ -175,6 +188,17 @@ public abstract class AbstractMovingModel {
 	 */
 	public void setHeight(float height) {
 		this.height = height;
+	}
+
+	/**
+	 * Method for setting the location offset
+	 * 
+	 * @param offset
+	 *            The amount of pixels from the edge of the image itself, to the
+	 *            preferred collision bound rectangle
+	 */
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
 	/**

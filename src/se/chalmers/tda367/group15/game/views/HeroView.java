@@ -1,6 +1,9 @@
 package se.chalmers.tda367.group15.game.views;
 
+import java.awt.geom.Rectangle2D;
+
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -14,12 +17,12 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  * 
  */
 public class HeroView implements View {
-	
+
 	/**
 	 * The hero model this view is representing
 	 */
 	private final AbstractMovingModel hero;
-	
+
 	/**
 	 * The move animation
 	 */
@@ -51,11 +54,15 @@ public class HeroView implements View {
 			heroMove.start();
 		}
 		// rotates the current frame
-		g.rotate(hero.getX() + heroMove.getWidth() / 2,
-				hero.getY() + heroMove.getHeight() / 2, rotation);
-		heroMove.draw(hero.getX(), hero.getY());
+		g.rotate(hero.getX() + hero.getWidth() / 2,
+				hero.getY() + hero.getHeight() / 2, rotation);
+		heroMove.draw(hero.getX() - hero.getOffset(),
+				hero.getY() - hero.getOffset());
 		g.resetTransform();
-
+		g.setColor(Color.red);
+		Rectangle2D.Float e = hero.getBounds();
+		g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
+				(int) e.getHeight());
 	}
 
 }

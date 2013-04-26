@@ -54,7 +54,7 @@ public class DummyEnemyView implements View{
 		// rotates the current frame
 		g.rotate(model.getX() + model.getWidth() / 2,
 				model.getY() + model.getHeight() / 2, rotation);
-		moveAnimation.draw(model.getX(), model.getY());
+		moveAnimation.draw(model.getX() - model.getOffset(), model.getY() - model.getOffset());
 		g.resetTransform();
 	}
 
