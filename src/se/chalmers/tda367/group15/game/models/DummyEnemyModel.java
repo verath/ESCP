@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
+
 /**
  * Simple class for representing a dummy enemy. This enemy is only intended for
  * testing.
@@ -16,9 +17,9 @@ public class DummyEnemyModel extends AbstractMovingModel {
 		setX(64f);
 		setY(128f);
 		setVelocity(0.1f);
-		setWidth(64);
-		setHeight(64);
+		setWidth(42);
+		setHeight(42);
 		setRotation(180);
+		setOffset(11);
 	}
-
 }

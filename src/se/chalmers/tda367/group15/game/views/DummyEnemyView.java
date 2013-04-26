@@ -1,14 +1,17 @@
 package se.chalmers.tda367.group15.game.views;
 
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.util.Arrays;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
@@ -54,8 +57,14 @@ public class DummyEnemyView implements View{
 		// rotates the current frame
 		g.rotate(model.getX() + model.getWidth() / 2,
 				model.getY() + model.getHeight() / 2, rotation);
-		moveAnimation.draw(model.getX(), model.getY());
+		moveAnimation.draw(model.getX() - model.getOffset(), model.getY() - model.getOffset());
 		g.resetTransform();
+		if(Constants.SHOW_BOUNDS) {
+			g.setColor(Color.yellow);
+			Rectangle2D.Float e = model.getBounds();
+			g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
+					(int) e.getHeight());
+		}
 	}
 
 }
