@@ -9,8 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.models.MovingModel;
-import se.chalmers.tda367.group15.game.utils.FileNameSorter;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
  * Class representing the view of a Dummy Enemy
@@ -19,18 +18,18 @@ import se.chalmers.tda367.group15.game.utils.FileNameSorter;
  */
 public class DummyEnemyView implements View{
 
-	private final MovingModel model;
+	private final AbstractMovingModel model;
 	private final Animation moveAnimation;
 	
 	/**
 	 * Creates a new view for the Dummy Enemy.
 	 * @param movingModel
 	 */
-	public DummyEnemyView(final MovingModel movingModel) {
+	public DummyEnemyView(final AbstractMovingModel movingModel) {
 		this.model = movingModel;
 		File folder = new File("res/animation/enemy/coworker/1");
 		File[] files = folder.listFiles();
-		Arrays.sort(files, new FileNameSorter());
+		Arrays.sort(files);
 		Image[] tmp = new Image[files.length];
 
 		for (int i = 0; i < files.length; i++) {

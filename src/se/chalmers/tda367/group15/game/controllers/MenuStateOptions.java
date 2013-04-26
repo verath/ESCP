@@ -6,9 +6,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.menu.AbstractMenuBasedState;
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.CheckBox;
-import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
 
 /**
  * A state with different settings you can choose between.
@@ -16,7 +16,7 @@ import se.chalmers.tda367.group15.game.menu.MenuBasedGameState;
  * @author Carl Jansson
  * @version 2.0
  */
-public class OptionsMenuState extends MenuBasedGameState {
+public class MenuStateOptions extends AbstractMenuBasedState {
 
 	/**
 	 * the upper left corner of button group
@@ -35,7 +35,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 	 * @param id
 	 *            The int used to identify the state.
 	 */
-	public OptionsMenuState(int id) {
+	public MenuStateOptions(int id) {
 		super(id);
 	}
 
@@ -45,7 +45,7 @@ public class OptionsMenuState extends MenuBasedGameState {
 	@Override
 	public void init() {
 		// Setup the Preferences for this application, by class.
-		prefSettings = Preferences.userNodeForPackage(OptionsMenuState.class);
+		prefSettings = Preferences.userNodeForPackage(MenuStateOptions.class);
 		// init menu items
 		this.initMenuItems();
 		// Create background image

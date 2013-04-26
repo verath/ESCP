@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 /**
  * A weapon that can be fired from a distance.
@@ -6,7 +6,7 @@ package se.chalmers.tda367.group15.game.models.weapons;
  * @author tholene
  * 
  */
-public abstract class RangedWeapon extends Weapon {
+public abstract class AbstractRangedWeaponModel extends AbstractWeaponModel {
 
 	private int ammo;
 
@@ -22,7 +22,7 @@ public abstract class RangedWeapon extends Weapon {
 	 * @param isEquipped
 	 *            Is the weapon equipped?
 	 */
-	public RangedWeapon(String name, int baseDamage, int maxDamage,
+	public AbstractRangedWeaponModel(String name, int baseDamage, int maxDamage,
 			int firingSpeed, boolean isEquipped) {
 		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
 		// TODO: placeholder for ammo. will perhaps implement magazines and

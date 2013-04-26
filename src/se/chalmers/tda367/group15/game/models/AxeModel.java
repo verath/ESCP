@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
@@ -12,11 +12,11 @@ import org.newdawn.slick.Image;
  * @author tholene
  * 
  */
-public class Axe extends MeleeWeapon {
+public class AxeModel extends AbstractMeleeWeapon {
 
 	private static Animation animation;
 
-	public Axe() {
+	public AxeModel() {
 		super("Axe", 10, 15, 500, false);
 	}
 

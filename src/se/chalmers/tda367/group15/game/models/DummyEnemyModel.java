@@ -7,12 +7,12 @@ package se.chalmers.tda367.group15.game.models;
  * @author simon
  * 
  */
-public class DummyEnemy extends MovingModel {
+public class DummyEnemyModel extends AbstractMovingModel {
 
 	/**
 	 * Creates a new dummy enemy.
 	 */
-	public DummyEnemy() {
+	public DummyEnemyModel() {
 		setX(64f);
 		setY(128f);
 		setVelocity(0.1f);

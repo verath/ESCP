@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.controllers.room;
+package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
@@ -10,8 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import se.chalmers.tda367.group15.game.controllers.MovingModelController;
-import se.chalmers.tda367.group15.game.models.MovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
  * Abstract class for representing a room containing a tiled map and controllers
@@ -20,7 +19,7 @@ import se.chalmers.tda367.group15.game.models.MovingModel;
  * @author simon
  * 
  */
-public abstract class Room {
+public abstract class AbstractRoomController {
 
 	/**
 	 * Method for updating the logic of all the rooms
@@ -40,7 +39,7 @@ public abstract class Room {
 	 *             Throw to indicate an internal error.
 	 */
 	public abstract void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds)
+			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException;
 
 	/**
@@ -72,7 +71,7 @@ public abstract class Room {
 
 	public abstract List<Rectangle2D.Float> getStaticBounds();
 
-	public abstract List<MovingModelController> getControllers();
+	public abstract List<AbstractMovingModelController> getControllers();
 
-	public abstract Map<MovingModel, Rectangle2D.Float> getDynamicBounds();
+	public abstract Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds();
 }

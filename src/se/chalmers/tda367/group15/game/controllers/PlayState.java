@@ -13,11 +13,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
-import se.chalmers.tda367.group15.game.controllers.room.BasicRoom;
-import se.chalmers.tda367.group15.game.controllers.room.Room;
-import se.chalmers.tda367.group15.game.controllers.room.RoomController;
-import se.chalmers.tda367.group15.game.models.MovingModel;
-import se.chalmers.tda367.group15.game.models.weapons.WeaponLoader;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.WeaponLoader;
 
 /**
  * The main controller for the slick2d implementation of PsychoHero.
@@ -30,8 +27,8 @@ public class PlayState extends BasicGameState {
 	private final int ID;
 
 	private boolean pendingEscpAction;
-	private RoomController roomController;
-	private MovingModelController heroController;
+	private RoomsController roomController;
+	private AbstractMovingModelController heroController;
 
 	/**
 	 * Creates a new GameController
@@ -60,13 +57,13 @@ public class PlayState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		// Set up the rooms
-		Room startingRoom = new BasicRoom();
+		AbstractRoomController startingRoom = new BasicRoomController();
 
 		// Initialize weapons
 		WeaponLoader.initWeapons();
 
 		// Set up the room manager
-		roomController = new RoomController();
+		roomController = new RoomsController();
 		roomController.addStartingRoom(startingRoom);
 		roomController.init(container, game);
 
@@ -92,13 +89,13 @@ public class PlayState extends BasicGameState {
 		}
 
 		// get current room
-		Room currentRoom = roomController.getCurrentRoom();
+		AbstractRoomController currentRoom = roomController.getCurrentRoom();
 
 		// get all static bounds
 		List<Rectangle2D.Float> staticBounds = currentRoom.getStaticBounds();
 
 		// get all dynamic bounds
-		Map<MovingModel, Rectangle2D.Float> dynamicBounds = new HashMap<MovingModel, Rectangle2D.Float>();
+		Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
 		dynamicBounds.putAll(currentRoom.getDynamicBounds());
 		dynamicBounds.put(heroController.getModel(), heroController.getModel()
 				.getBounds());

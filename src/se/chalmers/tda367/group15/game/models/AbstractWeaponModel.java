@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 import java.io.File;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.utils.FileNameSorter;
+import se.chalmers.tda367.group15.game.constants.Constants;
 
 /**
  * An abstract definition of a weapon in the game. Every weapon should be able
@@ -17,7 +17,7 @@ import se.chalmers.tda367.group15.game.utils.FileNameSorter;
  * @author tholene
  * 
  */
-public abstract class Weapon {
+public abstract class AbstractWeaponModel {
 
 	private String name;
 	private boolean isEquipped;
@@ -42,7 +42,7 @@ public abstract class Weapon {
 	 * @param isEquipped
 	 *            Is the weapon equipped or not?
 	 */
-	public Weapon(String name, int baseDamage, int maxDamage, int firingSpeed,
+	public AbstractWeaponModel(String name, int baseDamage, int maxDamage, int firingSpeed,
 			boolean isEquipped) {
 		this.name = name;
 		this.baseDamage = baseDamage;
@@ -122,12 +122,15 @@ public abstract class Weapon {
 		if (folder != null) {
 			File[] files = folder.listFiles();
 			if (files != null) {
-				Arrays.sort(files, new FileNameSorter());
+				Arrays.sort(files);
 				Image[] sortedImages = new Image[files.length];
 				for (int i = 0; i < files.length; i++) {
 					try {
 						sortedImages[i] = new Image(files[i].getPath());
-						System.out.println(sortedImages[i]);
+						
+						if(Constants.DEBUG) {
+							System.out.println(sortedImages[i]);
+						}
 					} catch (SlickException e) {
 						e.printStackTrace();
 					}

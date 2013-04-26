@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +17,17 @@ public class WeaponLoader {
 	 * Initialize the images for all the weapons currently implemented.
 	 */
 	public static void initWeapons() {
-		List<Weapon> weapons = new ArrayList<Weapon>();
+		List<AbstractWeaponModel> weapons = new ArrayList<AbstractWeaponModel>();
 
-		weapons.add(new Unarmed());
-		weapons.add(new Axe());
-		weapons.add(new Pistol());
+		weapons.add(new UnarmedModel());
+		weapons.add(new AxeModel());
+		weapons.add(new PistolModel());
 		
 		if (Constants.DEBUG) {
 			System.out.println("--Initializing loading of all weapon images--");
 		}
 		
-		for (Weapon w : weapons) {
+		for (AbstractWeaponModel w : weapons) {
 			w.initAnimation();
 		}
 

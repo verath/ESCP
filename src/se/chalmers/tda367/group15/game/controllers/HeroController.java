@@ -9,11 +9,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.models.Hero;
-import se.chalmers.tda367.group15.game.models.MovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
-public class HeroController extends MovingModelController {
+public class HeroController extends AbstractMovingModelController {
 
 	private boolean goingUp;
 	private boolean goingDown;
@@ -26,7 +26,7 @@ public class HeroController extends MovingModelController {
 	 * @param roomController
 	 */
 	public HeroController() {
-		setModel(new Hero());
+		setModel(new HeroModel());
 		setView(new HeroView(getModel()));
 	}
 
@@ -35,15 +35,15 @@ public class HeroController extends MovingModelController {
 	 */
 	@Override
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds) {
-		MovingModel model = getModel();
+			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds) {
+		AbstractMovingModel model = getModel();
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
 
 		// Calculate facing depending on where the mouse is relative
 		// to the center of the hero
-		((Hero) getModel()).setRotation(Math.toDegrees(Math.atan2(
+		((HeroModel) getModel()).setRotation(Math.toDegrees(Math.atan2(
 				(model.getHeight() / 2 + model.getY() - mouseY),
 				(model.getWidth() / 2 + model.getX() - mouseX))));
 

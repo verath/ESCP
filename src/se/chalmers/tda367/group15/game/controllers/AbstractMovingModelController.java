@@ -9,7 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.models.MovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
@@ -19,12 +19,12 @@ import se.chalmers.tda367.group15.game.views.View;
  * @author simon
  * 
  */
-public abstract class MovingModelController {
+public abstract class AbstractMovingModelController {
 
 	/**
 	 * The model that the controller is managing
 	 */
-	private MovingModel model;
+	private AbstractMovingModel model;
 
 	/**
 	 * The view that the controller is managing
@@ -59,7 +59,7 @@ public abstract class MovingModelController {
 	 *             Throw to indicate a internal error
 	 */
 	public abstract void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<MovingModel, Float> dynamicBounds)
+			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException;
 
 	/**
@@ -67,7 +67,7 @@ public abstract class MovingModelController {
 	 * 
 	 * @return the model
 	 */
-	public MovingModel getModel() {
+	public AbstractMovingModel getModel() {
 		return model;
 	}
 
@@ -86,7 +86,7 @@ public abstract class MovingModelController {
 	 * @param model
 	 *            to be set
 	 */
-	public void setModel(MovingModel model) {
+	public void setModel(AbstractMovingModel model) {
 		this.model = model;
 	}
 
@@ -116,7 +116,7 @@ public abstract class MovingModelController {
 	 */
 	public boolean isCollision(float x, float y,
 			List<Rectangle2D.Float> staticBounds,
-			Map<MovingModel, Rectangle2D.Float> dynamicBounds) {
+			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
 		boolean staticCollision = false;
 		boolean dynamicCollsion = false;
@@ -131,7 +131,7 @@ public abstract class MovingModelController {
 		}
 
 		// check dynamic collisions
-		for (MovingModel otherModel : dynamicBounds.keySet()) {
+		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
 			if (bound1.intersects(bound2) && this.model != otherModel)
 				dynamicCollsion = true;
