@@ -1,6 +1,7 @@
 package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D.Float;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,13 +11,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
-import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
-import se.chalmers.tda367.group15.game.models.AxeModel;
+import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
-import se.chalmers.tda367.group15.game.models.PistolModel;
-import se.chalmers.tda367.group15.game.models.UnarmedModel;
+import se.chalmers.tda367.group15.game.views.BulletView;
 import se.chalmers.tda367.group15.game.views.HeroView;
+import se.chalmers.tda367.group15.game.views.View;
 
 public class HeroController extends AbstractMovingModelController {
 
@@ -24,6 +23,9 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingDown;
 	private boolean goingLeft;
 	private boolean goingRight;
+	private List<AbstractMovingModel> bullets;
+	private List<View> bulletViews;
+	private int bulletCount;
 
 	/**
 	 * Create a new controller for the hero.
@@ -35,6 +37,8 @@ public class HeroController extends AbstractMovingModelController {
 		super(gameController);
 		setModel(new HeroModel());
 		setView(new HeroView(getModel()));
+		bullets = new ArrayList<AbstractMovingModel>();
+		bulletViews = new ArrayList<View>();
 	}
 
 	/**
@@ -49,22 +53,23 @@ public class HeroController extends AbstractMovingModelController {
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
-
-		List<AbstractWeaponModel> weapons = getModel().getWeapons();
-		if (input.isKeyPressed(Input.KEY_1)) {
-			getModel().setCurrentWeapon(weapons.get(0));
-		} else if (input.isKeyPressed(Input.KEY_2)) {
-			getModel().setCurrentWeapon(weapons.get(1));
-		} else if (input.isKeyPressed(Input.KEY_3)) {
-			getModel().setCurrentWeapon(weapons.get(2));
+		if (input.isKeyPressed(Input.KEY_SPACE)) {
+			System.out.println("HEJ");
+			AbstractMovingModel newBullet = new BulletModel();
+			newBullet.setX(model.getX() + model.getWidth() / 2);
+			newBullet.setY(model.getY() + model.getHeight() / 2);
+			newBullet.setRotation(model.getRotation());
+			newBullet.setAlive(true);
+			View newBulletView = new BulletView(newBullet);
+			bullets.add(newBullet);
+			bulletViews.add(newBulletView);
 		}
 
 		// Calculate facing depending on where the mouse is relative
 		// to the center of the hero
-		getModel().setRotation(
-				Math.toDegrees(Math.atan2(
-						(model.getHeight() / 2 + model.getY() - mouseY),
-						(model.getWidth() / 2 + model.getX() - mouseX))));
+		model.setRotation(Math.toDegrees(Math.atan2((model.getHeight() / 2
+				+ model.getY() - mouseY),
+				(model.getWidth() / 2 + model.getX() - mouseX))));
 
 		goingUp = input.isKeyDown(Input.KEY_W) || input.isKeyDown(Input.KEY_UP);
 		goingDown = input.isKeyDown(Input.KEY_S)
@@ -96,6 +101,16 @@ public class HeroController extends AbstractMovingModelController {
 		}
 
 		model.setMoving(speedY != 0 || speedX != 0);
+
+		for (AbstractMovingModel bullet : bullets) {
+			bullet.setX(bullet.getX()
+					- (float) Math.cos(Math.toRadians(bullet.getRotation()))
+					* (bullet.getVelocity() * delta));
+			bullet.setY(bullet.getY()
+					- (float) Math.sin(Math.toRadians(bullet.getRotation()))
+					* bullet.getVelocity() * delta);
+		}
+
 	}
 
 	/**
@@ -105,5 +120,10 @@ public class HeroController extends AbstractMovingModelController {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		getView().render(container, g);
+
+		for (View bulletView : bulletViews) {
+			bulletView.render(container, g);
+		}
+
 	}
 }

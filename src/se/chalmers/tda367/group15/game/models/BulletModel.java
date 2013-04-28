@@ -7,6 +7,8 @@ public class BulletModel extends AbstractMovingModel{
 		setY(0);
 		setVelocity(0.5f);
 		setAlive(false);
+		setWidth(6);
+		setHeight(6);
 	}
 	 
 }
