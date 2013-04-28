@@ -124,7 +124,11 @@ public class BasicRoomController extends AbstractRoomController {
 	public Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
 		for (AbstractMovingModel model : dynamicBounds.keySet()) {
-			dynamicBounds.put(model, model.getBounds());
+			if(model.isAlive()) {
+				dynamicBounds.put(model, model.getBounds());
+			}else{
+				dynamicBounds.remove(model);
+			}
 		}
 		return dynamicBounds;
 	}

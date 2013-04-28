@@ -10,6 +10,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
@@ -148,8 +150,14 @@ public abstract class AbstractMovingModelController {
 		// check dynamic collisions
 		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
-			if (bound1.intersects(bound2) && this.model != otherModel)
+			if (bound1.intersects(bound2) && this.model != otherModel) {
 				dynamicCollsion = true;
+				if(model instanceof HeroModel && otherModel instanceof DummyEnemyModel) {
+					otherModel.setAlive(false);
+				}
+			}
+				
+				
 		}
 		return staticCollision || dynamicCollsion;
 	}
