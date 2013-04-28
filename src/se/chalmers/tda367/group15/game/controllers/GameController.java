@@ -16,8 +16,16 @@ class GameController {
 	protected GameController() {
 	}
 
+	/**
+	 * The roomsController handling what room is the current room.
+	 */
 	private RoomsController roomController;
-	private AbstractMovingModelController heroController;
+
+	/**
+	 * The hero controller, handling actions to be taken by the hero (ie. the
+	 * player)
+	 */
+	private HeroController heroController;
 
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
@@ -59,7 +67,22 @@ class GameController {
 
 		heroController.update(container, delta, staticBounds, dynamicBounds);
 		roomController.update(container, delta, staticBounds, dynamicBounds);
+	}
+	
+	/**
+	 * Getter for the RoomsController associated with this controller.
+	 * 
+	 * @return
+	 */
+	protected RoomsController getRoomController() {
+		return roomController;
+	}
 
+	/**
+	 * Getter for the HeroController associated with this controller.
+	 */
+	protected HeroController getHeroController() {
+		return heroController;
 	}
 
 }
