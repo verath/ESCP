@@ -8,7 +8,6 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
@@ -61,12 +60,10 @@ public abstract class AbstractRoomController {
 	 * 
 	 * @param container
 	 *            The container holding this game.
-	 * @param game
-	 *            The game.
 	 * @throws SlickException
 	 *             Throw to indicate an internal error.
 	 */
-	public abstract void init(GameContainer container, StateBasedGame game)
+	public abstract void init(GameContainer container)
 			throws SlickException;
 
 	public abstract List<Rectangle2D.Float> getStaticBounds();

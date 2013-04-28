@@ -11,12 +11,11 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
-import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 
 public class BasicRoomController extends AbstractRoomController {
 
@@ -29,8 +28,7 @@ public class BasicRoomController extends AbstractRoomController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void init(GameContainer container, StateBasedGame game)
-			throws SlickException {
+	public void init(GameContainer container) throws SlickException {
 
 		staticBounds = new ArrayList<Rectangle2D.Float>();
 		dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
@@ -41,9 +39,11 @@ public class BasicRoomController extends AbstractRoomController {
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
 				int tileID = map.getTileId(i, j, 1);
-				String property = map.getTileProperty(tileID, "blocked", "false");
-				if(property.equals("true")) {
-					staticBounds.add(new Rectangle2D.Float(i * 32, j * 32, 32, 32));
+				String property = map.getTileProperty(tileID, "blocked",
+						"false");
+				if (property.equals("true")) {
+					staticBounds.add(new Rectangle2D.Float(i * 32, j * 32, 32,
+							32));
 				}
 			}
 		}
@@ -64,7 +64,8 @@ public class BasicRoomController extends AbstractRoomController {
 	 */
 	@Override
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 
 		// tell enemy controllers to move
@@ -87,11 +88,12 @@ public class BasicRoomController extends AbstractRoomController {
 		for (AbstractMovingModelController controller : enemyControllers) {
 			controller.render(container, g);
 		}
-		
-		if(Constants.SHOW_BOUNDS) {
+
+		if (Constants.SHOW_BOUNDS) {
 			g.setColor(Color.red);
-			for(Rectangle2D.Float e : staticBounds) {
-				g.drawRect((int)e.getX(), (int)e.getY(), (int)e.getWidth(), (int)e.getHeight());
+			for (Rectangle2D.Float e : staticBounds) {
+				g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
+						(int) e.getHeight());
 			}
 		}
 	}
@@ -117,7 +119,7 @@ public class BasicRoomController extends AbstractRoomController {
 	 */
 	public Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
-		for(AbstractMovingModel model : dynamicBounds.keySet()) {
+		for (AbstractMovingModel model : dynamicBounds.keySet()) {
 			dynamicBounds.put(model, model.getBounds());
 		}
 		return dynamicBounds;
