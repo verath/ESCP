@@ -118,7 +118,7 @@ public abstract class AbstractWeaponModel {
 	 * @throws SlickException
 	 */
 	protected Image[] sortImages(String weapon) {
-		File folder = new File("res/animation/hero/" + weapon);
+		File folder = new File("res/animation/heroMovement/" + weapon);
 		if (folder != null) {
 			File[] files = folder.listFiles();
 			if (files != null) {

@@ -30,7 +30,7 @@ public class AxeModel extends AbstractMeleeWeapon {
 	@Override
 	protected void initAnimation() {
 		Image[] image = sortImages("axe");
-		animation = new Animation(image, 160, true);
+		animation = new Animation(image, 40, true);
 	}
 
 }

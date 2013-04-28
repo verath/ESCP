@@ -29,7 +29,7 @@ public class UnarmedModel extends AbstractMeleeWeapon{
 	@Override
 	protected void initAnimation() {
 		Image[] image = sortImages("unarmed");
-		animation = new Animation(image, 80, true);
+		animation = new Animation(image, 40, true);
 	}
 
 }

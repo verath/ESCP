@@ -1,6 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An abstract class for representing a moving model.
@@ -9,6 +11,8 @@ import java.awt.geom.Rectangle2D;
  * 
  */
 public abstract class AbstractMovingModel {
+
+	private List<AbstractWeaponModel> weapons = new ArrayList<AbstractWeaponModel>();
 
 	/**
 	 * The currently equipped weapon
@@ -269,5 +273,24 @@ public abstract class AbstractMovingModel {
 	 */
 	public void takeDamage(int damage) {
 		health -= damage;
+	}
+
+	/**
+	 * Add another weapon to the arsenal of the hero.
+	 * 
+	 * @param weapon
+	 *            the weapon to be added
+	 */
+	public void addWeapon(AbstractWeaponModel weapon) {
+		weapons.add(weapon);
+	}
+
+	/**
+	 * Get the current weapons of the hero
+	 * 
+	 * @return a list of all the weapons that the hero currently has available
+	 */
+	public List<AbstractWeaponModel> getWeapons() {
+		return weapons;
 	}
 }
