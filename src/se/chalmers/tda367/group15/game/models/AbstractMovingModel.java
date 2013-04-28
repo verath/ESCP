@@ -15,6 +15,11 @@ public abstract class AbstractMovingModel {
 	private List<AbstractWeaponModel> weapons = new ArrayList<AbstractWeaponModel>();
 
 	/**
+	 * Should be true if the model is to be displayed and is alive, otherwise
+	 * false
+	 */
+	private boolean isAlive;
+	/**
 	 * The currently equipped weapon
 	 */
 	private AbstractWeaponModel currentWeapon;
@@ -156,12 +161,31 @@ public abstract class AbstractMovingModel {
 	}
 
 	/**
-	 * Method for checking wether the model is moving or not.
+	 * Method for checking if model is alive and should be painted.
+	 * 
+	 * @return true if alive, false otherwise
+	 */
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	/**
+	 * Method for checking whether the model is moving or not.
 	 * 
 	 * @return True if model is moving, false otherwise.
 	 */
 	public boolean isMoving() {
 		return isMoving;
+	}
+
+	/**
+	 * Method for setting if the model is alive and should be painted
+	 * 
+	 * @param isAlive
+	 *            true if model is alive, false otherwise
+	 */
+	public void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
 	}
 
 	/**
@@ -273,6 +297,9 @@ public abstract class AbstractMovingModel {
 	 */
 	public void takeDamage(int damage) {
 		health -= damage;
+		if(health <= 0) {
+			setAlive(false);
+		}
 	}
 
 	/**

@@ -10,6 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
 import se.chalmers.tda367.group15.game.models.AxeModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
@@ -43,17 +44,18 @@ public class HeroController extends AbstractMovingModelController {
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds) {
+
 		AbstractMovingModel model = getModel();
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
-		
+
 		List<AbstractWeaponModel> weapons = getModel().getWeapons();
-		if(input.isKeyPressed(Input.KEY_1)) {
+		if (input.isKeyPressed(Input.KEY_1)) {
 			getModel().setCurrentWeapon(weapons.get(0));
-		}else if(input.isKeyPressed(Input.KEY_2)) {
+		} else if (input.isKeyPressed(Input.KEY_2)) {
 			getModel().setCurrentWeapon(weapons.get(1));
-		}else if(input.isKeyPressed(Input.KEY_3)) {
+		} else if (input.isKeyPressed(Input.KEY_3)) {
 			getModel().setCurrentWeapon(weapons.get(2));
 		}
 
@@ -94,6 +96,7 @@ public class HeroController extends AbstractMovingModelController {
 		}
 
 		model.setMoving(speedY != 0 || speedX != 0);
+
 	}
 
 	/**

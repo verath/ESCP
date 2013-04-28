@@ -52,19 +52,22 @@ public class DummyEnemyView implements View{
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		float rotation = (float) model.getRotation();
+		if(model.isAlive()) {
+			float rotation = (float) model.getRotation();
 
-		// rotates the current frame
-		g.rotate(model.getX() + model.getWidth() / 2,
-				model.getY() + model.getHeight() / 2, rotation);
-		moveAnimation.draw(model.getX() - model.getOffset(), model.getY() - model.getOffset());
-		g.resetTransform();
-		if(Constants.SHOW_BOUNDS) {
-			g.setColor(Color.yellow);
-			Rectangle2D.Float e = model.getBounds();
-			g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
-					(int) e.getHeight());
+			// rotates the current frame
+			g.rotate(model.getX() + model.getWidth() / 2,
+					model.getY() + model.getHeight() / 2, rotation);
+			moveAnimation.draw(model.getX() - model.getOffset(), model.getY() - model.getOffset());
+			g.resetTransform();
+			if(Constants.SHOW_BOUNDS) {
+				g.setColor(Color.yellow);
+				Rectangle2D.Float e = model.getBounds();
+				g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
+						(int) e.getHeight());
+			}
 		}
+		
 	}
 
 }
