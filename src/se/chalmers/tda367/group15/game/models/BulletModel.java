@@ -2,10 +2,11 @@ package se.chalmers.tda367.group15.game.models;
 
 public class BulletModel extends AbstractMovingModel{
 	
-	public BulletModel(float x, float y) {
-		setX(x);
-		setY(y);
+	public BulletModel() {
+		setX(0);
+		setY(0);
 		setVelocity(0.5f);
+		setAlive(false);
 	}
 	 
 }

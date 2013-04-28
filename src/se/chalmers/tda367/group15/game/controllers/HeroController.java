@@ -96,7 +96,6 @@ public class HeroController extends AbstractMovingModelController {
 		}
 
 		model.setMoving(speedY != 0 || speedX != 0);
-
 	}
 
 	/**
