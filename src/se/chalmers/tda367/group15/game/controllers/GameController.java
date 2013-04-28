@@ -13,8 +13,6 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
 
 class GameController {
-	protected GameController() {
-	}
 
 	/**
 	 * The roomsController handling what room is the current room.
@@ -27,12 +25,21 @@ class GameController {
 	 */
 	private HeroController heroController;
 
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
-		roomController.render(container, g);
-		heroController.render(container, g);
+	/**
+	 * Creates the GameController
+	 */
+	protected GameController() {
 	}
 
+	/**
+	 * Initialise the game. This can be used to load static resources. It's
+	 * called before the game loop starts
+	 * 
+	 * @param container
+	 *            The container holding the game
+	 * @throws SlickException
+	 *             Throw to indicate an internal error
+	 */
 	public void init(GameContainer container) throws SlickException {
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController();
@@ -50,6 +57,18 @@ class GameController {
 
 	}
 
+	/**
+	 * Update the game logic here. No rendering should take place in this method
+	 * though it won't do any harm.
+	 * 
+	 * @param container
+	 *            The container holing this game
+	 * @param delta
+	 *            The amount of time thats passed since last update in
+	 *            milliseconds
+	 * @throws SlickException
+	 *             Throw to indicate an internal error
+	 */
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 
@@ -68,7 +87,24 @@ class GameController {
 		heroController.update(container, delta, staticBounds, dynamicBounds);
 		roomController.update(container, delta, staticBounds, dynamicBounds);
 	}
-	
+
+	/**
+	 * Render the game's screen here.
+	 * 
+	 * @param container
+	 *            The container holing this game
+	 * @param g
+	 *            The graphics context that can be used to render. However,
+	 *            normal rendering routines can also be used.
+	 * @throws SlickException
+	 *             Throw to indicate a internal error
+	 */
+	public void render(GameContainer container, Graphics g)
+			throws SlickException {
+		roomController.render(container, g);
+		heroController.render(container, g);
+	}
+
 	/**
 	 * Getter for the RoomsController associated with this controller.
 	 * 
