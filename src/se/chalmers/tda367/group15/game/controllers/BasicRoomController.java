@@ -16,6 +16,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.navigation.RotatingNavigation;
 
 public class BasicRoomController extends AbstractRoomController {
 
@@ -58,8 +59,8 @@ public class BasicRoomController extends AbstractRoomController {
 		DummyEnemyModel e3 = new DummyEnemyModel(100, 270);
 		DummyEnemyModel e4 = new DummyEnemyModel(200, 200);
 		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
-		enemyControllers.add(new DummyEnemyController(e1, getGameController()));
-		enemyControllers.add(new DummyEnemyController(e2, getGameController()));
+		enemyControllers.add(new DummyEnemyController(e1, new RotatingNavigation(), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e2, new RotatingNavigation(), getGameController()));
 		enemyControllers.add(new DummyEnemyController(e3, getGameController()));
 		enemyControllers.add(new DummyEnemyController(e4, getGameController()));
 		enemyControllers.add(new DummyEnemyController(e5, getGameController()));

@@ -30,5 +30,5 @@ public interface NpcNavigation {
 	/**
 	 * @return a new direction
 	 */
-	public double getNewDirection();
+	public double getNewDirection(double prev, boolean collision);
 }

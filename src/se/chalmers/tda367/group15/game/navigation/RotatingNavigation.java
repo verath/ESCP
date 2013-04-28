@@ -1,11 +1,9 @@
 package se.chalmers.tda367.group15.game.navigation;
 
-public class RandomNavigation implements NpcNavigation {
+public class RotatingNavigation implements NpcNavigation {
 
-	/**
-	 * Creates a new random navigation controller.
-	 */
-	public RandomNavigation() {
+	public RotatingNavigation() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -26,10 +24,7 @@ public class RandomNavigation implements NpcNavigation {
 	 * {@inheritDoc}
 	 */
 	public double getNewDirection(double prev, boolean collision) {
-		if ( collision ) {
-			return Math.random() * 360;
-		}
-		return prev;
+		return (prev + 1) % 360;
 	}
 
 }
