@@ -12,7 +12,7 @@ package se.chalmers.tda367.group15.game.event;
 public abstract class AbstractEventListener<T extends Event> implements
 		EventListener<T> {
 	/**
-	 * The type of class this object is a listner for.
+	 * The type of class this object is a listener for.
 	 */
 	private Class<T> clazz;
 
@@ -35,7 +35,7 @@ public abstract class AbstractEventListener<T extends Event> implements
 	public <E> void onEvent(E event) {
 		// Check if this event has the type we are looking for. If so, forward
 		// it to the specific onEvent handler
-		if (event.getClass() == clazz) {
+		if (clazz.isInstance(event)) {
 			onEvent((T) event);
 		}
 	}

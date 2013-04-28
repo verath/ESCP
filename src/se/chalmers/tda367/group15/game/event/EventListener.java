@@ -3,7 +3,7 @@ package se.chalmers.tda367.group15.game.event;
 /**
  * An interface describing an event listener for a specific event. One does
  * probably not want to implement this directly, but rather extend the
- * AbstractEventListner class.
+ * AbstractEventListener class.
  * 
  * @author Peter
  * 
