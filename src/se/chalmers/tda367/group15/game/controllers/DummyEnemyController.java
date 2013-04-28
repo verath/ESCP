@@ -58,6 +58,13 @@ public class DummyEnemyController extends AbstractMovingModelController {
 			model.setRotation((model.getRotation() + 180) % 360);
 		}
 		
+		if (model.getRotation() == 180) {
+			newX = model.getX() + (delta * model.getVelocity());
+		} else {
+			newX = model.getX() - (delta * model.getVelocity());
+		}
+		
+		
 		model.setX(newX);
 
 	}
