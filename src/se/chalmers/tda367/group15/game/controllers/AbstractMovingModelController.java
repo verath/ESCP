@@ -14,7 +14,7 @@ import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
- * Interface that should be implemented by all controllers handling moving
+ * abstract class that should be implemented by all controllers handling moving
  * models.
  * 
  * @author simon
@@ -212,6 +212,8 @@ public abstract class AbstractMovingModelController {
 	public boolean isStaticCollision(float x, float y,
 			List<Rectangle2D.Float> staticBounds, Rectangle2D.Float bound1) {
 
+		// Decided to keep this boolean since it can be interesting to see if it
+		// collides more than once
 		boolean staticCollision = false;
 		// check static collisions
 		for (Rectangle2D.Float bound2 : staticBounds) {
@@ -258,6 +260,8 @@ public abstract class AbstractMovingModelController {
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
 			Rectangle2D.Float bound1) {
 
+		// Decided to keep this boolean since it can be interesting to see if it
+		// collides more than once
 		boolean dynamicCollsion = false;
 		// check dynamic collisions
 		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {

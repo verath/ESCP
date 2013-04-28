@@ -160,10 +160,10 @@ public class BasicRoomController extends AbstractRoomController {
 		int tileID = map.getTileId(tx, ty, 1);
 		String property = map.getTileProperty(tileID, "blocked",
 				"false");
-		if (property.equals("true")) {
-			return true;
+		if (property.equals("false")) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
