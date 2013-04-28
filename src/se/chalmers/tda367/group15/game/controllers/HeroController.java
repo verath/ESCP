@@ -23,9 +23,11 @@ public class HeroController extends AbstractMovingModelController {
 	/**
 	 * Create a new controller for the hero.
 	 * 
-	 * @param roomController
+	 * @param gameController
+	 * 
 	 */
-	public HeroController() {
+	public HeroController(GameController gameController) {
+		super(gameController);
 		setModel(new HeroModel());
 		setView(new HeroView(getModel()));
 	}
@@ -35,7 +37,8 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	@Override
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds) {
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 		AbstractMovingModel model = getModel();
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
@@ -43,9 +46,10 @@ public class HeroController extends AbstractMovingModelController {
 
 		// Calculate facing depending on where the mouse is relative
 		// to the center of the hero
-		((HeroModel) getModel()).setRotation(Math.toDegrees(Math.atan2(
-				(model.getHeight() / 2 + model.getY() - mouseY),
-				(model.getWidth() / 2 + model.getX() - mouseX))));
+		getModel().setRotation(
+				Math.toDegrees(Math.atan2(
+						(model.getHeight() / 2 + model.getY() - mouseY),
+						(model.getWidth() / 2 + model.getX() - mouseX))));
 
 		goingUp = input.isKeyDown(Input.KEY_W) || input.isKeyDown(Input.KEY_UP);
 		goingDown = input.isKeyDown(Input.KEY_S)

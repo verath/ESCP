@@ -42,7 +42,7 @@ class GameController {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		// Set up the rooms
-		AbstractRoomController startingRoom = new BasicRoomController();
+		AbstractRoomController startingRoom = new BasicRoomController(this);
 
 		// Initialize weapons
 		WeaponLoader.initWeapons();
@@ -53,7 +53,7 @@ class GameController {
 		roomController.init(container);
 
 		// Set up the hero controller
-		heroController = new HeroController();
+		heroController = new HeroController(this);
 
 	}
 

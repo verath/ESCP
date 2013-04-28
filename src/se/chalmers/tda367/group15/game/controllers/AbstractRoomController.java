@@ -19,6 +19,20 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  * 
  */
 public abstract class AbstractRoomController {
+	
+	/**
+	 * A reference to the game's gameController
+	 */
+	private GameController gameController;
+
+	/**
+	 * Creates a new AbstractMovingModelController.
+	 * 
+	 * @param gameController
+	 */
+	protected AbstractRoomController(GameController gameController) {
+		this.setGameController(gameController);
+	}
 
 	/**
 	 * Method for updating the logic of all the rooms
@@ -71,4 +85,22 @@ public abstract class AbstractRoomController {
 	public abstract List<AbstractMovingModelController> getControllers();
 
 	public abstract Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds();
+
+	/**
+	 * Getter for the gameController associated with this controller.
+	 * 
+	 * @return
+	 */
+	protected GameController getGameController() {
+		return gameController;
+	}
+
+	/**
+	 * Setter for the gameController to be associated with this controller.
+	 * 
+	 * @param gameController
+	 */
+	protected void setGameController(GameController gameController) {
+		this.gameController = gameController;
+	}
 }

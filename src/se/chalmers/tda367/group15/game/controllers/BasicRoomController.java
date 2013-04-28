@@ -19,6 +19,10 @@ import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 
 public class BasicRoomController extends AbstractRoomController {
 
+	protected BasicRoomController(GameController gameController) {
+		super(gameController);
+	}
+
 	private TiledMap map;
 	private List<AbstractMovingModelController> enemyControllers = new ArrayList<AbstractMovingModelController>();
 	private List<Rectangle2D.Float> staticBounds;
@@ -50,7 +54,7 @@ public class BasicRoomController extends AbstractRoomController {
 
 		// create an enemy, and add controller for that enemy to the update list
 		DummyEnemyModel e1 = new DummyEnemyModel();
-		enemyControllers.add(new DummyEnemyController(e1));
+		enemyControllers.add(new DummyEnemyController(e1, getGameController()));
 
 		for (AbstractMovingModelController controller : enemyControllers) {
 			AbstractMovingModel model = controller.getModel();

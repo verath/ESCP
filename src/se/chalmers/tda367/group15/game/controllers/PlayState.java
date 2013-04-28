@@ -22,6 +22,9 @@ public class PlayState extends BasicGameState {
 
 	private boolean pendingEscpAction;
 
+	/**
+	 * The GameController controlling the game.
+	 */
 	private final GameController gameController = new GameController();
 
 	/**

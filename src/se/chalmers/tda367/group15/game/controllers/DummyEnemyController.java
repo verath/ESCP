@@ -16,9 +16,13 @@ public class DummyEnemyController extends AbstractMovingModelController {
 
 	/**
 	 * Create a new dummy enemy controller
-	 * @param model the DummyEnemy model
+	 * 
+	 * @param model
+	 *            the DummyEnemy model
 	 */
-	public DummyEnemyController(DummyEnemyModel model) {
+	public DummyEnemyController(DummyEnemyModel model,
+			GameController gameController) {
+		super(gameController);
 		setModel(model);
 		setView(new DummyEnemyView(getModel()));
 	}
@@ -38,7 +42,8 @@ public class DummyEnemyController extends AbstractMovingModelController {
 	 */
 	@Override
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 		AbstractMovingModel model = getModel();
 
@@ -52,6 +57,7 @@ public class DummyEnemyController extends AbstractMovingModelController {
 		if (isCollision(newX, model.getY(), staticBounds, dynamicBounds)) {
 			model.setRotation((model.getRotation() + 180) % 360);
 		}
+		
 		model.setX(newX);
 
 	}
