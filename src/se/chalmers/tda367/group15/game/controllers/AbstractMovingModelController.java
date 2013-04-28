@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
@@ -35,6 +36,8 @@ public abstract class AbstractMovingModelController {
 	 * A reference to the game's gameController
 	 */
 	private GameController gameController;
+
+	private NpcNavigation navigator;
 
 	/**
 	 * Creates a new AbstractMovingModelController.
@@ -170,5 +173,13 @@ public abstract class AbstractMovingModelController {
 	 */
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;
+	}
+	
+	public void setNavigator(NpcNavigation nav){
+		this.navigator = nav;
+	}
+	
+	public NpcNavigation getNavigator(){
+		return this.navigator;
 	}
 }
