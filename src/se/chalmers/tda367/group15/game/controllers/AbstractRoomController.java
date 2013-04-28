@@ -8,7 +8,6 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
@@ -20,6 +19,20 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  * 
  */
 public abstract class AbstractRoomController {
+	
+	/**
+	 * A reference to the game's gameController
+	 */
+	private GameController gameController;
+
+	/**
+	 * Creates a new AbstractMovingModelController.
+	 * 
+	 * @param gameController
+	 */
+	protected AbstractRoomController(GameController gameController) {
+		this.setGameController(gameController);
+	}
 
 	/**
 	 * Method for updating the logic of all the rooms
@@ -61,12 +74,10 @@ public abstract class AbstractRoomController {
 	 * 
 	 * @param container
 	 *            The container holding this game.
-	 * @param game
-	 *            The game.
 	 * @throws SlickException
 	 *             Throw to indicate an internal error.
 	 */
-	public abstract void init(GameContainer container, StateBasedGame game)
+	public abstract void init(GameContainer container)
 			throws SlickException;
 
 	public abstract List<Rectangle2D.Float> getStaticBounds();
@@ -74,4 +85,22 @@ public abstract class AbstractRoomController {
 	public abstract List<AbstractMovingModelController> getControllers();
 
 	public abstract Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds();
+
+	/**
+	 * Getter for the gameController associated with this controller.
+	 * 
+	 * @return
+	 */
+	protected GameController getGameController() {
+		return gameController;
+	}
+
+	/**
+	 * Setter for the gameController to be associated with this controller.
+	 * 
+	 * @param gameController
+	 */
+	protected void setGameController(GameController gameController) {
+		this.gameController = gameController;
+	}
 }

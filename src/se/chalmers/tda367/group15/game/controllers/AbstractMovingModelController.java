@@ -32,6 +32,20 @@ public abstract class AbstractMovingModelController {
 	private View view;
 
 	/**
+	 * A reference to the game's gameController
+	 */
+	private GameController gameController;
+
+	/**
+	 * Creates a new AbstractMovingModelController.
+	 * 
+	 * @param gameController
+	 */
+	protected AbstractMovingModelController(GameController gameController) {
+		this.setGameController(gameController);
+	}
+
+	/**
 	 * Method for rendering all views.
 	 * 
 	 * @param container
@@ -59,7 +73,8 @@ public abstract class AbstractMovingModelController {
 	 *             Throw to indicate a internal error
 	 */
 	public abstract void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException;
 
 	/**
@@ -137,5 +152,23 @@ public abstract class AbstractMovingModelController {
 				dynamicCollsion = true;
 		}
 		return staticCollision || dynamicCollsion;
+	}
+
+	/**
+	 * Getter for the gameController associated with this controller.
+	 * 
+	 * @return
+	 */
+	protected GameController getGameController() {
+		return gameController;
+	}
+
+	/**
+	 * Setter for the gameController to be associated with this controller.
+	 * 
+	 * @param gameController
+	 */
+	protected void setGameController(GameController gameController) {
+		this.gameController = gameController;
 	}
 }
