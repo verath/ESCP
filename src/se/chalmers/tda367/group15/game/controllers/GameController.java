@@ -7,9 +7,13 @@ import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AxeModel;
+import se.chalmers.tda367.group15.game.models.PistolModel;
+import se.chalmers.tda367.group15.game.models.UnarmedModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
 
 class GameController {
