@@ -14,36 +14,64 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 public class RandomPathNavigation implements NpcNavigation, Mover{
 
+	private float newX;
+	private float newY;
+	private double newRot;
 	private AStarPathFinder myPathFinder;
 	private Path myPath;
+	private int currentStep;
+	private int counting;
 
 	public RandomPathNavigation(TileBasedMap map) {
-		this.myPathFinder = new AStarPathFinder(map, 500, true);
+		this.myPathFinder = new AStarPathFinder(map, 5000, true);
 	}
 
 	@Override
 	public float getNewX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return newX;
 	}
 
 	@Override
 	public float getNewY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return newY;
 	}
 
 	@Override
 	public double getNewDirection() {
-		// TODO Auto-generated method stub
-		return 0;
+		return newRot;
 	}
 
 	@Override
 	public void update(DummyEnemyController dummyController,
 			AbstractMovingModel model, int delta, List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds) {
-		// TODO Auto-generated method stub
+
+		float curentX = (float) model.getX();
+		float curentY = (float) model.getY();
+		
+		if (myPath == null) {
+			System.out.println("HEJ2");
+			myPath = myPathFinder.findPath(this, (int) curentX/1024, (int) curentY/768, (int) Math.random()*32, (int) Math.random()*24);
+			
+			currentStep = 1;
+			counting = 0;
+		}
+		if ( myPath != null ) {
+			counting = counting +1;
+			if ( counting == 50) {
+				this.newX = myPath.getX(currentStep)*1024;
+				this.newX = myPath.getY(currentStep)*768;
+				currentStep = currentStep +1;
+				if (myPath.getLength() == currentStep) {
+					myPath = null;
+				}
+			}
+			
+		} else {
+			this.newX = curentX;
+			this.newX = curentY;
+			this.newRot = model.getRotation();
+		}
 		
 	}
 }

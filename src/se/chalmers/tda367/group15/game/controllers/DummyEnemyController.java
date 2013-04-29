@@ -56,7 +56,7 @@ public class DummyEnemyController extends AbstractMovingModelController {
 
 		AbstractMovingModel model = getModel();
 
-		getNavigator().update(this, getModel(), delta,staticBounds, dynamicBounds);
+		getNavigator().update(this, getModel(), delta, staticBounds, dynamicBounds);
 		
 		
 		model.setRotation(getNavigator().getNewDirection());
