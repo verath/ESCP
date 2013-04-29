@@ -1,6 +1,7 @@
 package se.chalmers.tda367.group15.game.models;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Rectangle2D;
@@ -34,6 +35,14 @@ public class MovingModelTest {
 		testedModel.setHealth(100);
 		testedModel.takeDamage(1);
 		assertTrue(testedModel.getHealth() == 99);
+	}
+	
+	@Test
+	public final void testDieFromDamage() {
+		testedModel.setHealth(1);
+		testedModel.setAlive(true);
+		testedModel.takeDamage(1);
+		assertFalse(testedModel.isAlive());
 	}
 
 	@Test
