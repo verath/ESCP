@@ -1,11 +1,19 @@
 package se.chalmers.tda367.group15.game.navigation;
 
+import java.awt.geom.Rectangle2D.Float;
+import java.util.List;
+import java.util.Map;
+
+import se.chalmers.tda367.group15.game.controllers.DummyEnemyController;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+
 /**
  * Interface for npc behavior pattern.
  * @author Carl Jansson
  *
  */
 public interface NpcNavigation {
+	
 	
 	/**
 	 * 
@@ -15,7 +23,7 @@ public interface NpcNavigation {
 	 * @param speed how fast we are moving 
 	 * @return a new x position
 	 */
-	public float getNewX(float x, double rot, int delta, float speed);
+	public float getNewX();
 	
 	/**
 	 * 
@@ -25,10 +33,14 @@ public interface NpcNavigation {
 	 * @param speed how fast we are moving 
 	 * @return a new y position
 	 */
-	public float getNewY(float y, double rot, int delta, float speed);
+	public float getNewY();
 	
 	/**
 	 * @return a new direction
 	 */
-	public double getNewDirection(double prev, boolean collision);
+	public double getNewDirection();
+
+	public void update(DummyEnemyController dummyController, AbstractMovingModel model, int delta,
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds);
 }

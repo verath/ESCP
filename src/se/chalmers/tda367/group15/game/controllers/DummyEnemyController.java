@@ -56,21 +56,11 @@ public class DummyEnemyController extends AbstractMovingModelController {
 
 		AbstractMovingModel model = getModel();
 
-		double preRotation = model.getRotation();
-		float preX = model.getX();
-		float preY = model.getY();
-
-		float tmpNewX = getNavigator().getNewX(preX, preRotation, delta,
-				model.getVelocity());
-		float tmpNewY = getNavigator().getNewY(preY, preRotation, delta,
-				model.getVelocity());
-		boolean collision = isCollision(tmpNewX, tmpNewY, staticBounds,
-				dynamicBounds);
-		model.setRotation(getNavigator()
-				.getNewDirection(preRotation, collision));
-		if (!collision) {
-			model.setX(tmpNewX);
-			model.setY(tmpNewY);
-		}
+		getNavigator().update(this, getModel(), delta,staticBounds, dynamicBounds);
+		
+		
+		model.setRotation(getNavigator().getNewDirection());
+		model.setX(getNavigator().getNewX());
+		model.setY(getNavigator().getNewY());
 	}
 }
