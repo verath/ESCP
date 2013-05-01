@@ -25,7 +25,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingRight;
 	private List<AbstractMovingModel> bullets;
 	private List<View> bulletViews;
-	private int bulletCount;
+	private int timer = 0;
 
 	/**
 	 * Create a new controller for the hero.
@@ -53,8 +53,24 @@ public class HeroController extends AbstractMovingModelController {
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
-		if (input.isKeyPressed(Input.KEY_SPACE)) {
-			System.out.println("HEJ");
+		if (input.isKeyDown(Input.KEY_SPACE)) {
+			timer--;
+			if (timer <= 0) {
+				AbstractMovingModel newBullet = new BulletModel();
+				newBullet.setX(model.getX() + model.getWidth() / 2);
+				newBullet.setY(model.getY() + model.getHeight() / 2);
+				newBullet.setRotation(model.getRotation());
+				newBullet.setAlive(true);
+				View newBulletView = new BulletView(newBullet);
+				bullets.add(newBullet);
+				bulletViews.add(newBulletView);
+				timer = model.getCurrentWeapon().getFiringSpeed();
+			}
+			// TODO: Ugly shit
+			// ATM you can either hold down or press space to shoot, but if you
+			// spam the button you can shoot faster than while holding. ^ Ugly
+			// shit.
+		} else if (input.isKeyPressed(Input.KEY_SPACE)) {
 			AbstractMovingModel newBullet = new BulletModel();
 			newBullet.setX(model.getX() + model.getWidth() / 2);
 			newBullet.setY(model.getY() + model.getHeight() / 2);
@@ -92,23 +108,35 @@ public class HeroController extends AbstractMovingModelController {
 		float newX = model.getX() - (delta * speedX);
 		float newY = model.getY() - (delta * speedY);
 
-		if (!isCollision(newX, model.getY(), staticBounds, dynamicBounds)) {
+		if (!isCollision(newX, model.getY(), model.getHeight(),
+				model.getWidth(), staticBounds, dynamicBounds)) {
 			model.setX(newX);
 		}
 
-		if (!isCollision(model.getX(), newY, staticBounds, dynamicBounds)) {
+		if (!isCollision(model.getX(), newY, model.getHeight(),
+				model.getWidth(), staticBounds, dynamicBounds)) {
 			model.setY(newY);
 		}
 
 		model.setMoving(speedY != 0 || speedX != 0);
 
 		for (AbstractMovingModel bullet : bullets) {
-			bullet.setX(bullet.getX()
-					- (float) Math.cos(Math.toRadians(bullet.getRotation()))
-					* (bullet.getVelocity() * delta));
-			bullet.setY(bullet.getY()
-					- (float) Math.sin(Math.toRadians(bullet.getRotation()))
-					* bullet.getVelocity() * delta);
+			if (bullet.isAlive()) {
+				if (!isCollision(bullet.getX(), bullet.getY(),
+						bullet.getHeight(), bullet.getWidth(), staticBounds,
+						dynamicBounds)) {
+					bullet.setX(bullet.getX()
+							- (float) Math.cos(Math.toRadians(bullet
+									.getRotation()))
+							* (bullet.getVelocity() * delta));
+					bullet.setY(bullet.getY()
+							- (float) Math.sin(Math.toRadians(bullet
+									.getRotation())) * bullet.getVelocity()
+							* delta);
+				} else {
+					bullet.setAlive(false);
+				}
+			}
 		}
 
 	}

@@ -131,7 +131,7 @@ public abstract class AbstractMovingModelController {
 	 *            map with moving models and their collisionbounds
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isCollision(float x, float y,
+	public boolean isCollision(float x, float y, float width, float height,
 			List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
@@ -139,7 +139,7 @@ public abstract class AbstractMovingModelController {
 		boolean dynamicCollsion = false;
 
 		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
-				model.getWidth(), model.getHeight());
+				width, height);
 
 		// check static collisions
 		for (Rectangle2D.Float bound2 : staticBounds) {
