@@ -4,10 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.event.AbstractEventListener;
-import se.chalmers.tda367.group15.game.event.EventHandler;
-import se.chalmers.tda367.group15.game.event.HeroDamagedEvent;
-import se.chalmers.tda367.group15.game.models.HUDModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
 /**
@@ -18,27 +15,12 @@ import se.chalmers.tda367.group15.game.views.HUDView;
  * 
  */
 public class HUDController {
-	private final HUDModel hudModel;
+
 	private final HUDView hudView;
-	
-	public HUDController(EventHandler eventHandler) {
-		eventHandler.addListener(new HeroDamageListener());
-		hudModel = new HUDModel(100);
-		hudView = new HUDView(hudModel);
+
+	public HUDController(HeroModel heroModel) {
+		hudView = new HUDView(heroModel);
 	}
-	
-	
-	private class HeroDamageListener extends AbstractEventListener<HeroDamagedEvent> {
-		public HeroDamageListener() {
-			super(HeroDamagedEvent.class);
-		}
-		@Override
-		public void onEvent(HeroDamagedEvent event) {
-			System.out.println("Damage man!");
-			hudModel.setHealth(event.getCurrentHealth());
-		}
-	}
-	
 	/**
 	 * Method for rendering all views.
 	 * 
