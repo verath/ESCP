@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
 
 class GameController {
@@ -24,6 +25,11 @@ class GameController {
 	 * player)
 	 */
 	private HeroController heroController;
+	
+	/**
+	 * The HUD controller (such as the 
+	 */
+	private HUDController hudController;
 
 	/**
 	 * Creates the GameController
@@ -40,7 +46,7 @@ class GameController {
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container) throws SlickException {		
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);
 
@@ -54,7 +60,9 @@ class GameController {
 
 		// Set up the hero controller
 		heroController = new HeroController(this);
-
+		
+		// Set up the HUD controller
+		hudController = new HUDController((HeroModel) heroController.getModel());
 	}
 
 	/**
@@ -101,8 +109,10 @@ class GameController {
 	 */
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+		
 		roomController.render(container, g);
 		heroController.render(container, g);
+		hudController.render(container, g);
 	}
 
 	/**
@@ -119,6 +129,10 @@ class GameController {
 	 */
 	protected HeroController getHeroController() {
 		return heroController;
+	}
+
+	protected HUDController getHudController() {
+		return hudController;
 	}
 
 }
