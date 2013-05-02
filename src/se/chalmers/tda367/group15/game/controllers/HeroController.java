@@ -25,7 +25,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingRight;
 	private List<AbstractMovingModel> bullets;
 	private List<View> bulletViews;
-	private int timer = 0;
+	private long timer = 0;
 
 	/**
 	 * Create a new controller for the hero.
@@ -53,34 +53,37 @@ public class HeroController extends AbstractMovingModelController {
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
-		if (input.isKeyDown(Input.KEY_SPACE)) {
-			timer--;
-			if (timer <= 0) {
-				AbstractMovingModel newBullet = new BulletModel();
-				newBullet.setX(model.getX() + model.getWidth() / 2);
-				newBullet.setY(model.getY() + model.getHeight() / 2);
-				newBullet.setRotation(model.getRotation());
-				newBullet.setAlive(true);
-				View newBulletView = new BulletView(newBullet);
-				bullets.add(newBullet);
-				bulletViews.add(newBulletView);
-				timer = model.getCurrentWeapon().getFiringSpeed();
-			}
-			// TODO: Ugly shit
-			// ATM you can either hold down or press space to shoot, but if you
-			// spam the button you can shoot faster than while holding. ^ Ugly
-			// shit.
-		} else if (input.isKeyPressed(Input.KEY_SPACE)) {
+		if (input.isKeyPressed(Input.KEY_SPACE)) {
 			AbstractMovingModel newBullet = new BulletModel();
 			newBullet.setX(model.getX() + model.getWidth() / 2);
 			newBullet.setY(model.getY() + model.getHeight() / 2);
 			newBullet.setRotation(model.getRotation());
 			newBullet.setAlive(true);
+
 			View newBulletView = new BulletView(newBullet);
+
+			bullets.add(newBullet);
+			bulletViews.add(newBulletView);
+
+			timer = System.currentTimeMillis();
+
+		} else if (input.isKeyDown(Input.KEY_SPACE)
+				&& System.currentTimeMillis() - timer > model
+						.getCurrentWeapon().getFiringSpeed()) {
+
+			timer = System.currentTimeMillis();
+
+			AbstractMovingModel newBullet = new BulletModel();
+			newBullet.setX(model.getX() + model.getWidth() / 2);
+			newBullet.setY(model.getY() + model.getHeight() / 2);
+			newBullet.setRotation(model.getRotation());
+			newBullet.setAlive(true);
+
+			View newBulletView = new BulletView(newBullet);
+
 			bullets.add(newBullet);
 			bulletViews.add(newBulletView);
 		}
-
 		// Calculate facing depending on where the mouse is relative
 		// to the center of the hero
 		model.setRotation(Math.toDegrees(Math.atan2((model.getHeight() / 2

@@ -16,7 +16,7 @@ public class UnarmedModel extends AbstractMeleeWeapon{
 	private static Animation animation;
 	
 	public UnarmedModel() {
-		super("Unarmed", 5, 10, 15, true);
+		super("Unarmed", 5, 10, 250, true);
 	}
 
 	@Override

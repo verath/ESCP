@@ -17,7 +17,7 @@ public class AxeModel extends AbstractMeleeWeapon {
 	private static Animation animation;
 
 	public AxeModel() {
-		super("Axe", 10, 15, 15, false);
+		super("Axe", 10, 15, 350, false);
 	}
 
 	@Override
