@@ -8,6 +8,7 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
@@ -18,7 +19,7 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  * @author simon
  * 
  */
-public abstract class AbstractRoomController {
+public abstract class AbstractRoomController implements TileBasedMap{
 	
 	/**
 	 * A reference to the game's gameController

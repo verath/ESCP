@@ -10,6 +10,8 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
+import se.chalmers.tda367.group15.game.navigation.RandomNavigation;
 import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 
 public class DummyEnemyController extends AbstractMovingModelController {
@@ -22,9 +24,15 @@ public class DummyEnemyController extends AbstractMovingModelController {
 	 */
 	public DummyEnemyController(DummyEnemyModel model,
 			GameController gameController) {
+		this(model, new RandomNavigation(), gameController);
+	}
+
+	public DummyEnemyController(DummyEnemyModel model, NpcNavigation navigator,
+			GameController gameController) {
 		super(gameController);
 		setModel(model);
 		setView(new DummyEnemyView(getModel()));
+		setNavigator(navigator);
 	}
 
 	/**
@@ -45,28 +53,13 @@ public class DummyEnemyController extends AbstractMovingModelController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
+
 		AbstractMovingModel model = getModel();
 
-		float newX;
-		if (model.getRotation() == 180) {
-			newX = model.getX() + (delta * model.getVelocity());
-		} else {
-			newX = model.getX() - (delta * model.getVelocity());
-		}
-
-		if (isCollision(newX, model.getY(), model.getHeight(), model.getWidth(), staticBounds, dynamicBounds)) {
-			model.setRotation((model.getRotation() + 180) % 360);
-		}
+		getNavigator().update(this, model, delta, staticBounds, dynamicBounds);
 		
-		if (model.getRotation() == 180) {
-			newX = model.getX() + (delta * model.getVelocity());
-		} else {
-			newX = model.getX() - (delta * model.getVelocity());
-		}
-		
-		
-		model.setX(newX);
-
+		//model.setRotation(getNavigator().getNewDirection());
+		//model.setX(getNavigator().getNewX());
+		//model.setY(getNavigator().getNewY());
 	}
-
 }

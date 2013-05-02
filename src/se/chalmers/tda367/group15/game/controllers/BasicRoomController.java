@@ -12,10 +12,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.util.pathfinding.PathFindingContext;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.navigation.RandomPathNavigation;
 
 public class BasicRoomController extends AbstractRoomController {
 
@@ -54,7 +56,15 @@ public class BasicRoomController extends AbstractRoomController {
 
 		// create an enemy, and add controller for that enemy to the update list
 		DummyEnemyModel e1 = new DummyEnemyModel();
-		enemyControllers.add(new DummyEnemyController(e1, getGameController()));
+		DummyEnemyModel e2 = new DummyEnemyModel(400, 200);
+		DummyEnemyModel e3 = new DummyEnemyModel(100, 270);
+		DummyEnemyModel e4 = new DummyEnemyModel(200, 200);
+		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
+		enemyControllers.add(new DummyEnemyController(e1, new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e2, new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e3, new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e4, new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e5, new RandomPathNavigation(this), getGameController()));
 
 		for (AbstractMovingModelController controller : enemyControllers) {
 			AbstractMovingModel model = controller.getModel();
@@ -131,6 +141,42 @@ public class BasicRoomController extends AbstractRoomController {
 			}
 		}
 		return dynamicBounds;
+	}
+
+	@Override
+	public int getWidthInTiles() {
+		return map.getWidth(); //*map.getTileWidth(); if using pixels instead
+	}
+
+	@Override
+	public int getHeightInTiles() {
+		return map.getHeight(); //*map.getTileHeight(); if using pixels instead
+	}
+
+	@Override
+	public void pathFinderVisited(int x, int y) {
+		// This is for debugging new heuristics.
+	}
+
+	@Override
+	public boolean blocked(PathFindingContext context, int tx, int ty) {
+		// TODO How to use PathFindingContext?
+		try {
+			int tileID = map.getTileId(tx, ty, 1);
+			String property = map.getTileProperty(tileID, "blocked",
+					"false");
+			if (property.equals("false")) {
+				return false;
+			}
+			return true;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return true;
+		}
+	}
+
+	@Override
+	public float getCost(PathFindingContext context, int tx, int ty) {
+		return 1;
 	}
 
 }

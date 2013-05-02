@@ -12,10 +12,11 @@ import org.newdawn.slick.SlickException;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
- * Interface that should be implemented by all controllers handling moving
+ * abstract class that should be implemented by all controllers handling moving
  * models.
  * 
  * @author simon
@@ -37,6 +38,8 @@ public abstract class AbstractMovingModelController {
 	 * A reference to the game's gameController
 	 */
 	private GameController gameController;
+
+	private NpcNavigation navigator;
 
 	/**
 	 * Creates a new AbstractMovingModelController.
@@ -131,12 +134,35 @@ public abstract class AbstractMovingModelController {
 	 *            map with moving models and their collision bounds
 	 * @return true if collision, false otherwise
 	 */
+	public boolean isCollision(float x, float y, List<Rectangle2D.Float> staticBounds,
+			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
+
+		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y, model.getWidth(), model.getHeight());
+
+		return isCollision(x, y, staticBounds, dynamicBounds, bound1);
+	}
+	
+	/**
+	 * Method for checking if collision with width and height is about to
+	 * happen.
+	 * @param x
+	 *            the x coordinate
+	 * @param y
+	 *            the y coordinate
+	 * @param width The width of area to check
+	 * @param height The height of area to check
+	 * @param staticBounds
+	 *            list of rectangles representing static blocked object on the
+	 *            map
+	 * @param dynamicBounds
+	 *            map with moving models and their collision bounds
+	 * @return true if collision, false otherwise
+	 */
 	public boolean isCollision(float x, float y, float width, float height,
 			List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
-		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
-				width, height);
+		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y, width, height);
 
 		return isCollision(x, y, staticBounds, dynamicBounds, bound1);
 	}
@@ -192,7 +218,6 @@ public abstract class AbstractMovingModelController {
 				model.getWidth(), model.getHeight());
 		return isStaticCollision(x, y, staticBounds, bound1);
 	}
-				
 
 	/**
 	 * Method for checking if static collision with Rectangle2D object is about
@@ -294,5 +319,13 @@ public abstract class AbstractMovingModelController {
 	 */
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;
+	}
+
+	public void setNavigator(NpcNavigation nav) {
+		this.navigator = nav;
+	}
+
+	public NpcNavigation getNavigator() {
+		return this.navigator;
 	}
 }
