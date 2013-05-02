@@ -51,16 +51,16 @@ public class RandomPathNavigation implements NpcNavigation, Mover{
 		
 		if (myPath == null) {
 			System.out.println("HEJ2");
-			myPath = myPathFinder.findPath(this, (int) curentX/1024, (int) curentY/768, (int) Math.random()*32, (int) Math.random()*24);
+			myPath = myPathFinder.findPath(this, (int) curentX/32, (int) curentY/24, (int) (Math.random()*32), (int) (Math.random()*24));
 			
 			currentStep = 1;
 			counting = 0;
 		}
 		if ( myPath != null ) {
 			counting = counting +1;
-			if ( counting == 50) {
-				this.newX = myPath.getX(currentStep)*1024;
-				this.newX = myPath.getY(currentStep)*768;
+			if ( counting%50==0) {
+				this.newX = myPath.getX(currentStep)*32;
+				this.newX = myPath.getY(currentStep)*24;
 				currentStep = currentStep +1;
 				if (myPath.getLength() == currentStep) {
 					myPath = null;
