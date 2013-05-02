@@ -54,7 +54,7 @@ public class DummyEnemyController extends AbstractMovingModelController {
 			newX = model.getX() - (delta * model.getVelocity());
 		}
 
-		if (isCollision(newX, model.getY(), staticBounds, dynamicBounds)) {
+		if (isCollision(newX, model.getY(), model.getHeight(), model.getWidth(), staticBounds, dynamicBounds)) {
 			model.setRotation((model.getRotation() + 180) % 360);
 		}
 		

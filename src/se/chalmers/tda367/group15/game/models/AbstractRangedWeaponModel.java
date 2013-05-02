@@ -19,11 +19,14 @@ public abstract class AbstractRangedWeaponModel extends AbstractWeaponModel {
 	 *            The base damage of the weapon.
 	 * @param maxDamage
 	 *            The maximum damage of the weapon.
+	 * @param firingSpeed
+	 *            The firingspeed of the weapon. 0 is really fast while 100 is
+	 *            really slow.
 	 * @param isEquipped
 	 *            Is the weapon equipped?
 	 */
-	public AbstractRangedWeaponModel(String name, int baseDamage, int maxDamage,
-			int firingSpeed, boolean isEquipped) {
+	public AbstractRangedWeaponModel(String name, int baseDamage,
+			int maxDamage, int firingSpeed, boolean isEquipped) {
 		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
 		// TODO: placeholder for ammo. will perhaps implement magazines and
 		// reloading later.
