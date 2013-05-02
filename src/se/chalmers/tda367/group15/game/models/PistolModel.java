@@ -18,7 +18,7 @@ public class PistolModel extends AbstractRangedWeaponModel {
 	private static Animation animation;
 	
 	public PistolModel() {
-		super("Pistol", 10, 20, 20, false);
+		super("Pistol", 10, 20, 300, false);
 	}
 	
 	@Override

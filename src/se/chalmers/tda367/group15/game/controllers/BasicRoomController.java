@@ -15,18 +15,24 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.views.BulletView;
+import se.chalmers.tda367.group15.game.views.View;
 
 public class BasicRoomController extends AbstractRoomController {
 
 	protected BasicRoomController(GameController gameController) {
 		super(gameController);
+		projectileController = new ProjectileController(gameController);
 	}
 
 	private TiledMap map;
 	private List<AbstractMovingModelController> enemyControllers = new ArrayList<AbstractMovingModelController>();
+	private ProjectileController projectileController;
 	private List<Rectangle2D.Float> staticBounds;
 	private Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
+	
 
 	/**
 	 * {@inheritDoc}
@@ -76,6 +82,7 @@ public class BasicRoomController extends AbstractRoomController {
 		for (AbstractMovingModelController controller : enemyControllers) {
 			controller.update(container, delta, staticBounds, dynamicBounds);
 		}
+		projectileController.update(container, delta, staticBounds, dynamicBounds);
 	}
 
 	/**
@@ -92,6 +99,8 @@ public class BasicRoomController extends AbstractRoomController {
 		for (AbstractMovingModelController controller : enemyControllers) {
 			controller.render(container, g);
 		}
+
+		projectileController.render(container, g);
 
 		if (Constants.SHOW_BOUNDS) {
 			g.setColor(Color.red);
@@ -124,13 +133,22 @@ public class BasicRoomController extends AbstractRoomController {
 	public Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
 		for (AbstractMovingModel model : dynamicBounds.keySet()) {
-			if(model.isAlive()) {
+			if (model.isAlive()) {
 				dynamicBounds.put(model, model.getBounds());
-			}else{
+			} else {
 				dynamicBounds.remove(model);
 			}
 		}
 		return dynamicBounds;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addProjectile(AbstractMovingModel projectile) {
+
+		projectileController.addProjectile(projectile);
 	}
 
 }

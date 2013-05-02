@@ -23,9 +23,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingDown;
 	private boolean goingLeft;
 	private boolean goingRight;
-	private List<AbstractMovingModel> bullets;
-	private List<View> bulletViews;
-	private int timer = 0;
+	private long timer = 0;
 
 	/**
 	 * Create a new controller for the hero.
@@ -37,8 +35,6 @@ public class HeroController extends AbstractMovingModelController {
 		super(gameController);
 		setModel(new HeroModel());
 		setView(new HeroView(getModel()));
-		bullets = new ArrayList<AbstractMovingModel>();
-		bulletViews = new ArrayList<View>();
 	}
 
 	/**
@@ -53,32 +49,19 @@ public class HeroController extends AbstractMovingModelController {
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
-		if (input.isKeyDown(Input.KEY_SPACE)) {
-			timer--;
-			if (timer <= 0) {
-				AbstractMovingModel newBullet = new BulletModel();
-				newBullet.setX(model.getX() + model.getWidth() / 2);
-				newBullet.setY(model.getY() + model.getHeight() / 2);
-				newBullet.setRotation(model.getRotation());
-				newBullet.setAlive(true);
-				View newBulletView = new BulletView(newBullet);
-				bullets.add(newBullet);
-				bulletViews.add(newBulletView);
-				timer = model.getCurrentWeapon().getFiringSpeed();
-			}
-			// TODO: Ugly shit
-			// ATM you can either hold down or press space to shoot, but if you
-			// spam the button you can shoot faster than while holding. ^ Ugly
-			// shit.
-		} else if (input.isKeyPressed(Input.KEY_SPACE)) {
+		if (input.isKeyDown(Input.KEY_SPACE)
+				&& System.currentTimeMillis() - timer > model
+						.getCurrentWeapon().getFiringSpeed()) {
+			timer = System.currentTimeMillis();
+
 			AbstractMovingModel newBullet = new BulletModel();
-			newBullet.setX(model.getX() + model.getWidth() / 2);
-			newBullet.setY(model.getY() + model.getHeight() / 2);
+			newBullet.setX(model.getX() + model.getWidth());
+			newBullet.setY(model.getY() + model.getHeight());
 			newBullet.setRotation(model.getRotation());
 			newBullet.setAlive(true);
-			View newBulletView = new BulletView(newBullet);
-			bullets.add(newBullet);
-			bulletViews.add(newBulletView);
+			AbstractRoomController currentRoom = getGameController()
+					.getRoomController().getCurrentRoom();
+			currentRoom.addProjectile(newBullet);
 		}
 
 		// Calculate facing depending on where the mouse is relative
@@ -120,25 +103,6 @@ public class HeroController extends AbstractMovingModelController {
 
 		model.setMoving(speedY != 0 || speedX != 0);
 
-		for (AbstractMovingModel bullet : bullets) {
-			if (bullet.isAlive()) {
-				if (!isCollision(bullet.getX(), bullet.getY(),
-						bullet.getHeight(), bullet.getWidth(), staticBounds,
-						dynamicBounds)) {
-					bullet.setX(bullet.getX()
-							- (float) Math.cos(Math.toRadians(bullet
-									.getRotation()))
-							* (bullet.getVelocity() * delta));
-					bullet.setY(bullet.getY()
-							- (float) Math.sin(Math.toRadians(bullet
-									.getRotation())) * bullet.getVelocity()
-							* delta);
-				} else {
-					bullet.setAlive(false);
-				}
-			}
-		}
-
 	}
 
 	/**
@@ -148,10 +112,6 @@ public class HeroController extends AbstractMovingModelController {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		getView().render(container, g);
-
-		for (View bulletView : bulletViews) {
-			bulletView.render(container, g);
-		}
 
 	}
 }

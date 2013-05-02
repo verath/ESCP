@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.views.View;
 
 /**
  * Abstract class for representing a room containing a tiled map and controllers
@@ -19,7 +20,7 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  * 
  */
 public abstract class AbstractRoomController {
-	
+
 	/**
 	 * A reference to the game's gameController
 	 */
@@ -52,7 +53,8 @@ public abstract class AbstractRoomController {
 	 *             Throw to indicate an internal error.
 	 */
 	public abstract void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException;
 
 	/**
@@ -77,8 +79,7 @@ public abstract class AbstractRoomController {
 	 * @throws SlickException
 	 *             Throw to indicate an internal error.
 	 */
-	public abstract void init(GameContainer container)
-			throws SlickException;
+	public abstract void init(GameContainer container) throws SlickException;
 
 	public abstract List<Rectangle2D.Float> getStaticBounds();
 
@@ -103,4 +104,15 @@ public abstract class AbstractRoomController {
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;
 	}
+	
+	/**
+	 * Method for adding a projectile to the room.
+	 * 
+	 * @param projectile
+	 *            The projectile to be added
+	 * @param projectileView
+	 *            The view of the projectile
+	 */
+	public abstract void addProjectile(AbstractMovingModel projectile);
+
 }
