@@ -9,7 +9,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.event.EventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
@@ -27,10 +26,9 @@ public class HeroController extends AbstractMovingModelController {
 	 * @param gameController
 	 * 
 	 */
-	public HeroController(GameController gameController,
-			EventHandler eventHandler) {
+	public HeroController(GameController gameController) {
 		super(gameController);
-		setModel(new HeroModel(eventHandler));
+		setModel(new HeroModel());
 		setView(new HeroView(getModel()));
 	}
 

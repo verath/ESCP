@@ -1,7 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-import se.chalmers.tda367.group15.game.event.EventHandler;
-import se.chalmers.tda367.group15.game.event.HeroDamagedEvent;
 
 /**
  * Class representing the model of a hero.
@@ -12,15 +10,12 @@ import se.chalmers.tda367.group15.game.event.HeroDamagedEvent;
 
 public class HeroModel extends AbstractMovingModel {
 
-	private final EventHandler eventHandler;
-
 	/**
 	 * Create a new Hero.
 	 * 
 	 * @param eventHandler
 	 */
-	public HeroModel(EventHandler eventHandler) {
-		setHealth(100);
+	public HeroModel() {
 		setX(44f);
 		setY(44f);
 		setVelocity(0.15f);
@@ -28,12 +23,5 @@ public class HeroModel extends AbstractMovingModel {
 		setHeight(42);
 		setCurrentWeapon(new PistolModel());
 		setOffset(11);
-		this.eventHandler = eventHandler;
-	}
-
-	@Override
-	public void takeDamage(int damage) {
-		super.takeDamage(damage);
-		eventHandler.publish(new HeroDamagedEvent(damage, getHealth()));
 	}
 }
