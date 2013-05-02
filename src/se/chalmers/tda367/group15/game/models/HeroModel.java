@@ -21,7 +21,12 @@ public class HeroModel extends AbstractMovingModel {
 		setVelocity(0.15f);
 		setWidth(42);
 		setHeight(42);
-		setCurrentWeapon(new PistolModel());
 		setOffset(11);
+		setAlive(true);
+		
+		addWeapon(new UnarmedModel());
+		addWeapon(new AxeModel());
+		addWeapon(new PistolModel());
+		setCurrentWeapon(getWeapons().get(0));
 	}
 }

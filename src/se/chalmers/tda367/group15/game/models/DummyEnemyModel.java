@@ -21,5 +21,6 @@ public class DummyEnemyModel extends AbstractMovingModel {
 		setHeight(42);
 		setRotation(180);
 		setOffset(11);
+		setAlive(true);
 	}
 }

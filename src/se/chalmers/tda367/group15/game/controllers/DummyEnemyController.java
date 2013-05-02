@@ -8,8 +8,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 
 public class DummyEnemyController extends AbstractMovingModelController {
@@ -57,6 +57,13 @@ public class DummyEnemyController extends AbstractMovingModelController {
 		if (isCollision(newX, model.getY(), staticBounds, dynamicBounds)) {
 			model.setRotation((model.getRotation() + 180) % 360);
 		}
+		
+		if (model.getRotation() == 180) {
+			newX = model.getX() + (delta * model.getVelocity());
+		} else {
+			newX = model.getX() - (delta * model.getVelocity());
+		}
+		
 		
 		model.setX(newX);
 

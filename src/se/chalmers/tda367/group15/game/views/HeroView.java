@@ -27,7 +27,7 @@ public class HeroView implements View {
 	/**
 	 * The move animation
 	 */
-	private Animation heroMove;
+	private Animation animation;
 
 	/**
 	 * Create a new hero view.
@@ -36,7 +36,7 @@ public class HeroView implements View {
 	 */
 	public HeroView(final AbstractMovingModel hero) {
 		this.model = hero;
-		heroMove = hero.getCurrentWeapon().getAnimation();
+		animation = hero.getCurrentWeapon().getAnimation();
 	}
 
 	/**
@@ -46,27 +46,29 @@ public class HeroView implements View {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 
-		float rotation = (float) model.getRotation();
+		if (model.isAlive()) {
+			animation = model.getCurrentWeapon().getAnimation();
+			float rotation = (float) model.getRotation();
 
-		// We don't want to run the animation if we're not moving
-		if (!model.isMoving()) {
-			heroMove.stop();
-		} else if (heroMove.isStopped()) {
-			heroMove.start();
+			// We don't want to run the animation if we're not moving
+			if (!model.isMoving()) {
+				animation.stop();
+			} else if (animation.isStopped()) {
+				animation.start();
+			}
+			// rotates the current frame
+			g.rotate(model.getX() + model.getWidth() / 2,
+					model.getY() + model.getHeight() / 2, rotation);
+			animation.draw(model.getX() - model.getOffset(), model.getY()
+					- model.getOffset());
+			g.resetTransform();
+			if (Constants.SHOW_BOUNDS) {
+				g.setColor(Color.yellow);
+				Rectangle2D.Float e = model.getBounds();
+				g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
+						(int) e.getHeight());
+			}
 		}
-		// rotates the current frame
-		g.rotate(model.getX() + model.getWidth() / 2,
-				model.getY() + model.getHeight() / 2, rotation);
-		heroMove.draw(model.getX() - model.getOffset(),
-				model.getY() - model.getOffset());
-		g.resetTransform();
-		if(Constants.SHOW_BOUNDS) {
-			g.setColor(Color.yellow);
-			Rectangle2D.Float e = model.getBounds();
-			g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
-					(int) e.getHeight());
-		}
-		
 	}
 
 }
