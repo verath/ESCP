@@ -18,7 +18,6 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 import se.chalmers.tda367.group15.game.navigation.RandomPathNavigation;
-import se.chalmers.tda367.group15.game.navigation.RotatingNavigation;
 
 public class BasicRoomController extends AbstractRoomController {
 
@@ -57,15 +56,15 @@ public class BasicRoomController extends AbstractRoomController {
 
 		// create an enemy, and add controller for that enemy to the update list
 		DummyEnemyModel e1 = new DummyEnemyModel();
-		DummyEnemyModel e2 = new DummyEnemyModel(100, 200);
+		DummyEnemyModel e2 = new DummyEnemyModel(400, 200);
 		DummyEnemyModel e3 = new DummyEnemyModel(100, 270);
 		DummyEnemyModel e4 = new DummyEnemyModel(200, 200);
 		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
-		enemyControllers.add(new DummyEnemyController(e1, new RotatingNavigation(), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e1, new RandomPathNavigation(this), getGameController()));
 		enemyControllers.add(new DummyEnemyController(e2, new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e3, getGameController()));
-		enemyControllers.add(new DummyEnemyController(e4, getGameController()));
-		enemyControllers.add(new DummyEnemyController(e5, getGameController()));
+		enemyControllers.add(new DummyEnemyController(e3, new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e4, new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e5, new RandomPathNavigation(this), getGameController()));
 
 		for (AbstractMovingModelController controller : enemyControllers) {
 			AbstractMovingModel model = controller.getModel();
@@ -158,13 +157,17 @@ public class BasicRoomController extends AbstractRoomController {
 	@Override
 	public boolean blocked(PathFindingContext context, int tx, int ty) {
 		// TODO How to use PathFindingContext?
-		int tileID = map.getTileId(tx, ty, 1);
-		String property = map.getTileProperty(tileID, "blocked",
-				"false");
-		if (property.equals("false")) {
-			return false;
+		try {
+			int tileID = map.getTileId(tx, ty, 1);
+			String property = map.getTileProperty(tileID, "blocked",
+					"false");
+			if (property.equals("false")) {
+				return false;
+			}
+			return true;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return true;
 		}
-		return true;
 	}
 
 	@Override
