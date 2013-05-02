@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -133,11 +134,13 @@ public class BasicRoomController extends AbstractRoomController {
 	 */
 	public Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
-		for (AbstractMovingModel model : dynamicBounds.keySet()) {
+		Iterator it = dynamicBounds.keySet().iterator();
+		while(it.hasNext()) {
+			AbstractMovingModel model = (AbstractMovingModel) it.next();
 			if(model.isAlive()) {
 				dynamicBounds.put(model, model.getBounds());
 			}else{
-				dynamicBounds.remove(model);
+				it.remove();
 			}
 		}
 		return dynamicBounds;
