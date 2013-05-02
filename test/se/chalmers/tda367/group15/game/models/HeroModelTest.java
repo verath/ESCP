@@ -13,13 +13,16 @@ public class HeroModelTest {
 	@Test
 	public final void testCreateHero() {
 		HeroModel hm = new HeroModel();
-		// Make sure it starts with a health
+		// Basic properties
 		assertTrue(hm.getHealth() > 0);
-		// Make sure we have coords 
+		assertTrue(hm.isAlive());
 		assertTrue(hm.getX() >= 0);
 		assertTrue(hm.getY() >= 0);
+		assertTrue(hm.getVelocity() > 0);
+		
 		// Have some kind of weapon
 		assertTrue(hm.getCurrentWeapon() != null);
+		
 		// Should have a non-empty collision bound
 		assertFalse(hm.getBounds().isEmpty());
 	}
