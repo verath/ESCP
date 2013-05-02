@@ -61,11 +61,16 @@ public class BasicRoomController extends AbstractRoomController {
 		DummyEnemyModel e3 = new DummyEnemyModel(100, 270);
 		DummyEnemyModel e4 = new DummyEnemyModel(200, 200);
 		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
-		enemyControllers.add(new DummyEnemyController(e1, new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e2, new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e3, new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e4, new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e5, new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e1,
+				new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e2,
+				new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e3,
+				new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e4,
+				new RandomPathNavigation(this), getGameController()));
+		enemyControllers.add(new DummyEnemyController(e5,
+				new RandomPathNavigation(this), getGameController()));
 
 		for (AbstractMovingModelController controller : enemyControllers) {
 			AbstractMovingModel model = controller.getModel();
@@ -134,12 +139,12 @@ public class BasicRoomController extends AbstractRoomController {
 	 */
 	public Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
-		Iterator it = dynamicBounds.keySet().iterator();
-		while(it.hasNext()) {
-			AbstractMovingModel model = (AbstractMovingModel) it.next();
-			if(model.isAlive()) {
+		Iterator<AbstractMovingModel> it = dynamicBounds.keySet().iterator();
+		while (it.hasNext()) {
+			AbstractMovingModel model = it.next();
+			if (model.isAlive()) {
 				dynamicBounds.put(model, model.getBounds());
-			}else{
+			} else {
 				it.remove();
 			}
 		}
@@ -148,12 +153,12 @@ public class BasicRoomController extends AbstractRoomController {
 
 	@Override
 	public int getWidthInTiles() {
-		return map.getWidth(); //*map.getTileWidth(); if using pixels instead
+		return map.getWidth(); // *map.getTileWidth(); if using pixels instead
 	}
 
 	@Override
 	public int getHeightInTiles() {
-		return map.getHeight(); //*map.getTileHeight(); if using pixels instead
+		return map.getHeight(); // *map.getTileHeight(); if using pixels instead
 	}
 
 	@Override
@@ -166,8 +171,7 @@ public class BasicRoomController extends AbstractRoomController {
 		// TODO How to use PathFindingContext?
 		try {
 			int tileID = map.getTileId(tx, ty, 1);
-			String property = map.getTileProperty(tileID, "blocked",
-					"false");
+			String property = map.getTileProperty(tileID, "blocked", "false");
 			if (property.equals("false")) {
 				return false;
 			}
