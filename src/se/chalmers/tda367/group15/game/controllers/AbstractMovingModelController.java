@@ -136,7 +136,7 @@ public abstract class AbstractMovingModelController {
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
 		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
-				model.getWidth(), model.getHeight());
+				width, height);
 
 		return isCollision(x, y, staticBounds, dynamicBounds, bound1);
 	}
