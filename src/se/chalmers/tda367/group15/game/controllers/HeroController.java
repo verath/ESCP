@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -55,8 +56,15 @@ public class HeroController extends AbstractMovingModelController {
 			timer = System.currentTimeMillis();
 
 			AbstractMovingModel newBullet = new BulletModel();
-			newBullet.setX(model.getX() + model.getWidth());
-			newBullet.setY(model.getY() + model.getHeight());
+			
+			float modelPosX = model.getX() + model.getWidth() / 2;
+			float modelPosY = model.getY() + model.getHeight() / 2;
+			float modelAngleRad = (float)Math.toRadians(model.getRotation());
+			float middlePosX = model.getX() - (float)Math.cos(modelAngleRad);
+			float middlePosY = model.getY() - (float)Math.sin(modelAngleRad);
+			
+			newBullet.setX(middlePosX);
+			newBullet.setY(middlePosY);
 			newBullet.setRotation(model.getRotation());
 			newBullet.setAlive(true);
 			AbstractRoomController currentRoom = getGameController()
@@ -111,7 +119,18 @@ public class HeroController extends AbstractMovingModelController {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+		AbstractMovingModel model = getModel();
+
+		float modelPosX = model.getX() + model.getWidth() / 2;
+		float modelPosY = model.getY() + model.getHeight() / 2;
+		float modelAngleRad = (float)Math.toRadians(model.getRotation());
+		float facePosX = modelPosX - (float)Math.cos(modelAngleRad) * model.getWidth() / 2;
+		float facePosY = modelPosY - (float)Math.sin(modelAngleRad) * model.getHeight() / 2;
+		float tmp1 = facePosX - modelPosX;
+		float tmp2 = facePosY - modelPosY;
 		getView().render(container, g);
+		g.setColor(Color.red);
+		g.drawRect(facePosX - (float)Math.sin(modelAngleRad) * 20, facePosY - (float)Math.cos(modelAngleRad) * 20, 2, 2);
 
 	}
 }
