@@ -18,10 +18,7 @@ public class HUDView implements View {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		Font f = g.getFont();
-
-		g.drawString("HP: " + heroModel.getHealth(), heroModel.getX(),
-				heroModel.getY() - f.getLineHeight());
+		
 	}
 
 }

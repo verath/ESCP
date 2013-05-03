@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -66,6 +67,11 @@ public class DummyEnemyView implements View{
 				g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
 						(int) e.getHeight());
 			}
+			
+
+			Font f = g.getFont();
+			g.drawString("HP: " + model.getHealth(), model.getX(),
+					model.getY() - f.getLineHeight());
 		}
 		
 	}
