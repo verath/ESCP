@@ -9,38 +9,44 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
  * Interface for npc behavior pattern.
+ * 
  * @author Carl Jansson
- *
+ * 
  */
 public interface NpcNavigation {
-	
-	
+
 	/**
 	 * 
-	 * @param x current x position
-	 * @param rot current rotation
-	 * @param delta time since last update
-	 * @param speed how fast we are moving 
-	 * @return a new x position
+	 * @return the x position to use
 	 */
 	public float getNewX();
-	
+
 	/**
 	 * 
-	 * @param y current y position
-	 * @param rot current rotation
-	 * @param delta time since last update
-	 * @param speed how fast we are moving 
-	 * @return a new y position
+	 * @return the y position to use
 	 */
 	public float getNewY();
-	
+
 	/**
-	 * @return a new direction
+	 * 
+	 * @return the direction to face
 	 */
 	public double getNewDirection();
 
-	public void update(DummyEnemyController dummyController, AbstractMovingModel model, int delta,
-			List<Float> staticBounds,
+	/**
+	 * 
+	 * @param dummyController
+	 *            the controller to update
+	 * @param model
+	 *            the controllers model
+	 * @param delta
+	 *            time since last update in milliseconds
+	 * @param staticBounds
+	 *            the static bounds to avoid
+	 * @param dynamicBounds
+	 *            the other movingmodels in current map.
+	 */
+	public void update(DummyEnemyController dummyController,
+			AbstractMovingModel model, int delta, List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds);
 }

@@ -17,16 +17,28 @@ import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 public class DummyEnemyController extends AbstractMovingModelController {
 
 	/**
-	 * Create a new dummy enemy controller
+	 * Creates a new dummyenemy controller with randomnavigation
 	 * 
 	 * @param model
 	 *            the DummyEnemy model
+	 * @param gameController
+	 *            A reference to the controller
 	 */
 	public DummyEnemyController(DummyEnemyModel model,
 			GameController gameController) {
 		this(model, new RandomNavigation(), gameController);
 	}
 
+	/**
+	 * Creates a new dummyenemy controller with navigation of your choice.
+	 * 
+	 * @param model
+	 *            the DummyEnemy model
+	 * @param navigator
+	 *            The navigator to use.
+	 * @param gameController
+	 *            A reference to the controller
+	 */
 	public DummyEnemyController(DummyEnemyModel model, NpcNavigation navigator,
 			GameController gameController) {
 		super(gameController);
@@ -57,9 +69,9 @@ public class DummyEnemyController extends AbstractMovingModelController {
 		AbstractMovingModel model = getModel();
 
 		getNavigator().update(this, model, delta, staticBounds, dynamicBounds);
-		
-		//model.setRotation(getNavigator().getNewDirection());
-		//model.setX(getNavigator().getNewX());
-		//model.setY(getNavigator().getNewY());
+
+		model.setRotation(getNavigator().getNewDirection());
+		model.setX(getNavigator().getNewX());
+		model.setY(getNavigator().getNewY());
 	}
 }

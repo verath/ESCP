@@ -14,6 +14,12 @@ import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import se.chalmers.tda367.group15.game.controllers.DummyEnemyController;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
+/**
+ * This navigator makes DummyEnemyController walk to random positions. If it
+ * reaches destination or hits something it calculates a new position.
+ * 
+ * @author Carl Jansson
+ */
 public class RandomPathNavigation implements NpcNavigation, Mover {
 
 	private float newX;
@@ -23,29 +29,49 @@ public class RandomPathNavigation implements NpcNavigation, Mover {
 	private Path myPath;
 	private int currentStep;
 
+	/**
+	 * Creates a new RandomPathNavigator for specific map.
+	 * 
+	 * @param map
+	 */
 	public RandomPathNavigation(TileBasedMap map) {
 		this.myPathFinder = new AStarPathFinder(map, 500, true);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public float getNewX() {
 		return newX;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public float getNewY() {
 		return newY;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public double getNewDirection() {
 		return newRot;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(DummyEnemyController dummyController,
 			AbstractMovingModel model, int delta, List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds) {
+
+		newX = model.getX();
+		newY = model.getY();
 
 		int currX = (int) (model.getX() + (model.getWidth() / 2)) / 32;
 		int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
@@ -55,7 +81,6 @@ public class RandomPathNavigation implements NpcNavigation, Mover {
 			int tarX = (int) (Math.random() * 30);
 			int tarY = (int) (Math.random() * 30);
 
-			System.out.println("New target: " + tarX + " " + tarY);
 			myPath = myPathFinder.findPath(null, currX, currY, tarX, tarY);
 			currentStep = 1;
 		} else {
@@ -63,25 +88,26 @@ public class RandomPathNavigation implements NpcNavigation, Mover {
 			float diffY = model.getY() - (myPath.getY(currentStep) * 32);
 
 			double dir = Math.atan2(diffY, diffX);
-			model.setRotation(Math.toDegrees(dir));
+			newRot = Math.toDegrees(dir);
 
 			float speedY = (float) (model.getVelocity() * Math.sin(dir));
 			float speedX = (float) (model.getVelocity() * Math.cos(dir));
 
-			float newX = model.getX() - (delta * speedX);
-			float newY = model.getY() - (delta * speedY);
+			float tmpNewX = model.getX() - (delta * speedX);
+			float tmpNewY = model.getY() - (delta * speedY);
 
-			if (dummyController.isDynamicCollision(newX, newY, dynamicBounds)) {
+			if (dummyController.isDynamicCollision(tmpNewX, tmpNewY,
+					dynamicBounds)) {
 				myPath = null;
 			} else {
-				if (!dummyController.isCollision(newX, model.getY(),
+				if (!dummyController.isCollision(tmpNewX, model.getY(),
 						new ArrayList<Rectangle2D.Float>(), dynamicBounds)) {
-					model.setX(newX);
+					newX = tmpNewX;
 				}
 
-				if (!dummyController.isCollision(model.getX(), newY,
+				if (!dummyController.isCollision(model.getX(), tmpNewY,
 						new ArrayList<Rectangle2D.Float>(), dynamicBounds)) {
-					model.setY(newY);
+					newY = tmpNewY;
 				}
 
 				if (currX == myPath.getX(currentStep)
