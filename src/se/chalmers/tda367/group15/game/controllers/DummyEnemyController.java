@@ -66,7 +66,6 @@ public class DummyEnemyController extends AbstractMovingModelController {
 		
 		
 		model.setX(newX);
-
 	}
 
 }

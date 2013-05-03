@@ -1,8 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An abstract class for representing a moving model.
@@ -12,17 +10,11 @@ import java.util.List;
  */
 public abstract class AbstractMovingModel {
 
-	private List<AbstractWeaponModel> weapons = new ArrayList<AbstractWeaponModel>();
-
 	/**
 	 * Should be true if the model is to be displayed and is alive, otherwise
 	 * false
 	 */
 	private boolean isAlive;
-	/**
-	 * The currently equipped weapon
-	 */
-	private AbstractWeaponModel currentWeapon;
 
 	/**
 	 * The current health
@@ -77,15 +69,6 @@ public abstract class AbstractMovingModel {
 	 */
 	public Rectangle2D.Float getBounds() {
 		return new Rectangle2D.Float(x, y, width, height);
-	}
-
-	/**
-	 * Method for getting the current weapon.
-	 * 
-	 * @return the current weapon
-	 */
-	public AbstractWeaponModel getCurrentWeapon() {
-		return currentWeapon;
 	}
 
 	/**
@@ -189,16 +172,6 @@ public abstract class AbstractMovingModel {
 	}
 
 	/**
-	 * Method for setting the current weapon.
-	 * 
-	 * @param the
-	 *            new weapon to be set as current
-	 */
-	public void setCurrentWeapon(AbstractWeaponModel weapon) {
-		currentWeapon = weapon;
-	}
-
-	/**
 	 * Method for setting the health.
 	 * 
 	 * @param health
@@ -297,27 +270,8 @@ public abstract class AbstractMovingModel {
 	 */
 	public void takeDamage(int damage) {
 		health -= damage;
-		if(health <= 0) {
+		if (health <= 0) {
 			setAlive(false);
 		}
-	}
-
-	/**
-	 * Add another weapon to the arsenal of the hero.
-	 * 
-	 * @param weapon
-	 *            the weapon to be added
-	 */
-	public void addWeapon(AbstractWeaponModel weapon) {
-		weapons.add(weapon);
-	}
-
-	/**
-	 * Get the current weapons of the hero
-	 * 
-	 * @return a list of all the weapons that the hero currently has available
-	 */
-	public List<AbstractWeaponModel> getWeapons() {
-		return weapons;
 	}
 }

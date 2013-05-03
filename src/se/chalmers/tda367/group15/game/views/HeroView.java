@@ -9,6 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
@@ -22,7 +23,7 @@ public class HeroView implements View {
 	/**
 	 * The hero model this view is representing
 	 */
-	private final AbstractMovingModel model;
+	private final AbstractCharacterModel model;
 
 	/**
 	 * The move animation
@@ -35,8 +36,8 @@ public class HeroView implements View {
 	 * @param heroModel
 	 */
 	public HeroView(final AbstractMovingModel hero) {
-		this.model = hero;
-		animation = hero.getCurrentWeapon().getAnimation();
+		this.model = (AbstractCharacterModel)hero;
+		animation = this.model.getCurrentWeapon().getAnimation();
 	}
 
 	/**

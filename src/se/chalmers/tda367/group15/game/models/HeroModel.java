@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-
 /**
  * Class representing the model of a hero.
  * 
@@ -8,7 +7,7 @@ package se.chalmers.tda367.group15.game.models;
  * 
  */
 
-public class HeroModel extends AbstractMovingModel {
+public class HeroModel extends AbstractCharacterModel {
 
 	/**
 	 * Create a new Hero.
@@ -23,7 +22,7 @@ public class HeroModel extends AbstractMovingModel {
 		setHeight(42);
 		setOffset(11);
 		setAlive(true);
-		
+
 		addWeapon(new UnarmedModel());
 		addWeapon(new AxeModel());
 		addWeapon(new PistolModel());

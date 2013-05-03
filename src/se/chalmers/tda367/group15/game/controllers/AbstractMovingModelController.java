@@ -9,9 +9,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
-import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
@@ -135,8 +135,7 @@ public abstract class AbstractMovingModelController {
 			List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
-		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
-				width, height);
+		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y, width, height);
 
 		return isCollision(x, y, staticBounds, dynamicBounds, bound1);
 	}
@@ -192,7 +191,6 @@ public abstract class AbstractMovingModelController {
 				model.getWidth(), model.getHeight());
 		return isStaticCollision(x, y, staticBounds, bound1);
 	}
-				
 
 	/**
 	 * Method for checking if static collision with Rectangle2D object is about
@@ -268,13 +266,18 @@ public abstract class AbstractMovingModelController {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
 			if (bound1.intersects(bound2) && this.model != otherModel) {
 				dynamicCollsion = true;
-				if(model instanceof HeroModel && otherModel instanceof DummyEnemyModel) {
-					otherModel.setAlive(false);
+				if (model instanceof AbstractCharacterModel
+						&& otherModel instanceof AbstractProjectileModel) {
+					AbstractProjectileModel projectile = (AbstractProjectileModel) otherModel;
+					int damage = projectile.getDamage();
+					model.takeDamage(damage);
+					 if(model.getHealth() <= 0) {
+					 model.setAlive(false);
+					 }	
 				}
-			}
-				
-				
+			}			
 		}
+		
 		return dynamicCollsion;
 	}
 

@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D.Float;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.views.BulletView;
-import se.chalmers.tda367.group15.game.views.View;
 
 public class ProjectileController extends AbstractMovingModelController {
 

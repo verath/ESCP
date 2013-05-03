@@ -83,13 +83,10 @@ public class BasicRoomController extends AbstractRoomController {
 				it.remove();
 			}
 		}
-		int i = 0;
 
 		for (AbstractMovingModelController controller : movingModelControllers) {
-			i++;
 			controller.update(container, delta, staticBounds, dynamicBounds);
 		}
-		System.out.println(i);
 	}
 
 	/**

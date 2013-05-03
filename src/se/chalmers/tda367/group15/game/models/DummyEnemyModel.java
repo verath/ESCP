@@ -8,7 +8,7 @@ package se.chalmers.tda367.group15.game.models;
  * @author simon
  * 
  */
-public class DummyEnemyModel extends AbstractMovingModel {
+public class DummyEnemyModel extends AbstractCharacterModel {
 
 	/**
 	 * Creates a new dummy enemy.
@@ -22,5 +22,6 @@ public class DummyEnemyModel extends AbstractMovingModel {
 		setRotation(180);
 		setOffset(11);
 		setAlive(true);
+		setHealth(100);
 	}
 }
