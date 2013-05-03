@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D.Float;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,12 +9,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
-import se.chalmers.tda367.group15.game.views.BulletView;
 import se.chalmers.tda367.group15.game.views.HeroView;
-import se.chalmers.tda367.group15.game.views.View;
 
 public class HeroController extends AbstractMovingModelController {
 
@@ -23,8 +22,6 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingDown;
 	private boolean goingLeft;
 	private boolean goingRight;
-	private List<AbstractMovingModel> bullets;
-	private List<View> bulletViews;
 	private long timer = 0;
 
 	/**
@@ -37,8 +34,6 @@ public class HeroController extends AbstractMovingModelController {
 		super(gameController);
 		setModel(new HeroModel());
 		setView(new HeroView(getModel()));
-		bullets = new ArrayList<AbstractMovingModel>();
-		bulletViews = new ArrayList<View>();
 	}
 
 	/**
@@ -49,41 +44,21 @@ public class HeroController extends AbstractMovingModelController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
-		AbstractMovingModel model = getModel();
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
-		if (input.isKeyPressed(Input.KEY_SPACE)) {
-			AbstractMovingModel newBullet = new BulletModel();
-			newBullet.setX(model.getX() + model.getWidth() / 2);
-			newBullet.setY(model.getY() + model.getHeight() / 2);
-			newBullet.setRotation(model.getRotation());
-			newBullet.setAlive(true);
 
-			View newBulletView = new BulletView(newBullet);
-
-			bullets.add(newBullet);
-			bulletViews.add(newBulletView);
-
+		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			createBullet();
 			timer = System.currentTimeMillis();
-
-		} else if (input.isKeyDown(Input.KEY_SPACE)
+		}else if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
 				&& System.currentTimeMillis() - timer > model
 						.getCurrentWeapon().getFiringSpeed()) {
-
 			timer = System.currentTimeMillis();
-
-			AbstractMovingModel newBullet = new BulletModel();
-			newBullet.setX(model.getX() + model.getWidth() / 2);
-			newBullet.setY(model.getY() + model.getHeight() / 2);
-			newBullet.setRotation(model.getRotation());
-			newBullet.setAlive(true);
-
-			View newBulletView = new BulletView(newBullet);
-
-			bullets.add(newBullet);
-			bulletViews.add(newBulletView);
+			createBullet();
 		}
+
 		// Calculate facing depending on where the mouse is relative
 		// to the center of the hero
 		model.setRotation(Math.toDegrees(Math.atan2((model.getHeight() / 2
@@ -123,25 +98,32 @@ public class HeroController extends AbstractMovingModelController {
 
 		model.setMoving(speedY != 0 || speedX != 0);
 
-		for (AbstractMovingModel bullet : bullets) {
-			if (bullet.isAlive()) {
-				if (!isCollision(bullet.getX(), bullet.getY(),
-						bullet.getHeight(), bullet.getWidth(), staticBounds,
-						dynamicBounds)) {
-					bullet.setX(bullet.getX()
-							- (float) Math.cos(Math.toRadians(bullet
-									.getRotation()))
-							* (bullet.getVelocity() * delta));
-					bullet.setY(bullet.getY()
-							- (float) Math.sin(Math.toRadians(bullet
-									.getRotation())) * bullet.getVelocity()
-							* delta);
-				} else {
-					bullet.setAlive(false);
-				}
-			}
-		}
+	}
 
+	private void createBullet() {
+		AbstractCharacterModel model = (AbstractCharacterModel)getModel();
+		AbstractProjectileModel newBullet = new BulletModel();
+
+		float heroAngle = (float) Math.toRadians(model.getRotation());
+		float heroMiddleX = model.getX() + model.getWidth() / 2;
+		float heroMiddleY = model.getY() + model.getHeight() / 2;
+
+		// +12 pixels in end of expression to make bullet appear outside
+		// hero's collision box
+		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
+				* ((model.getWidth() / 2) + 12);
+		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
+				* ((model.getHeight() / 2) + 12);
+
+		// *3 pixels compensating for the width and height of the bullet
+		newBullet.setX(heroFaceX + (float) Math.sin(heroAngle) * 3);
+		newBullet.setY(heroFaceY + (float) Math.cos(heroAngle) * 3);
+		newBullet.setRotation(model.getRotation());
+		newBullet.setDamage(model.getCurrentWeapon().getDamage());
+		newBullet.setAlive(true);
+		AbstractRoomController currentRoom = getGameController()
+				.getRoomController().getCurrentRoom();
+		currentRoom.addProjectile(newBullet);
 	}
 
 	/**
@@ -151,10 +133,5 @@ public class HeroController extends AbstractMovingModelController {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		getView().render(container, g);
-
-		for (View bulletView : bulletViews) {
-			bulletView.render(container, g);
-		}
-
 	}
 }

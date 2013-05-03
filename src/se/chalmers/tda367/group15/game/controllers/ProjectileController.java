@@ -9,24 +9,21 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.views.BulletView;
-import se.chalmers.tda367.group15.game.views.View;
 
 public class ProjectileController extends AbstractMovingModelController {
 
-	protected ProjectileController(GameController gameController) {
+	protected ProjectileController(GameController gameController,
+			AbstractMovingModel projectile) {
 		super(gameController);
-		AbstractMovingModel bullet = new BulletModel();
-		View bulletview = new BulletView(bullet);
-		setModel(bullet);
+		setModel(projectile);
+		setView(new BulletView(projectile));
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		// TODO Auto-generated method stub
-
+		getView().render(container, g);
 	}
 
 	@Override
@@ -34,7 +31,25 @@ public class ProjectileController extends AbstractMovingModelController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
-		// TODO Auto-generated method stub
+		AbstractMovingModel projectile = getModel();
+		if (projectile.isAlive()) {
+
+			if (!isCollision(projectile.getX(), projectile.getY(),
+					projectile.getHeight(), projectile.getWidth(),
+					staticBounds, dynamicBounds)) {
+				projectile.setX(projectile.getX()
+						- (float) Math.cos(Math.toRadians(projectile
+								.getRotation()))
+						* (projectile.getVelocity() * delta));
+				projectile.setY(projectile.getY()
+						- (float) Math.sin(Math.toRadians(projectile
+								.getRotation())) * projectile.getVelocity()
+						* delta);
+			} else {
+				projectile.setAlive(false);
+			}
+
+		}
 
 	}
 

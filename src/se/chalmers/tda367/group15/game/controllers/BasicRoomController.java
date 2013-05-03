@@ -27,7 +27,7 @@ public class BasicRoomController extends AbstractRoomController {
 	}
 
 	private TiledMap map;
-	private List<AbstractMovingModelController> enemyControllers = new ArrayList<AbstractMovingModelController>();
+	private List<AbstractMovingModelController> movingModelControllers = new ArrayList<AbstractMovingModelController>();
 	private List<Rectangle2D.Float> staticBounds;
 	private Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
 
@@ -61,18 +61,18 @@ public class BasicRoomController extends AbstractRoomController {
 		DummyEnemyModel e3 = new DummyEnemyModel(100, 270);
 		DummyEnemyModel e4 = new DummyEnemyModel(200, 200);
 		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
-		enemyControllers.add(new DummyEnemyController(e1,
+		movingModelControllers.add(new DummyEnemyController(e1,
 				new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e2,
+		movingModelControllers.add(new DummyEnemyController(e2,
 				new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e3,
+		movingModelControllers.add(new DummyEnemyController(e3,
 				new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e4,
+		movingModelControllers.add(new DummyEnemyController(e4,
 				new RandomPathNavigation(this), getGameController()));
-		enemyControllers.add(new DummyEnemyController(e5,
+		movingModelControllers.add(new DummyEnemyController(e5,
 				new RandomPathNavigation(this), getGameController()));
 
-		for (AbstractMovingModelController controller : enemyControllers) {
+		for (AbstractMovingModelController controller : movingModelControllers) {
 			AbstractMovingModel model = controller.getModel();
 			dynamicBounds.put(model, model.getBounds());
 		}
@@ -89,7 +89,18 @@ public class BasicRoomController extends AbstractRoomController {
 			throws SlickException {
 
 		// tell enemy controllers to move
-		for (AbstractMovingModelController controller : enemyControllers) {
+		Iterator<AbstractMovingModelController> it = movingModelControllers
+				.iterator();
+		while (it.hasNext()) {
+			AbstractMovingModelController controller = (AbstractMovingModelController) it
+					.next();
+			AbstractMovingModel model = controller.getModel();
+			if (!model.isAlive()) {
+				it.remove();
+			}
+		}
+
+		for (AbstractMovingModelController controller : movingModelControllers) {
 			controller.update(container, delta, staticBounds, dynamicBounds);
 		}
 	}
@@ -105,7 +116,7 @@ public class BasicRoomController extends AbstractRoomController {
 		map.render(0, 0);
 
 		// tell enemy controllers to render all enemy views
-		for (AbstractMovingModelController controller : enemyControllers) {
+		for (AbstractMovingModelController controller : movingModelControllers) {
 			controller.render(container, g);
 		}
 
@@ -123,7 +134,7 @@ public class BasicRoomController extends AbstractRoomController {
 	 */
 	@Override
 	public List<AbstractMovingModelController> getControllers() {
-		return enemyControllers;
+		return movingModelControllers;
 	}
 
 	/**
@@ -140,8 +151,9 @@ public class BasicRoomController extends AbstractRoomController {
 	public Map<AbstractMovingModel, Rectangle2D.Float> getDynamicBounds() {
 		// update bounds
 		Iterator<AbstractMovingModel> it = dynamicBounds.keySet().iterator();
+
 		while (it.hasNext()) {
-			AbstractMovingModel model = it.next();
+			AbstractMovingModel model = (AbstractMovingModel) it.next();
 			if (model.isAlive()) {
 				dynamicBounds.put(model, model.getBounds());
 			} else {
@@ -184,6 +196,16 @@ public class BasicRoomController extends AbstractRoomController {
 	@Override
 	public float getCost(PathFindingContext context, int tx, int ty) {
 		return 1;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addProjectile(AbstractMovingModel projectile) {
+		movingModelControllers.add(new ProjectileController(
+				getGameController(), projectile));
+		dynamicBounds.put(projectile, projectile.getBounds());
 	}
 
 }

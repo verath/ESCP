@@ -24,7 +24,8 @@ public class BulletView implements View{
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		if(model.isAlive()) {
-			image.draw(model.getX(), model.getY());
+			image.draw(model.getX()
+					, model.getY());
 		}
 	}
 

@@ -9,9 +9,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
-import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
 import se.chalmers.tda367.group15.game.views.View;
 
@@ -134,23 +134,28 @@ public abstract class AbstractMovingModelController {
 	 *            map with moving models and their collision bounds
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isCollision(float x, float y, List<Rectangle2D.Float> staticBounds,
+	public boolean isCollision(float x, float y,
+			List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
-		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y, model.getWidth(), model.getHeight());
+		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
+				model.getWidth(), model.getHeight());
 
 		return isCollision(x, y, staticBounds, dynamicBounds, bound1);
 	}
-	
+
 	/**
 	 * Method for checking if collision with width and height is about to
 	 * happen.
+	 * 
 	 * @param x
 	 *            the x coordinate
 	 * @param y
 	 *            the y coordinate
-	 * @param width The width of area to check
-	 * @param height The height of area to check
+	 * @param width
+	 *            The width of area to check
+	 * @param height
+	 *            The height of area to check
 	 * @param staticBounds
 	 *            list of rectangles representing static blocked object on the
 	 *            map
@@ -293,13 +298,18 @@ public abstract class AbstractMovingModelController {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
 			if (bound1.intersects(bound2) && this.model != otherModel) {
 				dynamicCollsion = true;
-				if(model instanceof HeroModel && otherModel instanceof DummyEnemyModel) {
-					otherModel.setAlive(false);
+				if (model instanceof AbstractCharacterModel
+						&& otherModel instanceof AbstractProjectileModel) {
+					AbstractProjectileModel projectile = (AbstractProjectileModel) otherModel;
+					int damage = projectile.getDamage();
+					model.takeDamage(damage);
+					if (model.getHealth() <= 0) {
+						model.setAlive(false);
+					}
 				}
 			}
-				
-				
 		}
+
 		return dynamicCollsion;
 	}
 
