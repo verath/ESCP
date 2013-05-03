@@ -15,21 +15,17 @@ import se.chalmers.tda367.group15.game.views.View;
 
 public class ProjectileController extends AbstractMovingModelController {
 
-	private List<View> projectileViews = new ArrayList<View>();
-	private List<AbstractMovingModel> projectiles = new ArrayList<AbstractMovingModel>();
-
-	protected ProjectileController(GameController gameController) {
+	protected ProjectileController(GameController gameController,
+			AbstractMovingModel projectile) {
 		super(gameController);
+		setModel(projectile);
+		setView(new BulletView(projectile));
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		if (projectileViews.size() > 0) {
-			for (View view : projectileViews) {
-				view.render(container, g);
-			}
-		}
+		getView().render(container, g);
 	}
 
 	@Override
@@ -37,41 +33,26 @@ public class ProjectileController extends AbstractMovingModelController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
-		if (projectiles.size() > 0) {
-			for (AbstractMovingModel projectile : projectiles) {
-				if (projectile.isAlive()) {
-					
-					if (!isCollision(projectile.getX(), projectile.getY(),
-							projectile.getHeight(), projectile.getWidth(),
-							staticBounds, dynamicBounds)) {
-						projectile.setX(projectile.getX()
-								- (float) Math.cos(Math.toRadians(projectile
-										.getRotation()))
-								* (projectile.getVelocity() * delta));
-						projectile.setY(projectile.getY()
-								- (float) Math.sin(Math.toRadians(projectile
-										.getRotation()))
-								* projectile.getVelocity() * delta);
-					} else {
-						projectile.setAlive(false);
-					}
-				}
+		AbstractMovingModel projectile = getModel();
+		if (projectile.isAlive()) {
+
+			if (!isCollision(projectile.getX(), projectile.getY(),
+					projectile.getHeight(), projectile.getWidth(),
+					staticBounds, dynamicBounds)) {
+				projectile.setX(projectile.getX()
+						- (float) Math.cos(Math.toRadians(projectile
+								.getRotation()))
+						* (projectile.getVelocity() * delta));
+				projectile.setY(projectile.getY()
+						- (float) Math.sin(Math.toRadians(projectile
+								.getRotation())) * projectile.getVelocity()
+						* delta);
+			} else {
+				projectile.setAlive(false);
 			}
+
 		}
 
-	}
-
-	/**
-	 * Method for adding a projectile to the projectile controller.
-	 * 
-	 * @param projectile
-	 *            The projectile to be added
-	 * @param projectileView
-	 *            The view of the projectile
-	 */
-	public void addProjectile(AbstractMovingModel projectile) {
-		projectiles.add(projectile);
-		projectileViews.add(new BulletView(projectile));
 	}
 
 }

@@ -63,8 +63,8 @@ public class HeroController extends AbstractMovingModelController {
 			float facePosX = modelPosX - (float)Math.cos(modelAngleRad) * model.getWidth() / 2;
 			float facePosY = modelPosY - (float)Math.sin(modelAngleRad) * model.getHeight() / 2;
 			
-			newBullet.setX(facePosX + (float)Math.sin(modelAngleRad) * 20);
-			newBullet.setY(facePosY - (float)Math.cos(modelAngleRad) * 20);
+			newBullet.setX(facePosX + (float)Math.sin(modelAngleRad) * 25);
+			newBullet.setY(facePosY - (float)Math.cos(modelAngleRad) * 50);
 			newBullet.setRotation(model.getRotation());
 			newBullet.setAlive(true);
 			AbstractRoomController currentRoom = getGameController()
