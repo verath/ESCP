@@ -97,6 +97,20 @@ public class HeroController extends AbstractMovingModelController {
 		}
 
 		model.setMoving(speedY != 0 || speedX != 0);
+		RoomsController roomsController = getGameController().getRoomController();
+		if(model.getX() < -10) {
+			roomsController.moveLeft();
+			model.setX(container.getWidth());
+		}else if(model.getX() > container.getWidth() + 10) {
+			roomsController.moveRight();
+			model.setX(0);
+		}else if(model.getY() < -10) {
+			roomsController.moveUp();
+			model.setY(container.getHeight());
+		}else if(model.getY() > container.getHeight() + 10) {
+			roomsController.moveDown();
+			model.setY(0);
+		}
 
 	}
 
