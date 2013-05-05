@@ -30,7 +30,7 @@ public class PistolModel extends AbstractRangedWeaponModel {
 
 	@Override
 	protected void initAnimation() {
-		Image[] image = sortImages("pistol");
+		Image[] image = sortImages("heroMovement/pistol");
 		animation = new Animation(image, 40, true);
 	}
 

@@ -36,6 +36,10 @@ public class SlickPsychoHero implements PsychoHeroGame {
 			// TODO handle exception?
 			e.printStackTrace();
 			return;
+		} catch (org.lwjgl.openal.OpenALException e) {
+			System.out
+					.println("caught OpenALException, probably about shutting down sound. Maybe your drives are outdated?");
+			return;
 		}
 	}
 

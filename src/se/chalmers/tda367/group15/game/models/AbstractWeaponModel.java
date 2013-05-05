@@ -105,15 +105,15 @@ public abstract class AbstractWeaponModel {
 	 * This method returns the images of a folder in an alphabetical order so
 	 * that the animation runs correctly.
 	 * 
-	 * @param weapon
-	 *            the name of the weapon's folder. Only provide the last level
+	 * @param path
+	 *            the name of the weapon's folder. Only provide the two last levels
 	 *            of the hierarchy due to the implementation;
-	 *            "res/animation/hero/" + weapon.
+	 *            "res/animation/" + path.
 	 * @return a sorted array of images corresponding to the path given.
 	 * @throws SlickException
 	 */
-	protected Image[] sortImages(String weapon) {
-		File folder = new File("res/animation/heroMovement/" + weapon);
+	protected Image[] sortImages(String path) {
+		File folder = new File("res/animation/" + path);
 		if (folder != null) {
 			File[] files = folder.listFiles();
 			if (files != null) {

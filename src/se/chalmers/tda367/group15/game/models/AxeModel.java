@@ -15,6 +15,7 @@ import org.newdawn.slick.Image;
 public class AxeModel extends AbstractMeleeWeapon {
 
 	private static Animation animation;
+	private static Animation swingAnimation;
 
 	public AxeModel() {
 		super("Axe", 10, 15, 350, false);
@@ -29,8 +30,20 @@ public class AxeModel extends AbstractMeleeWeapon {
 
 	@Override
 	protected void initAnimation() {
-		Image[] image = sortImages("axe");
+		Image[] image = sortImages("heroMovement/axe");
 		animation = new Animation(image, 40, true);
+		
+		image = sortImages("heroAttack/axe");
+		swingAnimation = new Animation(image, 15, true);
+		
+	}
+	
+	@Override
+	public Animation getSwingAnimation() {
+		if(swingAnimation == null) {
+			initAnimation();
+		}
+		return swingAnimation.copy();
 	}
 
 }

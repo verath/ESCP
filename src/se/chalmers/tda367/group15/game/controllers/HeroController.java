@@ -167,7 +167,34 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	private void swingWeapon() {
-		//TODO: Fix this shiet
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		
+		// Run the swinging animation for the weapon
+		AbstractMeleeWeapon weapon = (AbstractMeleeWeapon)model.getCurrentWeapon();
+		HeroView view = (HeroView)getView();
+		view.runAnimation(weapon.getSwingAnimation());
+		
+		AbstractProjectileModel newSwing = new MeleeSwingModel();
+		
+		float heroAngle = (float) Math.toRadians(model.getRotation());
+		float heroMiddleX = model.getX() + model.getWidth() / 2;
+		float heroMiddleY = model.getY() + model.getHeight() / 2;
+
+
+		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
+				* ((model.getWidth() / 2) + 12);
+		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
+				* ((model.getHeight() / 2) + 12);
+
+		newSwing.setX(heroFaceX + (float) Math.sin(heroAngle));
+		newSwing.setY(heroFaceY + (float) Math.cos(heroAngle));
+		newSwing.setRotation(model.getRotation());
+		newSwing.setDamage(model.getCurrentWeapon().getDamage());
+		newSwing.setAlive(true);
+	
+		AbstractRoomController currentRoom = getGameController()
+				.getRoomController().getCurrentRoom();
+		currentRoom.addSwing(newSwing);
 	}
 
 	/**

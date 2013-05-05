@@ -21,6 +21,8 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  */
 public class HeroView implements View {
 
+	private boolean swingAnimationRunning = false;
+
 	/**
 	 * The hero model this view is representing
 	 */
@@ -30,6 +32,7 @@ public class HeroView implements View {
 	 * The move animation
 	 */
 	private Animation animation;
+	private Animation swingAnimation;
 
 	/**
 	 * Create a new hero view.
@@ -37,7 +40,7 @@ public class HeroView implements View {
 	 * @param heroModel
 	 */
 	public HeroView(final AbstractMovingModel hero) {
-		this.model = (AbstractCharacterModel)hero;
+		this.model = (AbstractCharacterModel) hero;
 		animation = this.model.getCurrentWeapon().getAnimation();
 	}
 
@@ -49,14 +52,21 @@ public class HeroView implements View {
 			throws SlickException {
 
 		if (model.isAlive()) {
-			animation = model.getCurrentWeapon().getAnimation();
 			float rotation = (float) model.getRotation();
+			if (!swingAnimationRunning) {
+				animation = model.getCurrentWeapon().getAnimation();
 
-			// We don't want to run the animation if we're not moving
-			if (!model.isMoving()) {
-				animation.stop();
-			} else if (animation.isStopped()) {
-				animation.start();
+				// We don't want to run the animation if we're not moving
+				if (!model.isMoving()) {
+					animation.stop();
+				} else if (animation.isStopped()) {
+					animation.start();
+				}
+			} else {
+				animation = swingAnimation;
+				if(swingAnimation.isStopped()){
+					swingAnimationRunning = false;
+				}
 			}
 			// rotates the current frame
 			g.rotate(model.getX() + model.getWidth() / 2,
@@ -70,11 +80,21 @@ public class HeroView implements View {
 				g.drawRect((int) e.getX(), (int) e.getY(), (int) e.getWidth(),
 						(int) e.getHeight());
 			}
-			
+
 			Font f = g.getFont();
-			g.drawString("HP: " + model.getHealth(), model.getX(),
-					model.getY() - f.getLineHeight());
+			g.drawString("HP: " + model.getHealth(), model.getX(), model.getY()
+					- f.getLineHeight());
+
 		}
+	}
+
+	public void runAnimation(Animation animation) {
+		if(model.isAlive()) {
+			swingAnimationRunning = true;
+			this.swingAnimation = animation;
+			this.swingAnimation.setLooping(false);
+		}
+		
 	}
 
 }
