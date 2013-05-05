@@ -32,13 +32,16 @@ public class AxeModel extends AbstractMeleeWeapon {
 	protected void initAnimation() {
 		Image[] image = sortImages("heroMovement/axe");
 		animation = new Animation(image, 40, true);
+		
+		image = sortImages("heroAttack/axe");
+		swingAnimation = new Animation(image, 15, true);
+		
 	}
 	
 	@Override
 	public Animation getSwingAnimation() {
 		if(swingAnimation == null) {
-			Image[] image = sortImages("heroAttack/axe");
-			swingAnimation = new Animation(image, 15, true);
+			initAnimation();
 		}
 		return swingAnimation.copy();
 	}

@@ -207,5 +207,15 @@ public class BasicRoomController extends AbstractRoomController {
 				getGameController(), projectile));
 		dynamicBounds.put(projectile, projectile.getBounds());
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addSwing(AbstractMovingModel swing) {
+		movingModelControllers.add(new MeleeSwingController(
+				getGameController(), swing));
+		dynamicBounds.put(swing, swing.getBounds());
+	}
 
 }

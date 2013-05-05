@@ -19,7 +19,7 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  * @author simon
  * 
  */
-public abstract class AbstractRoomController implements TileBasedMap{
+public abstract class AbstractRoomController implements TileBasedMap {
 
 	/**
 	 * A reference to the game's gameController
@@ -104,15 +104,21 @@ public abstract class AbstractRoomController implements TileBasedMap{
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;
 	}
-	
+
 	/**
 	 * Method for adding a projectile to the room.
 	 * 
 	 * @param projectile
 	 *            The projectile to be added
-	 * @param projectileView
-	 *            The view of the projectile
 	 */
 	public abstract void addProjectile(AbstractMovingModel projectile);
+
+	/**
+	 * Method for adding a swing infront of the hero
+	 * 
+	 * @param swing
+	 *            The swing to be added
+	 */
+	public abstract void addSwing(AbstractMovingModel swing);
 
 }
