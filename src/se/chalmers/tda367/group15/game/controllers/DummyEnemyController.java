@@ -7,27 +7,19 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
+import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
-import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
-import se.chalmers.tda367.group15.game.navigation.RandomNavigation;
 import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 
-public class DummyEnemyController extends AbstractMovingModelController {
-
-	/**
-	 * Creates a new dummyenemy controller with randomnavigation
-	 * 
-	 * @param model
-	 *            the DummyEnemy model
-	 * @param gameController
-	 *            A reference to the controller
-	 */
-	public DummyEnemyController(DummyEnemyModel model,
-			GameController gameController) {
-		this(model, new RandomNavigation(), gameController);
-	}
+/**
+ * Creates a new dummy enemy
+ * @author ?????, Carl Jansson
+ *
+ */
+public class DummyEnemyController extends AbstractNpcController {
 
 	/**
 	 * Creates a new dummyenemy controller with navigation of your choice.
@@ -39,12 +31,11 @@ public class DummyEnemyController extends AbstractMovingModelController {
 	 * @param gameController
 	 *            A reference to the controller
 	 */
-	public DummyEnemyController(DummyEnemyModel model, NpcNavigation navigator,
+	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
 			GameController gameController) {
-		super(gameController);
+		super(gameController, new AStarPathFinder(map, 500, true));
 		setModel(model);
 		setView(new DummyEnemyView(getModel()));
-		setNavigator(navigator);
 	}
 
 	/**
@@ -66,12 +57,7 @@ public class DummyEnemyController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 
-		AbstractMovingModel model = getModel();
+		randomPosMove(container, delta, staticBounds, dynamicBounds);
 
-		getNavigator().update(this, model, delta, staticBounds, dynamicBounds);
-
-		model.setRotation(getNavigator().getNewDirection());
-		model.setX(getNavigator().getNewX());
-		model.setY(getNavigator().getNewY());
 	}
 }

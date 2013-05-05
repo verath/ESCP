@@ -12,7 +12,6 @@ import org.newdawn.slick.SlickException;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
-import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
@@ -38,8 +37,6 @@ public abstract class AbstractMovingModelController {
 	 * A reference to the game's gameController
 	 */
 	private GameController gameController;
-
-	private NpcNavigation navigator;
 
 	/**
 	 * Creates a new AbstractMovingModelController.
@@ -73,7 +70,9 @@ public abstract class AbstractMovingModelController {
 	 *            The amount of time thats passed since last update in
 	 *            milliseconds
 	 * @param dynamicBounds
+	 *            the dynamic bounds of moving objects
 	 * @param staticBounds
+	 *            the static bounds of current map
 	 * @throws SlickException
 	 *             Throw to indicate a internal error
 	 */
@@ -303,7 +302,8 @@ public abstract class AbstractMovingModelController {
 					AbstractProjectileModel projectile = (AbstractProjectileModel) otherModel;
 					int damage = projectile.getDamage();
 					model.takeDamage(damage);
-					System.out.println("Dealt " + damage + " points of damage! Wow!");
+					System.out.println("Dealt " + damage
+							+ " points of damage! Wow!");
 					if (model.getHealth() <= 0) {
 						model.setAlive(false);
 					}
@@ -330,13 +330,5 @@ public abstract class AbstractMovingModelController {
 	 */
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;
-	}
-
-	public void setNavigator(NpcNavigation nav) {
-		this.navigator = nav;
-	}
-
-	public NpcNavigation getNavigator() {
-		return this.navigator;
 	}
 }
