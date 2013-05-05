@@ -33,7 +33,12 @@ public class DummyEnemyController extends AbstractNpcController {
 	 */
 	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
 			GameController gameController) {
-		super(gameController, new AStarPathFinder(map, 500, true));
+		this(model, map, gameController, 0, 10, 0, 32);
+	}
+	
+	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
+			GameController gameController, int x, int x2, int y, int y2) {
+		super(gameController, new AStarPathFinder(map, 500, true), x, x2, y, y2);
 		setModel(model);
 		setView(new DummyEnemyView(getModel()));
 	}

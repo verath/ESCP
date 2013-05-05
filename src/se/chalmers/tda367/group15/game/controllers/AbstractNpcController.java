@@ -38,6 +38,11 @@ public abstract class AbstractNpcController extends
 	 * the path finder
 	 */
 	private AStarPathFinder myPathFinder;
+	
+	private int deltaX;
+	private int deltaY;
+	private int startX;
+	private int startY;
 
 	/**
 	 * Create a new AbstractNpcController using a map.
@@ -61,8 +66,23 @@ public abstract class AbstractNpcController extends
 	 */
 	public AbstractNpcController(GameController gameController,
 			AStarPathFinder pathFinder) {
+		this(gameController, pathFinder, 0, 32, 0, 24);
+	}
+	
+	/**
+	 * Create a new AbstractNpcController using a path finder and setting default tiles to visit
+	 * @param gameController
+	 * @param pathFinder
+	 * @param x
+	 * @param x2
+	 * @param y
+	 * @param y2
+	 */
+	public AbstractNpcController(GameController gameController,
+			AStarPathFinder pathFinder, int x, int x2, int y, int y2) {
 		super(gameController);
 		this.setpathFinder(pathFinder);
+		this.setDefaultTiles(x, x2, y, y2);
 	}
 
 	/**
@@ -128,8 +148,8 @@ public abstract class AbstractNpcController extends
 
 		if (myPath == null || currentStep == myPath.getLength()) {
 
-			int tarX = (int) (Math.random() * 30);
-			int tarY = (int) (Math.random() * 30);
+			int tarX = startX + (int) (Math.random() * deltaX);
+			int tarY = startY + (int) (Math.random() * deltaY);
 
 			myPath = getPathFinder().findPath(null, currX, currY, tarX, tarY);
 			currentStep = 1;
@@ -165,6 +185,31 @@ public abstract class AbstractNpcController extends
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 * @param x min x
+	 * @param x2 max x
+	 * @param y min y
+	 * @param y2 max y
+	 */
+	public void setDefaultTiles(int x, int x2, int y, int y2){
+		
+		if ( x >= 0 && y >= 0 && x < x2 && y < y2 && x2 <= 32 && y2 <= 24) {
+			deltaX = x2-x;
+			deltaY = y2-y;
+			startX = x;
+			startY = y;
+			
+		} else {
+			deltaX = 32;
+			deltaY = 24;
+			startX = 0;
+			startY = 0;
+			
+		}
+		
 	}
 
 }
