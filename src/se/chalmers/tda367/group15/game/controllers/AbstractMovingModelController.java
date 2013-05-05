@@ -247,8 +247,13 @@ public abstract class AbstractMovingModelController {
 		boolean staticCollision = false;
 		// check static collisions
 		for (Rectangle2D.Float bound2 : staticBounds) {
-			if (bound1.intersects(bound2))
+			if (bound1.intersects(bound2)) {
 				staticCollision = true;
+				if(model instanceof AbstractProjectileModel) {
+					model.setAlive(false);
+				}
+			}
+			
 		}
 		return staticCollision;
 	}
@@ -303,11 +308,8 @@ public abstract class AbstractMovingModelController {
 					AbstractProjectileModel projectile = (AbstractProjectileModel) otherModel;
 					int damage = projectile.getDamage();
 					model.takeDamage(damage);
-					otherModel.setAlive(false);
+					projectile.setAlive(false);
 					System.out.println("Dealt " + damage + " points of damage! Wow!");
-					if (model.getHealth() <= 0) {
-						model.setAlive(false);
-					}
 				}
 			}
 		}
