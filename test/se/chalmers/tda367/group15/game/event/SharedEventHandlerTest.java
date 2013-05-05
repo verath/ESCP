@@ -7,13 +7,13 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
- * Test for the event handling class, and by doing so also testing Events and
+ * Test for the SingleEventHandler class, and by doing so also testing Events and
  * EventListener.
  * 
  * @author Peter
  * 
  */
-public class EventHandlerTest {
+public class SharedEventHandlerTest {
 
 	/*
 	 * Set up two custom events
@@ -35,7 +35,7 @@ public class EventHandlerTest {
 	 */
 	@Test
 	public final void testEventPublish() {
-		EventHandler eh = new EventHandler();
+		SingleEventHandler eh = new SingleEventHandler();
 
 		final SuperEvent event = new SuperEvent();
 
@@ -55,7 +55,7 @@ public class EventHandlerTest {
 	 */
 	@Test
 	public final void testRemoveEventListener() {
-		EventHandler eh = new EventHandler();
+		SingleEventHandler eh = new SingleEventHandler();
 
 		final SuperEvent event = new SuperEvent();
 
@@ -79,7 +79,7 @@ public class EventHandlerTest {
 	 */
 	@Test
 	public final void testEventPublishSubEventTriggersSuperEventListener() {
-		EventHandler eh = new EventHandler();
+		SingleEventHandler eh = new SingleEventHandler();
 
 		final SubEvent event = new SubEvent();
 
@@ -101,7 +101,7 @@ public class EventHandlerTest {
 	 */
 	@Test
 	public final void testEventPublishSuperEventDoesNotTriggersSubEventListener() {
-		EventHandler eh = new EventHandler();
+		SingleEventHandler eh = new SingleEventHandler();
 
 		final SuperEvent event = new SuperEvent();
 

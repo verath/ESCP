@@ -5,6 +5,7 @@ package se.chalmers.tda367.group15.game.event;
  * the events of type T to the extending class.
  * 
  * @author Peter
+ * @see EventListener
  * 
  * @param <T>
  *            The type of events to listen for.
