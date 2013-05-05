@@ -47,6 +47,8 @@ class GameController {
 	 *             Throw to indicate an internal error
 	 */
 	public void init(GameContainer container) throws SlickException {
+		container.setShowFPS(false);
+		
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);
 		AbstractRoomController secondRoom = new SecondRoomController(this);
