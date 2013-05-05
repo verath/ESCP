@@ -14,6 +14,8 @@ import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
 
 class GameController {
+	
+	private boolean imagesAlreadyLoaded = false; 
 
 	/**
 	 * The roomsController handling what room is the current room.
@@ -54,7 +56,10 @@ class GameController {
 		AbstractRoomController secondRoom = new SecondRoomController(this);
 
 		// Initialize weapons
-		WeaponLoader.initWeapons();
+		if(!imagesAlreadyLoaded) {
+			WeaponLoader.initWeapons();
+			imagesAlreadyLoaded = true;
+		}
 
 		// Set up the room manager
 		roomController = new RoomsController();

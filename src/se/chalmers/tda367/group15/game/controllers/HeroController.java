@@ -10,10 +10,14 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
+import se.chalmers.tda367.group15.game.models.AbstractMeleeWeapon;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
+import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
 import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
 public class HeroController extends AbstractMovingModelController {
@@ -45,18 +49,40 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		AbstractWeaponModel weapon = model.getCurrentWeapon();
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
+		
+		// Change weapons
+		
+		if(input.isKeyPressed(Input.KEY_1)){
+			model.setCurrentWeapon(model.getWeapons().get(0));
+		} else if(input.isKeyPressed(Input.KEY_2)){
+			model.setCurrentWeapon(model.getWeapons().get(1));
+		} else if(input.isKeyPressed(Input.KEY_3)){
+			model.setCurrentWeapon(model.getWeapons().get(2));
+		}
 
+		// Fire bullets if mouse clicked and a ranged weapon is equipped
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			createBullet();
+			if (weapon instanceof AbstractRangedWeaponModel) {
+				createBullet();
+			} else if (weapon instanceof AbstractMeleeWeapon) {
+				swingWeapon();
+			}
 			timer = System.currentTimeMillis();
-		}else if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
+		} else if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
 				&& System.currentTimeMillis() - timer > model
 						.getCurrentWeapon().getFiringSpeed()) {
+
 			timer = System.currentTimeMillis();
-			createBullet();
+
+			if (weapon instanceof AbstractRangedWeaponModel) {
+				createBullet();
+			} else if (weapon instanceof AbstractMeleeWeapon) {
+				swingWeapon();
+			}
 		}
 
 		// Calculate facing depending on where the mouse is relative
@@ -115,7 +141,7 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	private void createBullet() {
-		AbstractCharacterModel model = (AbstractCharacterModel)getModel();
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newBullet = new BulletModel();
 
 		float heroAngle = (float) Math.toRadians(model.getRotation());
@@ -138,6 +164,10 @@ public class HeroController extends AbstractMovingModelController {
 		AbstractRoomController currentRoom = getGameController()
 				.getRoomController().getCurrentRoom();
 		currentRoom.addProjectile(newBullet);
+	}
+
+	private void swingWeapon() {
+		//TODO: Fix this shiet
 	}
 
 	/**

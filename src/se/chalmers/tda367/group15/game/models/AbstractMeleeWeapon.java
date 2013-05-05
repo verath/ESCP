@@ -27,11 +27,4 @@ public abstract class AbstractMeleeWeapon extends AbstractWeaponModel {
 			int firingSpeed, boolean isEquipped) {
 		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
 	}
-
-	@Override
-	public void fire() {
-		// TODO: implement firing. should probably trigger some
-		// "swinging animation".
-	}
-
 }
