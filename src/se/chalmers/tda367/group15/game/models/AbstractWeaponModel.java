@@ -52,11 +52,6 @@ public abstract class AbstractWeaponModel {
 	}
 
 	/**
-	 * Fire the weapon in the direction that the Hero is facing.
-	 */
-	public abstract void fire();
-
-	/**
 	 * Equip the weapon.
 	 */
 	public void equip() {
