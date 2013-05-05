@@ -17,7 +17,6 @@ import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
 import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
-import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
 public class HeroController extends AbstractMovingModelController {
@@ -124,16 +123,19 @@ public class HeroController extends AbstractMovingModelController {
 
 		model.setMoving(speedY != 0 || speedX != 0);
 		RoomsController roomsController = getGameController().getRoomController();
-		if(model.getX() < -10) {
+		float tmpX = model.getX() + model.getWidth() / 2;
+		float tmpY = model.getY() + model.getHeight() / 2;
+
+		if(tmpX <= 0) {
 			roomsController.moveLeft();
-			model.setX(container.getWidth());
-		}else if(model.getX() > container.getWidth() + 10) {
+			model.setX(container.getWidth() - model.getWidth());
+		}else if(tmpX >= container.getWidth()) {
 			roomsController.moveRight();
 			model.setX(0);
-		}else if(model.getY() < -10) {
+		}else if(tmpY <= 0) {
 			roomsController.moveUp();
 			model.setY(container.getHeight());
-		}else if(model.getY() > container.getHeight() + 10) {
+		}else if(tmpY >= container.getHeight()) {
 			roomsController.moveDown();
 			model.setY(0);
 		}
