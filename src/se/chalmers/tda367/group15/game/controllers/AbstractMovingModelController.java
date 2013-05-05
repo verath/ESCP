@@ -303,6 +303,7 @@ public abstract class AbstractMovingModelController {
 					AbstractProjectileModel projectile = (AbstractProjectileModel) otherModel;
 					int damage = projectile.getDamage();
 					model.takeDamage(damage);
+					otherModel.setAlive(false);
 					System.out.println("Dealt " + damage + " points of damage! Wow!");
 					if (model.getHealth() <= 0) {
 						model.setAlive(false);

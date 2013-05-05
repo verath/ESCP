@@ -45,8 +45,6 @@ public class ProjectileController extends AbstractMovingModelController {
 						- (float) Math.sin(Math.toRadians(projectile
 								.getRotation())) * projectile.getVelocity()
 						* delta);
-			} else {
-				projectile.setAlive(false);
 			}
 
 		}
