@@ -36,14 +36,35 @@ public abstract class AbstractNpcController extends
 	 * the path finder
 	 */
 	private AStarPathFinder myPathFinder;
-	
-	private long pauseTime;
-	private long waitTime;
-	
 
+	/**
+	 * waiting time start for creating new path
+	 */
+	private long pauseTime;
+
+	/**
+	 * Time to wait before creating new path
+	 */
+	private long waitTime;
+
+	/**
+	 * with of x to walk in
+	 */
 	private int deltaX;
+
+	/**
+	 * height of y to walk in
+	 */
 	private int deltaY;
+
+	/**
+	 * X coordinate of area to walk in
+	 */
 	private int startX;
+
+	/**
+	 * Y coordinate of area to walk in
+	 */
 	private int startY;
 
 	/**
@@ -77,10 +98,14 @@ public abstract class AbstractNpcController extends
 	 * 
 	 * @param gameController
 	 * @param pathFinder
-	 * @param x min x pos
-	 * @param x2 max x pos
-	 * @param y min y pos
-	 * @param y2 max y pos
+	 * @param x
+	 *            min x pos
+	 * @param x2
+	 *            max x pos
+	 * @param y
+	 *            min y pos
+	 * @param y2
+	 *            max y pos
 	 */
 	public AbstractNpcController(GameController gameController,
 			AStarPathFinder pathFinder, int x, int x2, int y, int y2) {
@@ -151,19 +176,20 @@ public abstract class AbstractNpcController extends
 		int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
 
 		if (myPath == null || currentStep == myPath.getLength()) {
-			
-			if ( pauseTime == 0) {
+
+			if (pauseTime == 0) {
 				pauseTime = System.currentTimeMillis();
-				waitTime = (long) (2000*Math.random());
-			} else if ( System.currentTimeMillis() >= waitTime + pauseTime) {
+				waitTime = (long) (2000 * Math.random());
+			} else if (System.currentTimeMillis() >= waitTime + pauseTime) {
 				int tarX = startX + (int) (Math.random() * deltaX);
 				int tarY = startY + (int) (Math.random() * deltaY);
 
-				myPath = getPathFinder().findPath(null, currX, currY, tarX, tarY);
+				myPath = getPathFinder().findPath(null, currX, currY, tarX,
+						tarY);
 				currentStep = 1;
 				pauseTime = 0;
 			}
-			
+
 		} else {
 			float diffX = model.getX() - (myPath.getX(currentStep) * 32);
 			float diffY = model.getY() - (myPath.getY(currentStep) * 32);
@@ -197,11 +223,17 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Set max and min positions.
-	 * @param x min x pos
-	 * @param x2 max x pos
-	 * @param y min y pos
-	 * @param y2 max y pos
+	 * Set max and min positions. Of given coordinates not allowed sets entire
+	 * map as default.
+	 * 
+	 * @param x
+	 *            min x pos
+	 * @param x2
+	 *            max x pos
+	 * @param y
+	 *            min y pos
+	 * @param y2
+	 *            max y pos
 	 */
 	public void setDefaultTiles(int x, int x2, int y, int y2) {
 
