@@ -168,6 +168,11 @@ public class HeroController extends AbstractMovingModelController {
 
 	private void swingWeapon() {
 		//TODO: Fix this shiet
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		AbstractMeleeWeapon weapon = (AbstractMeleeWeapon)model.getCurrentWeapon();
+		HeroView view = (HeroView)getView();
+		view.runAnimation(weapon.getSwingAnimation());
+		
 	}
 
 	/**

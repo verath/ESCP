@@ -1,5 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Image;
+
 /**
  * A weapon that can only be used in melee range.
  * 
@@ -27,4 +30,6 @@ public abstract class AbstractMeleeWeapon extends AbstractWeaponModel {
 			int firingSpeed, boolean isEquipped) {
 		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
 	}
+	
+	public abstract Animation getSwingAnimation();
 }
