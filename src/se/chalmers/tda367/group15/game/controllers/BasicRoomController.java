@@ -57,8 +57,8 @@ public class BasicRoomController extends AbstractRoomController {
 		// create an enemy, and add controller for that enemy to the update list
 		DummyEnemyModel e1 = new DummyEnemyModel();
 		DummyEnemyModel e2 = new DummyEnemyModel(400, 200);
-		DummyEnemyModel e3 = new DummyEnemyModel(100, 700);
-		DummyEnemyModel e4 = new DummyEnemyModel(800, 700);
+		DummyEnemyModel e3 = new DummyEnemyModel(100, 600);
+		DummyEnemyModel e4 = new DummyEnemyModel(940, 600);
 		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
 		movingModelControllers.add(new DummyEnemyController(e1, this,
 				getGameController(), 0, 10, 0, 10));
@@ -162,21 +162,33 @@ public class BasicRoomController extends AbstractRoomController {
 		return dynamicBounds;
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public int getWidthInTiles() {
 		return map.getWidth(); // *map.getTileWidth(); if using pixels instead
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public int getHeightInTiles() {
 		return map.getHeight(); // *map.getTileHeight(); if using pixels instead
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public void pathFinderVisited(int x, int y) {
 		// This is for debugging new heuristics.
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public boolean blocked(PathFindingContext context, int tx, int ty) {
 		// TODO How to use PathFindingContext?
@@ -192,6 +204,9 @@ public class BasicRoomController extends AbstractRoomController {
 		}
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public float getCost(PathFindingContext context, int tx, int ty) {
 		return 1;

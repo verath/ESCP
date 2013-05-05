@@ -16,18 +16,23 @@ public class DummyEnemyModel extends AbstractCharacterModel {
 		this(64f, 128f);
 	}
 	
+	public DummyEnemyModel(float x, float y){
+		this(x, y, 360*Math.random());
+	}
+	
 	/**
 	 * Creates a new dummy enemy.
-	 * @param x x postiton of DummyEnemyModel
+	 * @param x x position of DummyEnemyModel
 	 * @param y y position of DummyEnemyModel
+	 * @param rot angle to face in beginning
 	 */
-	public DummyEnemyModel(float x, float y) {
+	public DummyEnemyModel(float x, float y, double rot) {
 		setX(x);
 		setY(y);
 		setVelocity(0.1f);
 		setWidth(42);
 		setHeight(42);
-		setRotation(180);
+		setRotation(rot);
 		setOffset(11);
 		setAlive(true);
 		setHealth(100);

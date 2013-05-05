@@ -1,8 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +37,10 @@ public abstract class AbstractNpcController extends
 	 */
 	private AStarPathFinder myPathFinder;
 	
+	private long pauseTime;
+	private long waitTime;
+	
+
 	private int deltaX;
 	private int deltaY;
 	private int startX;
@@ -68,15 +70,17 @@ public abstract class AbstractNpcController extends
 			AStarPathFinder pathFinder) {
 		this(gameController, pathFinder, 0, 32, 0, 24);
 	}
-	
+
 	/**
-	 * Create a new AbstractNpcController using a path finder and setting default tiles to visit
+	 * Create a new AbstractNpcController using a path finder and setting
+	 * default tiles to visit
+	 * 
 	 * @param gameController
 	 * @param pathFinder
-	 * @param x
-	 * @param x2
-	 * @param y
-	 * @param y2
+	 * @param x min x pos
+	 * @param x2 max x pos
+	 * @param y min y pos
+	 * @param y2 max y pos
 	 */
 	public AbstractNpcController(GameController gameController,
 			AStarPathFinder pathFinder, int x, int x2, int y, int y2) {
@@ -147,12 +151,19 @@ public abstract class AbstractNpcController extends
 		int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
 
 		if (myPath == null || currentStep == myPath.getLength()) {
+			
+			if ( pauseTime == 0) {
+				pauseTime = System.currentTimeMillis();
+				waitTime = (long) (2000*Math.random());
+			} else if ( System.currentTimeMillis() >= waitTime + pauseTime) {
+				int tarX = startX + (int) (Math.random() * deltaX);
+				int tarY = startY + (int) (Math.random() * deltaY);
 
-			int tarX = startX + (int) (Math.random() * deltaX);
-			int tarY = startY + (int) (Math.random() * deltaY);
-
-			myPath = getPathFinder().findPath(null, currX, currY, tarX, tarY);
-			currentStep = 1;
+				myPath = getPathFinder().findPath(null, currX, currY, tarX, tarY);
+				currentStep = 1;
+				pauseTime = 0;
+			}
+			
 		} else {
 			float diffX = model.getX() - (myPath.getX(currentStep) * 32);
 			float diffY = model.getY() - (myPath.getY(currentStep) * 32);
@@ -169,13 +180,11 @@ public abstract class AbstractNpcController extends
 			if (isDynamicCollision(tmpNewX, tmpNewY, dynamicBounds)) {
 				myPath = null;
 			} else {
-				if (!isCollision(tmpNewX, model.getY(),
-						new ArrayList<Rectangle2D.Float>(), dynamicBounds)) {
+				if (!isDynamicCollision(tmpNewX, model.getY(), dynamicBounds)) {
 					model.setX(tmpNewX);
 				}
 
-				if (!isCollision(model.getX(), tmpNewY,
-						new ArrayList<Rectangle2D.Float>(), dynamicBounds)) {
+				if (!isDynamicCollision(model.getX(), tmpNewY, dynamicBounds)) {
 					model.setY(tmpNewY);
 				}
 
@@ -186,30 +195,30 @@ public abstract class AbstractNpcController extends
 			}
 		}
 	}
-	
+
 	/**
-	 * 
-	 * @param x min x
-	 * @param x2 max x
-	 * @param y min y
-	 * @param y2 max y
+	 * Set max and min positions.
+	 * @param x min x pos
+	 * @param x2 max x pos
+	 * @param y min y pos
+	 * @param y2 max y pos
 	 */
-	public void setDefaultTiles(int x, int x2, int y, int y2){
-		
-		if ( x >= 0 && y >= 0 && x < x2 && y < y2 && x2 <= 32 && y2 <= 24) {
-			deltaX = x2-x;
-			deltaY = y2-y;
+	public void setDefaultTiles(int x, int x2, int y, int y2) {
+
+		if (x >= 0 && y >= 0 && x < x2 && y < y2 && x2 <= 32 && y2 <= 24) {
+			deltaX = x2 - x;
+			deltaY = y2 - y;
 			startX = x;
 			startY = y;
-			
+
 		} else {
 			deltaX = 32;
 			deltaY = 24;
 			startX = 0;
 			startY = 0;
-			
+
 		}
-		
+
 	}
 
 }

@@ -22,7 +22,7 @@ import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 public class DummyEnemyController extends AbstractNpcController {
 
 	/**
-	 * Creates a new dummyenemy controller with navigation of your choice.
+	 * Creates a new dummyenemy controller.
 	 * 
 	 * @param model
 	 *            the DummyEnemy model
@@ -36,6 +36,20 @@ public class DummyEnemyController extends AbstractNpcController {
 		this(model, map, gameController, 0, 10, 0, 32);
 	}
 	
+	/**
+	 * Creates a new dummyenemy controller that navigates in enclosed space.
+	 * 
+	 * @param model
+	 *            the DummyEnemy model
+	 * @param navigator
+	 *            The navigator to use.
+	 * @param gameController
+	 *            A reference to the controller
+	 * @param x min x pos
+	 * @param x2 max x pos
+	 * @param y min y pos
+	 * @param y2 max y pos
+	 */
 	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
 			GameController gameController, int x, int x2, int y, int y2) {
 		super(gameController, new AStarPathFinder(map, 500, true), x, x2, y, y2);
