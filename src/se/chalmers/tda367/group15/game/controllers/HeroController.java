@@ -17,7 +17,6 @@ import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
 import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
-import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
 public class HeroController extends AbstractMovingModelController {
