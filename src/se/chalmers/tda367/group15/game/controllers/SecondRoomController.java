@@ -57,17 +57,17 @@ public class SecondRoomController extends AbstractRoomController {
 		// create an enemy, and add controller for that enemy to the update list
 		DummyEnemyModel e1 = new DummyEnemyModel();
 		DummyEnemyModel e2 = new DummyEnemyModel(400, 200);
-		DummyEnemyModel e3 = new DummyEnemyModel(100, 270);
-		DummyEnemyModel e4 = new DummyEnemyModel(200, 200);
+		DummyEnemyModel e3 = new DummyEnemyModel(100, 700);
+		DummyEnemyModel e4 = new DummyEnemyModel(800, 700);
 		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
 		movingModelControllers.add(new DummyEnemyController(e1, this,
-				getGameController()));
+				getGameController(), 0, 10, 0, 10));
 		movingModelControllers.add(new DummyEnemyController(e2, this,
-				getGameController()));
+				getGameController(), 12 , 32, 0, 9));
 		movingModelControllers.add(new DummyEnemyController(e3, this,
-				getGameController()));
+				getGameController(), 0, 18, 16, 24));
 		movingModelControllers.add(new DummyEnemyController(e4, this,
-				getGameController()));
+				getGameController(), 18, 32, 10, 24));
 		movingModelControllers.add(new DummyEnemyController(e5, this,
 				getGameController()));
 
