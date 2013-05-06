@@ -44,7 +44,7 @@ public class DummyEnemyView implements View{
 				e.printStackTrace();
 			}
 		}
-		animation = new Animation(tmp, 80, true);
+		animation = new Animation(tmp, 40, true);
 	}
 
 	/**
@@ -54,8 +54,15 @@ public class DummyEnemyView implements View{
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		if(model.isAlive()) {
+			
+			if (!model.isMoving()) {
+				animation.stop();
+			} else if (animation.isStopped()) {
+				animation.start();
+			}
+			
 			float rotation = (float) model.getRotation();
-
+			
 			// rotates the current frame
 			g.rotate(model.getX() + model.getWidth() / 2,
 					model.getY() + model.getHeight() / 2, rotation);

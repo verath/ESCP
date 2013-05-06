@@ -123,7 +123,7 @@ public class StateController extends StateBasedGame {
 
 		try {
 			if (ID == Constants.GAME_STATE_PLAYING) {
-				this.getContainer().setMouseCursor("res/tiles/crosshair.png",
+				this.getContainer().setMouseCursor("res/images/crosshair.png",
 						16, 16);
 			} else {
 				this.getContainer().setMouseCursor("res/menu/cursor.png", 0, 0);

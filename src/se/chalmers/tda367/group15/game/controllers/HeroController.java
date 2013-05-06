@@ -187,9 +187,9 @@ public class HeroController extends AbstractMovingModelController {
 
 
 		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
-				* ((model.getWidth() / 2) + 12);
+				* ((model.getWidth() / 2) + 15);
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
-				* ((model.getHeight() / 2) + 12);
+				* ((model.getHeight() / 2) + 15);
 
 		newSwing.setX(heroFaceX + (float) Math.sin(heroAngle));
 		newSwing.setY(heroFaceY + (float) Math.cos(heroAngle));

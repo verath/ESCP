@@ -7,7 +7,7 @@ import org.newdawn.slick.Image;
  * Placeholder class for an Axe. We might not use axes in the future, but this
  * is just for show.
  * 
- * An axe deals 10-15 damage and is a melee weapon.
+ * An axe deals 20-30 damage and is a melee weapon.
  * 
  * @author tholene
  * 
@@ -18,7 +18,7 @@ public class AxeModel extends AbstractMeleeWeapon {
 	private static Animation swingAnimation;
 
 	public AxeModel() {
-		super("Axe", 10, 15, 350, false);
+		super("Axe", 20, 30, 350, false);
 	}
 
 	@Override
@@ -40,9 +40,8 @@ public class AxeModel extends AbstractMeleeWeapon {
 	
 	@Override
 	public Animation getSwingAnimation() {
-		if(swingAnimation == null) {
+		if(swingAnimation == null) 
 			initAnimation();
-		}
 		return swingAnimation.copy();
 	}
 
