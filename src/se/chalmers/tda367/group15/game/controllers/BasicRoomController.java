@@ -18,7 +18,6 @@ import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
-import se.chalmers.tda367.group15.game.navigation.RandomPathNavigation;
 
 public class BasicRoomController extends AbstractRoomController {
 
@@ -58,19 +57,19 @@ public class BasicRoomController extends AbstractRoomController {
 		// create an enemy, and add controller for that enemy to the update list
 		DummyEnemyModel e1 = new DummyEnemyModel();
 		DummyEnemyModel e2 = new DummyEnemyModel(400, 200);
-		DummyEnemyModel e3 = new DummyEnemyModel(100, 270);
-		DummyEnemyModel e4 = new DummyEnemyModel(200, 200);
+		DummyEnemyModel e3 = new DummyEnemyModel(100, 600);
+		DummyEnemyModel e4 = new DummyEnemyModel(940, 600);
 		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
-		movingModelControllers.add(new DummyEnemyController(e1,
-				new RandomPathNavigation(this), getGameController()));
-		movingModelControllers.add(new DummyEnemyController(e2,
-				new RandomPathNavigation(this), getGameController()));
-		movingModelControllers.add(new DummyEnemyController(e3,
-				new RandomPathNavigation(this), getGameController()));
-		movingModelControllers.add(new DummyEnemyController(e4,
-				new RandomPathNavigation(this), getGameController()));
-		movingModelControllers.add(new DummyEnemyController(e5,
-				new RandomPathNavigation(this), getGameController()));
+		movingModelControllers.add(new DummyEnemyController(e1, this,
+				getGameController(), 0, 10, 0, 10));
+		movingModelControllers.add(new DummyEnemyController(e2, this,
+				getGameController(), 12 , 32, 0, 9));
+		movingModelControllers.add(new DummyEnemyController(e3, this,
+				getGameController(), 0, 18, 16, 24));
+		movingModelControllers.add(new DummyEnemyController(e4, this,
+				getGameController(), 18, 32, 10, 24));
+		movingModelControllers.add(new DummyEnemyController(e5, this,
+				getGameController()));
 
 		for (AbstractMovingModelController controller : movingModelControllers) {
 			AbstractMovingModel model = controller.getModel();
@@ -163,21 +162,33 @@ public class BasicRoomController extends AbstractRoomController {
 		return dynamicBounds;
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public int getWidthInTiles() {
 		return map.getWidth(); // *map.getTileWidth(); if using pixels instead
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public int getHeightInTiles() {
 		return map.getHeight(); // *map.getTileHeight(); if using pixels instead
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public void pathFinderVisited(int x, int y) {
 		// This is for debugging new heuristics.
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public boolean blocked(PathFindingContext context, int tx, int ty) {
 		// TODO How to use PathFindingContext?
@@ -193,6 +204,9 @@ public class BasicRoomController extends AbstractRoomController {
 		}
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public float getCost(PathFindingContext context, int tx, int ty) {
 		return 1;

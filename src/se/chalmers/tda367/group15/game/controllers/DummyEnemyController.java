@@ -7,30 +7,23 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
+import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
-import se.chalmers.tda367.group15.game.navigation.NpcNavigation;
-import se.chalmers.tda367.group15.game.navigation.RandomNavigation;
 import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 
-public class DummyEnemyController extends AbstractMovingModelController {
+/**
+ * Creates a new dummy enemy
+ * 
+ * @author ?????, Carl Jansson
+ * 
+ */
+public class DummyEnemyController extends AbstractNpcController {
 
 	/**
-	 * Creates a new dummyenemy controller with randomnavigation
-	 * 
-	 * @param model
-	 *            the DummyEnemy model
-	 * @param gameController
-	 *            A reference to the controller
-	 */
-	public DummyEnemyController(DummyEnemyModel model,
-			GameController gameController) {
-		this(model, new RandomNavigation(), gameController);
-	}
-
-	/**
-	 * Creates a new dummyenemy controller with navigation of your choice.
+	 * Creates a new dummyenemy controller.
 	 * 
 	 * @param model
 	 *            the DummyEnemy model
@@ -39,12 +32,34 @@ public class DummyEnemyController extends AbstractMovingModelController {
 	 * @param gameController
 	 *            A reference to the controller
 	 */
-	public DummyEnemyController(DummyEnemyModel model, NpcNavigation navigator,
+	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
 			GameController gameController) {
-		super(gameController);
+		this(model, map, gameController, 0, 10, 0, 32);
+	}
+
+	/**
+	 * Creates a new dummyenemy controller that navigates in enclosed space.
+	 * 
+	 * @param model
+	 *            the DummyEnemy model
+	 * @param navigator
+	 *            The navigator to use.
+	 * @param gameController
+	 *            A reference to the controller
+	 * @param x
+	 *            min x pos
+	 * @param x2
+	 *            max x pos
+	 * @param y
+	 *            min y pos
+	 * @param y2
+	 *            max y pos
+	 */
+	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
+			GameController gameController, int x, int x2, int y, int y2) {
+		super(gameController, new AStarPathFinder(map, 500, true), x, x2, y, y2);
 		setModel(model);
 		setView(new DummyEnemyView(getModel()));
-		setNavigator(navigator);
 	}
 
 	/**
@@ -66,12 +81,7 @@ public class DummyEnemyController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 
-		AbstractMovingModel model = getModel();
+		randomPosMove(container, delta, staticBounds, dynamicBounds);
 
-		getNavigator().update(this, model, delta, staticBounds, dynamicBounds);
-
-		model.setRotation(getNavigator().getNewDirection());
-		model.setX(getNavigator().getNewX());
-		model.setY(getNavigator().getNewY());
 	}
 }
