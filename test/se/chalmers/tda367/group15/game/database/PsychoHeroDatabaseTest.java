@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class PsychoHeroDatabaseTest {
-	
+
 	@Test
 	public void testConnectToDatabase() throws ClassNotFoundException {
 		PsychoHeroDatabase psh = new PsychoHeroDatabase();
@@ -36,6 +36,17 @@ public class PsychoHeroDatabaseTest {
 		InsertableScore result = new InsertableScore(dbResult);
 
 		assertEquals(score, result);
+	}
+
+	@Test
+	public void testAddEventToDatabase() throws ClassNotFoundException {
+		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+
+		InsertableEvent event = new InsertableEvent("Test");
+		psh.addEvent(event);
+
+		assertTrue(psh.getNumEventsByType(event) == 1);
+		assertTrue(psh.getNumEventsByType(new InsertableEvent("TestNo")) == 0);
 	}
 
 	@Test
@@ -67,6 +78,26 @@ public class PsychoHeroDatabaseTest {
 			}
 			assertTrue(exist);
 		}
+	}
+
+	@Test
+	public void testAddMultipleEventToDatabase() throws ClassNotFoundException {
+		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+
+		// Add some dummy events
+		List<InsertableEvent> events = new ArrayList<>();
+		events.add(new InsertableEvent("Test"));
+		events.add(new InsertableEvent("Test"));
+		events.add(new InsertableEvent("Test"));
+		events.add(new InsertableEvent("Test2"));
+		events.add(new InsertableEvent("Test2"));
+
+		psh.addEvent(events);
+
+		assertTrue(psh.getNumEventsByType(new InsertableEvent("Test")) == 3);
+		assertTrue(psh.getNumEventsByType(new InsertableEvent("Test2")) == 2);
+		assertTrue(psh.getNumEventsByType(new InsertableEvent("TestNo")) == 0);
+
 	}
 
 	@Test
