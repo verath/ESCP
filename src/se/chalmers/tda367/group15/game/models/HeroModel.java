@@ -21,6 +21,7 @@ public class HeroModel extends AbstractCharacterModel {
 		setWidth(42);
 		setHeight(42);
 		setOffset(11);
+		setHealth(100);
 		setAlive(true);
 
 		addWeapon(new UnarmedModel());
