@@ -88,5 +88,4 @@ public class PlayState extends BasicGameState {
 	public int getID() {
 		return ID;
 	}
-
 }

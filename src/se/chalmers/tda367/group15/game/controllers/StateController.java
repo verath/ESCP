@@ -3,6 +3,7 @@ package se.chalmers.tda367.group15.game.controllers;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -19,6 +20,7 @@ public class StateController extends StateBasedGame {
 
 	private boolean pendingFullScreenAction;
 	private AppGameContainer gameContainer;
+	private Music music;
 
 	/**
 	 * creates a new StateController
@@ -35,16 +37,29 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
+		
+		container.setShowFPS(false);
+		
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MenuStateMain mainMenu = new MenuStateMain(
 				Constants.GAME_STATE_MAIN_MENU);
 		MenuStateOptions optionsMenu = new MenuStateOptions(
 				Constants.GAME_STATE_OPTIONS_MENU);
 
-		this.addState(playState);
+		this.initMusic();
 		this.addState(mainMenu);
+		this.addState(playState);
 		this.addState(optionsMenu);
 		this.enterState(Constants.GAME_STATE_MAIN_MENU);
+	}
+	
+	public void initMusic(){
+		try {
+			music = new Music("res/music/menu.aif");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		music.loop();
 	}
 
 	/**
@@ -131,5 +146,15 @@ public class StateController extends StateBasedGame {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @return true if close is ok
+	 */
+	@Override
+	public boolean closeRequested() {
+		music.release();
+		return true;
 	}
 }

@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
@@ -24,7 +23,6 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	 */
 	private Button resumeGameButton;
 	
-	private Music music;
 
 	/**
 	 * the upper left corner of button group
@@ -56,11 +54,9 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		this.initMenuItems();
 		try {
 			background = new Image("res/menu/background.png");
-			music = new Music("res/music/menu.aif");
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		music.loop();
 	}
 
 	/**
