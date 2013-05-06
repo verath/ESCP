@@ -282,11 +282,11 @@ public abstract class AbstractMovingModelController {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
 			if (bound1.intersects(bound2) && this.model != otherModel) {
 				dynamicCollsion = true;
-				if (model instanceof AbstractCharacterModel
-						&& otherModel instanceof AbstractProjectileModel) {
-					AbstractProjectileModel projectile = (AbstractProjectileModel) otherModel;
+				if (model instanceof AbstractProjectileModel
+						&& otherModel instanceof AbstractCharacterModel) {
+					AbstractProjectileModel projectile = (AbstractProjectileModel) model;
 					int damage = projectile.getDamage();
-					model.takeDamage(damage);
+					otherModel.takeDamage(damage);
 					projectile.setAlive(false);
 				}
 			}
