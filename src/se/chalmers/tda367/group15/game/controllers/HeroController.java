@@ -17,6 +17,7 @@ import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
 import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.views.HeroView;
 
 public class HeroController extends AbstractMovingModelController {
@@ -178,7 +179,7 @@ public class HeroController extends AbstractMovingModelController {
 		HeroView view = (HeroView)getView();
 		view.runAnimation(weapon.getSwingAnimation());
 		
-//		AbstractProjectileModel newSwing = new MeleeSwingModel();
+		AbstractProjectileModel newSwing = new MeleeSwingModel();
 		
 		float heroAngle = (float) Math.toRadians(model.getRotation());
 		float heroMiddleX = model.getX() + model.getWidth() / 2;
@@ -190,15 +191,16 @@ public class HeroController extends AbstractMovingModelController {
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
 				* ((model.getHeight() / 2) + 12);
 
-//		newSwing.setX(heroFaceX + (float) Math.sin(heroAngle));
-//		newSwing.setY(heroFaceY + (float) Math.cos(heroAngle));
-//		newSwing.setRotation(model.getRotation());
-//		newSwing.setDamage(model.getCurrentWeapon().getDamage());
-//		newSwing.setAlive(true);
+		newSwing.setX(heroFaceX + (float) Math.sin(heroAngle));
+		newSwing.setY(heroFaceY + (float) Math.cos(heroAngle));
+		newSwing.setRotation(model.getRotation());
+		newSwing.setDamage(model.getCurrentWeapon().getDamage());
+		newSwing.setAlive(true);
 	
 		AbstractRoomController currentRoom = getGameController()
 				.getRoomController().getCurrentRoom();
-//		currentRoom.addSwing(newSwing);
+		
+		currentRoom.addSwing(newSwing);
 	}
 
 	/**

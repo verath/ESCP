@@ -120,6 +120,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 				MENUX, MENUY + 150) {
 			@Override
 			public void performAction() {
+				music.release();
 				container.exit();
 			}
 		};
