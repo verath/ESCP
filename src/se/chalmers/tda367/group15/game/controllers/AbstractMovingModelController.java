@@ -223,7 +223,7 @@ public abstract class AbstractMovingModelController {
 	 *            list of rectangles representing static blocked object on the
 	 *            map
 	 * @param bound1
-	 *            the Rectangle2D witch to check if colliding
+	 *            the Rectangle2D witch to check if col23liding
 	 * @return true if collision, false otherwise
 	 */
 	public boolean isStaticCollision(List<Rectangle2D.Float> staticBounds,
