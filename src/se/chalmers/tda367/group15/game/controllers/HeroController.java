@@ -48,7 +48,6 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-		AbstractWeaponModel weapon = model.getCurrentWeapon();
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
@@ -62,6 +61,9 @@ public class HeroController extends AbstractMovingModelController {
 		} else if(input.isKeyPressed(Input.KEY_3)){
 			model.setCurrentWeapon(model.getWeapons().get(2));
 		}
+		
+		AbstractWeaponModel weapon = model.getCurrentWeapon();
+
 
 		// Fire bullets if mouse clicked and a ranged weapon is equipped
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -150,12 +152,12 @@ public class HeroController extends AbstractMovingModelController {
 		float heroMiddleX = model.getX() + model.getWidth() / 2;
 		float heroMiddleY = model.getY() + model.getHeight() / 2;
 
-		// +12 pixels in end of expression to make bullet appear outside
+		// +15 pixels in end of expression to make bullet appear outside
 		// hero's collision box
 		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
-				* ((model.getWidth() / 2) + 12);
+				* ((model.getWidth() / 2) + 15);
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
-				* ((model.getHeight() / 2) + 12);
+				* ((model.getHeight() / 2) + 15);
 
 		// *3 pixels compensating for the width and height of the bullet
 		newBullet.setX(heroFaceX + (float) Math.sin(heroAngle) * 3);
