@@ -25,8 +25,6 @@ public class MeleeSwingController extends AbstractMovingModelController {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		// Ugly rectangle for the bounds
-		g.drawRect(getModel().getX(), getModel().getY(), getModel().getWidth(), getModel().getHeight());
 	}
 
 	@Override
@@ -34,26 +32,27 @@ public class MeleeSwingController extends AbstractMovingModelController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
-		MeleeSwingModel swing = (MeleeSwingModel) getModel();
-		if (swing.isAlive() && swing.getDistance() <= 10) {
-			swing.incDistance();
+		AbstractMovingModel swing = (MeleeSwingModel) getModel();
+		if (swing.isAlive()) {
+
+			float oldX = swing.getX();
+			float oldY = swing.getY();
+
+			float newX = swing.getX()
+					- (float) Math.cos(Math.toRadians(swing.getRotation()))
+					* (swing.getVelocity() * delta);
+			float newY = swing.getY()
+					- (float) Math.sin(Math.toRadians(swing.getRotation()))
+					* (swing.getVelocity() * delta);
+			if((float)Math.hypot((oldX-newX), (oldY-newY)) >= (float)(swing.getVelocity()*5f/4f)) 
+				swing.setAlive(false);
 			if (!isCollision(swing.getX(), swing.getY(), swing.getHeight(),
 					swing.getWidth(), staticBounds, dynamicBounds)) {
-				
-				swing.setX(swing.getX()
-						- (float) Math.cos(Math.toRadians(swing.getRotation()))
-						* (swing.getVelocity() * delta));
-				
-				swing.setY(swing.getY()
-						- (float) Math.sin(Math.toRadians(swing.getRotation()))
-						* swing.getVelocity() * delta);
-
-			} else {
-				swing.setAlive(false);
+				swing.setX(newX);
+				swing.setY(newY);
 			}
 
 		}
 
 	}
-
 }

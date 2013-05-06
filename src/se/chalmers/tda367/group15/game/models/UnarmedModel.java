@@ -15,8 +15,10 @@ public class UnarmedModel extends AbstractMeleeWeapon{
 	 
 	private static Animation animation;
 	
+	private static Animation swingAnimation;
+	
 	public UnarmedModel() {
-		super("Unarmed", 5, 10, 250, true);
+		super("Unarmed", 5, 10, 350, true);
 	}
 
 	@Override
@@ -30,11 +32,16 @@ public class UnarmedModel extends AbstractMeleeWeapon{
 	protected void initAnimation() {
 		Image[] image = sortImages("heroMovement/unarmed");
 		animation = new Animation(image, 40, true);
+		
+		image = sortImages("heroAttack/unarmed");
+		swingAnimation = new Animation(image, 25, true);
 	}
 	
 	@Override
 	public Animation getSwingAnimation(){
-		return animation.copy();
+		if(swingAnimation == null) 
+			initAnimation();
+		return swingAnimation.copy();
 	}
 
 }

@@ -1,3 +1,4 @@
+
 package se.chalmers.tda367.group15.game.controllers;
 
 import org.newdawn.slick.AppGameContainer;
@@ -37,9 +38,6 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		
-		container.setShowFPS(false);
-		
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MenuStateMain mainMenu = new MenuStateMain(
 				Constants.GAME_STATE_MAIN_MENU);
@@ -47,8 +45,8 @@ public class StateController extends StateBasedGame {
 				Constants.GAME_STATE_OPTIONS_MENU);
 
 		this.initMusic();
-		this.addState(mainMenu);
 		this.addState(playState);
+		this.addState(mainMenu);
 		this.addState(optionsMenu);
 		this.enterState(Constants.GAME_STATE_MAIN_MENU);
 	}
@@ -138,7 +136,7 @@ public class StateController extends StateBasedGame {
 
 		try {
 			if (ID == Constants.GAME_STATE_PLAYING) {
-				this.getContainer().setMouseCursor("res/tiles/crosshair.png",
+				this.getContainer().setMouseCursor("res/images/crosshair.png",
 						16, 16);
 			} else {
 				this.getContainer().setMouseCursor("res/menu/cursor.png", 0, 0);
@@ -147,7 +145,6 @@ public class StateController extends StateBasedGame {
 			e.printStackTrace();
 		}
 	}
-	
 	/**
 	 * {@inheritDoc}
 	 * @return true if close is ok
