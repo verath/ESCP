@@ -141,8 +141,8 @@ public class PsychoHeroDatabase {
 	 * @param score
 	 *            The score object to add to the database.
 	 */
-	public void addScore(Score score) {
-		List<Score> s = new ArrayList<Score>(1);
+	public void addScore(InsertableScore score) {
+		List<InsertableScore> s = new ArrayList<InsertableScore>(1);
 		s.add(score);
 		addScore(s);
 	}
@@ -152,7 +152,7 @@ public class PsychoHeroDatabase {
 	 * 
 	 * @param scores
 	 */
-	public void addScore(List<Score> scores) {
+	public void addScore(List<InsertableScore> scores) {
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -168,7 +168,7 @@ public class PsychoHeroDatabase {
 
 			// Add all queries as a batch and execute all at once instead of
 			// executing them one at a time
-			for (Score s : scores) {
+			for (InsertableScore s : scores) {
 				stmt.setInt(1, s.getScore());
 				stmt.setString(2, s.getName());
 				stmt.addBatch();

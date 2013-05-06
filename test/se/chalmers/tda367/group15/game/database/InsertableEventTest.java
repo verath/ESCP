@@ -1,0 +1,32 @@
+package se.chalmers.tda367.group15.game.database;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+import se.chalmers.tda367.group15.game.event.Event;
+
+public class InsertableEventTest {
+	public class TestEvent extends Event {
+	}
+
+	/*
+	 * Tests creating an event without a type.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public final void testCreateNullTypeEvent() {
+		String s = null;
+		new InsertableEvent(s);
+	}
+
+	/*
+	 * Tests creating an InsertableEvent from an Event
+	 */
+	@Test
+	public final void testCreateInsertableEventFromEvent() {
+		TestEvent evt = new TestEvent();
+		InsertableEvent inEvt = new InsertableEvent(evt);
+		assertTrue(inEvt.getEventType().equals("TestEvent"));
+	}
+
+}

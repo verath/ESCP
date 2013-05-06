@@ -22,7 +22,7 @@ public class PsychoHeroDatabaseTest {
 	public void testAddScoreToDatabase() throws ClassNotFoundException {
 		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
 
-		Score score = new Score("Test", 200);
+		InsertableScore score = new InsertableScore("Test", 200);
 		psh.addScore(score);
 
 		DatabaseScore dbResult = psh.getHighscores(1).get(0);
@@ -33,7 +33,7 @@ public class PsychoHeroDatabaseTest {
 
 		// We have to "up-cast" it to a Score, as the object returned
 		// by the database class is a DatabaseScore, holding more information.
-		Score result = new Score(dbResult);
+		InsertableScore result = new InsertableScore(dbResult);
 
 		assertEquals(score, result);
 	}
@@ -43,11 +43,11 @@ public class PsychoHeroDatabaseTest {
 		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
 
 		// Add some dummy scores
-		List<Score> scores = new ArrayList<Score>();
-		scores.add(new Score("Test1", 2));
-		scores.add(new Score("Test2", 4));
-		scores.add(new Score("Test3", 3));
-		scores.add(new Score("Test4", 1));
+		List<InsertableScore> scores = new ArrayList<InsertableScore>();
+		scores.add(new InsertableScore("Test1", 2));
+		scores.add(new InsertableScore("Test2", 4));
+		scores.add(new InsertableScore("Test3", 3));
+		scores.add(new InsertableScore("Test4", 1));
 		psh.addScore(scores);
 
 		List<DatabaseScore> resultScores = psh.getHighscores();
@@ -58,9 +58,9 @@ public class PsychoHeroDatabaseTest {
 		// And make sure every inserted score is also returned
 		for (DatabaseScore res : resultScores) {
 			boolean exist = false;
-			for (Score s : scores) {
+			for (InsertableScore s : scores) {
 				// Have to cast res to Score, see testAddScoreToDatabase.
-				if (s.equals(new Score(res))) {
+				if (s.equals(new InsertableScore(res))) {
 					exist = true;
 					break;
 				}
@@ -74,15 +74,15 @@ public class PsychoHeroDatabaseTest {
 		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
 
 		// Add some dummy scores
-		List<Score> scores = new ArrayList<Score>();
-		scores.add(new Score("Test1", 2));
-		scores.add(new Score("Test2", 4));
-		scores.add(new Score("Test3", 3));
-		scores.add(new Score("Test4", 1));
+		List<InsertableScore> scores = new ArrayList<InsertableScore>();
+		scores.add(new InsertableScore("Test1", 2));
+		scores.add(new InsertableScore("Test2", 4));
+		scores.add(new InsertableScore("Test3", 3));
+		scores.add(new InsertableScore("Test4", 1));
 		psh.addScore(scores);
 
 		// Get 1 from the highscore list
-		Score result = psh.getHighscores(1).get(0);
+		InsertableScore result = psh.getHighscores(1).get(0);
 
 		// Make sure the highest score is returned
 		assertTrue(result.getScore() == 4 && result.getName().equals("Test2"));
