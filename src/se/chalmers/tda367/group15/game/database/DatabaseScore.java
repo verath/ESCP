@@ -6,7 +6,7 @@ package se.chalmers.tda367.group15.game.database;
  * @author Peter
  * 
  */
-public class DatabaseScore extends Score {
+public class DatabaseScore extends InsertableScore {
 
 	/**
 	 * A string representing the date this score was saved to the database.

@@ -6,7 +6,7 @@ package se.chalmers.tda367.group15.game.database;
  * @author Peter
  * 
  */
-public class Score {
+public class InsertableScore {
 	/**
 	 * The name of the player
 	 */
@@ -23,7 +23,7 @@ public class Score {
 	 * @param name
 	 * @param score
 	 */
-	public Score(String name, int score) {
+	public InsertableScore(String name, int score) {
 		if (name == null) {
 			throw new IllegalArgumentException("name may not be null");
 		}
@@ -37,7 +37,7 @@ public class Score {
 	 * 
 	 * @param score
 	 */
-	public Score(Score score) {
+	public InsertableScore(InsertableScore score) {
 		this(score.name, score.score);
 	}
 
@@ -76,7 +76,7 @@ public class Score {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Score other = (Score) obj;
+		InsertableScore other = (InsertableScore) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;

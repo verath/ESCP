@@ -19,6 +19,11 @@ import org.apache.commons.dbutils.DbUtils;
  */
 public class PsychoHeroDatabase {
 
+	/*
+	 * Score table constants
+	 */
+	private static final String TABLE_SCORES = "scores";
+
 	private static final String SCORES_COLUMN_NAME = "name";
 
 	private static final String SCORES_COLUMN_TIME_ADDED = "time_added";
@@ -27,7 +32,16 @@ public class PsychoHeroDatabase {
 
 	private static final String SCORES_COLUMN_ID = "id";
 
-	private static final String TABLE_SCORES = "scores";
+	/*
+	 * Event table constants
+	 */
+	private static final String TABLE_EVENTS = "events";
+
+	private static final String EVENTS_COLUMN_TYPE = "type";
+
+	private static final String EVENTS_COLUMN_TIME_ADDED = "time_added";
+
+	private static final String EVENTS_COLUMN_ID = "id";
 
 	/**
 	 * The database file used for the database
@@ -126,6 +140,12 @@ public class PsychoHeroDatabase {
 					TABLE_SCORES, SCORES_COLUMN_ID, SCORES_COLUMN_SCORE,
 					SCORES_COLUMN_NAME, SCORES_COLUMN_TIME_ADDED));
 
+			// Set up events table
+			stmt.executeUpdate(String.format("CREATE TABLE IF NOT EXISTS %s ("
+					+ "%s INTEGER PRIMARY KEY, " + "%s STRING NOT NULL, "
+					+ "%s DATETIME NOT NULL)", TABLE_EVENTS, EVENTS_COLUMN_ID,
+					EVENTS_COLUMN_TYPE, EVENTS_COLUMN_TIME_ADDED));
+
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
@@ -135,25 +155,69 @@ public class PsychoHeroDatabase {
 	}
 
 	/**
-	 * Adds a Score object to the database. If adding more than one Score
-	 * object, use the addScores method instead.
+	 * Adds a single InsertableEvent to the database.
+	 * 
+	 * @param event
+	 *            The event to add to the database
+	 */
+	public void addEvent(InsertableEvent event) {
+		List<InsertableEvent> evt = new ArrayList<InsertableEvent>(1);
+		evt.add(event);
+		addEvent(evt);
+	}
+
+	/**
+	 * Adds a list of InsertableEvent to the database.
+	 * 
+	 * @param events
+	 *            A list of events to add to the database
+	 */
+	public void addEvent(List<InsertableEvent> events) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = getConnection();
+			stmt = conn
+					.prepareStatement(String
+							.format("INSERT INTO %s (%s, %s) VALUES (?, datetime('now'))",
+									TABLE_EVENTS, EVENTS_COLUMN_TYPE,
+									EVENTS_COLUMN_TIME_ADDED));
+			stmt.setQueryTimeout(30);
+
+			// Add all queries as a batch and execute all at once instead of
+			// executing them one at a time
+			for (InsertableEvent evt : events) {
+				stmt.setString(1, evt.getEventType());
+				stmt.addBatch();
+			}
+			stmt.executeBatch();
+
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			DbUtils.closeQuietly(stmt);
+			closeConnection(conn);
+		}
+	}
+
+	/**
+	 * Adds a single InsertableScore object to the database.
 	 * 
 	 * @param score
 	 *            The score object to add to the database.
 	 */
-	public void addScore(Score score) {
-		List<Score> s = new ArrayList<Score>(1);
+	public void addScore(InsertableScore score) {
+		List<InsertableScore> s = new ArrayList<InsertableScore>(1);
 		s.add(score);
 		addScore(s);
 	}
 
 	/**
-	 * Adds a list of scores to the database
+	 * Adds a list of InsertableScores to the database
 	 * 
 	 * @param scores
 	 */
-	public void addScore(List<Score> scores) {
-
+	public void addScore(List<InsertableScore> scores) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -168,7 +232,7 @@ public class PsychoHeroDatabase {
 
 			// Add all queries as a batch and execute all at once instead of
 			// executing them one at a time
-			for (Score s : scores) {
+			for (InsertableScore s : scores) {
 				stmt.setInt(1, s.getScore());
 				stmt.setString(2, s.getName());
 				stmt.addBatch();
@@ -251,5 +315,43 @@ public class PsychoHeroDatabase {
 	 */
 	public List<DatabaseScore> getHighscores() {
 		return getHighscores(-1);
+	}
+
+	/**
+	 * Returns the number of events in the database with the same type as the
+	 * InsertableEvent.
+	 * 
+	 * @param event
+	 *            An event which type will be used to check for events that
+	 *            matches.
+	 * @return The number of matches, or -1 if an error occurred
+	 */
+	public int getNumEventsByType(InsertableEvent event) {
+		Connection conn = null;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(String.format(
+					"SELECT COUNT(*) FROM %s WHERE %s = ?",
+					TABLE_EVENTS, EVENTS_COLUMN_TYPE));
+			stmt.setString(1, event.getEventType());
+			
+			stmt.setQueryTimeout(30);
+
+			// Run query and get results
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			System.err.println(e.getSQLState());
+		} finally {
+			DbUtils.closeQuietly(stmt);
+			DbUtils.closeQuietly(rs);
+			closeConnection(conn);
+		}
+		return -1;
 	}
 }
