@@ -25,10 +25,6 @@ public class WeaponTest {
 			public Animation getAnimation() {
 				return null;
 			}
-
-			@Override
-			public void fire() {
-			}
 		};
 	}
 

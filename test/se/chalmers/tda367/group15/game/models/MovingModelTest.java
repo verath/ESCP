@@ -36,7 +36,7 @@ public class MovingModelTest {
 		testedModel.takeDamage(1);
 		assertTrue(testedModel.getHealth() == 99);
 	}
-	
+
 	@Test
 	public final void testDieFromDamage() {
 		testedModel.setHealth(1);
@@ -44,31 +44,4 @@ public class MovingModelTest {
 		testedModel.takeDamage(1);
 		assertFalse(testedModel.isAlive());
 	}
-
-	@Test
-	public void testSetInvalidLocation() {
-		// Allow either gracefully handling of invalid locations, or exception
-		// as both methods make sense
-		try {
-			testedModel.setX(-200);
-			testedModel.setY(-200);
-			assertTrue(testedModel.getX() >= 0 && testedModel.getY() >= 0);
-		} catch (IllegalArgumentException e) {
-
-		}
-	}
-
-	@Test
-	public void testSetInvalidSize() {
-		// Allow either gracefully handling of invalid locations, or exception
-		// as both methods make sense
-		try {
-			testedModel.setHeight(-200);
-			testedModel.setWidth(-200);
-			assertTrue(testedModel.getX() >= 0 && testedModel.getY() >= 0);
-		} catch (IllegalArgumentException e) {
-
-		}
-	}
-
 }
