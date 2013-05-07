@@ -53,19 +53,18 @@ public class HeroController extends AbstractMovingModelController {
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
-		
+
 		// Change weapons
-		
-		if(input.isKeyPressed(Input.KEY_1)){
+
+		if (input.isKeyPressed(Input.KEY_1)) {
 			model.setCurrentWeapon(model.getWeapons().get(0));
-		} else if(input.isKeyPressed(Input.KEY_2)){
+		} else if (input.isKeyPressed(Input.KEY_2)) {
 			model.setCurrentWeapon(model.getWeapons().get(1));
-		} else if(input.isKeyPressed(Input.KEY_3)){
+		} else if (input.isKeyPressed(Input.KEY_3)) {
 			model.setCurrentWeapon(model.getWeapons().get(2));
 		}
-		
-		AbstractWeaponModel weapon = model.getCurrentWeapon();
 
+		AbstractWeaponModel weapon = model.getCurrentWeapon();
 
 		// Fire bullets if mouse clicked and a ranged weapon is equipped
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -126,20 +125,21 @@ public class HeroController extends AbstractMovingModelController {
 		}
 
 		model.setMoving(speedY != 0 || speedX != 0);
-		RoomsController roomsController = getGameController().getRoomController();
+		RoomsController roomsController = getGameController()
+				.getRoomController();
 		float tmpX = model.getX() + model.getWidth() / 2;
 		float tmpY = model.getY() + model.getHeight() / 2;
 
-		if(tmpX <= 0) {
+		if (tmpX <= 0) {
 			roomsController.moveLeft();
 			model.setX(container.getWidth() - model.getWidth());
-		}else if(tmpX >= container.getWidth()) {
+		} else if (tmpX >= container.getWidth()) {
 			roomsController.moveRight();
 			model.setX(0);
-		}else if(tmpY <= 0) {
+		} else if (tmpY <= 0) {
 			roomsController.moveUp();
 			model.setY(container.getHeight());
-		}else if(tmpY >= container.getHeight()) {
+		} else if (tmpY >= container.getHeight()) {
 			roomsController.moveDown();
 			model.setY(0);
 		}
@@ -160,9 +160,8 @@ public class HeroController extends AbstractMovingModelController {
 				* ((model.getHeight()));
 
 		// *3 pixels compensating for the width and height of the bullet
-		newBullet.setX(heroFaceX - 3);
-		newBullet.setY(heroFaceY - 3);
-		
+		newBullet.setX(heroFaceX - newBullet.getWidth() / 2);
+		newBullet.setY(heroFaceY - newBullet.getHeight() / 2);
 
 		newBullet.setRotation(model.getRotation());
 		newBullet.setDamage(model.getCurrentWeapon().getDamage());
@@ -174,33 +173,33 @@ public class HeroController extends AbstractMovingModelController {
 
 	private void swingWeapon() {
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-		
+
 		// Run the swinging animation for the weapon
-		AbstractMeleeWeapon weapon = (AbstractMeleeWeapon)model.getCurrentWeapon();
-		HeroView view = (HeroView)getView();
+		AbstractMeleeWeapon weapon = (AbstractMeleeWeapon) model
+				.getCurrentWeapon();
+		HeroView view = (HeroView) getView();
 		view.runAnimation(weapon.getSwingAnimation());
-		
+
 		AbstractProjectileModel newSwing = new MeleeSwingModel();
-		
+
 		float heroAngle = (float) Math.toRadians(model.getRotation());
 		float heroMiddleX = model.getX() + model.getWidth() / 2;
 		float heroMiddleY = model.getY() + model.getHeight() / 2;
-
 
 		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
 				* ((model.getWidth()));
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
 				* ((model.getHeight()));
 
-		newSwing.setX(heroFaceX + (float) Math.sin(heroAngle));
-		newSwing.setY(heroFaceY + (float) Math.cos(heroAngle));
+		newSwing.setX(heroFaceX - newSwing.getWidth() / 2);
+		newSwing.setY(heroFaceY - newSwing.getHeight() / 2);
 		newSwing.setRotation(model.getRotation());
 		newSwing.setDamage(model.getCurrentWeapon().getDamage());
 		newSwing.setAlive(true);
-	
+
 		AbstractRoomController currentRoom = getGameController()
 				.getRoomController().getCurrentRoom();
-		
+
 		currentRoom.addSwing(newSwing);
 	}
 
@@ -211,19 +210,18 @@ public class HeroController extends AbstractMovingModelController {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		getView().render(container, g);
-		
+
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		float heroAngle = (float) Math.toRadians(model.getRotation());
 		float heroMiddleX = model.getX() + model.getWidth() / 2;
 		float heroMiddleY = model.getY() + model.getHeight() / 2;
 
-
 		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
 				* ((model.getWidth() + 3));
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
 				* ((model.getHeight() + 3));
-		
+
 		g.setColor(Color.red);
 		g.fillRect(heroFaceX, heroFaceY, 2, 2);
 	}
