@@ -25,7 +25,6 @@ public class BulletView implements View{
 			throws SlickException {
 		if(model.isAlive()) {
 			double rotation = model.getRotation();
-			System.out.println(rotation);
 			g.rotate(model.getX() + model.getWidth() / 2,
 					model.getY() + model.getHeight() / 2, (float) rotation - 90);
 			image.draw(model.getX()

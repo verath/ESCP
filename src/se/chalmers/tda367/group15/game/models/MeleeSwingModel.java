@@ -7,7 +7,7 @@ public class MeleeSwingModel extends AbstractProjectileModel{
 		setY(0);
 		setVelocity(0.1f);
 		setAlive(false);
-		setWidth(2);
-		setHeight(2);
+		setWidth(10);
+		setHeight(10);
 	}
 }

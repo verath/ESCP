@@ -210,19 +210,5 @@ public class HeroController extends AbstractMovingModelController {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		getView().render(container, g);
-
-		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-
-		float heroAngle = (float) Math.toRadians(model.getRotation());
-		float heroMiddleX = model.getX() + model.getWidth() / 2;
-		float heroMiddleY = model.getY() + model.getHeight() / 2;
-
-		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
-				* ((model.getWidth() + 3));
-		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
-				* ((model.getHeight() + 3));
-
-		g.setColor(Color.red);
-		g.fillRect(heroFaceX, heroFaceY, 2, 2);
 	}
 }
