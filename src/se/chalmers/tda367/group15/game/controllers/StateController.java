@@ -1,4 +1,3 @@
-
 package se.chalmers.tda367.group15.game.controllers;
 
 import org.newdawn.slick.AppGameContainer;
@@ -50,8 +49,8 @@ public class StateController extends StateBasedGame {
 		this.addState(optionsMenu);
 		this.enterState(Constants.GAME_STATE_MAIN_MENU);
 	}
-	
-	public void initMusic(){
+
+	public void initMusic() {
 		try {
 			music = new Music("res/music/menu.aif");
 		} catch (SlickException e) {
@@ -74,6 +73,9 @@ public class StateController extends StateBasedGame {
 			gameContainer = new AppGameContainer(scalableGame);
 			gameContainer.setVerbose(Constants.DEBUG);
 			gameContainer.setTargetFrameRate(120);
+			gameContainer.setIcons(new String[] { "res/menu/ContainerIcon.tga",
+					"res/menu/ContainerTabIcon.tga",
+					"res/menu/ContainerTabIcon2.tga" });
 			this.setAppFullScreen(fullscreen);
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -145,8 +147,10 @@ public class StateController extends StateBasedGame {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @return true if close is ok
 	 */
 	@Override
