@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -153,16 +154,16 @@ public class HeroController extends AbstractMovingModelController {
 		float heroMiddleX = model.getX() + model.getWidth() / 2;
 		float heroMiddleY = model.getY() + model.getHeight() / 2;
 
-		// +15 pixels in end of expression to make bullet appear outside
-		// hero's collision box
 		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
-				* ((model.getWidth() / 2) + 15);
+				* ((model.getWidth()));
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
-				* ((model.getHeight() / 2) + 15);
+				* ((model.getHeight()));
 
 		// *3 pixels compensating for the width and height of the bullet
-		newBullet.setX(heroFaceX + (float) Math.sin(heroAngle) * 3);
-		newBullet.setY(heroFaceY + (float) Math.cos(heroAngle) * 3);
+		newBullet.setX(heroFaceX - 3);
+		newBullet.setY(heroFaceY - 3);
+		
+
 		newBullet.setRotation(model.getRotation());
 		newBullet.setDamage(model.getCurrentWeapon().getDamage());
 		newBullet.setAlive(true);
@@ -187,9 +188,9 @@ public class HeroController extends AbstractMovingModelController {
 
 
 		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
-				* ((model.getWidth() / 2) + 15);
+				* ((model.getWidth()));
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
-				* ((model.getHeight() / 2) + 15);
+				* ((model.getHeight()));
 
 		newSwing.setX(heroFaceX + (float) Math.sin(heroAngle));
 		newSwing.setY(heroFaceY + (float) Math.cos(heroAngle));
@@ -210,5 +211,20 @@ public class HeroController extends AbstractMovingModelController {
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		getView().render(container, g);
+		
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+
+		float heroAngle = (float) Math.toRadians(model.getRotation());
+		float heroMiddleX = model.getX() + model.getWidth() / 2;
+		float heroMiddleY = model.getY() + model.getHeight() / 2;
+
+
+		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
+				* ((model.getWidth() + 3));
+		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
+				* ((model.getHeight() + 3));
+		
+		g.setColor(Color.red);
+		g.fillRect(heroFaceX, heroFaceY, 2, 2);
 	}
 }

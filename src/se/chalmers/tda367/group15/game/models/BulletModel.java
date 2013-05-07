@@ -5,10 +5,10 @@ public class BulletModel extends AbstractProjectileModel {
 	public BulletModel() {
 		setX(0);
 		setY(0);
-		setVelocity(0.4f);
+		setVelocity(0.1f);
 		setAlive(false);
-		setWidth(2);
-		setHeight(2);
+		setWidth(6);
+		setHeight(6);
 	}
 
 }
