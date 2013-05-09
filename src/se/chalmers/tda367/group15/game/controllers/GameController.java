@@ -9,8 +9,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
+import se.chalmers.tda367.group15.game.views.HUDView;
 
 class GameController {
 
@@ -28,9 +31,14 @@ class GameController {
 	private HeroController heroController;
 
 	/**
-	 * The HUD controller (such as the hp of the hero)
+	 * The HUD view (displaying things such as the hp of the hero)
 	 */
-	private HUDController hudController;
+	private HUDView hudView;
+
+	/**
+	 * The Score controller, handling decreasing of score over time
+	 */
+	private ScoreController scoreController;
 
 	/**
 	 * Creates the GameController
@@ -70,8 +78,15 @@ class GameController {
 		// Set up the hero controller
 		heroController = new HeroController(this);
 
+		// Set up a score model, shared between the scoreController and the
+		// HUDController
+		ScoreModel scoreModel = new ScoreModel(Constants.STARTING_SCORE);
+
+		// Set up the score controller
+		scoreController = new ScoreController(scoreModel);
+
 		// Set up the HUD controller
-		hudController = new HUDController();
+		hudView = new HUDView(scoreModel);
 	}
 
 	/**
@@ -88,6 +103,8 @@ class GameController {
 	 */
 	public void update(GameContainer container, int delta)
 			throws SlickException {
+
+		scoreController.update(container, delta);
 
 		// get current room
 		AbstractRoomController currentRoom = roomController.getCurrentRoom();
@@ -121,7 +138,8 @@ class GameController {
 
 		roomController.render(container, g);
 		heroController.render(container, g);
-		hudController.render(container, g);
+
+		hudView.render(container, g);
 	}
 
 	/**
@@ -138,10 +156,6 @@ class GameController {
 	 */
 	protected HeroController getHeroController() {
 		return heroController;
-	}
-
-	protected HUDController getHudController() {
-		return hudController;
 	}
 
 }

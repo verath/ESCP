@@ -23,16 +23,21 @@ public class Constants {
 	 */
 	public static boolean SHOW_BOUNDS = true;
 
-	/**
-	 * the different states. They should each be a unique int.
+	/*
+	 * The different states. They should each be a unique int.
 	 */
 	public static final int GAME_STATE_MAIN_MENU = 1;
 	public static final int GAME_STATE_PLAYING = 2;
 	public static final int GAME_STATE_OPTIONS_MENU = 3;
 
-	/**
-	 * The resolution of the games maps.
+	/*
+	 * The resolutions of the games maps.
 	 */
 	public static final int GAME_WIDTH = 1024;
 	public static final int GAME_HEIGHT = 768;
+
+	/**
+	 * The starting score of the game.
+	 */
+	public static final int STARTING_SCORE = 10_000;
 }
