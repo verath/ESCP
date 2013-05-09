@@ -17,10 +17,11 @@ import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 /**
  * Creates a new dummy enemy
  * 
- * @author ?????, Carl Jansson
+ * @author Simon Persson, Carl Jansson
  * 
  */
 public class DummyEnemyController extends AbstractNpcController {
+	private boolean hasFired;
 
 	/**
 	 * Creates a new dummyenemy controller.
@@ -80,6 +81,9 @@ public class DummyEnemyController extends AbstractNpcController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
+		if(hasFired) {
+			// TODO fix firing
+		}
 		
 		// Save old position
 		float oldX = this.getModel().getX();
@@ -95,5 +99,11 @@ public class DummyEnemyController extends AbstractNpcController {
 		// Set whether model is moving or not
 		this.getModel().setMoving(!((oldX == newX) || (oldY == newY)));
 
+	}
+
+	@Override
+	public void fire() {
+		hasFired = true;
+		
 	}
 }
