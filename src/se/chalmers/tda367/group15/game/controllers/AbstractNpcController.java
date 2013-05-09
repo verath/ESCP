@@ -97,7 +97,9 @@ public abstract class AbstractNpcController extends
 	 * default tiles to visit
 	 * 
 	 * @param gameController
+	 *            the main controller
 	 * @param pathFinder
+	 *            the path finder to use
 	 * @param x
 	 *            min x pos
 	 * @param x2
@@ -112,6 +114,7 @@ public abstract class AbstractNpcController extends
 		super(gameController);
 		this.setpathFinder(pathFinder);
 		this.setDefaultTiles(x, x2, y, y2);
+		this.pauseTime = 0;
 	}
 
 	/**
@@ -150,8 +153,9 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Makes npc move to random positions. If collision occurs or target is
-	 * reached a new random position is set as target.
+	 * Makes npc move to random position restricted by setDefaultTiles(). If
+	 * collision occurs or target is reached a new random position is set as
+	 * target.
 	 * 
 	 * @param container
 	 *            The container holding this game.
@@ -175,8 +179,10 @@ public abstract class AbstractNpcController extends
 		int currX = (int) (model.getX() + (model.getWidth() / 2)) / 32;
 		int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
 
+		// If path is null or end of path reached
 		if (myPath == null || currentStep == myPath.getLength()) {
 
+			
 			if (pauseTime == 0) {
 				pauseTime = System.currentTimeMillis();
 				waitTime = (long) (2000 * Math.random());
@@ -190,6 +196,7 @@ public abstract class AbstractNpcController extends
 				pauseTime = 0;
 			}
 
+		// If traveling along path
 		} else {
 			float diffX = model.getX() - (myPath.getX(currentStep) * 32);
 			float diffY = model.getY() - (myPath.getY(currentStep) * 32);
@@ -203,8 +210,10 @@ public abstract class AbstractNpcController extends
 			float tmpNewX = model.getX() - (delta * speedX);
 			float tmpNewY = model.getY() - (delta * speedY);
 
+			// if dynamic collision set path to null so a new random path will be created
 			if (isDynamicCollision(tmpNewX, tmpNewY, dynamicBounds)) {
 				myPath = null;
+			// Set the new positions
 			} else {
 				if (!isDynamicCollision(tmpNewX, model.getY(), dynamicBounds)) {
 					model.setX(tmpNewX);
