@@ -10,12 +10,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
 
 class GameController {
-	
-	private boolean imagesAlreadyLoaded = false; 
+
+	private boolean imagesAlreadyLoaded = false;
 
 	/**
 	 * The roomsController handling what room is the current room.
@@ -50,13 +49,13 @@ class GameController {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		container.setShowFPS(true);
-		
+
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);
 		AbstractRoomController secondRoom = new SecondRoomController(this);
 
 		// Initialize weapons
-		if(!imagesAlreadyLoaded) {
+		if (!imagesAlreadyLoaded) {
 			WeaponLoader.initWeapons();
 			imagesAlreadyLoaded = true;
 		}
@@ -64,14 +63,15 @@ class GameController {
 		// Set up the room manager
 		roomController = new RoomsController();
 		roomController.addStartingRoom(startingRoom);
-		roomController.addRoom(startingRoom, secondRoom, RoomsController.RelativePosition.LEFTOF);
+		roomController.addRoom(startingRoom, secondRoom,
+				RoomsController.RelativePosition.LEFTOF);
 		roomController.init(container);
 
 		// Set up the hero controller
 		heroController = new HeroController(this);
 
 		// Set up the HUD controller
-		hudController = new HUDController((HeroModel) heroController.getModel());
+		hudController = new HUDController();
 	}
 
 	/**
