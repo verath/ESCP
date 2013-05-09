@@ -88,18 +88,9 @@ public class SecondRoomController extends AbstractRoomController {
 			throws SlickException {
 
 		// tell enemy controllers to move
-		Iterator<AbstractMovingModelController> it = movingModelControllers
-				.iterator();
-		while (it.hasNext()) {
-			AbstractMovingModelController controller = (AbstractMovingModelController) it
-					.next();
-			AbstractMovingModel model = controller.getModel();
-			if (!model.isAlive()) {
-				it.remove();
-			}
-		}
 
 		for (AbstractMovingModelController controller : movingModelControllers) {
+			if(controller.getModel().isAlive())
 			controller.update(container, delta, staticBounds, dynamicBounds);
 		}
 	}
@@ -162,21 +153,33 @@ public class SecondRoomController extends AbstractRoomController {
 		return dynamicBounds;
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public int getWidthInTiles() {
 		return map.getWidth(); // *map.getTileWidth(); if using pixels instead
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public int getHeightInTiles() {
 		return map.getHeight(); // *map.getTileHeight(); if using pixels instead
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public void pathFinderVisited(int x, int y) {
 		// This is for debugging new heuristics.
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public boolean blocked(PathFindingContext context, int tx, int ty) {
 		// TODO How to use PathFindingContext?
@@ -192,6 +195,9 @@ public class SecondRoomController extends AbstractRoomController {
 		}
 	}
 
+	/**
+	 * TileBasedMap method.
+	 */
 	@Override
 	public float getCost(PathFindingContext context, int tx, int ty) {
 		return 1;
