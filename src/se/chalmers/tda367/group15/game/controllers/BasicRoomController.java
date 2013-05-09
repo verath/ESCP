@@ -90,6 +90,7 @@ public class BasicRoomController extends AbstractRoomController {
 		// tell enemy controllers to move
 
 		for (AbstractMovingModelController controller : movingModelControllers) {
+			if(controller.getModel().isAlive())
 			controller.update(container, delta, staticBounds, dynamicBounds);
 		}
 	}
