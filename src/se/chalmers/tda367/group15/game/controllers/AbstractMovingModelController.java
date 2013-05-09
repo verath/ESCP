@@ -137,8 +137,11 @@ public abstract class AbstractMovingModelController {
 			List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
-		return isCollision(x, y, model.getWidth(), model.getHeight(),
-				staticBounds, dynamicBounds);
+		if(model.isAlive()) {
+			return isCollision(x, y, model.getWidth(), model.getHeight(),
+					staticBounds, dynamicBounds);
+		}
+		return false;
 	}
 
 	/**
@@ -280,7 +283,7 @@ public abstract class AbstractMovingModelController {
 		// check dynamic collisions
 		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
-			if (bound1.intersects(bound2) && this.model != otherModel) {
+			if (bound1.intersects(bound2) && this.model != otherModel && otherModel.isAlive()) {
 				dynamicCollsion = true;
 				if (model instanceof AbstractProjectileModel
 						&& otherModel instanceof AbstractCharacterModel) {

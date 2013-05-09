@@ -88,16 +88,6 @@ public class BasicRoomController extends AbstractRoomController {
 			throws SlickException {
 
 		// tell enemy controllers to move
-		Iterator<AbstractMovingModelController> it = movingModelControllers
-				.iterator();
-		while (it.hasNext()) {
-			AbstractMovingModelController controller = (AbstractMovingModelController) it
-					.next();
-			AbstractMovingModel model = controller.getModel();
-			if (!model.isAlive()) {
-				it.remove();
-			}
-		}
 
 		for (AbstractMovingModelController controller : movingModelControllers) {
 			controller.update(container, delta, staticBounds, dynamicBounds);
