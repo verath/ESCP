@@ -80,13 +80,19 @@ public class DummyEnemyController extends AbstractNpcController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
+		
+		// Save old position
 		float oldX = this.getModel().getX();
 		float oldY = this.getModel().getY();
+		
+		// this moves the npc
 		randomPosMove(container, delta, staticBounds, dynamicBounds);
 		
+		// get new position
 		float newX = this.getModel().getX();
 		float newY = this.getModel().getY();
 		
+		// Set whether model is moving or not
 		this.getModel().setMoving(!((oldX == newX) || (oldY == newY)));
 
 	}
