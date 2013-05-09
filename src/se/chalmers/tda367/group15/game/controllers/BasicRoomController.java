@@ -29,6 +29,7 @@ public class BasicRoomController extends AbstractRoomController {
 	private List<AbstractMovingModelController> movingModelControllers = new ArrayList<AbstractMovingModelController>();
 	private List<Rectangle2D.Float> staticBounds;
 	private Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
+	private List<AbstractMovingModelController> quedAddons = new ArrayList<AbstractMovingModelController>();
 
 	/**
 	 * {@inheritDoc}
@@ -63,7 +64,7 @@ public class BasicRoomController extends AbstractRoomController {
 		movingModelControllers.add(new DummyEnemyController(e1, this,
 				getGameController(), 0, 10, 0, 10));
 		movingModelControllers.add(new DummyEnemyController(e2, this,
-				getGameController(), 12 , 32, 0, 9));
+				getGameController(), 12, 32, 0, 9));
 		movingModelControllers.add(new DummyEnemyController(e3, this,
 				getGameController(), 0, 18, 16, 24));
 		movingModelControllers.add(new DummyEnemyController(e4, this,
@@ -89,10 +90,27 @@ public class BasicRoomController extends AbstractRoomController {
 
 		// tell enemy controllers to move
 
-		for (AbstractMovingModelController controller : movingModelControllers) {
-			if(controller.getModel().isAlive())
-			controller.update(container, delta, staticBounds, dynamicBounds);
+		Iterator it1 = movingModelControllers.iterator();
+		while (it1.hasNext()) {
+			AbstractMovingModelController controller = (AbstractMovingModelController) it1
+					.next();
+			if (controller.getModel().isAlive()) {
+				controller
+						.update(container, delta, staticBounds, dynamicBounds);
+			}
 		}
+
+		Iterator it2 = quedAddons.iterator();
+		while (it2.hasNext()) {
+			AbstractMovingModelController controller = (AbstractMovingModelController) it2
+					.next();
+			movingModelControllers.add(controller);
+		}
+		quedAddons.clear();
+		// for (AbstractMovingModelController controller :
+		// movingModelControllers) {
+		//
+		// }
 	}
 
 	/**
@@ -208,18 +226,17 @@ public class BasicRoomController extends AbstractRoomController {
 	 */
 	@Override
 	public void addProjectile(AbstractMovingModel projectile) {
-		movingModelControllers.add(new ProjectileController(
+		quedAddons.add(new ProjectileController(
 				getGameController(), projectile));
 		dynamicBounds.put(projectile, projectile.getBounds());
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void addSwing(AbstractMovingModel swing) {
-		movingModelControllers.add(new MeleeSwingController(
-				getGameController(), swing));
+		quedAddons.add(new MeleeSwingController(getGameController(), swing));
 		dynamicBounds.put(swing, swing.getBounds());
 	}
 
