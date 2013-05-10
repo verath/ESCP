@@ -294,11 +294,13 @@ public abstract class AbstractMovingModelController {
 					AbstractProjectileModel projectile = (AbstractProjectileModel) model;
 					int damage = projectile.getDamage();
 					otherModel.takeDamage(damage);
-					soundController.playSound(SoundEffectsController.SoundEffect.ENEMY_HURT);
 
 					if(otherModel.getHealth() <= 0) {
 						otherModel.setAlive(false);
 						soundController.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);
+					}else {
+						soundController.playSound(SoundEffectsController.SoundEffect.ENEMY_HURT);
+
 					}
 					projectile.setAlive(false);
 				}

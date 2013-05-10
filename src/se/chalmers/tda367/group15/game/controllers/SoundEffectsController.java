@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.util.Random;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
@@ -8,14 +10,17 @@ public class SoundEffectsController {
 	private static SoundEffectsController instance;
 
 	public enum SoundEffect {
-		ENEMY_DEATH("res/sound/enemy/ondamage/die.aif"), ENEMY_HURT(
-				"res/sound/enemy/ondamage/damage1.aif"), PISTOL_FIRED(
-				"res/sound/pistol/shoot.aif");
+		ENEMY_DEATH(new String[] { "res/sound/enemy/ondamage/die.aif" }), ENEMY_HURT(
+				new String[] { "res/sound/enemy/ondamage/damage1.aif",
+						"res/sound/enemy/ondamage/damage2.aif",
+						"res/sound/enemy/ondamage/damage3.aif" }), PISTOL_FIRED(
+				new String[] { "res/sound/pistol/shoot.aif" }), ENEMY_COLLISION(
+				new String[] { "res/sound/enemy/collision.aif" });
 
-		private String pathToFile;
+		private String[] pathsToFiles;
 
-		private SoundEffect(String pathToFile) {
-			this.pathToFile = pathToFile;
+		private SoundEffect(String[] pathsToFiles) {
+			this.pathsToFiles = pathsToFiles;
 		}
 	}
 
@@ -30,14 +35,19 @@ public class SoundEffectsController {
 	}
 
 	public void playSound(SoundEffect soundEffect) {
-		Sound sound;;
+		Sound sound;
+		int maxRandomNbr = soundEffect.pathsToFiles.length;
+		Random generator = new Random();
+
 		try {
-			sound = new Sound(soundEffect.pathToFile);
+			sound = new Sound(
+					soundEffect.pathsToFiles[generator.nextInt(maxRandomNbr)]);
 			sound.play();
+
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
