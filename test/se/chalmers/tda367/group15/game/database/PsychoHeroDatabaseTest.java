@@ -59,7 +59,7 @@ public class PsychoHeroDatabaseTest {
 		scores.add(new InsertableScore("Test2", 4));
 		scores.add(new InsertableScore("Test3", 3));
 		scores.add(new InsertableScore("Test4", 1));
-		psh.addScore(scores);
+		psh.addScores(scores);
 
 		List<DatabaseScore> resultScores = psh.getHighscores();
 
@@ -92,7 +92,7 @@ public class PsychoHeroDatabaseTest {
 		events.add(new InsertableEvent("Test2"));
 		events.add(new InsertableEvent("Test2"));
 
-		psh.addEvent(events);
+		psh.addEvents(events);
 
 		assertTrue(psh.getNumEventsByType(new InsertableEvent("Test")) == 3);
 		assertTrue(psh.getNumEventsByType(new InsertableEvent("Test2")) == 2);
@@ -110,7 +110,7 @@ public class PsychoHeroDatabaseTest {
 		scores.add(new InsertableScore("Test2", 4));
 		scores.add(new InsertableScore("Test3", 3));
 		scores.add(new InsertableScore("Test4", 1));
-		psh.addScore(scores);
+		psh.addScores(scores);
 
 		// Get 1 from the highscore list
 		InsertableScore result = psh.getHighscores(1).get(0);

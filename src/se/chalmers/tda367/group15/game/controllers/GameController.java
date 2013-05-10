@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
@@ -36,9 +37,15 @@ class GameController {
 	private HUDView hudView;
 
 	/**
-	 * The Score controller, handling decreasing of score over time
+	 * The Score controller, handling decreasing of score over time and saving
+	 * score to the database.
 	 */
 	private ScoreController scoreController;
+
+	/**
+	 * The Event logger, logging events and saves them to the database.
+	 */
+	private EventLogger eventLogger;
 
 	/**
 	 * Creates the GameController
@@ -57,6 +64,14 @@ class GameController {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		container.setShowFPS(true);
+
+		// Set up the event logger
+		if (eventLogger != null) {
+			// If this is a new game. Save and clear events instead
+			eventLogger.saveEvents();
+		} else {
+			eventLogger = new EventLogger(SharedEventHandler.INSTANCE);
+		}
 
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);

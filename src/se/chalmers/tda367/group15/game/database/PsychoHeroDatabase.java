@@ -163,7 +163,7 @@ public class PsychoHeroDatabase {
 	public void addEvent(InsertableEvent event) {
 		List<InsertableEvent> evt = new ArrayList<InsertableEvent>(1);
 		evt.add(event);
-		addEvent(evt);
+		addEvents(evt);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class PsychoHeroDatabase {
 	 * @param events
 	 *            A list of events to add to the database
 	 */
-	public void addEvent(List<InsertableEvent> events) {
+	public void addEvents(List<InsertableEvent> events) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -209,7 +209,7 @@ public class PsychoHeroDatabase {
 	public void addScore(InsertableScore score) {
 		List<InsertableScore> s = new ArrayList<InsertableScore>(1);
 		s.add(score);
-		addScore(s);
+		addScores(s);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class PsychoHeroDatabase {
 	 * 
 	 * @param scores
 	 */
-	public void addScore(List<InsertableScore> scores) {
+	public void addScores(List<InsertableScore> scores) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
