@@ -184,6 +184,7 @@ public abstract class AbstractNpcController extends
 		
 		float heroX = heroModel.getX();
 		float heroY = heroModel.getY();
+		
 		if ( isInSight( staticBounds, model.getX(), model.getY(), heroX, heroY) ) {
 			model.setAlive(false);
 		}
@@ -276,10 +277,10 @@ public abstract class AbstractNpcController extends
 		Line2D.Float heroSightLine = new Line2D.Float( (float)currX, (float)currX, heroX, heroY);
 		
 		// check static collisions
-		for (Rectangle2D.Float bound2 : staticBounds) {
+		for (Rectangle2D.Float rect : staticBounds) {
 			
-			Line2D.Float x1 = new Line2D.Float( (float)bound2.getX(), (float)bound2.getY(), (float)(bound2.getX()+bound2.getWidth()), (float)(bound2.getY()+bound2.getHeight()));
-			Line2D.Float x2 = new Line2D.Float( (float)bound2.getX(), (float)(bound2.getY()+bound2.getHeight()), (float)bound2.getY(), (float)(bound2.getX()+bound2.getWidth()));
+			Line2D.Float x1 = new Line2D.Float( (float)rect.getX(), (float)rect.getY(), (float)(rect.getX()+rect.getWidth()), (float)(rect.getY()+rect.getHeight()));
+			Line2D.Float x2 = new Line2D.Float( (float)rect.getX(), (float)(rect.getY()+rect.getHeight()), (float)(rect.getX()+rect.getWidth()), (float)rect.getY());
 			
 			if ( heroSightLine.intersectsLine(x1) || heroSightLine.intersectsLine(x2)) {
 				return false;
