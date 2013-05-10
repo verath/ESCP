@@ -101,7 +101,7 @@ public class BasicRoomController extends AbstractRoomController {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-
+		
 		// render map
 		map.render(0, 0);
 

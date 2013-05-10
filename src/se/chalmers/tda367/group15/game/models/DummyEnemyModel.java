@@ -58,6 +58,6 @@ public class DummyEnemyModel extends AbstractCharacterModel {
 				e.printStackTrace();
 			}
 		}
-		return new Animation(image, 50, true);
+		return new Animation(image, 60, true);
 	}
 }

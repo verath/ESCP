@@ -8,6 +8,7 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
@@ -22,7 +23,8 @@ import se.chalmers.tda367.group15.game.views.View;
  * 
  */
 public abstract class AbstractMovingModelController {
-
+	
+	private Sound damage1;
 	/**
 	 * The model that the controller is managing
 	 */
@@ -290,6 +292,14 @@ public abstract class AbstractMovingModelController {
 					AbstractProjectileModel projectile = (AbstractProjectileModel) model;
 					int damage = projectile.getDamage();
 					otherModel.takeDamage(damage);
+					try {
+						damage1 = new Sound("res/sound/enemy/ondamage/damage1.aif");
+					} catch (SlickException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(otherModel.isAlive())
+					damage1.playAt(otherModel.getX(), otherModel.getY(), 0);
 					projectile.setAlive(false);
 				}
 			}

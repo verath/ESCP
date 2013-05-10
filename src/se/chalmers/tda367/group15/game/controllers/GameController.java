@@ -103,6 +103,7 @@ class GameController {
 
 		heroController.update(container, delta, staticBounds, dynamicBounds);
 		roomController.update(container, delta, staticBounds, dynamicBounds);
+		
 	}
 
 	/**

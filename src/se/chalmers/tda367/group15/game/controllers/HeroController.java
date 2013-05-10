@@ -3,11 +3,13 @@ package se.chalmers.tda367.group15.game.controllers;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMeleeWeapon;
@@ -27,6 +29,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingLeft;
 	private boolean goingRight;
 	private long timer = 0;
+	private Sound shoot;
 
 	/**
 	 * Create a new controller for the hero.
@@ -146,6 +149,15 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	private void createBullet() {
+		try {
+			shoot = new Sound("res/sound/pistol/shoot.aif");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Random rand = new Random();
+		float f = rand.nextFloat();
+		shoot.play();
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newBullet = new BulletModel();
 
