@@ -73,6 +73,7 @@ public class StateController extends StateBasedGame {
 			gameContainer = new AppGameContainer(scalableGame);
 			gameContainer.setVerbose(Constants.DEBUG);
 			gameContainer.setTargetFrameRate(120);
+			gameContainer.setShowFPS(false);
 			gameContainer.setIcons(new String[] { "res/menu/ContainerIcon.tga",
 					"res/menu/ContainerTabIcon.tga",
 					"res/menu/ContainerTabIcon2.tga" });

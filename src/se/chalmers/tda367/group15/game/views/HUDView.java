@@ -5,7 +5,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 
 public class HUDView implements View {
@@ -21,15 +20,17 @@ public class HUDView implements View {
 
 		int currentScore = scoreModel.getScore();
 
-		// Draw the score string, adjust for width of the text
 		String scoreStr = "Score: " + currentScore;
+		String fpsStr = "FPS: " + container.getFPS();
 		int scoreStrWidth = g.getFont().getWidth(scoreStr);
 
 		g.setColor(Color.black);
-		g.drawString(scoreStr, Constants.GAME_WIDTH - (scoreStrWidth + 6), 6);
+		g.drawString(scoreStr, container.getWidth() - (scoreStrWidth + 6), 6);
+		g.drawString(fpsStr, 6, 6);
 
 		g.setColor(Color.white);
-		g.drawString(scoreStr, Constants.GAME_WIDTH - (scoreStrWidth + 5), 5);
+		g.drawString(scoreStr, container.getWidth() - (scoreStrWidth + 5), 5);
+		g.drawString(fpsStr, 5, 5);
 
 	}
 

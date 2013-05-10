@@ -63,8 +63,6 @@ class GameController {
 	 *             Throw to indicate an internal error
 	 */
 	public void init(GameContainer container) throws SlickException {
-		container.setShowFPS(true);
-
 		// Set up the event logger
 		if (eventLogger != null) {
 			// If this is a new game. Save and clear events instead
