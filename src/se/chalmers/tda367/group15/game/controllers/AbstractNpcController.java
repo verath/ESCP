@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
@@ -175,9 +177,16 @@ public abstract class AbstractNpcController extends
 			throws SlickException {
 
 		AbstractMovingModel model = getModel();
+		AbstractMovingModel heroModel = getGameController().getHeroController().getModel();
 
 		int currX = (int) (model.getX() + (model.getWidth() / 2)) / 32;
 		int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
+		
+		float heroX = heroModel.getX();
+		float heroY = heroModel.getY();
+		if ( isInSight( staticBounds, model.getX(), model.getY(), heroX, heroY) ) {
+			model.setAlive(false);
+		}
 
 		// If path is null or end of path reached
 		if (myPath == null || currentStep == myPath.getLength()) {
@@ -261,5 +270,26 @@ public abstract class AbstractNpcController extends
 		}
 
 	}
+	
+	public boolean isInSight(List<Rectangle2D.Float> staticBounds, float currX, float curry, float heroX, float heroY) {
 
+		Line2D.Float heroSightLine = new Line2D.Float( (float)currX, (float)currX, heroX, heroY);
+		
+		// check static collisions
+		for (Rectangle2D.Float bound2 : staticBounds) {
+			
+			Line2D.Float x1 = new Line2D.Float( (float)bound2.getX(), (float)bound2.getY(), (float)(bound2.getX()+bound2.getWidth()), (float)(bound2.getY()+bound2.getHeight()));
+			Line2D.Float x2 = new Line2D.Float( (float)bound2.getX(), (float)(bound2.getY()+bound2.getHeight()), (float)bound2.getY(), (float)(bound2.getX()+bound2.getWidth()));
+			
+			if ( heroSightLine.intersectsLine(x1) || heroSightLine.intersectsLine(x2)) {
+				return false;
+			}
+			/*
+			if ( heroSightLine.intersects(bound2) ) {
+				return false;
+			}
+			*/
+		}
+		return true;
+	}
 }
