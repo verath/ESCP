@@ -82,15 +82,17 @@ public class DummyEnemyView implements View {
 						(int) e.getHeight());
 			}
 
+			// Draw the current HP string
 			Font f = g.getFont();
+			g.setColor(Color.yellow);
 			g.drawString("HP: " + model.getHealth(), model.getX(), model.getY()
 					- f.getLineHeight());
 		} else if (!model.isAlive()) {
-			if(!deathAnimationInitiated) {
+			if (!deathAnimationInitiated) {
 				DummyEnemyModel tmp = (DummyEnemyModel) model;
 				runDeathAnimation(tmp.getDeathAnimation());
 				deathAnimationInitiated = true;
-			}	
+			}
 			float rotation = (float) model.getRotation();
 			g.rotate(model.getX() + model.getWidth() / 2,
 					model.getY() + model.getHeight() / 2, rotation);
@@ -99,9 +101,9 @@ public class DummyEnemyView implements View {
 				animation.draw(model.getX() - model.getOffset(), model.getY()
 						- model.getOffset());
 				g.resetTransform();
-				
+
 				deathAnimationRunning = !(deathAnimation.isStopped());
-						
+
 			} else {
 
 				Image dead = deathAnimation.getImage(deathAnimation

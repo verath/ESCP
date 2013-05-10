@@ -64,7 +64,7 @@ public class HeroView implements View {
 				}
 			} else {
 				animation = swingAnimation;
-				if(swingAnimation.isStopped()){
+				if (swingAnimation.isStopped()) {
 					swingAnimationRunning = false;
 				}
 			}
@@ -81,6 +81,8 @@ public class HeroView implements View {
 						(int) e.getHeight());
 			}
 
+			// Draw the current HP string
+			g.setColor(Color.yellow);
 			Font f = g.getFont();
 			g.drawString("HP: " + model.getHealth(), model.getX(), model.getY()
 					- f.getLineHeight());
@@ -89,12 +91,12 @@ public class HeroView implements View {
 	}
 
 	public void runAnimation(Animation animation) {
-		if(model.isAlive()) {
+		if (model.isAlive()) {
 			swingAnimationRunning = true;
 			this.swingAnimation = animation;
 			this.swingAnimation.setLooping(false);
 		}
-		
+
 	}
 
 }
