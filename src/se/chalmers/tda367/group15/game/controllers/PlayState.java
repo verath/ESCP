@@ -43,7 +43,7 @@ public class PlayState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-		gameController.render(container, g);
+		gameController.render(container, game, g);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class PlayState extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		gameController.init(container);
+		gameController.init(container, game);
 
 	}
 
@@ -78,7 +78,7 @@ public class PlayState extends BasicGameState {
 			game.enterState(Constants.GAME_STATE_MAIN_MENU);
 		}
 
-		gameController.update(container, delta);
+		gameController.update(container, game, delta);
 	}
 
 	/**

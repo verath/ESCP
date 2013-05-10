@@ -8,6 +8,7 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
@@ -59,10 +60,11 @@ class GameController {
 	 * 
 	 * @param container
 	 *            The container holding the game
+	 * @param game The state based game currently running.
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		// Set up the event logger
 		if (eventLogger != null) {
 			// If this is a new game. Save and clear events instead
@@ -108,13 +110,15 @@ class GameController {
 	 * 
 	 * @param container
 	 *            The container holing this game
+	 * @param game
+	 *            The state based game currently running.
 	 * @param delta
 	 *            The amount of time thats passed since last update in
 	 *            milliseconds
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void update(GameContainer container, int delta)
+	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 
 		scoreController.update(container, delta);
@@ -140,13 +144,14 @@ class GameController {
 	 * 
 	 * @param container
 	 *            The container holing this game
+	 * @param game The state based game currently running.
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
 	 * @throws SlickException
 	 *             Throw to indicate a internal error
 	 */
-	public void render(GameContainer container, Graphics g)
+	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 
 		roomController.render(container, g);
