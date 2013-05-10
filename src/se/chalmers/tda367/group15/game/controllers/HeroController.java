@@ -30,6 +30,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingRight;
 	private long timer = 0;
 	private Sound shoot;
+	private SoundEffectsController soundController = SoundEffectsController.instance();
 
 	/**
 	 * Create a new controller for the hero.
@@ -149,15 +150,9 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	private void createBullet() {
-		try {
-			shoot = new Sound("res/sound/pistol/shoot.aif");
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		Random rand = new Random();
 		float f = rand.nextFloat();
-		shoot.play();
+		soundController.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newBullet = new BulletModel();
 
