@@ -65,7 +65,7 @@ public class DummyEnemyController extends AbstractNpcController {
 			GameController gameController, int x, int x2, int y, int y2) {
 		super(gameController, new AStarPathFinder(map, 500, true), x, x2, y, y2);
 		setModel(model);
-		setView(new DummyEnemyView(getModel()));
+		setView(new DummyEnemyView(model));
 	}
 
 	/**
@@ -86,6 +86,10 @@ public class DummyEnemyController extends AbstractNpcController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
+		Input input = container.getInput();
+		if(input.isKeyPressed(Input.KEY_9)) {
+			fire();
+		}
 		if (hasFired) {
 			swingWeapon();
 			hasFired = false;

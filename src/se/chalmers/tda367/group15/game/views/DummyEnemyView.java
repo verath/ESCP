@@ -10,9 +10,11 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
@@ -23,7 +25,7 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  */
 public class DummyEnemyView implements View {
 
-	private final AbstractMovingModel model;
+	private final AbstractCharacterModel model;
 	private Animation animation;
 	private Animation swingAnimation;
 	private boolean swingAnimationRunning = false;
@@ -33,7 +35,7 @@ public class DummyEnemyView implements View {
 	 * 
 	 * @param movingModel
 	 */
-	public DummyEnemyView(final AbstractMovingModel movingModel) {
+	public DummyEnemyView(final AbstractCharacterModel movingModel) {
 		this.model = movingModel;
 		File folder = new File("res/animation/enemy/coworker/1");
 		File[] files = folder.listFiles();
@@ -57,10 +59,13 @@ public class DummyEnemyView implements View {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+
 		if (model.isAlive()) {
 			float rotation = (float) model.getRotation();
 
 			if (!swingAnimationRunning) {
+				animation = model.getCurrentWeapon().getAnimation();
+
 				// We don't want to run the animation if we're not moving
 
 				if (!model.isMoving()) {
