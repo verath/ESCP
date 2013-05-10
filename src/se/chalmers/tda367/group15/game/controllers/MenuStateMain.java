@@ -22,7 +22,6 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	 * it is null.
 	 */
 	private Button resumeGameButton;
-	
 
 	/**
 	 * the upper left corner of button group
@@ -92,9 +91,12 @@ public class MenuStateMain extends AbstractMenuBasedState {
 			public void performAction() {
 
 				try { // Init PlayState to reset game.
-					game.getState(Constants.GAME_STATE_PLAYING).init(container,
-							game);
-					existsGameCurrently = true;
+					if (existsGameCurrently) {
+						game.getState(Constants.GAME_STATE_PLAYING).init(
+								container, game);
+					} else {
+						existsGameCurrently = true;
+					}
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}
@@ -116,7 +118,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 				MENUX, MENUY + 150) {
 			@Override
 			public void performAction() {
-				if ( ((StateController) game).closeRequested() ) {
+				if (((StateController) game).closeRequested()) {
 					container.exit();
 				}
 			}
