@@ -13,7 +13,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 
 /**
@@ -24,18 +24,22 @@ import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
  */
 public class DummyEnemyView implements View {
 
-	private final AbstractMovingModel model;
+	private final AbstractCharacterModel model;
+
 	private Animation animation;
 	private Animation deathAnimation;
+	private Animation swingAnimation;
+
 	private boolean deathAnimationRunning = false;
 	private boolean deathAnimationInitiated = false;
+	private boolean swingAnimationRunning = false;
 
 	/**
 	 * Creates a new view for the Dummy Enemy.
 	 * 
 	 * @param movingModel
 	 */
-	public DummyEnemyView(final AbstractMovingModel movingModel) {
+	public DummyEnemyView(final AbstractCharacterModel movingModel) {
 		this.model = movingModel;
 		File folder = new File("res/animation/enemy/coworker/1");
 		File[] files = folder.listFiles();
@@ -59,15 +63,27 @@ public class DummyEnemyView implements View {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+
 		if (model.isAlive()) {
-
-			if (!model.isMoving()) {
-				animation.stop();
-			} else if (animation.isStopped()) {
-				animation.start();
-			}
-
 			float rotation = (float) model.getRotation();
+
+			if (!swingAnimationRunning) {
+				animation = model.getCurrentWeapon().getAnimation();
+
+				// We don't want to run the animation if we're not moving
+
+				if (!model.isMoving()) {
+					animation.stop();
+				} else if (animation.isStopped()) {
+					animation.start();
+				}
+
+			} else {
+				animation = swingAnimation;
+				if (swingAnimation.isStopped()) {
+					swingAnimationRunning = false;
+				}
+			}
 
 			// rotates the current frame
 			g.rotate(model.getX() + model.getWidth() / 2,
@@ -124,6 +140,15 @@ public class DummyEnemyView implements View {
 			this.deathAnimation.setLooping(false);
 			this.animation = deathAnimation;
 		}
+	}
+
+	public void runAnimation(Animation animation) {
+		if (model.isAlive()) {
+			swingAnimationRunning = true;
+			this.swingAnimation = animation;
+			this.swingAnimation.setLooping(false);
+		}
+
 	}
 
 }

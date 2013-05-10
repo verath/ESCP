@@ -43,6 +43,8 @@ public class DummyEnemyModel extends AbstractCharacterModel {
 		setOffset(11);
 		setAlive(true);
 		setHealth(100);
+		addWeapon(new EnemyUnarmed());
+		setCurrentWeapon(getWeapons().get(0));
 	}
 	
 	public Animation getDeathAnimation() {

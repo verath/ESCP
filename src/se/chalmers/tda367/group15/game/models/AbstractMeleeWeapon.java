@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
 import org.newdawn.slick.Animation;
-import org.newdawn.slick.Image;
 
 /**
  * A weapon that can only be used in melee range.

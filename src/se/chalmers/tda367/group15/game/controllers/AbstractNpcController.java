@@ -261,5 +261,10 @@ public abstract class AbstractNpcController extends
 		}
 
 	}
+	
+	/**
+	 * Method to tell npc to fire a weapon of some kind
+	 */
+	public abstract void fire();
 
 }

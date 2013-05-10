@@ -21,7 +21,7 @@ public class Constants {
 	/**
 	 * Boolean controlling whether collision bounds should be drawn.
 	 */
-	public static boolean SHOW_BOUNDS = true;
+	public static boolean SHOW_BOUNDS = false;
 
 	/*
 	 * The different states. They should each be a unique int.
