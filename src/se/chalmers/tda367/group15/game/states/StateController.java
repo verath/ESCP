@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.controllers;
+package se.chalmers.tda367.group15.game.states;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -126,7 +126,7 @@ public class StateController extends StateBasedGame {
 	 * 
 	 * @return the AppGameContainer in which game is.
 	 */
-	public AppGameContainer getTheAppContainer() {
+	public AppGameContainer getAppGameContainer() {
 		return gameContainer;
 	}
 

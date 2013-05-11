@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.database;
 
-import se.chalmers.tda367.group15.game.event.Event;
 
 /**
  * A class representing an event that can be inserted into the database
@@ -25,16 +24,6 @@ public class InsertableEvent {
 			throw new IllegalArgumentException("eventType can not be null");
 		}
 		this.eventType = eventType;
-	}
-
-	/**
-	 * Creates a new InsertableEvent from an Event using the class name as type.
-	 * 
-	 * @param event
-	 *            An Event that will be inserted using it's class name as type.
-	 */
-	public InsertableEvent(final Event event) {
-		this(event.getClass().getSimpleName());
 	}
 
 	/**

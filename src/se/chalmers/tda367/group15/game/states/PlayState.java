@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.controllers;
+package se.chalmers.tda367.group15.game.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -8,6 +8,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.controllers.GameController;
 
 /**
  * The playing state of the game (as to be compared to the menu states),

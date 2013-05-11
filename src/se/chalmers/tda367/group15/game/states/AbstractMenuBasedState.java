@@ -1,10 +1,12 @@
-package se.chalmers.tda367.group15.game.menu;
+package se.chalmers.tda367.group15.game.states;
 
 import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+
+import se.chalmers.tda367.group15.game.menu.MenuItem;
 
 
 /**
