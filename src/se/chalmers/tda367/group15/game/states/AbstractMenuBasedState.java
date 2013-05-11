@@ -1,13 +1,13 @@
 package se.chalmers.tda367.group15.game.states;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
 import se.chalmers.tda367.group15.game.menu.MenuItem;
-
 
 /**
  * A class with the purpose of making it easy to create menus in a graphical
@@ -26,11 +26,11 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * indicates mouse button i was just pressed.
 	 */
 	protected boolean leftMouseButtonReleased;
-	
+
 	/**
 	 * List with all MenuItems on page.
 	 */
-	protected ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+	protected List<MenuItem> menuItems = new ArrayList<MenuItem>();
 
 	/**
 	 * The background for current menu page.
@@ -69,9 +69,13 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 */
 	@Override
 	public void render(Graphics g) {
-		background.draw();
-		for ( int i = 0; i < menuItems.size(); i++) {
-			menuItems.get(i).render(g);
+		if (background != null) {
+			background.draw();
+		}
+		if (menuItems != null) {
+			for (MenuItem item : menuItems) {
+				item.render(g);
+			}
 		}
 	}
 
@@ -115,8 +119,8 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * action.
 	 */
 	private void clickButton() {
-		for ( int i = 0; i < menuItems.size(); i++ ) {
-			if ( menuItems.get(i).isMouseOver() ) {
+		for (int i = 0; i < menuItems.size(); i++) {
+			if (menuItems.get(i).isMouseOver()) {
 				menuItems.get(i).performAction();
 			}
 		}

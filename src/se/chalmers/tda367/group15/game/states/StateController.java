@@ -42,11 +42,14 @@ public class StateController extends StateBasedGame {
 				Constants.GAME_STATE_MAIN_MENU);
 		MenuStateOptions optionsMenu = new MenuStateOptions(
 				Constants.GAME_STATE_OPTIONS_MENU);
+		GameOverState gameOverState = new GameOverState(
+				Constants.GAME_STATE_GAME_OVER);
 
 		this.initMusic();
 		this.addState(playState);
 		this.addState(mainMenu);
 		this.addState(optionsMenu);
+		this.addState(gameOverState);
 		this.enterState(Constants.GAME_STATE_MAIN_MENU);
 	}
 
