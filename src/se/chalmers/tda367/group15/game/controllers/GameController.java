@@ -2,6 +2,7 @@ package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,13 +12,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.database.InsertableEvent;
+import se.chalmers.tda367.group15.game.database.PsychoHeroDatabase;
+import se.chalmers.tda367.group15.game.event.Event;
+import se.chalmers.tda367.group15.game.event.EventLogger;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
-class GameController {
+public class GameController {
 
 	private boolean imagesAlreadyLoaded = false;
 
@@ -48,10 +53,42 @@ class GameController {
 	 */
 	private EventLogger eventLogger;
 
+	private PsychoHeroDatabase db = null;
+
 	/**
 	 * Creates the GameController
 	 */
-	protected GameController() {
+	public GameController() {
+		try {
+			db = new PsychoHeroDatabase();
+		} catch (ClassNotFoundException e) {
+			if (Constants.DEBUG) {
+				System.err.println("Could not connect to the database. "
+						+ "Make sure you have the org.sqlite.JDBC library.");
+			}
+		}
+	}
+
+	/**
+	 * Sets up the event logger for the game. If an event logger already exists,
+	 * save it's current events and clear it.
+	 */
+	private void initEventLogger() {
+		// Set up the event logger
+		if (eventLogger != null) {
+			// If this is a new game. Save and clear events instead
+			List<InsertableEvent> insertEvts = new LinkedList<>();
+			for (Event evt : eventLogger) {
+				insertEvts.add(new InsertableEvent(evt.getClass()
+						.getSimpleName()));
+			}
+			eventLogger.clear();
+			if (db != null) {
+				db.addEvents(insertEvts);
+			}
+		} else {
+			eventLogger = new EventLogger(SharedEventHandler.INSTANCE);
+		}
 	}
 
 	/**
@@ -60,18 +97,15 @@ class GameController {
 	 * 
 	 * @param container
 	 *            The container holding the game
-	 * @param game The state based game currently running.
+	 * @param game
+	 *            The state based game currently running.
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		// Set up the event logger
-		if (eventLogger != null) {
-			// If this is a new game. Save and clear events instead
-			eventLogger.saveEvents();
-		} else {
-			eventLogger = new EventLogger(SharedEventHandler.INSTANCE);
-		}
+	public void init(GameContainer container, StateBasedGame game)
+			throws SlickException {
+
+		initEventLogger();
 
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);
@@ -144,7 +178,8 @@ class GameController {
 	 * 
 	 * @param container
 	 *            The container holing this game
-	 * @param game The state based game currently running.
+	 * @param game
+	 *            The state based game currently running.
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.

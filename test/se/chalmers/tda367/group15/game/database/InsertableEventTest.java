@@ -25,7 +25,8 @@ public class InsertableEventTest {
 	@Test
 	public final void testCreateInsertableEventFromEvent() {
 		TestEvent evt = new TestEvent();
-		InsertableEvent inEvt = new InsertableEvent(evt);
+		InsertableEvent inEvt = new InsertableEvent(evt.getClass()
+				.getSimpleName());
 		assertTrue(inEvt.getEventType().equals("TestEvent"));
 	}
 

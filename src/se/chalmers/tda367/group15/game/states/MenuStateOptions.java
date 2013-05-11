@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.controllers;
+package se.chalmers.tda367.group15.game.states;
 
 import java.util.prefs.Preferences;
 
@@ -6,7 +6,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
-import se.chalmers.tda367.group15.game.menu.AbstractMenuBasedState;
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.CheckBox;
 

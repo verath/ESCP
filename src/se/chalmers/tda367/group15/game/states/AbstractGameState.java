@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.menu;
+package se.chalmers.tda367.group15.game.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
