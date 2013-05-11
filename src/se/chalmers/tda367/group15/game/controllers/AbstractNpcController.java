@@ -187,7 +187,8 @@ public abstract class AbstractNpcController extends
 
 		if (isInSight(staticBounds, model.getX() + model.getWidth() / 2,
 				model.getY() + model.getHeight() / 2, heroX, heroY)) {
-			model.setAlive(false);
+			//model.setAlive(false);
+			//TODO Enemies should react in some way when hero is in sight!
 		}
 
 		// If path is null or end of path reached
