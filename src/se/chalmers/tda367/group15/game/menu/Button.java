@@ -6,9 +6,10 @@ import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.gui.MouseOverArea;
 
 /**
- * A class for representation buttons in a graphical environment. Class based on
- * tutorial for writing menus in Slick2D Originally posted on
- * http://slick.javaunlimited.net/ by user shiroto. Remade to suit our purpose.
+ * A class for representation buttons in a graphical environment. Supposed to be
+ * used together with AbstractMenuBasedState.java. Class based on tutorial for
+ * writing menus in Slick2D Originally posted on http://slick.javaunlimited.net/
+ * by user shiroto. Remade to suit our purpose.
  * 
  * @author Carl Jansson
  * @version 2.0
@@ -16,8 +17,8 @@ import org.newdawn.slick.gui.MouseOverArea;
 public class Button implements MenuItem {
 
 	/**
-	 * The pictures and area of the button. This is the size of the image used when creating
-	 * the moa.
+	 * The pictures and area of the button. This is the size of the image used
+	 * when creating the moa.
 	 */
 	protected MouseOverArea moa;
 

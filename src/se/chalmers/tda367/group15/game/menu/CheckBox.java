@@ -8,8 +8,9 @@ import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.gui.MouseOverArea;
 
 /**
- * A class for representation a CheckBox in a graphical environment. Class is
- * extension by me to tutorial for writing menus in Slick2D Originally posted on
+ * A class for representation a CheckBox in a graphical environment. Supposed to
+ * be used together with AbstractMenuBasedState.java. Class is extension by me
+ * to tutorial for writing menus in Slick2D Originally posted on
  * http://slick.javaunlimited.net/ by user shiroto
  * 
  * @author Carl Jansson

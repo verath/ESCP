@@ -187,8 +187,7 @@ public abstract class AbstractNpcController extends
 
 		if (isInSight(staticBounds, model.getX() + model.getWidth() / 2,
 				model.getY() + model.getHeight() / 2, heroX, heroY)) {
-			//model.setAlive(false);
-			//TODO Enemies should react in some way when hero is in sight!
+			// TODO Enemies should react in some way when hero is in sight!
 		}
 
 		// If path is null or end of path reached
@@ -244,7 +243,7 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Set max and min positions. Of given coordinates not allowed sets entire
+	 * Set max and min positions. If given coordinates not allowed sets entire
 	 * map as default.
 	 * 
 	 * @param x
@@ -269,35 +268,39 @@ public abstract class AbstractNpcController extends
 			deltaY = 24;
 			startX = 0;
 			startY = 0;
-
 		}
-
 	}
-	
+
 	/**
 	 * Method to tell npc to fire a weapon of some kind
 	 */
 	public abstract void fire();
 
 	/**
-	 * Method for checking if two points are in sight of each other.
-	 * @param staticBounds The obstruction that can get in the way
-	 * @param point1X 
+	 * Method for checking if two pixel points are in sight of each other.
+	 * 
+	 * @param staticBounds
+	 *            The obstruction that can get in the way
+	 * @param point1X
+	 *            first points x position
 	 * @param point1Y
+	 *            first points y position
 	 * @param point2X
+	 *            second points x position
 	 * @param point2Y
+	 *            second points y position
 	 * @return true if they are in sight of each other
 	 */
-	public boolean isInSight(List<Rectangle2D.Float> staticBounds, float point1X,
-			float point1Y, float point2X, float point2Y) {
+	public boolean isInSight(List<Rectangle2D.Float> staticBounds,
+			float point1X, float point1Y, float point2X, float point2Y) {
 
 		for (Rectangle2D.Float rect : staticBounds) {
 
 			if (linesIntersect(point1X, point1Y, point2X, point2Y, rect.getX(),
 					rect.getY(), rect.getX() + rect.getWidth(), rect.getY()
 							+ rect.getHeight())
-					|| linesIntersect(point1X, point1Y, point2X, point2Y, rect.getX(),
-							rect.getY() + rect.getHeight(),
+					|| linesIntersect(point1X, point1Y, point2X, point2Y,
+							rect.getX(), rect.getY() + rect.getHeight(),
 							rect.getX() + rect.getWidth(), rect.getY())) {
 				return false;
 			}
