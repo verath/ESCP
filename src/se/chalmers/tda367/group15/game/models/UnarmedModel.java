@@ -11,7 +11,7 @@ import org.newdawn.slick.Image;
  * @author tholene
  * 
  */
-public class UnarmedModel extends AbstractMeleeWeapon{
+public class UnarmedModel extends AbstractMeleeWeaponModel{
 	 
 	private static Animation animation;
 	

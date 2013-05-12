@@ -12,7 +12,7 @@ import org.newdawn.slick.Image;
  * @author tholene
  * 
  */
-public class AxeModel extends AbstractMeleeWeapon {
+public class AxeModel extends AbstractMeleeWeaponModel {
 
 	private static Animation animation;
 	private static Animation swingAnimation;

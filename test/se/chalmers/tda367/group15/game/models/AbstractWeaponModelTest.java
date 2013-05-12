@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models.weapons;
+package se.chalmers.tda367.group15.game.models;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,7 +9,7 @@ import org.newdawn.slick.Animation;
 import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
 
 
-public class WeaponTest {
+public class AbstractWeaponModelTest {
 	private static AbstractWeaponModel testedModel;
 	private static final int MIN_DMG = 1;
 	private static final int MAX_DMG = 10;

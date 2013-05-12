@@ -11,7 +11,7 @@ import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
-import se.chalmers.tda367.group15.game.models.AbstractMeleeWeapon;
+import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
@@ -119,7 +119,7 @@ public class DummyEnemyController extends AbstractNpcController {
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		// Run the swinging animation for the weapon
-		AbstractMeleeWeapon weapon = (AbstractMeleeWeapon) model
+		AbstractMeleeWeaponModel weapon = (AbstractMeleeWeaponModel) model
 				.getCurrentWeapon();
 		DummyEnemyView view = (DummyEnemyView) getView();
 		view.runAnimation(weapon.getSwingAnimation());

@@ -10,7 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
-import se.chalmers.tda367.group15.game.models.AbstractMeleeWeapon;
+import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
@@ -69,7 +69,7 @@ public class HeroController extends AbstractMovingModelController {
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			if (weapon instanceof AbstractRangedWeaponModel) {
 				createBullet();
-			} else if (weapon instanceof AbstractMeleeWeapon) {
+			} else if (weapon instanceof AbstractMeleeWeaponModel) {
 				swingWeapon();
 			}
 			timer = System.currentTimeMillis();
@@ -81,7 +81,7 @@ public class HeroController extends AbstractMovingModelController {
 
 			if (weapon instanceof AbstractRangedWeaponModel) {
 				createBullet();
-			} else if (weapon instanceof AbstractMeleeWeapon) {
+			} else if (weapon instanceof AbstractMeleeWeaponModel) {
 				swingWeapon();
 			}
 		}
@@ -174,7 +174,7 @@ public class HeroController extends AbstractMovingModelController {
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		// Run the swinging animation for the weapon
-		AbstractMeleeWeapon weapon = (AbstractMeleeWeapon) model
+		AbstractMeleeWeaponModel weapon = (AbstractMeleeWeaponModel) model
 				.getCurrentWeapon();
 		HeroView view = (HeroView) getView();
 		view.runAnimation(weapon.getSwingAnimation());
