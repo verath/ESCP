@@ -10,7 +10,6 @@ import org.newdawn.slick.SlickException;
 import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
 import se.chalmers.tda367.group15.game.database.PsychoHeroDatabase;
-import se.chalmers.tda367.group15.game.menu.Button;
 
 /**
  * A game over state. Displays a high score and allows the user to either replay
@@ -21,11 +20,30 @@ import se.chalmers.tda367.group15.game.menu.Button;
  */
 public class GameOverState extends AbstractMenuBasedState {
 
-	/**
-	 * the upper left corner of button group
+	/*
+	 * the upper left corner of the highscore list
 	 */
-	private int MENUX = 200;
-	private int MENUY = 100;
+	private static final int HIGH_SCORE_LIST_X = 40;
+	private static final int HIGH_SCORE_LIST_Y = 170;
+
+	/*
+	 * Horizontal spacing between entries
+	 */
+	private static final int HIGH_SCORE_LIST_SPACING = 30;
+
+	/*
+	 * 
+	 */
+	private static final int HIGH_SCORE_LIST_WIDTH = 200;
+
+	/*
+	 * The number of high score entries to show
+	 */
+	private static final int NUM_HIGH_SCORE_ENTRIES = 5;
+
+	private long last_db_query = 0;
+
+	private List<DatabaseScore> highScores;
 
 	/**
 	 * Creates a new GameOverState.
@@ -42,23 +60,52 @@ public class GameOverState extends AbstractMenuBasedState {
 	 */
 	@Override
 	public void init() {
-
+		try {
+			background = new Image("res/menu/gameOver.png");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
 
-		PsychoHeroDatabase db;
-		try {
-			db = new PsychoHeroDatabase();
-			List<DatabaseScore> scores = db.getHighscores(5);
-			for (int i = 0; i < scores.size(); i++) {
-				DatabaseScore score = scores.get(i);
-				g.getFont().drawString(200, 300 + 30 * i,
-						score.getName() + " " + score.getScore(), Color.white);
+		// Don't query the database more than once every 20 sec or so.
+		long now = System.currentTimeMillis();
+		if (now - last_db_query > 1000 * 20) {
+			last_db_query = now;
+			PsychoHeroDatabase db;
+			try {
+				db = new PsychoHeroDatabase();
+				highScores = db.getHighscores(5);
+			} catch (ClassNotFoundException e) {
 			}
-		} catch (ClassNotFoundException e) {
+		}
+
+		// Print the highscores
+		if (highScores != null) {
+			for (int i = 0; i < NUM_HIGH_SCORE_ENTRIES; i++) {
+				String score = "----";
+				String name = "<No One>";
+				if (i < highScores.size()) {
+					score = Integer.toString(highScores.get(i).getScore());
+					name = highScores.get(i).getName();
+				}
+
+				if (name.length() > 15) {
+					name = name.substring(0, 15) + "...";
+				}
+
+				name = Integer.toString(i + 1) + ". " + name;
+				g.getFont().drawString(HIGH_SCORE_LIST_X,
+						HIGH_SCORE_LIST_Y + HIGH_SCORE_LIST_SPACING * i, name,
+						Color.white);
+				g.getFont().drawString(
+						HIGH_SCORE_LIST_X + HIGH_SCORE_LIST_WIDTH,
+						HIGH_SCORE_LIST_Y + HIGH_SCORE_LIST_SPACING * i, score,
+						Color.white);
+			}
 		}
 
 	}
@@ -68,30 +115,6 @@ public class GameOverState extends AbstractMenuBasedState {
 	 */
 	@Override
 	protected void initMenuItems() {
-		initButtons();
-	}
-
-	/**
-	 * Create the buttons used in this state.
-	 */
-	private void initButtons() {
-		try {
-			Image backImage = new Image("res/menu/returnButton.png");
-			Image backImageMO = new Image("res/menu/returnButtonMO.png");
-
-			// Button for returning to main menu.
-			Button returnButton = new Button(container, backImage, backImageMO,
-					MENUX, MENUY) {
-				@Override
-				public void performAction() {
-					game.enterState(Constants.GAME_STATE_MAIN_MENU);
-				}
-			};
-			this.addMenuItem(returnButton);
-
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
