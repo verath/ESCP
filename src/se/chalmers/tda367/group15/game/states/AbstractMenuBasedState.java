@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.states;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -30,7 +29,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	/**
 	 * List with all MenuItems on page.
 	 */
-	protected List<MenuItem> menuItems = new ArrayList<MenuItem>();
+	protected HashSet<MenuItem> menuItems = new HashSet<MenuItem>();
 
 	/**
 	 * The background for current menu page.
@@ -119,9 +118,9 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * action.
 	 */
 	private void clickButton() {
-		for (int i = 0; i < menuItems.size(); i++) {
-			if (menuItems.get(i).isMouseOver()) {
-				menuItems.get(i).performAction();
+		for (MenuItem item : menuItems) {
+			if (item.isMouseOver()) {
+				item.performAction();
 			}
 		}
 	}

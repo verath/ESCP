@@ -27,6 +27,8 @@ public class Button implements MenuItem {
 	 */
 	protected GUIContext guiContext;
 
+	private boolean buttonActive;
+
 	/**
 	 * Create a new button with only one picture.
 	 * 
@@ -84,13 +86,15 @@ public class Button implements MenuItem {
 		moa = new MouseOverArea(guiContext, image, x, y);
 		moa.setMouseOverImage(moImage);
 		moa.setMouseDownImage(mdImage);
+		this.buttonActive = true;
 	}
 
 	/**
 	 * Paint the button.
 	 */
 	public void render(Graphics g) {
-		moa.render(guiContext, g);
+		if (buttonActive)
+			moa.render(guiContext, g);
 	}
 
 	/**
@@ -103,6 +107,13 @@ public class Button implements MenuItem {
 	 * @return true if mouse is above button.
 	 */
 	public boolean isMouseOver() {
-		return moa.isMouseOver();
+		if (buttonActive) {
+			return moa.isMouseOver();
+		}
+		return false;
+	}
+
+	public void setButtonActive(boolean active) {
+		this.buttonActive = active;
 	}
 }

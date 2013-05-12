@@ -17,8 +17,7 @@ import se.chalmers.tda367.group15.game.menu.Button;
 public class MenuStateMain extends AbstractMenuBasedState {
 
 	/**
-	 * Resume button created separately, therefore you need to be able to see if
-	 * it is null.
+	 * Resume button must be possible to set visible at will.
 	 */
 	private Button resumeGameButton;
 
@@ -82,7 +81,18 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		Image quitImageMO = new Image("res/menu/quitMO.png");
 		Image optionsImage = new Image("res/menu/options.png");
 		Image optionsImageMO = new Image("res/menu/optionsMO.png");
+		Image resumeImage = new Image("res/menu/resumeGame.png");
+		Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
 
+		// Resume game button. This Button should only be visible when there is an active game.
+		resumeGameButton = new Button(container, resumeImage,
+				resumeImageMO, MENUX, MENUY) {
+			@Override
+			public void performAction() {
+				// Returns to currently active game.
+				game.enterState(Constants.GAME_STATE_PLAYING);
+			}
+		};
 		// Start a new game.
 		Button newGameButton = new Button(container, newGameImage,
 				newGameImageMO, MENUX, MENUY + 50) {
@@ -101,7 +111,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 				}
 
 				game.enterState(Constants.GAME_STATE_PLAYING);
-				addResumeButton();
+				resumeGameButton.setButtonActive(true);
 			}
 		};
 		// open options
@@ -123,35 +133,21 @@ public class MenuStateMain extends AbstractMenuBasedState {
 			}
 		};
 
+		// Resume game button should not be visible before new game.
+		this.resumeGameButton.setButtonActive(false);
+		
 		// add items to state.
+		this.addMenuItem(resumeGameButton);
 		this.addMenuItem(newGameButton);
 		this.addMenuItem(optionsButton);
 		this.addMenuItem(exitButton);
 	}
 
 	/**
-	 * Adds a resume button. The existence of a resume button indicates that
-	 * there is something to resume and therefore this is done separately from
-	 * the rest of the buttons.
+	 * Currently only removes resume game button.
 	 */
-	public void addResumeButton() {
-		if (resumeGameButton == null) {
-			try {
-				Image resumeImage = new Image("res/menu/resumeGame.png");
-				Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
-				resumeGameButton = new Button(container, resumeImage,
-						resumeImageMO, MENUX, MENUY) {
-					@Override
-					public void performAction() {
-						// Returns to currently active game.
-						game.enterState(Constants.GAME_STATE_PLAYING);
-					}
-				};
-			} catch (SlickException e) {
-				e.printStackTrace();
-			}
-			this.addMenuItem(resumeGameButton);
-		}
+	public void reInitMainMenu() {
+		this.resumeGameButton.setButtonActive(false);
 	}
 
 	/**
