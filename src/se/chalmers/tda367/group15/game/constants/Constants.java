@@ -21,6 +21,7 @@ public class Constants {
 	/**
 	 * Boolean controlling whether collision bounds should be drawn.
 	 */
+	// TODO: This property should be final.
 	public static boolean SHOW_BOUNDS = false;
 
 	/*

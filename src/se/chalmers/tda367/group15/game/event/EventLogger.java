@@ -83,11 +83,7 @@ public class EventLogger implements Iterable<Event> {
 
 		@Override
 		public void onEvent(Event event) {
-			try {
-				loggedEvents.add(event);
-			} catch (IllegalArgumentException e) {
-
-			}
+			loggedEvents.add(event);
 		}
 
 	}
