@@ -1,5 +1,9 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
@@ -21,10 +25,12 @@ public class ScoreController {
 	private final static int SCORE_DECREASE_INTERVAL = 1000;
 
 	/**
-	 * The default name used if no name was provided when saving to the
-	 * database.
+	 * A list of names used if no name was provided when saving to the database.
 	 */
-	private final static String DEFAULT_HIGH_SCORE_NAME = "TheMaster";
+	private final static List<String> DEFAULT_HIGH_SCORE_NAMES = Arrays.asList(
+			"TheMaster", "XxMEGAMANxX", "1337Skillz", "YOUR MOM", "H4xx0rMega",
+			"MoreMega", "SuperDragon", "TinyGiant", "GiganticDwarf", "Red Car",
+			"ILikeYou", "Random", "LoL", "AnotherOne", "NoNamez");
 
 	/**
 	 * The ScoreModel, holding the current score in the game. decrease interval
@@ -75,7 +81,8 @@ public class ScoreController {
 	 */
 	public void saveScore(String name) {
 		if (name == null) {
-			name = DEFAULT_HIGH_SCORE_NAME;
+			Collections.shuffle(DEFAULT_HIGH_SCORE_NAMES);
+			name = DEFAULT_HIGH_SCORE_NAMES.get(0);
 		}
 
 		PsychoHeroDatabase db;
