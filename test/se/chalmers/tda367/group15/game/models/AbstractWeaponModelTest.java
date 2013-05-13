@@ -6,8 +6,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.newdawn.slick.Animation;
 
-import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
-
 
 public class AbstractWeaponModelTest {
 	private static AbstractWeaponModel testedModel;
