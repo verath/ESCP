@@ -30,7 +30,6 @@ public abstract class AbstractNpcController extends
 		AbstractMovingModelController {
 
 	private long timer = 0;
-	private boolean hasFired;
 	private final int ENEMY_DAMAGE_MODIFIER = 3;
 
 	/**
@@ -143,10 +142,6 @@ public abstract class AbstractNpcController extends
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
-		if (hasFired) {
-			swingWeapon();
-			hasFired = false;
-		}
 	}
 
 	/**
@@ -294,10 +289,7 @@ public abstract class AbstractNpcController extends
 	/**
 	 * Method to tell npc to fire a weapon of some kind
 	 */
-	public void fire() {
-		hasFired = true;
-
-	}
+	public abstract void fire();
 
 	/**
 	 * Method for checking if two pixel points are in sight of each other.
