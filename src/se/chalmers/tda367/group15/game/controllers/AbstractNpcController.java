@@ -260,6 +260,12 @@ public abstract class AbstractNpcController extends
 	 * Set max and min positions. If given coordinates not allowed sets entire
 	 * map as default.
 	 * 
+	 * (x1, y1) and (x2, y2) is upper left corner and lower right corner of tile
+	 * box for model to move in. Model do not have to start in this box and when
+	 * they track hero they might move outside this box. But default movement
+	 * position will always be inside. If x1, x2, y1, y2 not used entire map
+	 * will be set as default.
+	 * 
 	 * @param x1
 	 *            minimum x tile random movement will occur on
 	 * @param x2
