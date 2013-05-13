@@ -49,6 +49,10 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		if (!model.isAlive()) {
+			getGameController().gameOver(false);
+			return;
+		}
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
