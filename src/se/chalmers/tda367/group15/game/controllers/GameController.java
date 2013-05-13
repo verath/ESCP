@@ -2,20 +2,16 @@ package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
-import se.chalmers.tda367.group15.game.database.InsertableEvent;
-import se.chalmers.tda367.group15.game.database.PsychoHeroDatabase;
-import se.chalmers.tda367.group15.game.event.Event;
-import se.chalmers.tda367.group15.game.event.EventLogger;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
@@ -23,6 +19,16 @@ import se.chalmers.tda367.group15.game.models.WeaponLoader;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
 public class GameController {
+
+	/**
+	 * A flag for if the game is over
+	 */
+	private boolean gameOver;
+
+	/**
+	 * A flag for if the game was won
+	 */
+	private boolean gameWon;
 
 	private boolean imagesAlreadyLoaded = false;
 
@@ -51,45 +57,7 @@ public class GameController {
 	/**
 	 * The Event logger, logging events and saves them to the database.
 	 */
-	private EventLogger eventLogger;
-
-	private PsychoHeroDatabase db = null;
-
-	/**
-	 * Creates the GameController
-	 */
-	public GameController() {
-		try {
-			db = new PsychoHeroDatabase();
-		} catch (ClassNotFoundException e) {
-			if (Constants.DEBUG) {
-				System.err.println("Could not connect to the database. "
-						+ "Make sure you have the org.sqlite.JDBC library.");
-			}
-		}
-	}
-
-	/**
-	 * Sets up the event logger for the game. If an event logger already exists,
-	 * save it's current events and clear it.
-	 */
-	private void initEventLogger() {
-		// Set up the event logger
-		if (eventLogger != null) {
-			// If this is a new game. Save and clear events instead
-			List<InsertableEvent> insertEvts = new LinkedList<>();
-			for (Event evt : eventLogger) {
-				insertEvts.add(new InsertableEvent(evt.getClass()
-						.getSimpleName()));
-			}
-			eventLogger.clear();
-			if (db != null) {
-				db.addEvents(insertEvts);
-			}
-		} else {
-			eventLogger = new EventLogger(SharedEventHandler.INSTANCE);
-		}
-	}
+	private EventLoggerController eventLogger;
 
 	/**
 	 * Initialise the game. This can be used to load static resources. It's
@@ -105,7 +73,13 @@ public class GameController {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 
-		initEventLogger();
+		// Reset the game over flags
+		gameOver = false;
+		gameWon = false;
+
+		// Set up an event logger to listen for events on the shared event
+		// handler
+		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
 
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);
@@ -155,6 +129,10 @@ public class GameController {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 
+		if (gameOver) {
+			return;
+		}
+
 		scoreController.update(container, delta);
 
 		// get current room
@@ -171,6 +149,13 @@ public class GameController {
 
 		heroController.update(container, delta, staticBounds, dynamicBounds);
 		roomController.update(container, delta, staticBounds, dynamicBounds);
+
+		// TODO: Remove this.
+		if (container.getInput().isKeyPressed(Input.KEY_G)) {
+			gameOver(false);
+		} else if (container.getInput().isKeyPressed(Input.KEY_H)) {
+			gameOver(true);
+		}
 	}
 
 	/**
@@ -193,6 +178,39 @@ public class GameController {
 		heroController.render(container, g);
 
 		hudView.render(container, g);
+	}
+
+	/**
+	 * Ends the game. Saves events, updates states and shows the game over
+	 * screen.
+	 * 
+	 * @param win
+	 *            True if the game was won.
+	 */
+	public void gameOver(boolean win) {
+		// Save events
+		eventLogger.saveEvents();
+		if (win) {
+			// Save score
+			// TODO: Name for the saved score?
+			scoreController.saveScore(null);
+		}
+
+		// Set gameOver and gameWon flags. We can not directly reference the
+		// StateController, and must therefore wait until it asks "us"
+		gameOver = true;
+		gameWon = win;
+
+	}
+
+	/**
+	 * Method for checking if a game is over and if so, if it was won or not.
+	 * 
+	 * @return An array of lenght 2, where the first element is whether the game
+	 *         is over and the second if the game was won.
+	 */
+	public boolean[] isGameOver() {
+		return new boolean[] { gameOver, gameWon };
 	}
 
 	/**

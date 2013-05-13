@@ -46,6 +46,7 @@ public class StateController extends StateBasedGame {
 				Constants.GAME_STATE_GAME_OVER);
 
 		this.initMusic();
+
 		this.addState(playState);
 		this.addState(mainMenu);
 		this.addState(optionsMenu);

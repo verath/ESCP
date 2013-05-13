@@ -50,7 +50,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	public void init() {
 		this.initMenuItems();
 		try {
-			background = new Image("res/menu/background.png");
+			setBackground(new Image("res/menu/background.png"));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -84,9 +84,10 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		Image resumeImage = new Image("res/menu/resumeGame.png");
 		Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
 
-		// Resume game button. This Button should only be visible when there is an active game.
-		resumeGameButton = new Button(container, resumeImage,
-				resumeImageMO, MENUX, MENUY) {
+		// Resume game button. This Button should only be visible when there is
+		// an active game.
+		resumeGameButton = new Button(container, resumeImage, resumeImageMO,
+				MENUX, MENUY) {
 			@Override
 			public void performAction() {
 				// Returns to currently active game.
@@ -135,19 +136,12 @@ public class MenuStateMain extends AbstractMenuBasedState {
 
 		// Resume game button should not be visible before new game.
 		this.resumeGameButton.setButtonActive(false);
-		
+
 		// add items to state.
 		this.addMenuItem(resumeGameButton);
 		this.addMenuItem(newGameButton);
 		this.addMenuItem(optionsButton);
 		this.addMenuItem(exitButton);
-	}
-
-	/**
-	 * Currently only removes resume game button.
-	 */
-	public void reInitMainMenu() {
-		this.resumeGameButton.setButtonActive(false);
 	}
 
 	/**
@@ -160,5 +154,10 @@ public class MenuStateMain extends AbstractMenuBasedState {
 			// Returns you to game.
 			game.enterState(Constants.GAME_STATE_PLAYING);
 		}
+	}
+
+	@Override
+	public void gameOver(boolean win) {
+		resumeGameButton.setButtonActive(false);
 	}
 }
