@@ -109,14 +109,14 @@ public abstract class AbstractNpcController extends
 	 *            the main controller
 	 * @param pathFinder
 	 *            the path finder to use
-	 * @param x
-	 *            min x pos
+	 * @param x1
+	 *            minimum x tile random movement will occur on
 	 * @param x2
-	 *            max x pos
-	 * @param y
-	 *            min y pos
+	 *            maximum x tile random movement will occur on
+	 * @param y1
+	 *            minimum y tile random movement will occur on
 	 * @param y2
-	 *            max y pos
+	 *            maximum y tile random movement will occur on
 	 */
 	public AbstractNpcController(GameController gameController,
 			AStarPathFinder pathFinder, int x, int x2, int y, int y2) {
@@ -260,14 +260,14 @@ public abstract class AbstractNpcController extends
 	 * Set max and min positions. If given coordinates not allowed sets entire
 	 * map as default.
 	 * 
-	 * @param x
-	 *            min x pos
+	 * @param x1
+	 *            minimum x tile random movement will occur on
 	 * @param x2
-	 *            max x pos
-	 * @param y
-	 *            min y pos
+	 *            maximum x tile random movement will occur on
+	 * @param y1
+	 *            minimum y tile random movement will occur on
 	 * @param y2
-	 *            max y pos
+	 *            maximum y tile random movement will occur on
 	 */
 	public void setDefaultTiles(int x, int x2, int y, int y2) {
 

@@ -91,13 +91,13 @@ public abstract class AbstractRoomController implements TileBasedMap {
 	 * @param model
 	 *            The model to be added
 	 * @param x1
-	 *            minimum x minimum tile random movement will occur on
+	 *            minimum x tile random movement will occur on
 	 * @param x2
-	 *            maximum x maximum tile random movement will occur on
+	 *            maximum x tile random movement will occur on
 	 * @param y1
-	 *            minimum y minimum tile random movement will occur on
+	 *            minimum y tile random movement will occur on
 	 * @param y2
-	 *            maximum y maximum tile random movement will occur on
+	 *            maximum y tile random movement will occur on
 	 */
 	public void addMovingModel(DummyEnemyModel model, int x1, int x2, int y1,
 			int y2) {
