@@ -78,6 +78,17 @@ public abstract class AbstractGameState extends BasicGameState {
 	}
 
 	/**
+	 * Called when the game is over to allow the states to re-adjust their
+	 * current state.
+	 * 
+	 * @param win
+	 *            True if the game was won.
+	 */
+	public void gameOver(boolean win) {
+		return;
+	}
+
+	/**
 	 * init your state.
 	 */
 	public abstract void init();

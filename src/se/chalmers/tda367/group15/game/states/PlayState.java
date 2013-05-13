@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.constants.Constants;
@@ -24,12 +25,18 @@ public class PlayState extends BasicGameState {
 	private boolean pendingEscpAction;
 
 	/**
+	 * A list of state-ids that should be updated when the game ends.
+	 */
+	private final static int[] gameOverListeningStates = {
+			Constants.GAME_STATE_GAME_OVER, Constants.GAME_STATE_MAIN_MENU };
+
+	/**
 	 * The GameController controlling the game.
 	 */
 	private final GameController gameController = new GameController();
 
 	/**
-	 * Creates a new GameController
+	 * Creates a new PlayState.
 	 * 
 	 * @param ID
 	 *            The id used to identify the state.
@@ -80,6 +87,21 @@ public class PlayState extends BasicGameState {
 		}
 
 		gameController.update(container, game, delta);
+
+		boolean[] gameOverStatus = gameController.isGameOver();
+		boolean gameOver = gameOverStatus[0];
+		boolean gameWon = gameOverStatus[1];
+		if (gameOver) {
+			// Make sure we notice states that should know about a game over.
+			for (int id : gameOverListeningStates) {
+				GameState state = game.getState(id);
+				if (state instanceof AbstractGameState) {
+					((AbstractGameState) state).gameOver(gameWon);
+				}
+			}
+
+			game.enterState(Constants.GAME_STATE_GAME_OVER);
+		}
 	}
 
 	/**

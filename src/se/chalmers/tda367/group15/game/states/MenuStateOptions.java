@@ -51,7 +51,7 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 		this.initMenuItems();
 		// Create background image
 		try {
-			background = new Image("res/menu/backgroundOptions.png");
+			setBackground(new Image("res/menu/backgroundOptions.png"));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
