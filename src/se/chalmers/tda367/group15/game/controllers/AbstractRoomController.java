@@ -81,20 +81,23 @@ public abstract class AbstractRoomController implements TileBasedMap {
 		dynamicBounds.put(model, model.getBounds());
 	}
 
-	// TODO add more describing javadoc.. Calle :)?
 	/**
-	 * Method for adding a moving model to this room.
+	 * Method for adding a moving model to this room. (x1, y1) and (x2, y2) is
+	 * upper left corner and lower right corner of tile box for model to move in.
+	 * Model do not have to start in this box and when they track hero they
+	 * might move outside this box. But default movement position will always be
+	 * inside. If x1, x2, y1, y2 not used entire map will be set as default.
 	 * 
 	 * @param model
 	 *            The model to be added
 	 * @param x1
-	 *            minimum x
+	 *            minimum x minimum tile random movement will occur on
 	 * @param x2
-	 *            maximum x
+	 *            maximum x maximum tile random movement will occur on
 	 * @param y1
-	 *            minimum y
+	 *            minimum y minimum tile random movement will occur on
 	 * @param y2
-	 *            maximum y
+	 *            maximum y maximum tile random movement will occur on
 	 */
 	public void addMovingModel(DummyEnemyModel model, int x1, int x2, int y1,
 			int y2) {
@@ -333,10 +336,9 @@ public abstract class AbstractRoomController implements TileBasedMap {
 			throws SlickException {
 		// tell enemy controllers to move
 
-		Iterator it1 = movingModelControllers.iterator();
+		Iterator<AbstractMovingModelController> it1 = movingModelControllers.iterator();
 		while (it1.hasNext()) {
-			AbstractMovingModelController controller = (AbstractMovingModelController) it1
-					.next();
+			AbstractMovingModelController controller = it1.next();
 			if (controller.getModel().isAlive()) {
 				controller
 						.update(container, delta, staticBounds, dynamicBounds);
@@ -344,10 +346,9 @@ public abstract class AbstractRoomController implements TileBasedMap {
 		}
 
 		// add new qued controllers to the movingModelControllers list
-		Iterator it2 = quedControllers.iterator();
+		Iterator<AbstractMovingModelController> it2 = quedControllers.iterator();
 		while (it2.hasNext()) {
-			AbstractMovingModelController controller = (AbstractMovingModelController) it2
-					.next();
+			AbstractMovingModelController controller = it2.next();
 			movingModelControllers.add(controller);
 		}
 		quedControllers.clear();
