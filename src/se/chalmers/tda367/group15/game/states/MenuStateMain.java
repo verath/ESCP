@@ -159,5 +159,6 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	@Override
 	public void gameOver(boolean win) {
 		resumeGameButton.setButtonActive(false);
+		existsGameCurrently = false;
 	}
 }
