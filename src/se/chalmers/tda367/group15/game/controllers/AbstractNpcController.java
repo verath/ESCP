@@ -7,12 +7,18 @@ import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
+import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
+import se.chalmers.tda367.group15.game.views.DummyEnemyView;
 
 /**
  * AbstractNpcController implements methods for pathfinding and movement of npc
@@ -22,6 +28,10 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
  */
 public abstract class AbstractNpcController extends
 		AbstractMovingModelController {
+
+	private long timer = 0;
+	private boolean hasFired;
+	private final int ENEMY_DAMAGE_MODIFIER = 3;
 
 	/**
 	 * The path controller is traveling
@@ -129,10 +139,15 @@ public abstract class AbstractNpcController extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	public abstract void update(GameContainer container, int delta,
+	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException;
+			throws SlickException {
+		if (hasFired) {
+			swingWeapon();
+			hasFired = false;
+		}
+	}
 
 	/**
 	 * Set path finder
@@ -188,6 +203,11 @@ public abstract class AbstractNpcController extends
 		if (isInSight(staticBounds, model.getX() + model.getWidth() / 2,
 				model.getY() + model.getHeight() / 2, heroX, heroY)) {
 			// TODO Enemies should react in some way when hero is in sight!
+			if (System.currentTimeMillis() - timer > ((AbstractCharacterModel) model)
+					.getCurrentWeapon().getFiringSpeed()) {
+				timer = System.currentTimeMillis();
+				fire();
+			}
 		}
 
 		// If path is null or end of path reached
@@ -274,7 +294,10 @@ public abstract class AbstractNpcController extends
 	/**
 	 * Method to tell npc to fire a weapon of some kind
 	 */
-	public abstract void fire();
+	public void fire() {
+		hasFired = true;
+
+	}
 
 	/**
 	 * Method for checking if two pixel points are in sight of each other.
@@ -394,5 +417,41 @@ public abstract class AbstractNpcController extends
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Swing the the currently equipped weapon of the enemy
+	 */
+	protected void swingWeapon() {
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+
+		// Run the swinging animation for the weapon
+		AbstractMeleeWeaponModel weapon = (AbstractMeleeWeaponModel) model
+				.getCurrentWeapon();
+		DummyEnemyView view = (DummyEnemyView) getView();
+		view.runSwingAnimation(weapon.getSwingAnimation());
+
+		AbstractProjectileModel newSwing = new MeleeSwingModel();
+
+		float modelAngle = (float) Math.toRadians(model.getRotation());
+		float modelMiddleX = model.getX() + model.getWidth() / 2;
+		float heroMiddleY = model.getY() + model.getHeight() / 2;
+
+		float modelFaceX = modelMiddleX - (float) Math.cos(modelAngle)
+				* ((model.getWidth()));
+		float modelFaceY = heroMiddleY - (float) Math.sin(modelAngle)
+				* ((model.getHeight()));
+
+		newSwing.setX(modelFaceX - newSwing.getWidth() / 2);
+		newSwing.setY(modelFaceY - newSwing.getHeight() / 2);
+		newSwing.setRotation(model.getRotation());
+		newSwing.setDamage(model.getCurrentWeapon().getDamage()
+				* ENEMY_DAMAGE_MODIFIER);
+		newSwing.setAlive(true);
+
+		AbstractRoomController currentRoom = getGameController()
+				.getRoomController().getCurrentRoom();
+
+		currentRoom.addSwing(newSwing);
 	}
 }

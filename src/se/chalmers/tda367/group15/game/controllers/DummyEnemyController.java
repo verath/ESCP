@@ -25,6 +25,7 @@ import se.chalmers.tda367.group15.game.views.DummyEnemyView;
  * 
  */
 public class DummyEnemyController extends AbstractNpcController {
+	
 	private boolean hasFired;
 
 	/**
@@ -113,37 +114,5 @@ public class DummyEnemyController extends AbstractNpcController {
 	public void fire() {
 		hasFired = true;
 
-	}
-
-	private void swingWeapon() {
-		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-
-		// Run the swinging animation for the weapon
-		AbstractMeleeWeaponModel weapon = (AbstractMeleeWeaponModel) model
-				.getCurrentWeapon();
-		DummyEnemyView view = (DummyEnemyView) getView();
-		view.runAnimation(weapon.getSwingAnimation());
-
-		AbstractProjectileModel newSwing = new MeleeSwingModel();
-
-		float modelAngle = (float) Math.toRadians(model.getRotation());
-		float modelMiddleX = model.getX() + model.getWidth() / 2;
-		float heroMiddleY = model.getY() + model.getHeight() / 2;
-
-		float modelFaceX = modelMiddleX - (float) Math.cos(modelAngle)
-				* ((model.getWidth()));
-		float modelFaceY = heroMiddleY - (float) Math.sin(modelAngle)
-				* ((model.getHeight()));
-
-		newSwing.setX(modelFaceX - newSwing.getWidth() / 2);
-		newSwing.setY(modelFaceY - newSwing.getHeight() / 2);
-		newSwing.setRotation(model.getRotation());
-		newSwing.setDamage(model.getCurrentWeapon().getDamage());
-		newSwing.setAlive(true);
-
-		AbstractRoomController currentRoom = getGameController()
-				.getRoomController().getCurrentRoom();
-
-		currentRoom.addSwing(newSwing);
 	}
 }

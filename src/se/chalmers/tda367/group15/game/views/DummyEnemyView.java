@@ -132,7 +132,11 @@ public class DummyEnemyView implements View {
 		}
 
 	}
-
+	
+	/**
+	 * Call this method when you want to run the animation for a dying enemy 
+	 * @param animation the animation to be run
+	 */
 	public void runDeathAnimation(Animation animation) {
 		if (!model.isAlive()) {
 			this.deathAnimationRunning = true;
@@ -141,8 +145,13 @@ public class DummyEnemyView implements View {
 			this.animation = deathAnimation;
 		}
 	}
+	
 
-	public void runAnimation(Animation animation) {
+	/**
+	 * Calling this method runs the swinging animation  
+	 * @param animation the animation to be run
+	 */
+	public void runSwingAnimation(Animation animation) {
 		if (model.isAlive()) {
 			swingAnimationRunning = true;
 			this.swingAnimation = animation;
