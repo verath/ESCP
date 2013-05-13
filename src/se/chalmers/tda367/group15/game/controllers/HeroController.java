@@ -1,6 +1,7 @@
 package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D.Float;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,10 +16,15 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
+import se.chalmers.tda367.group15.game.models.AxeModel;
 import se.chalmers.tda367.group15.game.models.BulletModel;
 import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
-import se.chalmers.tda367.group15.game.views.HeroView;
+import se.chalmers.tda367.group15.game.models.PistolModel;
+import se.chalmers.tda367.group15.game.models.UnarmedModel;
+import se.chalmers.tda367.group15.game.views.View;
+import se.chalmers.tda367.group15.game.views.WeaponSwingView;
+import se.chalmers.tda367.group15.game.views.WeaponView;
 
 public class HeroController extends AbstractMovingModelController {
 
@@ -27,6 +33,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingLeft;
 	private boolean goingRight;
 	private long timer = 0;
+	private Map<AbstractWeaponModel, View> heroViews;
 
 	/**
 	 * Create a new controller for the hero.
@@ -36,8 +43,37 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	public HeroController(GameController gameController) {
 		super(gameController);
-		setModel(new HeroModel());
-		setView(new HeroView(getModel()));
+		heroViews = new HashMap<AbstractWeaponModel, View>();
+
+		HeroModel model = new HeroModel();
+
+		// configure model
+		model.setX(44f);
+		model.setY(44f);
+		model.setVelocity(0.15f);
+		model.setHealth(100);
+		model.setAlive(true);
+
+		// create and add weapons
+		AbstractWeaponModel unarmed = new UnarmedModel();
+		WeaponView unarmedView = new WeaponView(model, "heroMovement/unarmed");
+		heroViews.put(unarmed, unarmedView);
+
+		AbstractWeaponModel axe = new AxeModel();
+		WeaponSwingView axeView = new WeaponSwingView(model, "heroMovement/axe", "heroAttack/axe");
+		heroViews.put(axe, axeView);
+
+		AbstractWeaponModel pistol = new PistolModel();
+		WeaponView pistolView = new WeaponView(model, "heroMovement/pistol");
+		heroViews.put(pistol, pistolView);
+
+		model.addWeapon(unarmed);
+		model.addWeapon(axe);
+		model.addWeapon(pistol);
+		model.setCurrentWeapon(model.getWeapons().get(0));
+
+		setModel(model);
+		setView(unarmedView);
 	}
 
 	/**
@@ -49,6 +85,10 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+
+		View currentView = heroViews.get(model.getCurrentWeapon());
+		setView(currentView);
+
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
@@ -158,7 +198,6 @@ public class HeroController extends AbstractMovingModelController {
 		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
 				* ((model.getHeight()));
 
-		// *3 pixels compensating for the width and height of the bullet
 		newBullet.setX(heroFaceX - newBullet.getWidth() / 2);
 		newBullet.setY(heroFaceY - newBullet.getHeight() / 2);
 
@@ -174,10 +213,8 @@ public class HeroController extends AbstractMovingModelController {
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		// Run the swinging animation for the weapon
-		AbstractMeleeWeaponModel weapon = (AbstractMeleeWeaponModel) model
-				.getCurrentWeapon();
-		HeroView view = (HeroView) getView();
-		view.runAnimation(weapon.getSwingAnimation());
+		WeaponSwingView view = (WeaponSwingView) getView();
+		view.animateSwing();
 
 		AbstractProjectileModel newSwing = new MeleeSwingModel();
 
