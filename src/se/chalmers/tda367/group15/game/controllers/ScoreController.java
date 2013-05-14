@@ -22,7 +22,7 @@ public class ScoreController {
 	/**
 	 * The amount of milliseconds between each decrease in score.
 	 */
-	private final static int SCORE_DECREASE_INTERVAL = 1000;
+	public final static int SCORE_DECREASE_INTERVAL = 1000;
 
 	/**
 	 * A list of names used if no name was provided when saving to the database.
@@ -41,6 +41,11 @@ public class ScoreController {
 	 * Time since last update of the score (milliseconds).
 	 */
 	private int lastChange;
+
+	/**
+	 * The database instance to use when saving score.
+	 */
+	private PsychoHeroDatabase db;
 
 	/**
 	 * Creates a new ScoreController, using the provided ScoreModel.
@@ -85,13 +90,14 @@ public class ScoreController {
 			name = DEFAULT_HIGH_SCORE_NAMES.get(0);
 		}
 
-		PsychoHeroDatabase db;
-		try {
-			db = new PsychoHeroDatabase();
-		} catch (ClassNotFoundException e) {
-			System.err
-					.println("Could not connect to the database. Make sure you have the org.sqlite.JDBC library.");
-			return;
+		if (db == null) {
+			try {
+				db = new PsychoHeroDatabase();
+			} catch (ClassNotFoundException e) {
+				System.err
+						.println("Could not connect to the database. Make sure you have the org.sqlite.JDBC library.");
+				return;
+			}
 		}
 
 		InsertableScore s = new InsertableScore(name, scoreModel.getScore());
@@ -101,5 +107,14 @@ public class ScoreController {
 			System.out.println("Succesfully inserted " + s
 					+ " into the database!");
 		}
+	}
+
+	/**
+	 * Sets the database used. Should most likely only be used for testing.
+	 * 
+	 * @param db
+	 */
+	protected void setDatabase(PsychoHeroDatabase db) {
+		this.db = db;
 	}
 }
