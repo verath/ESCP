@@ -9,9 +9,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
  * Class representing the view of a hero.

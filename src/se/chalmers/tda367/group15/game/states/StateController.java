@@ -8,7 +8,7 @@ import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
  * a container for the different states.

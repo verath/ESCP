@@ -3,7 +3,7 @@ package se.chalmers.tda367.group15.game.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
  * A class to initialize all the images for every weapon in the game.

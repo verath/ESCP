@@ -8,7 +8,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
  * An abstract definition of a weapon in the game. Every weapon should be able

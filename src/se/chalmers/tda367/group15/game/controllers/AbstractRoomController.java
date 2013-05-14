@@ -16,9 +16,9 @@ import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
  * Abstract class for representing a room containing a tiled map and controllers

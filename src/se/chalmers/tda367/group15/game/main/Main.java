@@ -3,7 +3,7 @@ package se.chalmers.tda367.group15.game.main;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
+import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.states.StateController;
 
 /**

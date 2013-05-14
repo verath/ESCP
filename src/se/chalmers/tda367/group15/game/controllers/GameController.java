@@ -11,11 +11,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.models.WeaponLoader;
+import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
 public class GameController {

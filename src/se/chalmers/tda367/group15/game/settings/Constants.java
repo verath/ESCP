@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.constants;
+package se.chalmers.tda367.group15.game.settings;
 
 /**
  * A class for holding constant values that are global across the entire game.
