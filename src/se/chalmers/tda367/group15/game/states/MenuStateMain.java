@@ -101,12 +101,9 @@ public class MenuStateMain extends AbstractMenuBasedState {
 			public void performAction() {
 
 				try { // Init PlayState to reset game.
-					if (existsGameCurrently) {
-						game.getState(Constants.GAME_STATE_PLAYING).init(
-								container, game);
-					} else {
-						existsGameCurrently = true;
-					}
+					game.getState(Constants.GAME_STATE_PLAYING).init(container,
+							game);
+					existsGameCurrently = true;
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}
