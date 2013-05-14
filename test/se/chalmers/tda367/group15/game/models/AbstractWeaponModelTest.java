@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.newdawn.slick.Animation;
-
 
 public class AbstractWeaponModelTest {
 	private static AbstractWeaponModel testedModel;
@@ -14,15 +12,8 @@ public class AbstractWeaponModelTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		testedModel = new AbstractWeaponModel("test", MIN_DMG, MAX_DMG, 1, false) {
-			@Override
-			protected void initAnimation() {
-			}
-
-			@Override
-			public Animation getAnimation() {
-				return null;
-			}
+		testedModel = new AbstractWeaponModel("test", MIN_DMG, MAX_DMG, 1,
+				false) {
 		};
 	}
 
