@@ -1,7 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D.Float;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +21,7 @@ import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.models.PistolModel;
 import se.chalmers.tda367.group15.game.models.UnarmedModel;
-import se.chalmers.tda367.group15.game.views.View;
-import se.chalmers.tda367.group15.game.views.WeaponSwingView;
-import se.chalmers.tda367.group15.game.views.WeaponView;
+import se.chalmers.tda367.group15.game.views.CharacterView;
 
 public class HeroController extends AbstractMovingModelController {
 
@@ -33,7 +30,6 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingLeft;
 	private boolean goingRight;
 	private long timer = 0;
-	private Map<AbstractWeaponModel, View> heroViews;
 
 	/**
 	 * Create a new controller for the hero.
@@ -43,7 +39,6 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	public HeroController(GameController gameController) {
 		super(gameController);
-		heroViews = new HashMap<AbstractWeaponModel, View>();
 
 		HeroModel model = new HeroModel();
 
@@ -54,26 +49,15 @@ public class HeroController extends AbstractMovingModelController {
 		model.setHealth(100);
 		model.setAlive(true);
 
-		// create and add weapons
-		AbstractWeaponModel unarmed = new UnarmedModel();
-		WeaponView unarmedView = new WeaponView(model, "heroMovement/unarmed");
-		heroViews.put(unarmed, unarmedView);
-
-		AbstractWeaponModel axe = new AxeModel();
-		WeaponSwingView axeView = new WeaponSwingView(model, "heroMovement/axe", "heroAttack/axe");
-		heroViews.put(axe, axeView);
-
-		AbstractWeaponModel pistol = new PistolModel();
-		WeaponView pistolView = new WeaponView(model, "heroMovement/pistol");
-		heroViews.put(pistol, pistolView);
-
-		model.addWeapon(unarmed);
-		model.addWeapon(axe);
-		model.addWeapon(pistol);
+		// add weapons
+	
+		model.addWeapon(new UnarmedModel());
+		model.addWeapon(new AxeModel());
+		model.addWeapon(new PistolModel());
 		model.setCurrentWeapon(model.getWeapons().get(0));
 
 		setModel(model);
-		setView(unarmedView);
+		setView(new CharacterView(model));
 	}
 
 	/**
@@ -85,10 +69,7 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-
-		View currentView = heroViews.get(model.getCurrentWeapon());
-		setView(currentView);
-
+		
 		Input input = container.getInput();
 		float mouseX = input.getMouseX();
 		float mouseY = input.getMouseY();
@@ -213,8 +194,8 @@ public class HeroController extends AbstractMovingModelController {
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		// Run the swinging animation for the weapon
-		WeaponSwingView view = (WeaponSwingView) getView();
-		view.animateSwing();
+		CharacterView view = (CharacterView)getView();
+		view.runAttackAnimation();
 
 		AbstractProjectileModel newSwing = new MeleeSwingModel();
 

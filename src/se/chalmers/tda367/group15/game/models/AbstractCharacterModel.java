@@ -18,6 +18,8 @@ public class AbstractCharacterModel extends AbstractMovingModel {
 	 * The currently equipped weapon
 	 */
 	private AbstractWeaponModel currentWeapon;
+	
+	private String animationPath;
 
 	/**
 	 * Method for getting the current weapon.
@@ -55,5 +57,13 @@ public class AbstractCharacterModel extends AbstractMovingModel {
 	 */
 	public List<AbstractWeaponModel> getWeapons() {
 		return weapons;
+	}
+
+	public String getAnimationPath() {
+		return animationPath;
+	}
+	
+	public void setAnimationPath(String path) {
+		this.animationPath = path;
 	}
 }

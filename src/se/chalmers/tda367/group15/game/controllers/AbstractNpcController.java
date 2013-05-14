@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
@@ -18,7 +17,7 @@ import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
-import se.chalmers.tda367.group15.game.views.DummyEnemyView;
+import se.chalmers.tda367.group15.game.views.CharacterView;
 
 /**
  * AbstractNpcController implements methods for pathfinding and movement of npc
@@ -420,8 +419,8 @@ public abstract class AbstractNpcController extends
 		// Run the swinging animation for the weapon
 		AbstractMeleeWeaponModel weapon = (AbstractMeleeWeaponModel) model
 				.getCurrentWeapon();
-		DummyEnemyView view = (DummyEnemyView) getView();
-		view.runSwingAnimation(weapon.getSwingAnimation());
+		CharacterView view = (CharacterView) getView();
+		view.runAttackAnimation();
 
 		AbstractProjectileModel newSwing = new MeleeSwingModel();
 

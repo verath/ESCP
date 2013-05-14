@@ -15,7 +15,6 @@ import se.chalmers.tda367.group15.game.constants.Constants;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
-import se.chalmers.tda367.group15.game.models.WeaponLoader;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
 public class GameController {
@@ -85,11 +84,11 @@ public class GameController {
 		AbstractRoomController startingRoom = new BasicRoomController(this);
 		AbstractRoomController secondRoom = new SecondRoomController(this);
 
-		// Initialize weapons
-		if (!imagesAlreadyLoaded) {
-			WeaponLoader.initWeapons();
-			imagesAlreadyLoaded = true;
-		}
+//		// Initialize weapons
+//		if (!imagesAlreadyLoaded) {
+//			WeaponLoader.initWeapons();
+//			imagesAlreadyLoaded = true;
+//		}
 
 		// Set up the room manager
 		roomController = new RoomsController();
