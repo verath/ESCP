@@ -9,30 +9,44 @@ import java.util.prefs.Preferences;
  * 
  */
 public class KeyBindings {
+
+	public enum Key {
+		LEFT(Constants.DEFAULT_KEY_BIND_LEFT), UP(Constants.DEFAULT_KEY_BIND_UP), RIGHT(
+				Constants.DEFAULT_KEY_BIND_RIGHT), DOWN(
+				Constants.DEFAULT_KEY_BIND_DOWN);
+		private final String preferenceKey;
+		private final int defaultBinding;
+
+		private Key(final int defaultBinding) {
+			this.defaultBinding = defaultBinding;
+			this.preferenceKey = "KEYBINDS_" + name();
+		}
+
+		protected String getPreferenceKey() {
+			return this.preferenceKey;
+		}
+
+		/**
+		 * Returns the default binding for this key
+		 * 
+		 * @return
+		 */
+		public int getDefaultBinding() {
+			return this.defaultBinding;
+		}
+	}
+
 	/**
 	 * The Preference store used to store user data.
 	 */
 	private static Preferences prefs = Preferences
-			.userNodeForPackage(se.chalmers.tda367.group15.game.main.Main.class);
+			.userNodeForPackage(KeyBindings.class);
 
 	/**
-	 * An enum holding the bindable keys.
-	 * 
-	 * @author Peter
-	 * 
+	 * Private constructor, as this class only has static methods.
 	 */
-	public enum Key {
-		LEFT, UP, RIGHT, DOWN;
-		private final String preferenceKey;
-
-		private Key() {
-			this.preferenceKey = "KEYBINDS_" + name();
-		}
-
-		public String getPreferenceKey() {
-			return this.preferenceKey;
-		}
-	}
+	private KeyBindings() {
+	};
 
 	/**
 	 * Returns the stored integer representing the binding for the key, if
@@ -50,10 +64,16 @@ public class KeyBindings {
 	}
 
 	/**
-	 * Private constructor, as this class only has static methods.
+	 * Returns a stored integer representing the binding for the key, if
+	 * existing. If not, returns the default value associated with the key.
+	 * 
+	 * @param key
+	 *            The key to find bindings for.
+	 * @return
 	 */
-	private KeyBindings() {
-	};
+	public static int getBinding(final Key key) {
+		return KeyBindings.getBinding(key, key.getDefaultBinding());
+	}
 
 	/**
 	 * Stores a new value as the key bind for the key.

@@ -7,9 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 
-/*
- * Test for the KeyBindings. Note that we can not test the default value, as that would require us to remove the key stored for the 
- */
 public class KeyBindingsTest {
 
 	private static Preferences prefs = Preferences
@@ -42,6 +39,9 @@ public class KeyBindingsTest {
 	public final void testDefaultValue() {
 		clearPrefs();
 		assertTrue(KeyBindings.getBinding(Key.DOWN, 123) == 123);
+		clearPrefs();
+		assertTrue(KeyBindings.getBinding(Key.DOWN) == Key.DOWN
+				.getDefaultBinding());
 	}
 
 	/*
