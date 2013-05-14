@@ -412,6 +412,16 @@
     <property name="door" value="true"/>
    </properties>
   </tile>
+  <tile id="162">
+   <properties>
+    <property name="door" value="true"/>
+   </properties>
+  </tile>
+  <tile id="163">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
   <tile id="184">
    <properties>
     <property name="blocked" value="true"/>
@@ -503,21 +513,6 @@
    </properties>
   </tile>
   <tile id="255">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="34">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="162">
-   <properties>
-    <property name="door" value="true"/>
-   </properties>
-  </tile>
-  <tile id="163">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -1080,22 +1075,22 @@
  </tileset>
  <layer name="Floor" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztw0ENAAAIBCCdSa5/SWP4EDbSVdGjc7xVVZ9dnFMaQQ==
-  </data>
- </layer>
- <layer name="Stripes" width="32" height="24">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BkA3ZG7HiomD8KKANsjNgxvcwfTX8jG4ymv1EwkGCg098oGDgAAEeVAh0=
+   eJxjYCANMOLA9ALD3X5c5lMLDzb7aW3fKB7cGB3Q275R+0ftH7V/1P7BYj+l7qM1GLV/eNkPAN0hAds=
   </data>
  </layer>
  <layer name="Blocked" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJzt0klOAkEUgOGqVkHQS0ADngMF78E8eQlUBoFLODJeAgcQ9RLIICqH8Gdh6BjZkEp3L3jJt31/Vap0IYS+hr+zzo6FgPxnmUnjl5v+pm99P4IoYogjgaQJ5/rt53GKM5yjgKKJ/Utc4Ro3uMWdiX2rxi59jyaEFzp88COgqet0adzjAY94Qk8u+0FahzhCCGEcK+wPabxjhDEmmBr6EVpRxBBHAkmFfckuDVvYxg4cmn3e3+p+H88Y4AWveFN4rhS70sggixxODO//gRk+8YVvzBX2S+wq4wIVVFEz9J38hV244MYe9hX+vzqNBppooY2OtM/7O1dQNav22+X+BxZZ9H8ApcQ8Ww==
+   eJxjYCANOAKxMhJfGSpGL6BIpNhQtR8WvrgwtrAmpAefXnRAyC+sOMTuA/EDLDQhs9Hd7ojDDkoBKw67RjoYbOFPy7xMjNnUzH/oaonNf1E45BIYcPtBE4i1gJgNiD2B2AuH2cTYX4VDrgEqf48Ic3CZTYyaWTjkFkDl/9HY/l045A5A5VOBOI2G9uMDoDTUCsRtA2Q/JYBY+8ktf5DrITYoRq6HaJX/qaGXWIDPD/RoB4HsyMEirkNH+3uwiPvQ0X5cbSB62I/e/oYBctMXACQBJlo=
   </data>
  </layer>
  <layer name="Door" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztxaENAAAIwDD+fwMOBYlGIdpkWcRNTrUOAAD81xdaAo8=
+   eJxjYCAPLAbiJWTqHQWjYLCA5AG0OwWImwfQ/pYBtHsUjIJRMApGwSgYBaSDg0B8CIkmFwAAKWEGHA==
+  </data>
+ </layer>
+ <layer name="Small Object" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztyqEBAAAIwzDE/r+ZB+YQmERVdAbuUjptBADg1QKAIAAN
   </data>
  </layer>
 </map>
