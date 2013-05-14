@@ -15,18 +15,10 @@ public class HeroModel extends AbstractCharacterModel {
 	 * @param eventHandler
 	 */
 	public HeroModel() {
-		setX(44f);
-		setY(44f);
-		setVelocity(0.15f);
 		setWidth(42);
 		setHeight(42);
 		setOffset(11);
-		setHealth(100);
-		setAlive(true);
+		setAnimationPath("hero");
 
-		addWeapon(new UnarmedModel());
-		addWeapon(new AxeModel());
-		addWeapon(new PistolModel());
-		setCurrentWeapon(getWeapons().get(0));
 	}
 }

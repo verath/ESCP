@@ -14,7 +14,6 @@ import org.newdawn.slick.state.StateBasedGame;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
-import se.chalmers.tda367.group15.game.models.WeaponLoader;
 import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
@@ -29,8 +28,6 @@ public class GameController {
 	 * A flag for if the game was won
 	 */
 	private boolean gameWon;
-
-	private boolean imagesAlreadyLoaded = false;
 
 	/**
 	 * The roomsController handling what room is the current room.
@@ -84,12 +81,6 @@ public class GameController {
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);
 		AbstractRoomController secondRoom = new SecondRoomController(this);
-
-		// Initialize weapons
-		if (!imagesAlreadyLoaded) {
-			WeaponLoader.initWeapons();
-			imagesAlreadyLoaded = true;
-		}
 
 		// Set up the room manager
 		roomController = new RoomsController();

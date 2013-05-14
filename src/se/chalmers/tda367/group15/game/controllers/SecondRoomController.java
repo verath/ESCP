@@ -17,7 +17,7 @@ public class SecondRoomController extends AbstractRoomController {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 
-		setMap("res/levels/untitled2.tmx");
+		setMap("res/levels/left_room.tmx");
 
 		// create enemy models
 		DummyEnemyModel e1 = new DummyEnemyModel();
