@@ -20,11 +20,11 @@ public class BasicRoomController extends AbstractRoomController {
 		setMap("res/levels/untitled.tmx");
 
 		// create enemy models
-		DummyEnemyModel e1 = new DummyEnemyModel();
+		DummyEnemyModel e1 = new DummyEnemyModel(800, 500);
 		DummyEnemyModel e2 = new DummyEnemyModel(400, 200);
-		DummyEnemyModel e3 = new DummyEnemyModel(100, 600);
+		DummyEnemyModel e3 = new DummyEnemyModel(450, 600);
 		DummyEnemyModel e4 = new DummyEnemyModel(940, 600);
-		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
+		DummyEnemyModel e5 = new DummyEnemyModel(300, 400);
 
 		// add moving models to the room
 		addMovingModel(e1, 0, 10, 0, 10);
