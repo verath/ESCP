@@ -114,15 +114,15 @@ public class RoomsController {
 	 * @param room
 	 * @param relativePosition
 	 */
-	public void addRoom(final AbstractRoomController reference, final AbstractRoomController room,
-			RelativePosition relativePosition) {
+	public void addRoom(final AbstractRoomController reference,
+			final AbstractRoomController room, RelativePosition relativePosition) {
 		Point addPosition = getRoomPosition(reference);
 		switch (relativePosition) {
 		case ABOVE:
 			addPosition.translate(0, 1);
 			break;
 		case BELOW:
-			addPosition.translate(0, 1);
+			addPosition.translate(0, -1);
 			break;
 		case LEFTOF:
 			addPosition.translate(-1, 0);
@@ -187,7 +187,8 @@ public class RoomsController {
 	 *             Throw to indicate an internal error
 	 */
 	public void update(GameContainer container, int delta,
-			List<Float> staticBounds, Map<AbstractMovingModel, Float> dynamicBounds)
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
 	}
@@ -219,8 +220,7 @@ public class RoomsController {
 	 * @throws SlickException
 	 *             Throw to indicate an internal error.
 	 */
-	public void init(GameContainer container)
-			throws SlickException {
+	public void init(GameContainer container) throws SlickException {
 		for (AbstractRoomController room : rooms.values()) {
 			room.init(container);
 		}
