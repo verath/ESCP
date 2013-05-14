@@ -19,16 +19,51 @@ import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
 
+/**
+ * Class representing a view for a character model.
+ * 
+ * @author simon
+ * 
+ */
 public class CharacterView implements View {
-	
+
+	/**
+	 * The character model that this view is rendering.
+	 */
 	private AbstractCharacterModel model;
+
+	/**
+	 * Map of weapons and it's corresponding walk animations.
+	 */
 	private Map<AbstractWeaponModel, Animation> walkAnimations;
+
+	/**
+	 * Map of weapons and it's corresponding attack animations.
+	 */
 	private Map<AbstractWeaponModel, Animation> attackAnimations;
+
+	/**
+	 * The death animation.
+	 */
 	private Animation deathAnimation;
 
+	/**
+	 * Variable for holding the active animation running.
+	 */
 	private Animation activeAnimation;
+
+	/**
+	 * Variable for checking whether an attack animation is running or not.
+	 */
 	private boolean attackActive;
 
+	/**
+	 * Creates a new character view for the specified model. Creates and stores
+	 * animations for all the model's weapons.
+	 * 
+	 * @param model
+	 *            The character model this view is rendering.
+	 */
 	public CharacterView(AbstractCharacterModel model) {
 		this.model = model;
 		walkAnimations = new HashMap<AbstractWeaponModel, Animation>();
@@ -56,9 +91,13 @@ public class CharacterView implements View {
 		deathAnimation = getAnimationFromPath(path);
 		deathAnimation.setLooping(false);
 
+		// set initial animation
 		activeAnimation = walkAnimations.get(model.getCurrentWeapon());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
@@ -105,6 +144,15 @@ public class CharacterView implements View {
 				model.getY() - f.getLineHeight());
 	}
 
+	/**
+	 * Method for getting an Animation object from a specified path in the
+	 * filesystem. The method asumes that the root folder to the animation files
+	 * is 'res/animation/specifiedanimationpath'.
+	 * 
+	 * @param animationPath
+	 *            The path to the animation files
+	 * @return An animation object
+	 */
 	public Animation getAnimationFromPath(String animationPath) {
 		File folder = new File("res/animation/" + animationPath);
 		if (folder != null) {
@@ -132,6 +180,9 @@ public class CharacterView implements View {
 		return null;
 	}
 
+	/**
+	 * Method to call if attack animation for the current weapon should be run.
+	 */
 	public void runAttackAnimation() {
 		attackActive = true;
 		activeAnimation = attackAnimations.get(model.getCurrentWeapon()).copy();

@@ -29,8 +29,6 @@ public class GameController {
 	 */
 	private boolean gameWon;
 
-	private boolean imagesAlreadyLoaded = false;
-
 	/**
 	 * The roomsController handling what room is the current room.
 	 */
@@ -83,12 +81,6 @@ public class GameController {
 		// Set up the rooms
 		AbstractRoomController startingRoom = new BasicRoomController(this);
 		AbstractRoomController secondRoom = new SecondRoomController(this);
-
-//		// Initialize weapons
-//		if (!imagesAlreadyLoaded) {
-//			WeaponLoader.initWeapons();
-//			imagesAlreadyLoaded = true;
-//		}
 
 		// Set up the room manager
 		roomController = new RoomsController();
