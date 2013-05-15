@@ -83,8 +83,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		try {
-			// TODO: create a background image for keybinds
-			setBackground(new Image("res/menu/backgroundOptions.png"));
+			setBackground(new Image("res/menu/backgroundKeys.png"));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
