@@ -116,7 +116,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		addMenuItem(returnButton);
 
 		Image imageNormal = new Image(180, 40);
-		Image imageOver = new Image("res/menu/emptyMO.png");
+		Image imageOver = new Image("res/menu/EmptyMO.png");
 
 		TextButton bindUp = new TextButton(new Button(container, imageNormal,
 				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
