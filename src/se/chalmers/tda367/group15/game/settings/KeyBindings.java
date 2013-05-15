@@ -2,6 +2,8 @@ package se.chalmers.tda367.group15.game.settings;
 
 import java.util.prefs.Preferences;
 
+import org.newdawn.slick.Input;
+
 /**
  * A class providing static access to the stored key binds for the user.
  * 
@@ -10,10 +12,49 @@ import java.util.prefs.Preferences;
  */
 public class KeyBindings {
 
+	/**
+	 * The default binding for going left
+	 */
+	public static final int DEFAULT_KEY_BIND_LEFT = Input.KEY_A;
+
+	/**
+	 * The default binding for going up
+	 */
+	public static final int DEFAULT_KEY_BIND_UP = Input.KEY_W;
+
+	/**
+	 * The default binding for going down
+	 */
+	public static final int DEFAULT_KEY_BIND_DOWN = Input.KEY_S;
+
+	/**
+	 * The default binding for changing to weapon 1
+	 */
+	public static final int DEFAULT_KEY_BIND_WEAPON_1 = Input.KEY_1;
+
+	/**
+	 * The default binding for changing to weapon 2
+	 */
+	public static final int DEFAULT_KEY_BIND_WEAPON_2 = Input.KEY_2;
+
+	/**
+	 * The default binding for changing to weapon 3
+	 */
+	public static final int DEFAULT_KEY_BIND_WEAPON_3 = Input.KEY_3;
+
+	/**
+	 * The default binding for going right
+	 */
+	public static final int DEFAULT_KEY_BIND_RIGHT = Input.KEY_D;
+
 	public enum Key {
-		LEFT(Constants.DEFAULT_KEY_BIND_LEFT), UP(Constants.DEFAULT_KEY_BIND_UP), RIGHT(
-				Constants.DEFAULT_KEY_BIND_RIGHT), DOWN(
-				Constants.DEFAULT_KEY_BIND_DOWN);
+		LEFT(KeyBindings.DEFAULT_KEY_BIND_LEFT), UP(
+				KeyBindings.DEFAULT_KEY_BIND_UP), RIGHT(
+				KeyBindings.DEFAULT_KEY_BIND_RIGHT), DOWN(
+				KeyBindings.DEFAULT_KEY_BIND_DOWN), WEAPON_1(
+				KeyBindings.DEFAULT_KEY_BIND_WEAPON_1), WEAPON_2(
+				KeyBindings.DEFAULT_KEY_BIND_WEAPON_2), WEAPON_3(
+				KeyBindings.DEFAULT_KEY_BIND_WEAPON_3);
 		private final String preferenceKey;
 		private final int defaultBinding;
 

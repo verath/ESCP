@@ -412,6 +412,16 @@
     <property name="door" value="true"/>
    </properties>
   </tile>
+  <tile id="162">
+   <properties>
+    <property name="door" value="true"/>
+   </properties>
+  </tile>
+  <tile id="163">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
   <tile id="184">
    <properties>
     <property name="blocked" value="true"/>
@@ -503,21 +513,6 @@
    </properties>
   </tile>
   <tile id="255">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="34">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="162">
-   <properties>
-    <property name="door" value="true"/>
-   </properties>
-  </tile>
-  <tile id="163">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -1088,17 +1083,17 @@
    <property name="blocked" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxzZGBgUCYCO5IpR8hMRQbiAEgdK5R9H4gfQNmsSHJsRJqFrI8U+8mRI2QmteyPQhND5yeg8eOobH8Vmhg6vwGNX0dl+2ehiaHzF6Dx51HZ/l1oYuj8A2j8fVS035FIM7CZSQ37yQWDwX7ksgs5HNHLNHxhTEr5h24HLn95ArEXA6RM0wRiLRzqYOUYOYDSMFUHYo0BtN8diD3QzLEAYjsgtgdiByjfEoitgNgai/2UugE9/CWAWBKIpYBYGohlgVgOiOWBWAGL/cSmHUcG3GmU0vwvgeZGNizuRq5/sZlDif3EqsUG7tHJflxh/A/NDFsG/OkPuY1CjfQHMwcG0NMftrilpv06FJgBsx9buw1dDFf4+1DBfvQ4A6Vz9HiD2cEGxZlAnIVkDjroBOIuNHXIAFZukJr/qd3+BgAdUzPS
+   eJxjYBgFo2AUjIJRMApGwSgYBaNgFAxWoAzFuPikAgAySACN
   </data>
  </layer>
  <layer name="Doors" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztzTEBAAAIA6BVNYrNjbFDKEACwEdT/rf8A3x1F8sA4w==
+   eJztzDENAAAIBLH37wqUgQgGhja59RIAAOC72vrgM3XQAYQ=
   </data>
  </layer>
  <layer name="Small props" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYBiagGWgHTAKRsEoGAWjYBQggeFULw0nv4xUMBqHowAfAABj8AAR
+   eJztwQEBAAAAgiD/r25IQAEAAC8GDAAAAQ==
   </data>
  </layer>
 </map>
