@@ -84,11 +84,11 @@ public class HeroController extends AbstractMovingModelController {
 
 		// Change weapons
 
-		if (input.isKeyPressed(Input.KEY_1)) {
+		if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_1))) {
 			model.setCurrentWeapon(model.getWeapons().get(0));
-		} else if (input.isKeyPressed(Input.KEY_2)) {
+		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_2))) {
 			model.setCurrentWeapon(model.getWeapons().get(1));
-		} else if (input.isKeyPressed(Input.KEY_3)) {
+		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_3))) {
 			model.setCurrentWeapon(model.getWeapons().get(2));
 		}
 

@@ -28,6 +28,21 @@ public class KeyBindings {
 	public static final int DEFAULT_KEY_BIND_DOWN = Input.KEY_S;
 
 	/**
+	 * The default binding for changing to weapon 1
+	 */
+	public static final int DEFAULT_KEY_BIND_WEAPON_1 = Input.KEY_1;
+
+	/**
+	 * The default binding for changing to weapon 2
+	 */
+	public static final int DEFAULT_KEY_BIND_WEAPON_2 = Input.KEY_2;
+
+	/**
+	 * The default binding for changing to weapon 3
+	 */
+	public static final int DEFAULT_KEY_BIND_WEAPON_3 = Input.KEY_3;
+
+	/**
 	 * The default binding for going right
 	 */
 	public static final int DEFAULT_KEY_BIND_RIGHT = Input.KEY_D;
@@ -36,7 +51,10 @@ public class KeyBindings {
 		LEFT(KeyBindings.DEFAULT_KEY_BIND_LEFT), UP(
 				KeyBindings.DEFAULT_KEY_BIND_UP), RIGHT(
 				KeyBindings.DEFAULT_KEY_BIND_RIGHT), DOWN(
-				KeyBindings.DEFAULT_KEY_BIND_DOWN);
+				KeyBindings.DEFAULT_KEY_BIND_DOWN), WEAPON_1(
+				KeyBindings.DEFAULT_KEY_BIND_WEAPON_1), WEAPON_2(
+				KeyBindings.DEFAULT_KEY_BIND_WEAPON_2), WEAPON_3(
+				KeyBindings.DEFAULT_KEY_BIND_WEAPON_3);
 		private final String preferenceKey;
 		private final int defaultBinding;
 
