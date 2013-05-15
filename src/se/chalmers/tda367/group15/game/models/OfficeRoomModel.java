@@ -23,10 +23,10 @@ public class OfficeRoomModel implements RoomModel {
 	public OfficeRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
-		CoworkerModel e1 = new CoworkerModel(800, 500);
-		CoworkerModel e2 = new CoworkerModel(400, 200);
-		CoworkerModel e3 = new CoworkerModel(450, 600);
-		CoworkerModel e4 = new CoworkerModel(940, 600);
+		CoworkerModel e1 = new CoworkerModel(800, 500, 0, 10, 0, 10);
+		CoworkerModel e2 = new CoworkerModel(400, 200, 12, 32, 0, 9);
+		CoworkerModel e3 = new CoworkerModel(450, 600, 0, 18, 16, 24);
+		CoworkerModel e4 = new CoworkerModel(940, 600, 18, 32, 10, 24);
 		CoworkerModel e5 = new CoworkerModel(300, 400);
 
 		npcModels.add(e1);

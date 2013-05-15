@@ -25,6 +25,10 @@ public class CoworkerModel extends AbstractNpcModel {
 		this(x, y, rot, 0, 32, 0, 24);
 	}
 	
+	public CoworkerModel(float x, float y, int x1, int x2, int y1, int y2) {
+		this(x, y, 0, x1, x2, y1, y2);
+	}
+	
 	/**
 	 * Creates a new dummy enemy.
 	 * @param x x position of DummyEnemyModel
