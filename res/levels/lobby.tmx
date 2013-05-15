@@ -1075,17 +1075,17 @@
  </tileset>
  <layer name="Floor" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYCANMOLA9ALD3X5c5lMLDzb7aW3fKB7cGB3Q275R+0ftH7V/1P7BYj+l7qM1GLV/eNkPAN0hAds=
+   eJxjYCANMOLA9ALD3X5c5lMLDzb7aW3fqP2D2356u2ek2z/Y08Oo/fS1b9T+wWU/pe6jNRi1f3jZDwCtIQHb
   </data>
  </layer>
  <layer name="Blocked" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYCANOAKxMhJfGSpGL6BIpNhQtR8WvrgwtrAmpAefXnRAyC+sOMTuA/EDLDQhs9Hd7ojDDkoBKw67RjoYbOFPy7xMjNnUzH/oaonNf1E45BIYcPtBE4i1gJgNiD2B2AuH2cTYX4VDrgEqf48Ic3CZTYyaWTjkFkDl/9HY/l045A5A5VOBOI2G9uMDoDTUCsRtA2Q/JYBY+8ktf5DrITYoRq6HaJX/qaGXWIDPD/RoB4HsyMEirkNH+3uwiPvQ0X5cbSB62I/e/oYBctMXACQBJlo=
+   eJxjYCANOAKxMhJfGSpGL6BIpNhQtR8WvrgwtrAmpIcUvSA+KxBrArEWELOhqWfFYgZI7D4QP8BCg/SrArEaw8DFnSsQu9HJLnxgMNo/0HkHV/rLBOIsBsz0R237CbmHkvyHrhabX7G5MQqH2xLw+AE5v3oCsRcD9rwKA6w4zAKJVeHQ0wCVv4fHXEoByPxZOOQWQOX/0dj+XTjkDkDlU4E4jUp2ESOGDEBpphWI28iwj9j0RwuAK71hsx9fuiVkB3K9w4bEh5lNCJCT/6mhl1iAzw/0KMtBduRgEdeho/09WMR96Gg/rjYQPexHb3/DALnpCwAIwChN
   </data>
  </layer>
  <layer name="Door" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYCAPLAbiJWTqHQWjYLCA5AG0OwWImwfQ/pYBtHsUjIJRMApGwSgYBaSDg0B8CIkmFwAAKWEGHA==
+   eJxjYCAPLAbiJWTqHQWjYLCA5AG2v3mA7R8Fo2CgQMoA298ywPaPglEwCkYBOeAgEB9CoskFAHE0Bhw=
   </data>
  </layer>
  <layer name="Small Object" width="32" height="24">

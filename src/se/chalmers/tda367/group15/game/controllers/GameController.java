@@ -147,6 +147,7 @@ public class GameController {
 		} else if (container.getInput().isKeyPressed(Input.KEY_H)) {
 			gameOver(true);
 		}
+
 	}
 
 	/**

@@ -412,6 +412,16 @@
     <property name="door" value="true"/>
    </properties>
   </tile>
+  <tile id="162">
+   <properties>
+    <property name="door" value="true"/>
+   </properties>
+  </tile>
+  <tile id="163">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
   <tile id="184">
    <properties>
     <property name="blocked" value="true"/>
@@ -503,21 +513,6 @@
    </properties>
   </tile>
   <tile id="255">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="34">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="162">
-   <properties>
-    <property name="door" value="true"/>
-   </properties>
-  </tile>
-  <tile id="163">
    <properties>
     <property name="blocked" value="true"/>
    </properties>

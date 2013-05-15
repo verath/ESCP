@@ -22,7 +22,11 @@ import se.chalmers.tda367.group15.game.views.View;
  * 
  */
 public abstract class AbstractMovingModelController {
-
+	
+	/**
+	 * The controller for sound effects
+	 */
+	private SoundEffectsController soundController = SoundEffectsController.instance();
 	/**
 	 * The model that the controller is managing
 	 */
@@ -290,6 +294,14 @@ public abstract class AbstractMovingModelController {
 					AbstractProjectileModel projectile = (AbstractProjectileModel) model;
 					int damage = projectile.getDamage();
 					otherModel.takeDamage(damage);
+
+					if(otherModel.getHealth() <= 0) {
+						otherModel.setAlive(false);
+						soundController.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);
+					}else {
+						soundController.playSound(SoundEffectsController.SoundEffect.ENEMY_HURT);
+
+					}
 					projectile.setAlive(false);
 				}
 			}
