@@ -31,6 +31,11 @@ import se.chalmers.tda367.group15.game.settings.Constants;
 public class RoomController implements TileBasedMap {
 
 	/**
+	 * The layer containing the blocked boolean
+	 */
+	private int blockedLayerID = 0;
+
+	/**
 	 * A reference to the game's gameController.
 	 */
 	private GameController gameController;
@@ -120,7 +125,7 @@ public class RoomController implements TileBasedMap {
 	public boolean blocked(PathFindingContext context, int tx, int ty) {
 		// TODO How to use PathFindingContext?
 		try {
-			int tileID = map.getTileId(tx, ty, 1);
+			int tileID = map.getTileId(tx, ty, blockedLayerID);
 			String property = map.getTileProperty(tileID, "blocked", "false");
 			if (property.equals("false")) {
 				return false;
@@ -284,7 +289,7 @@ public class RoomController implements TileBasedMap {
 		try {
 			this.map = new TiledMap(mapPath);
 			int layerCount = map.getLayerCount();
-			int blockedLayerID = -1;
+			blockedLayerID = -1;
 			for(int i = 0; i < layerCount ; i++) {
 				if(map.getLayerProperty(i, "blocked", "false").equals("true")) {
 					blockedLayerID = i;
