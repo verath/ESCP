@@ -20,7 +20,7 @@ public class ScoreControllerTest {
 	public void setUpBefore() throws Exception {
 		db = new PsychoHeroDatabase(true);
 		sm = new ScoreModel(1000);
-		scoreController = new ScoreController(sm);
+		scoreController = new ScoreController(null, sm);
 		scoreController.setDatabase(db);
 	}
 

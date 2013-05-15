@@ -48,11 +48,17 @@ public class ScoreController {
 	private PsychoHeroDatabase db;
 
 	/**
+	 * The game controller for the game
+	 */
+	private final GameController gameController;
+
+	/**
 	 * Creates a new ScoreController, using the provided ScoreModel.
 	 * 
 	 * @param scoreModel
 	 */
-	public ScoreController(ScoreModel scoreModel) {
+	public ScoreController(GameController gameController, ScoreModel scoreModel) {
+		this.gameController = gameController;
 		this.scoreModel = scoreModel;
 	}
 
@@ -72,6 +78,10 @@ public class ScoreController {
 		if (lastChange > SCORE_DECREASE_INTERVAL) {
 			lastChange = 0;
 			scoreModel.decreaseScore();
+		}
+
+		if (scoreModel.getScore() <= 0) {
+			gameController.gameOver(false);
 		}
 	}
 

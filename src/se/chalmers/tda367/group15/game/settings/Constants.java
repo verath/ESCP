@@ -42,5 +42,5 @@ public class Constants {
 	/**
 	 * The starting score of the game.
 	 */
-	public static final int STARTING_SCORE = 10_000;
+	public static final int STARTING_SCORE = 5_000;
 }

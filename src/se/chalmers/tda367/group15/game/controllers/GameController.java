@@ -82,7 +82,8 @@ public class GameController {
 		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
 
 		// Set up the rooms
-		RoomController parkingLot = new RoomController(this, new ParkingLotRoomModel());
+		RoomController parkingLot = new RoomController(this,
+				new ParkingLotRoomModel());
 		RoomController lobby = new RoomController(this, new LobbyRoomModel());
 		RoomController office = new RoomController(this, new OfficeRoomModel());
 
@@ -91,7 +92,8 @@ public class GameController {
 		roomController.addStartingRoom(parkingLot);
 		roomController.addRoom(parkingLot, lobby,
 				RoomsController.RelativePosition.ABOVE);
-		roomController.addRoom(lobby, office, RoomsController.RelativePosition.RIGHTOF);
+		roomController.addRoom(lobby, office,
+				RoomsController.RelativePosition.RIGHTOF);
 		roomController.init(container);
 
 		// Set up the hero controller
@@ -102,7 +104,7 @@ public class GameController {
 		ScoreModel scoreModel = new ScoreModel(Constants.STARTING_SCORE);
 
 		// Set up the score controller
-		scoreController = new ScoreController(scoreModel);
+		scoreController = new ScoreController(this, scoreModel);
 
 		// Set up the HUD controller
 		hudView = new HUDView(scoreModel);
