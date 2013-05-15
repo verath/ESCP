@@ -138,10 +138,12 @@ public class CharacterView implements View {
 		}
 
 		// Draw the current HP string
-		g.setColor(Color.yellow);
-		Font f = g.getFont();
-		g.drawString("HP: " + model.getHealth(), model.getX(),
-				model.getY() - f.getLineHeight());
+		if(model.isAlive()) {
+			g.setColor(Color.yellow);
+			Font f = g.getFont();
+			g.drawString("HP: " + model.getHealth(), model.getX(),
+					model.getY() - f.getLineHeight());
+		}
 	}
 
 	/**
