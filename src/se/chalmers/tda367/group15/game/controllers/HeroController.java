@@ -30,6 +30,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingLeft;
 	private boolean goingRight;
 	private long timer = 0;
+	private SoundEffectsController soundController = SoundEffectsController.instance();
 
 	/**
 	 * Create a new controller for the hero.
@@ -171,6 +172,7 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	private void createBullet() {
+		soundController.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newBullet = new BulletModel();
 

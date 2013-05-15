@@ -2,6 +2,9 @@ package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
 
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
+
 /**
  * An abstract class for representing a moving model.
  * 
@@ -9,7 +12,7 @@ import java.awt.geom.Rectangle2D;
  * 
  */
 public abstract class AbstractMovingModel {
-
+		
 	/**
 	 * Should be true if the model is to be displayed and is alive, otherwise
 	 * false
@@ -270,8 +273,5 @@ public abstract class AbstractMovingModel {
 	 */
 	public void takeDamage(int damage) {
 		health -= damage;
-		if (health <= 0) {
-			setAlive(false);
-		}
 	}
 }
