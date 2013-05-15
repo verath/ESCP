@@ -1079,11 +1079,8 @@
   </data>
  </layer>
  <layer name="Blocked" width="32" height="24">
-  <properties>
-   <property name="blocked" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCANOAKxMhJfGSpGL6BIpNhQtR8WvrgwtrAmpIcUvSA+KxBrArEWELOhqWfFYgZI7D4QP8BCg/SrArEaw8DFnSsQu9HJLnxgMNo/0HkHV/rLBOIsBsz0R237CbmHkvyHrhabX7G5MQqH2xLw+AE5v3oCsRcD9rwKA6w4zAKJVeHQ0wCVv4fHXEoByPxZOOQWQOX/0dj+XTjkDkDlU4E4jUp2ESOGDEBpphWI28iwj9j0RwuAK71hsx9fuiVkB3K9w4bEh5lNCJCT/6mhl1iAzw/0KMtBduRgEdeho/09WMR96Gg/rjYQPexHb3/DALnpCwAIwChN
+   eJxjYCANOAKxMhJfGSpGL6BIpNhQtR8WvrgwtrAmpIcUvSA+CxBrArEWELOiqWfBYgZI7D4QP8BCg/SrArEaw8DFnSsQu9HJLnxgMNo/0HkHV/rLBOIsBsz0R237CbmHkvyHrhabX7G5MQqH2xLw+AE5v3oCsRcD9rwKAyw4zAKJVeHQ0wCVv4fHXEoByPxZOOQWQOX/0dj+XTjkDkDlU4E4jUp2ESOGDEBpphWI28iwj9j0RwuAK71hsx9fuiVkB3K9w4rEh5lNCJCT/6mhl1iAzw/0KMtBduRgEdeho/09WMR96Gg/rjYQPexHb3/DALnpCwCkiSg8
   </data>
  </layer>
  <layer name="Door" width="32" height="24">
@@ -1093,7 +1090,7 @@
  </layer>
  <layer name="Small Object" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztyqEBAAAIwzDE/r+ZB+YQmERVdAbuUjptBADg1QKAIAAN
+   eJztyqENAAAMw7BJ/f/nPVA2MGKjgMzAXUqnjQAAvFpjGAAK
   </data>
  </layer>
 </map>
