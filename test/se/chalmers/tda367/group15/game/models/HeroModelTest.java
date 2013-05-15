@@ -14,15 +14,9 @@ public class HeroModelTest {
 	public final void testCreateHero() {
 		HeroModel hm = new HeroModel();
 		// Basic properties
-		assertTrue(hm.getHealth() > 0);
-		assertTrue(hm.isAlive());
 		assertTrue(hm.getX() >= 0);
 		assertTrue(hm.getY() >= 0);
-		assertTrue(hm.getVelocity() > 0);
-		
-		// Have some kind of weapon
-		assertTrue(hm.getCurrentWeapon() != null);
-		
+
 		// Should have a non-empty collision bound
 		assertFalse(hm.getBounds().isEmpty());
 	}
