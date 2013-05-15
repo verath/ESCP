@@ -11,9 +11,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosition;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
+import se.chalmers.tda367.group15.game.models.OfficeRoomModel;
+import se.chalmers.tda367.group15.game.models.ParkingLotRoomModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.views.HUDView;
@@ -80,9 +82,9 @@ public class GameController {
 		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
 
 		// Set up the rooms
-		AbstractRoomController parkingLot = new ParkingLotRoomController(this);
-		AbstractRoomController lobby = new LobbyRoomController(this);
-		AbstractRoomController office = new OfficeRoomController(this);
+		RoomController parkingLot = new RoomController(this, new ParkingLotRoomModel());
+		RoomController lobby = new RoomController(this, new LobbyRoomModel());
+		RoomController office = new RoomController(this, new OfficeRoomModel());
 
 		// Set up the room manager
 		roomController = new RoomsController();
@@ -130,7 +132,7 @@ public class GameController {
 		scoreController.update(container, delta);
 
 		// get current room
-		AbstractRoomController currentRoom = roomController.getCurrentRoom();
+		RoomController currentRoom = roomController.getCurrentRoom();
 
 		// get all static bounds
 		List<Rectangle2D.Float> staticBounds = currentRoom.getStaticBounds();

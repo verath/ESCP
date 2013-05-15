@@ -7,12 +7,10 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
-import se.chalmers.tda367.group15.game.views.CharacterView;
+import se.chalmers.tda367.group15.game.models.CoworkerModel;
 
 /**
  * Creates a new dummy enemy
@@ -20,7 +18,7 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
  * @author Simon Persson, Carl Jansson
  * 
  */
-public class DummyEnemyController extends AbstractNpcController {
+public class CoworkerController extends AbstractNpcController {
 
 	private boolean hasFired;
 
@@ -34,40 +32,9 @@ public class DummyEnemyController extends AbstractNpcController {
 	 * @param gameController
 	 *            A reference to the controller
 	 */
-	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
+	public CoworkerController(CoworkerModel model, TileBasedMap map,
 			GameController gameController) {
-		this(model, map, gameController, 0, 10, 0, 32);
-	}
-
-	/**
-	 * Creates a new dummyenemy controller that navigates in enclosed space.
-	 * 
-	 * (x1, y1) and (x2, y2) is upper left corner and lower right corner of tile
-	 * box for model to move in. Model do not have to start in this box and when
-	 * they track hero they might move outside this box. But default movement
-	 * position will always be inside. If x1, x2, y1, y2 not used entire map
-	 * will be set as default.
-	 * 
-	 * @param model
-	 *            the DummyEnemy model
-	 * @param navigator
-	 *            The navigator to use.
-	 * @param gameController
-	 *            A reference to the controller
-	 * @param x1
-	 *            minimum x tile random movement will occur on
-	 * @param x2
-	 *            maximum x tile random movement will occur on
-	 * @param y1
-	 *            minimum y tile random movement will occur on
-	 * @param y2
-	 *            maximum y tile random movement will occur on
-	 */
-	public DummyEnemyController(DummyEnemyModel model, TileBasedMap map,
-			GameController gameController, int x, int x2, int y, int y2) {
-		super(gameController, new AStarPathFinder(map, 500, true), x, x2, y, y2);
-		setModel(model);
-		setView(new CharacterView(model));
+		super(gameController, model, map );
 	}
 
 	/**

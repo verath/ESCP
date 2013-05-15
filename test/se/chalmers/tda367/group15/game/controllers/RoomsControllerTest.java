@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.newdawn.slick.GameContainer;
@@ -10,7 +10,7 @@ import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosit
 
 public class RoomsControllerTest {
 
-	private class DummyRoom extends AbstractRoomController {
+	private class DummyRoom extends RoomController {
 		private String name;
 
 		protected DummyRoom(GameController gameController, String name) {
@@ -35,7 +35,7 @@ public class RoomsControllerTest {
 	@Test
 	public final void testAddStartingRoom() {
 		RoomsController rc = new RoomsController();
-		AbstractRoomController room = new DummyRoom(null);
+		RoomController room = new DummyRoom(null);
 		rc.addStartingRoom(room);
 		assertEquals(rc.getCurrentRoom(), room);
 	}
@@ -43,8 +43,8 @@ public class RoomsControllerTest {
 	@Test
 	public final void addRoom() {
 		RoomsController rc = new RoomsController();
-		AbstractRoomController start_room = new DummyRoom(null);
-		AbstractRoomController room = new DummyRoom(null);
+		RoomController start_room = new DummyRoom(null);
+		RoomController room = new DummyRoom(null);
 		rc.addStartingRoom(start_room);
 		rc.addRoom(start_room, room, RelativePosition.ABOVE);
 	}
@@ -52,7 +52,7 @@ public class RoomsControllerTest {
 	@Test(expected = RoomDoesNotExistException.class)
 	public final void addRoomNullReference() {
 		RoomsController rc = new RoomsController();
-		AbstractRoomController room = new DummyRoom(null);
+		RoomController room = new DummyRoom(null);
 		rc.addRoom(null, room, RelativePosition.ABOVE);
 	}
 
@@ -63,11 +63,11 @@ public class RoomsControllerTest {
 	@Test
 	public final void getRoom() {
 		RoomsController rc = new RoomsController();
-		AbstractRoomController start_room = new DummyRoom(null);
-		AbstractRoomController roomL = new DummyRoom(null, "Left");
-		AbstractRoomController roomU = new DummyRoom(null, "Up");
-		AbstractRoomController roomR = new DummyRoom(null, "Right");
-		AbstractRoomController roomD = new DummyRoom(null, "Down");
+		RoomController start_room = new DummyRoom(null);
+		RoomController roomL = new DummyRoom(null, "Left");
+		RoomController roomU = new DummyRoom(null, "Up");
+		RoomController roomR = new DummyRoom(null, "Right");
+		RoomController roomD = new DummyRoom(null, "Down");
 		rc.addStartingRoom(start_room);
 		rc.addRoom(start_room, roomL, RelativePosition.LEFTOF);
 		rc.addRoom(start_room, roomU, RelativePosition.ABOVE);

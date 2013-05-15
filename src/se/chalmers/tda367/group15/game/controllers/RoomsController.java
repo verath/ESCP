@@ -40,7 +40,7 @@ public class RoomsController {
 	 * A 2-dimensional array of rooms, describing the layout of the rooms in the
 	 * game.
 	 */
-	private Map<Point, AbstractRoomController> rooms;
+	private Map<Point, RoomController> rooms;
 
 	/**
 	 * The current "position", used as key to query for the room from the map.
@@ -51,7 +51,7 @@ public class RoomsController {
 	 * RoomManager constructor
 	 */
 	public RoomsController() {
-		rooms = new HashMap<Point, AbstractRoomController>();
+		rooms = new HashMap<Point, RoomController>();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class RoomsController {
 	 * 
 	 * @return True if the room is attached, else False.
 	 */
-	public boolean roomExist(final AbstractRoomController room) {
+	public boolean roomExist(final RoomController room) {
 		// If room is null, we can discard it at once
 		if (room == null) {
 			return false;
@@ -76,7 +76,7 @@ public class RoomsController {
 	 *            The room that should be set as the starting room. Must not be
 	 *            null.
 	 */
-	public void addStartingRoom(final AbstractRoomController room) {
+	public void addStartingRoom(final RoomController room) {
 		if (rooms.containsKey(STARTING_POINT)) {
 			throw new RoomAlreadyExistAtPositionException();
 		} else {
@@ -90,10 +90,10 @@ public class RoomsController {
 	 * @param room
 	 * @return The position of the room
 	 */
-	private Point getRoomPosition(AbstractRoomController room) {
+	private Point getRoomPosition(RoomController room) {
 		Point position = null;
 
-		for (Entry<Point, AbstractRoomController> entry : rooms.entrySet()) {
+		for (Entry<Point, RoomController> entry : rooms.entrySet()) {
 			if (entry.getValue().equals(room)) {
 				position = new Point(entry.getKey());
 			}
@@ -114,8 +114,8 @@ public class RoomsController {
 	 * @param room
 	 * @param relativePosition
 	 */
-	public void addRoom(final AbstractRoomController reference,
-			final AbstractRoomController room, RelativePosition relativePosition) {
+	public void addRoom(final RoomController reference,
+			final RoomController room, RelativePosition relativePosition) {
 		Point addPosition = getRoomPosition(reference);
 		switch (relativePosition) {
 		case ABOVE:
@@ -137,7 +137,7 @@ public class RoomsController {
 	/**
 	 * Returns the currently "selected" room
 	 */
-	public AbstractRoomController getCurrentRoom() {
+	public RoomController getCurrentRoom() {
 		return rooms.get(currentPosition);
 
 	}
@@ -221,7 +221,7 @@ public class RoomsController {
 	 *             Throw to indicate an internal error.
 	 */
 	public void init(GameContainer container) throws SlickException {
-		for (AbstractRoomController room : rooms.values()) {
+		for (RoomController room : rooms.values()) {
 			room.init(container);
 		}
 	}
