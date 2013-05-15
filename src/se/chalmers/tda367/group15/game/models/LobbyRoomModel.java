@@ -23,18 +23,15 @@ public class LobbyRoomModel implements RoomModel {
 	public LobbyRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 		
-		CoworkerModel e1 = new CoworkerModel(200, 200);
-		CoworkerModel e2 = new CoworkerModel(650, 364);
-		CoworkerModel e3 = new CoworkerModel(564, 300);
-		CoworkerModel e4 = new CoworkerModel(500, 460);
-		CoworkerModel e5 = new CoworkerModel(500, 200);
+		CoworkerModel e1 = new CoworkerModel(9, 12);
+		CoworkerModel e2 = new CoworkerModel(12, 7);
+		CoworkerModel e3 = new CoworkerModel(25, 16);
+		
 		
 		npcModels.add(e1);
 		npcModels.add(e2);
 		npcModels.add(e3);
-		npcModels.add(e4);
-		npcModels.add(e5);
-		
+
 		mapPath = "res/levels/lobby.tmx";
 	}
 
