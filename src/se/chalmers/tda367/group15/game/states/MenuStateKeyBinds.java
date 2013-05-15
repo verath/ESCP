@@ -1,10 +1,21 @@
 package se.chalmers.tda367.group15.game.states;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 
+import se.chalmers.tda367.group15.game.menu.Button;
+import se.chalmers.tda367.group15.game.menu.TextButton;
 import se.chalmers.tda367.group15.game.settings.Constants;
+import se.chalmers.tda367.group15.game.settings.KeyBindings;
+import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 
 /**
  * A game over state. Displays a high score and allows the user to either replay
@@ -14,6 +25,47 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  * 
  */
 public class MenuStateKeyBinds extends AbstractMenuBasedState {
+
+	/**
+	 * The true typed font used to draw text.
+	 */
+	private TrueTypeFont textFont = new TrueTypeFont(TextButton.DEFAULT_FONT,
+			true);
+
+	/**
+	 * The starting y-point for the list of buttons and texts
+	 */
+	private static final int LIST_TOP_Y = 120;
+
+	/**
+	 * The starting x-point for the list of buttons and texts
+	 */
+	private static final int LIST_TOP_X = 80;
+
+	/**
+	 * Spacing in y between each button
+	 */
+	private static final int LIST_Y_SPACING = 50;
+
+	/**
+	 * Spacing in x between the text and the buttons
+	 */
+	private static final int LIST_X_SPACING = 220;
+
+	/**
+	 * A map mapping the buttons to the key they are binding
+	 */
+	private Map<TextButton, Key> buttonToKeyBind = new HashMap<>();
+
+	/**
+	 * The currently clicked/active keybind button.
+	 */
+	private TextButton activeBindButton;
+
+	/**
+	 * Boolean indicating if we are currently rebinding a key or not.
+	 */
+	private boolean isRebinding;
 
 	/**
 	 * Creates a new MenuStateKeyBinds.
@@ -31,17 +83,184 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		try {
-			// TODO: create a background image for keybinds?
+			// TODO: create a background image for keybinds
 			setBackground(new Image("res/menu/backgroundOptions.png"));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 
+		try {
+			initElements();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+
+		container.getInput().addKeyListener(new keyBindingListener());
+
+	}
+
+	private void initElements() throws SlickException {
+		Image backImage = new Image("res/menu/returnButton.png");
+		Image backImageMO = new Image("res/menu/returnButtonMO.png");
+
+		// Button for returning to main menu.
+		Button returnButton = new Button(container, backImage, backImageMO,
+				200, 50) {
+			@Override
+			public void performAction() {
+				stopRebindKey();
+				game.enterState(Constants.GAME_STATE_MENU_MAIN);
+			}
+		};
+
+		addMenuItem(returnButton);
+
+		Image imageNormal = new Image(180, 40);
+		Image imageOver = new Image("res/menu/emptyMO.png");
+
+		TextButton bindUp = new TextButton(new Button(container, imageNormal,
+				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
+						+ LIST_Y_SPACING * 0), null) {
+			@Override
+			public void performAction() {
+				startRebindKey(this);
+			}
+		};
+		TextButton bindDown = new TextButton(new Button(container, imageNormal,
+				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
+						+ LIST_Y_SPACING * 1), null) {
+			@Override
+			public void performAction() {
+				startRebindKey(this);
+			}
+		};
+		TextButton bindLeft = new TextButton(new Button(container, imageNormal,
+				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
+						+ LIST_Y_SPACING * 2), null) {
+			@Override
+			public void performAction() {
+				startRebindKey(this);
+			}
+		};
+		TextButton bindRight = new TextButton(new Button(container,
+				imageNormal, imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
+						+ LIST_Y_SPACING * 3), null) {
+			@Override
+			public void performAction() {
+				startRebindKey(this);
+			}
+		};
+		TextButton bindWeapon1 = new TextButton(new Button(container,
+				imageNormal, imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
+						+ LIST_Y_SPACING * 4), null) {
+			@Override
+			public void performAction() {
+				startRebindKey(this);
+			}
+		};
+		TextButton bindWeapon2 = new TextButton(new Button(container,
+				imageNormal, imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
+						+ LIST_Y_SPACING * 5), null) {
+			@Override
+			public void performAction() {
+				startRebindKey(this);
+			}
+		};
+		TextButton bindWeapon3 = new TextButton(new Button(container,
+				imageNormal, imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
+						+ LIST_Y_SPACING * 6), null) {
+			@Override
+			public void performAction() {
+				startRebindKey(this);
+			}
+		};
+
+		// Map bind buttons to the key they are binding
+		buttonToKeyBind.put(bindUp, Key.UP);
+		buttonToKeyBind.put(bindDown, Key.DOWN);
+		buttonToKeyBind.put(bindLeft, Key.LEFT);
+		buttonToKeyBind.put(bindRight, Key.RIGHT);
+		buttonToKeyBind.put(bindWeapon1, Key.WEAPON_1);
+		buttonToKeyBind.put(bindWeapon2, Key.WEAPON_2);
+		buttonToKeyBind.put(bindWeapon3, Key.WEAPON_3);
+
+		// Set text from bind
+		for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
+			String keyName = Input.getKeyName(KeyBindings.getBinding(entry
+					.getValue()));
+			entry.getKey().setText(keyName);
+		}
+
+		// Add items so that they are drawn
+		addMenuItem(bindUp);
+		addMenuItem(bindDown);
+		addMenuItem(bindLeft);
+		addMenuItem(bindRight);
+		addMenuItem(bindWeapon1);
+		addMenuItem(bindWeapon2);
+		addMenuItem(bindWeapon3);
+	}
+
+	/**
+	 * Starts listening for keybindings for the Key associated with the clicked
+	 * button.
+	 * 
+	 * @param textButton
+	 */
+	protected void startRebindKey(TextButton button) {
+		if (!buttonToKeyBind.containsKey(button)) {
+			return;
+		}
+
+		stopRebindKey();
+
+		button.setText("---");
+		activeBindButton = button;
+		isRebinding = true;
+	}
+
+	/**
+	 * Sets a Key as the bind for the key we were rebinding
+	 * 
+	 * @param keyCode
+	 */
+	protected void setRebindKey(int keyCode) {
+		Key key = buttonToKeyBind.get(activeBindButton);
+		KeyBindings.setBinding(key, keyCode);
+		stopRebindKey();
+	}
+
+	/**
+	 * Stops rebinding a key and resets the active button to default state.
+	 */
+	private void stopRebindKey() {
+		if (!isRebinding) {
+			return;
+		}
+
+		Key key = buttonToKeyBind.get(activeBindButton);
+		activeBindButton.setText(Input.getKeyName(KeyBindings.getBinding(key)));
+
+		activeBindButton = null;
+		isRebinding = false;
 	}
 
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 0, "Up: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 1,
+				"Down: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 2,
+				"Left: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 3,
+				"Right: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 4,
+				"Weapon 1: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 5,
+				"Weapon 2: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 6,
+				"Weapon 3: ");
 	}
 
 	/**
@@ -56,8 +275,42 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 */
 	@Override
 	protected void escpAction() {
-		// escape returns you to main menu.
-		game.enterState(Constants.GAME_STATE_MENU_MAIN);
+		// escape cancels current binding
+		if (isRebinding) {
+			stopRebindKey();
+		} else {
+			game.enterState(Constants.GAME_STATE_MENU_MAIN);
+		}
+	}
+
+	private class keyBindingListener implements KeyListener {
+		@Override
+		public void keyPressed(int key, char c) {
+		}
+
+		@Override
+		public void inputEnded() {
+		}
+
+		@Override
+		public void inputStarted() {
+		}
+
+		@Override
+		public boolean isAcceptingInput() {
+			return isRebinding;
+		}
+
+		@Override
+		public void setInput(Input input) {
+		}
+
+		@Override
+		public void keyReleased(int keyCode, char c) {
+			if (keyCode != Input.KEY_ESCAPE) {
+				setRebindKey(keyCode);
+			}
+		}
 	}
 
 }
