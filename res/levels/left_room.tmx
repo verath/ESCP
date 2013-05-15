@@ -2,52 +2,12 @@
 <map version="1.0" orientation="orthogonal" width="32" height="24" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="default" tilewidth="32" tileheight="32">
   <image source="../tiles/sprite_sheet.png" trans="ff00ff" width="1024" height="1024"/>
-  <tile id="3">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
   <tile id="4">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
   <tile id="5">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="9">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="12">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -152,11 +112,6 @@
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="44">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
   <tile id="55">
    <properties>
     <property name="blocked" value="true"/>
@@ -257,11 +212,6 @@
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="76">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
   <tile id="88">
    <properties>
     <property name="blocked" value="true"/>
@@ -342,11 +292,6 @@
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="108">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
   <tile id="120">
    <properties>
     <property name="blocked" value="true"/>
@@ -423,11 +368,6 @@
    </properties>
   </tile>
   <tile id="139">
-   <properties>
-    <property name="blocked" value="true"/>
-   </properties>
-  </tile>
-  <tile id="140">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -1143,17 +1083,17 @@
    <property name="blocked" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlktKBDEQhmvRDYoXmFF84YAPdO8DHw0DOqIXEBG3egQRcaswF3AhnsOFeBL1JOLfTALlT9LJTOJY8NFdSXX+dKWS7kpEliKoRuwLjbkI+jKwDpiia20bJq4w/if4MveF6isl3uxzNV3q65DfNXE+a+prMqvfp3bWP43QP6O2c/Ivyb+Q3++vc1Coe9sX0r+lthvy78m/U/qhdSsj9J+ojf0X8p+V/kRAfzJC/5Xa2H8n/y2jfhV43me59Ec1q18E4uxe/Qt9fXbpPPKZ1pTjYc4/1vC9Vw8cy6D2V8GaJy4lN6k5XQYr/6h/CI5onE2wB/bBgfG3wDbYceinzoHz3wJtMA1mwCyYA/NgwaEfWzuV+Gs0df+3aI6lY96+fRo6m2P0Y2Nd9jEmfV+Ov2mMXWmuP/2tG0f9udY2p/56whix3//afPk/yaDPa1bnlNeN53kFrtU4bA/gkeK02XUbdv/n/v/+AccfOAI=
+   eJxjYKAtUIZiRyQ2shi9gCKRYqP2D0/7saU1eto/CjDBQIc/ve0fyPJvFIyCUTAKRsEoQAYAoNQDzg==
   </data>
  </layer>
  <layer name="Doors" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztzTEBAAAIA6BVNYrNjbFDKEACwEdT/rf8A3x1F8sA4w==
+   eJztzTEBAAAIwCCzGsXkxtgDBZgBChv/F/8AQOMBYPkA5Q==
   </data>
  </layer>
  <layer name="Small props" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYBiagHmgHTAKRsEoGAWjYBQggeFULw0nv4xUMBqHowAfAABN9AAN
+   eJztwQEBAAAAgiD/r25IQAEAAC8GDAAAAQ==
   </data>
  </layer>
 </map>
