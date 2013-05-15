@@ -22,8 +22,8 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 	/**
 	 * the upper left corner of button group
 	 */
-	private int MENUX = 200;
-	private int MENUY = 100;
+	private int MENUX = Constants.MENU_UPPER_X;
+	private int MENUY = Constants.MENU_UPPER_Y;
 
 	/**
 	 * Used to store variables between restarts.

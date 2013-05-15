@@ -33,9 +33,15 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 			true);
 
 	/**
+	 * the upper left corner of button group
+	 */
+	private int MENUX = Constants.MENU_UPPER_X;
+	private int MENUY = Constants.MENU_UPPER_Y;
+	
+	/**
 	 * The starting y-point for the list of buttons and texts
 	 */
-	private static final int LIST_TOP_Y = 120;
+	private static final int LIST_TOP_Y = 150;
 
 	/**
 	 * The starting x-point for the list of buttons and texts
@@ -104,7 +110,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 
 		// Button for returning to main menu.
 		Button returnButton = new Button(container, backImage, backImageMO,
-				200, 50) {
+				MENUX, MENUY) {
 			@Override
 			public void performAction() {
 				stopRebindKey();
