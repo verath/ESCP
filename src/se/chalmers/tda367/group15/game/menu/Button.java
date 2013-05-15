@@ -17,16 +17,19 @@ import org.newdawn.slick.gui.MouseOverArea;
 public class Button implements MenuItem {
 
 	/**
-	 * The pictures and area of the button. This is the size of the image used
-	 * when creating the moa.
+	 * The mouse over area for this button. This holds both the area of the
+	 * "mouse over box" and the images used to represent the different states.
 	 */
-	protected MouseOverArea moa;
+	protected MouseOverArea mouseOverArea;
 
 	/**
 	 * The container containing the button.
 	 */
 	protected GUIContext guiContext;
 
+	/**
+	 * A boolean indicating if this button should be drawn or not.
+	 */
 	private boolean buttonActive;
 
 	/**
@@ -83,9 +86,9 @@ public class Button implements MenuItem {
 	public Button(GUIContext guiContext, Image image, Image moImage,
 			Image mdImage, int x, int y) {
 		this.guiContext = guiContext;
-		moa = new MouseOverArea(guiContext, image, x, y);
-		moa.setMouseOverImage(moImage);
-		moa.setMouseDownImage(mdImage);
+		mouseOverArea = new MouseOverArea(guiContext, image, x, y);
+		mouseOverArea.setMouseOverImage(moImage);
+		mouseOverArea.setMouseDownImage(mdImage);
 		this.buttonActive = true;
 	}
 
@@ -93,8 +96,9 @@ public class Button implements MenuItem {
 	 * Paint the button.
 	 */
 	public void render(Graphics g) {
-		if (buttonActive)
-			moa.render(guiContext, g);
+		if (buttonActive) {
+			mouseOverArea.render(guiContext, g);
+		}
 	}
 
 	/**
@@ -107,10 +111,7 @@ public class Button implements MenuItem {
 	 * @return true if mouse is above button.
 	 */
 	public boolean isMouseOver() {
-		if (buttonActive) {
-			return moa.isMouseOver();
-		}
-		return false;
+		return buttonActive && mouseOverArea.isMouseOver();
 	}
 
 	public void setButtonActive(boolean active) {
