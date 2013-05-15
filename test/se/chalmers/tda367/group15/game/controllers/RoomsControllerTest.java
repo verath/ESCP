@@ -13,13 +13,9 @@ public class RoomsControllerTest {
 	private class DummyRoom extends RoomController {
 		private String name;
 
-		protected DummyRoom(GameController gameController, String name) {
-			super(gameController);
-			this.name = name;
-		}
-
-		protected DummyRoom(GameController gameController) {
-			this(gameController, null);
+		protected DummyRoom(String name) {
+			super(null, null);
+			this.name = (name == null) ? "" : name;
 		}
 
 		@Override
@@ -64,10 +60,10 @@ public class RoomsControllerTest {
 	public final void getRoom() {
 		RoomsController rc = new RoomsController();
 		RoomController start_room = new DummyRoom(null);
-		RoomController roomL = new DummyRoom(null, "Left");
-		RoomController roomU = new DummyRoom(null, "Up");
-		RoomController roomR = new DummyRoom(null, "Right");
-		RoomController roomD = new DummyRoom(null, "Down");
+		RoomController roomL = new DummyRoom("Left");
+		RoomController roomU = new DummyRoom("Up");
+		RoomController roomR = new DummyRoom("Right");
+		RoomController roomD = new DummyRoom("Down");
 		rc.addStartingRoom(start_room);
 		rc.addRoom(start_room, roomL, RelativePosition.LEFTOF);
 		rc.addRoom(start_room, roomU, RelativePosition.ABOVE);
