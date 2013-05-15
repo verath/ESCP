@@ -31,7 +31,7 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingDown;
 	private boolean goingLeft;
 	private boolean goingRight;
-	private long timer = 0;
+	private long swingTimer = 0;
 	private SoundEffectsController soundController = SoundEffectsController
 			.instance();
 
@@ -47,8 +47,8 @@ public class HeroController extends AbstractMovingModelController {
 		HeroModel model = new HeroModel();
 
 		// configure model
-		model.setX(44f);
-		model.setY(44f);
+		model.setX(16*32f);
+		model.setY(20*32f);
 		model.setVelocity(0.15f);
 		model.setHealth(100);
 		model.setAlive(true);
@@ -101,12 +101,12 @@ public class HeroController extends AbstractMovingModelController {
 			} else if (weapon instanceof AbstractMeleeWeaponModel) {
 				swingWeapon();
 			}
-			timer = System.currentTimeMillis();
+			swingTimer = System.currentTimeMillis();
 		} else if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
-				&& System.currentTimeMillis() - timer > model
+				&& System.currentTimeMillis() - swingTimer > model
 						.getCurrentWeapon().getFiringSpeed()) {
 
-			timer = System.currentTimeMillis();
+			swingTimer = System.currentTimeMillis();
 
 			if (weapon instanceof AbstractRangedWeaponModel) {
 				createBullet();

@@ -81,6 +81,7 @@ public class CharacterView implements View {
 				path = model.getAnimationPath() + "/attack/" + weapon.getName()
 						+ "/";
 				Animation attackAnimation = getAnimationFromPath(path);
+				attackAnimation.setSpeed(2.5f);
 				attackAnimation.setLooping(false);
 				attackAnimations.put(weapon, attackAnimation);
 			}

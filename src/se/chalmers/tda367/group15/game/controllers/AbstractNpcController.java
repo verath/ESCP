@@ -29,8 +29,8 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
 public abstract class AbstractNpcController extends
 		AbstractMovingModelController {
 
-	private long timer = 0;
-	private final int ENEMY_DAMAGE_MODIFIER = 3;
+	private long swingTimer = 0;
+	private final int ENEMY_DAMAGE_MODIFIER = 2;
 
 	/**
 	 * The path controller is traveling
@@ -173,9 +173,9 @@ public abstract class AbstractNpcController extends
 					(int)heroY/32);
 			currentStep = 1;
 			
-			if (System.currentTimeMillis() - timer > ((AbstractCharacterModel) model)
+			if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) model)
 					.getCurrentWeapon().getFiringSpeed()) {
-				timer = System.currentTimeMillis();
+				swingTimer = System.currentTimeMillis();
 				fire();
 			}
 		}
