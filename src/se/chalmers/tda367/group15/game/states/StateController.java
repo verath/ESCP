@@ -39,9 +39,11 @@ public class StateController extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MenuStateMain mainMenu = new MenuStateMain(
-				Constants.GAME_STATE_MAIN_MENU);
+				Constants.GAME_STATE_MENU_MAIN);
 		MenuStateOptions optionsMenu = new MenuStateOptions(
-				Constants.GAME_STATE_OPTIONS_MENU);
+				Constants.GAME_STATE_MENU_OPTIONS);
+		MenuStateKeyBinds keyBindsMenu = new MenuStateKeyBinds(
+				Constants.GAME_STATE_MENU_KEY_BINDS);
 		GameOverState gameOverState = new GameOverState(
 				Constants.GAME_STATE_GAME_OVER);
 
@@ -50,8 +52,9 @@ public class StateController extends StateBasedGame {
 		this.addState(playState);
 		this.addState(mainMenu);
 		this.addState(optionsMenu);
+		this.addState(keyBindsMenu);
 		this.addState(gameOverState);
-		this.enterState(Constants.GAME_STATE_MAIN_MENU);
+		this.enterState(Constants.GAME_STATE_MENU_MAIN);
 	}
 
 	public void initMusic() {

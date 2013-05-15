@@ -79,7 +79,7 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 					MENUX, MENUY) {
 				@Override
 				public void performAction() {
-					game.enterState(Constants.GAME_STATE_MAIN_MENU);
+					game.enterState(Constants.GAME_STATE_MENU_MAIN);
 				}
 			};
 			this.addMenuItem(returnButton);
@@ -201,7 +201,7 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 	@Override
 	protected void escpAction() {
 		// escape returns you to main menu.
-		game.enterState(Constants.GAME_STATE_MAIN_MENU);
+		game.enterState(Constants.GAME_STATE_MENU_MAIN);
 	}
 
 }

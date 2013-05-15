@@ -81,6 +81,9 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		Image quitImageMO = new Image("res/menu/quitMO.png");
 		Image optionsImage = new Image("res/menu/options.png");
 		Image optionsImageMO = new Image("res/menu/optionsMO.png");
+		// TODO: create images for keybind option button
+		Image keyBindsImage = new Image("res/menu/options.png");
+		Image keyBindsImageMO = new Image("res/menu/optionsMO.png");
 		Image resumeImage = new Image("res/menu/resumeGame.png");
 		Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
 
@@ -117,12 +120,20 @@ public class MenuStateMain extends AbstractMenuBasedState {
 				optionsImageMO, MENUX, MENUY + 100) {
 			@Override
 			public void performAction() {
-				game.enterState(Constants.GAME_STATE_OPTIONS_MENU);
+				game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
+			}
+		};
+		// open Key bindings
+		Button keyBindsButton = new Button(container, keyBindsImage,
+				keyBindsImageMO, MENUX, MENUY + 150) {
+			@Override
+			public void performAction() {
+				game.enterState(Constants.GAME_STATE_MENU_KEY_BINDS);
 			}
 		};
 		// Quit application
 		Button exitButton = new Button(container, quitImage, quitImageMO,
-				MENUX, MENUY + 150) {
+				MENUX, MENUY + 200) {
 			@Override
 			public void performAction() {
 				if (((StateController) game).closeRequested()) {
@@ -138,6 +149,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		this.addMenuItem(resumeGameButton);
 		this.addMenuItem(newGameButton);
 		this.addMenuItem(optionsButton);
+		this.addMenuItem(keyBindsButton);
 		this.addMenuItem(exitButton);
 	}
 
