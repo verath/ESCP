@@ -151,7 +151,7 @@ public class HeroController extends AbstractMovingModelController {
 
 		model.setMoving(speedY != 0 || speedX != 0);
 		RoomsController roomsController = getGameController()
-				.getRoomController();
+				.getRoomsController();
 		float tmpX = model.getX() + model.getWidth() / 2;
 		float tmpY = model.getY() + model.getHeight() / 2;
 
@@ -191,8 +191,8 @@ public class HeroController extends AbstractMovingModelController {
 		newBullet.setRotation(model.getRotation());
 		newBullet.setDamage(model.getCurrentWeapon().getDamage());
 		newBullet.setAlive(true);
-		AbstractRoomController currentRoom = getGameController()
-				.getRoomController().getCurrentRoom();
+		RoomController currentRoom = getGameController()
+				.getRoomsController().getCurrentRoom();
 		currentRoom.addProjectile(newBullet);
 	}
 
@@ -220,8 +220,8 @@ public class HeroController extends AbstractMovingModelController {
 		newSwing.setDamage(model.getCurrentWeapon().getDamage());
 		newSwing.setAlive(true);
 
-		AbstractRoomController currentRoom = getGameController()
-				.getRoomController().getCurrentRoom();
+		RoomController currentRoom = getGameController()
+				.getRoomsController().getCurrentRoom();
 
 		currentRoom.addSwing(newSwing);
 	}

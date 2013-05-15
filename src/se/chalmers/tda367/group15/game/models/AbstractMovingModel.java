@@ -2,9 +2,6 @@ package se.chalmers.tda367.group15.game.models;
 
 import java.awt.geom.Rectangle2D;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
-
 /**
  * An abstract class for representing a moving model.
  * 

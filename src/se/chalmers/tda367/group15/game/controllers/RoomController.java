@@ -17,7 +17,8 @@ import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
+import se.chalmers.tda367.group15.game.models.CoworkerModel;
+import se.chalmers.tda367.group15.game.models.RoomModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -27,12 +28,17 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  * @author simon
  * 
  */
-public abstract class AbstractRoomController implements TileBasedMap {
+public class RoomController implements TileBasedMap {
 
 	/**
 	 * A reference to the game's gameController.
 	 */
 	private GameController gameController;
+	
+	/**
+	 * The model of the room.
+	 */
+	private RoomModel roomModel;
 
 	/**
 	 * The tiled map to be used in the room
@@ -62,11 +68,13 @@ public abstract class AbstractRoomController implements TileBasedMap {
 	 * 
 	 * @param gameController
 	 */
-	protected AbstractRoomController(GameController gameController) {
-		this.setGameController(gameController);
+	protected RoomController(GameController gameController, RoomModel roomModel) {
 		staticBounds = new ArrayList<Rectangle2D.Float>();
 		dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
 		movingModelControllers = new ArrayList<AbstractMovingModelController>();
+		this.gameController = gameController;
+		this.roomModel = roomModel;
+		this.setMap(roomModel.getMapPath());
 	}
 
 	/**
@@ -75,34 +83,9 @@ public abstract class AbstractRoomController implements TileBasedMap {
 	 * @param model
 	 *            The model to be added
 	 */
-	public void addMovingModel(DummyEnemyModel model) {
-		movingModelControllers.add(new DummyEnemyController(model, this,
+	public void addMovingModel(CoworkerModel model) {
+		movingModelControllers.add(new CoworkerController(model, this,
 				gameController));
-		dynamicBounds.put(model, model.getBounds());
-	}
-
-	/**
-	 * Method for adding a moving model to this room. (x1, y1) and (x2, y2) is
-	 * upper left corner and lower right corner of tile box for model to move in.
-	 * Model do not have to start in this box and when they track hero they
-	 * might move outside this box. But default movement position will always be
-	 * inside. If x1, x2, y1, y2 not used entire map will be set as default.
-	 * 
-	 * @param model
-	 *            The model to be added
-	 * @param x1
-	 *            minimum x tile random movement will occur on
-	 * @param x2
-	 *            maximum x tile random movement will occur on
-	 * @param y1
-	 *            minimum y tile random movement will occur on
-	 * @param y2
-	 *            maximum y tile random movement will occur on
-	 */
-	public void addMovingModel(DummyEnemyModel model, int x1, int x2, int y1,
-			int y2) {
-		movingModelControllers.add(new DummyEnemyController(model, this,
-				gameController, x1, x2, y1, y2));
 		dynamicBounds.put(model, model.getBounds());
 	}
 
@@ -236,7 +219,13 @@ public abstract class AbstractRoomController implements TileBasedMap {
 	 * @throws SlickException
 	 *             Throw to indicate an internal error.
 	 */
-	public abstract void init(GameContainer container) throws SlickException;
+	public void init(GameContainer container) throws SlickException {
+		List<AbstractMovingModel> npcs = roomModel.getNpcModels();
+		for(AbstractMovingModel model : npcs) {
+			if(model instanceof CoworkerModel)
+			addMovingModel((CoworkerModel)model);
+		}
+	}
 
 	/**
 	 * {@inheritDoc}

@@ -15,6 +15,7 @@ import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractNpcModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.views.CharacterView;
@@ -77,52 +78,23 @@ public abstract class AbstractNpcController extends
 	private int startY;
 
 	/**
-	 * Create a new AbstractNpcController using a map.
+	 * Create a new npc controller.
 	 * 
 	 * @param gameController
-	 *            the main controller
+	 *            The GameController to be used.
+	 * @param model
+	 *            The model that this controller should control.
 	 * @param map
-	 *            the map to path find on
-	 */
-	public AbstractNpcController(GameController gameController, TileBasedMap map) {
-		this(gameController, new AStarPathFinder(map, 500, true));
-	}
-
-	/**
-	 * Create a new AbstractNpcController using a path finder.
-	 * 
-	 * @param gameController
-	 *            the main controller
-	 * @param pathFinder
-	 *            the path finder to use
+	 *            The tile based map to be used.
 	 */
 	public AbstractNpcController(GameController gameController,
-			AStarPathFinder pathFinder) {
-		this(gameController, pathFinder, 0, 32, 0, 24);
-	}
-
-	/**
-	 * Create a new AbstractNpcController using a path finder and setting
-	 * default tiles to visit
-	 * 
-	 * @param gameController
-	 *            the main controller
-	 * @param pathFinder
-	 *            the path finder to use
-	 * @param x1
-	 *            minimum x tile random movement will occur on
-	 * @param x2
-	 *            maximum x tile random movement will occur on
-	 * @param y1
-	 *            minimum y tile random movement will occur on
-	 * @param y2
-	 *            maximum y tile random movement will occur on
-	 */
-	public AbstractNpcController(GameController gameController,
-			AStarPathFinder pathFinder, int x, int x2, int y, int y2) {
+			AbstractNpcModel model, TileBasedMap map) {
 		super(gameController);
-		this.setpathFinder(pathFinder);
-		this.setDefaultTiles(x, x2, y, y2);
+		this.setpathFinder(new AStarPathFinder(map, 500, true));
+		this.setModel(model);
+		this.setView(new CharacterView(model));
+		this.setDefaultTiles(model.getMinTileX(), model.getMaxTileX(),
+				model.getMinTileY(), model.getMaxTileY());
 		this.pauseTime = 0;
 	}
 
@@ -470,8 +442,8 @@ public abstract class AbstractNpcController extends
 				* ENEMY_DAMAGE_MODIFIER);
 		newSwing.setAlive(true);
 
-		AbstractRoomController currentRoom = getGameController()
-				.getRoomController().getCurrentRoom();
+		RoomController currentRoom = getGameController().getRoomsController()
+				.getCurrentRoom();
 
 		currentRoom.addSwing(newSwing);
 	}

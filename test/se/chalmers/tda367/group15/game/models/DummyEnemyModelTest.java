@@ -9,7 +9,7 @@ public class DummyEnemyModelTest {
 
 	@Test
 	public final void testCreateDummyEnemy() {
-		DummyEnemyModel dem = new DummyEnemyModel();
+		CoworkerModel dem = new CoworkerModel();
 		// Basic properties
 		assertTrue(dem.getHealth() > 0);
 		assertTrue(dem.isAlive());
