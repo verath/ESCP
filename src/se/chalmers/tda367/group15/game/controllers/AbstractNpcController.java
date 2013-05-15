@@ -196,7 +196,11 @@ public abstract class AbstractNpcController extends
 
 		if (isInSight(staticBounds, model.getX() + model.getWidth() / 2,
 				model.getY() + model.getHeight() / 2, heroX, heroY)) {
-			// TODO Enemies should react in some way when hero is in sight!
+
+			myPath = getPathFinder().findPath(null, currX, currY, (int)heroX/32,
+					(int)heroY/32);
+			currentStep = 1;
+			
 			if (System.currentTimeMillis() - timer > ((AbstractCharacterModel) model)
 					.getCurrentWeapon().getFiringSpeed()) {
 				timer = System.currentTimeMillis();
