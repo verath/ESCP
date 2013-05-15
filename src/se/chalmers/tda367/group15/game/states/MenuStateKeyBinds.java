@@ -35,18 +35,18 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	/**
 	 * the upper left corner of button group
 	 */
-	private int MENUX = Constants.MENU_UPPER_X;
-	private int MENUY = Constants.MENU_UPPER_Y;
+	private static final int MENUX = Constants.MENU_UPPER_X;
+	private static final int MENUY = Constants.MENU_UPPER_Y;
 	
 	/**
 	 * The starting y-point for the list of buttons and texts
 	 */
-	private static final int LIST_TOP_Y = 150;
+	private static final int LIST_TOP_Y = MENUY + 50;
 
 	/**
 	 * The starting x-point for the list of buttons and texts
 	 */
-	private static final int LIST_TOP_X = 80;
+	private static final int LIST_TOP_X = MENUX;
 
 	/**
 	 * Spacing in y between each button

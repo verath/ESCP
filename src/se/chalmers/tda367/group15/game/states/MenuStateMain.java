@@ -24,8 +24,8 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	/**
 	 * the upper left corner of button group
 	 */
-	private int MENUX = Constants.MENU_UPPER_X;
-	private int MENUY = Constants.MENU_UPPER_Y;
+	private final static int MENUX = Constants.MENU_UPPER_X;
+	private final static int MENUY = Constants.MENU_UPPER_Y;
 
 	/**
 	 * True if you have started a game.
