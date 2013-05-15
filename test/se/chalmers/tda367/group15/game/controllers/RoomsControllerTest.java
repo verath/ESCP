@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosition;
+import se.chalmers.tda367.group15.game.models.OfficeRoomModel;
 
 public class RoomsControllerTest {
 
@@ -14,7 +15,7 @@ public class RoomsControllerTest {
 		private String name;
 
 		protected DummyRoom(GameController gameController, String name) {
-			super(gameController);
+			super(gameController, new OfficeRoomModel());
 			this.name = name;
 		}
 
