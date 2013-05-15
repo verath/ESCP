@@ -28,7 +28,7 @@ public class PlayState extends BasicGameState {
 	 * A list of state-ids that should be updated when the game ends.
 	 */
 	private final static int[] gameOverListeningStates = {
-			Constants.GAME_STATE_GAME_OVER, Constants.GAME_STATE_MAIN_MENU };
+			Constants.GAME_STATE_GAME_OVER, Constants.GAME_STATE_MENU_MAIN };
 
 	/**
 	 * The GameController controlling the game.
@@ -83,7 +83,7 @@ public class PlayState extends BasicGameState {
 		} else if (pendingEscpAction
 				&& !container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = false;
-			game.enterState(Constants.GAME_STATE_MAIN_MENU);
+			game.enterState(Constants.GAME_STATE_MENU_MAIN);
 		}
 
 		gameController.update(container, game, delta);

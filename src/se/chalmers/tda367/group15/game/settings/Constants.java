@@ -29,10 +29,11 @@ public class Constants {
 	/*
 	 * The different states. They should each be a unique int.
 	 */
-	public static final int GAME_STATE_MAIN_MENU = 1;
-	public static final int GAME_STATE_PLAYING = 2;
-	public static final int GAME_STATE_OPTIONS_MENU = 3;
-	public static final int GAME_STATE_GAME_OVER = 4;
+	public static final int GAME_STATE_MENU_MAIN = 1;
+	public static final int GAME_STATE_MENU_OPTIONS = 2;
+	public static final int GAME_STATE_MENU_KEY_BINDS = 3;
+	public static final int GAME_STATE_PLAYING = 4;
+	public static final int GAME_STATE_GAME_OVER = 5;
 
 	/*
 	 * The resolutions of the games maps.
