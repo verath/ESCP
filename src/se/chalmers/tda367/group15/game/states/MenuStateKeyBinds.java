@@ -109,7 +109,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 			@Override
 			public void performAction() {
 				stopRebindKey();
-				game.enterState(Constants.GAME_STATE_MENU_MAIN);
+				game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
 			}
 		};
 
@@ -279,7 +279,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		if (isRebinding) {
 			stopRebindKey();
 		} else {
-			game.enterState(Constants.GAME_STATE_MENU_MAIN);
+			game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
 		}
 	}
 

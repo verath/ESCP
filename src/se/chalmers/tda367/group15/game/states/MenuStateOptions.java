@@ -73,6 +73,8 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 		try {
 			Image backImage = new Image("res/menu/returnButton.png");
 			Image backImageMO = new Image("res/menu/returnButtonMO.png");
+			Image keyBindsImage = new Image("res/menu/keyBindings.png");
+			Image keyBindsImageMO = new Image("res/menu/keyBindingsMO.png");
 
 			// Button for returning to main menu.
 			Button returnButton = new Button(container, backImage, backImageMO,
@@ -82,7 +84,16 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 					game.enterState(Constants.GAME_STATE_MENU_MAIN);
 				}
 			};
+			// open Key bindings
+			Button keyBindsButton = new Button(container, keyBindsImage,
+					keyBindsImageMO, MENUX, MENUY + 50) {
+				@Override
+				public void performAction() {
+					game.enterState(Constants.GAME_STATE_MENU_KEY_BINDS);
+				}
+			};
 			this.addMenuItem(returnButton);
+			this.addMenuItem(keyBindsButton);
 
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -100,7 +111,7 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 		boolean vSync = prefSettings.getBoolean("V-Sync", false);
 		checkActionVSync(vSync);
 		CheckBox vSyncBox = new CheckBox(container, "Activate V-Sync", vSync,
-				MENUX, MENUY + 50) {
+				MENUX, MENUY + 100) {
 			@Override
 			public void performAction() {
 				super.performAction();
@@ -111,7 +122,7 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 		boolean music = prefSettings.getBoolean("Music", true);
 		checkActionMusic(music);
 		CheckBox musicBox = new CheckBox(container, "Activate Music", music,
-				MENUX, MENUY + 100) {
+				MENUX, MENUY + 150) {
 			@Override
 			public void performAction() {
 				super.performAction();
@@ -122,7 +133,7 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 		boolean sound = prefSettings.getBoolean("Sound", true);
 		checkActionSound(sound);
 		CheckBox soundBox = new CheckBox(container, "Activate Sound", sound,
-				MENUX, MENUY + 150) {
+				MENUX, MENUY + 200) {
 			@Override
 			public void performAction() {
 				super.performAction();
@@ -133,7 +144,7 @@ public class MenuStateOptions extends AbstractMenuBasedState {
 		boolean fullScreen = prefSettings.getBoolean("Fullscreen", false);
 		checkActionFullScreen(fullScreen);
 		CheckBox toggleFullScreen = new CheckBox(container,
-				"toggle fullscreen", fullScreen, MENUX, MENUY + 200) {
+				"toggle fullscreen", fullScreen, MENUX, MENUY + 250) {
 			@Override
 			public void performAction() {
 				super.performAction();
