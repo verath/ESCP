@@ -74,7 +74,7 @@ public class GameOverState extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		try {
-			setBackground(new Image("res/menu/gameOver.png"));
+			setBackground(new Image("res/menu/backgroundGameOver.png"));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
