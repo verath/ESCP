@@ -1143,7 +1143,7 @@
    <property name="blocked" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlktKBDEQhmvRDYoXmFF84YAPdO8DHw0DOqIXEBG3egQRcaswF3AhnsOFeBL1JOLfTALlT9LJTOJY8NFdSXX+dKWS7kpEliKoRuwLjbkI+jKwDpiia20bJq4w/if4MveF6isl3uxzNV3q65DfNXE+a+prMqvfp3bWP43QP6O2c/Ivyb+Q3++vc1Coe9sX0r+lthvy78m/U/qhdSsj9J+ojf0X8p+V/kRAfzJC/5Xa2H8n/y2jfhV43me59Ec1q18E4uxe/Qt9fXbpPPKZ1pTjYc4/1vC9Vw8cy6D2V8GaJy4lN6k5XQYr/6h/CI5onE2wB/bBgfG3wDbYceinzoHz3wJtMA1mwCyYA/NgwaEfWzuV+Gs0df+3aI6lY96+fRo6m2P0Y2Nd9jEmfV+Ov2mMXWmuP/2tG0f9udY2p/56whix3//afPk/yaDPa1bnlNeN53kFrtU4bA/gkeK02XUbdv/n/v/+AccfOAI=
+   eJzFlltKAzEUhvMwA4obqBVvWLCKvntB7UDBC7oBEfFVlyAivip0Az6I6/BBXIm6Euk/NIHjz5wk04z1h5/2JGfyZU4ubWGMWYlwMWZfaMxleGBG6sAz9Flq0+ZlNv6Cv+33TPTlJl7uudJ96utQ3Ld5mnx9Pjn+gNqZfxbBP6e2C4qvKL40v99f1kDyXV+If0dttxQ/UHwv+Cx+f8fw8Z+pjeNXil8EfyrAn47gv1Ebxx8Uv3v4rBC/CDyvyfFD5yYP8MeV42eBPHdW/4Iv7y5ZR77TfDWuc/8xQ3uvY/jEjGq/Bq8reSm1Sa3pKtz9R/4hfETjbMH78AHcs/E2vAPvVvBT58D1b8GzcBueg+fhBXgRXqrgx+6dwuh7NPX8t2iOecW8tXOacjfUqb+W9zkhvlbjHxpjz/j3n7xrJ7H/qta2Sf5Gwhixvz+ltPqfNsDnNStryuvG87yGb8Q4rEf4ifKk3LrVPf9N//8eAgOfOFk=
   </data>
  </layer>
  <layer name="Doors" width="32" height="24">

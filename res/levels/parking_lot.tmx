@@ -1079,6 +1079,9 @@
   </data>
  </layer>
  <layer name="Blocked" width="32" height="24">
+  <properties>
+   <property name="blocked" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJzt0klOAkEUgOGqVkHQS0ADngMF78E8eQlUBoFLODJeAgcQ9RLIICqH8Gdh6BjZkEp3L3jJt31/Vap0IYS+hr+zzo6FgPxnmUnjl5v+pm99P4IoYogjgaQJ5/rt53GKM5yjgKKJ/Utc4Ro3uMWdiX2rxi59jyaEFzp88COgqet0adzjAY94Qk8u+0FahzhCCGEcK+wPabxjhDEmmBr6EVpRxBBHAkmFfckuDVvYxg4cmn3e3+p+H88Y4AWveFN4rhS70sggixxODO//gRk+8YVvzBX2S+wq4wIVVFEz9J38hV244MYe9hX+vzqNBppooY2OtM/7O1dQNav22+X+BxZZ9H8ApcQ8Ww==
   </data>
