@@ -13,6 +13,7 @@ public class RoomsControllerTest {
 	private class DummyRoom extends RoomController {
 		private String name;
 
+
 		protected DummyRoom(String name) {
 			super(null, null);
 			this.name = (name == null) ? "" : name;
