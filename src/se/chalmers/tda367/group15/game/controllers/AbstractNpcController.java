@@ -316,16 +316,36 @@ public abstract class AbstractNpcController extends
 
 		for (Rectangle2D.Float rect : staticBounds) {
 
-			if (linesIntersect(point1X, point1Y, point2X, point2Y, rect.getX(),
-					rect.getY(), rect.getX() + rect.getWidth(), rect.getY()
-							+ rect.getHeight())
-					|| linesIntersect(point1X, point1Y, point2X, point2Y,
-							rect.getX(), rect.getY() + rect.getHeight(),
-							rect.getX() + rect.getWidth(), rect.getY())) {
+			if (recIntersectLine(rect, point1X, point1Y, point2X, point2Y)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Check if line defined by two point is intersected by a rectangle rect.
+	 * 
+	 * @param rect
+	 *            the Rectangle that maybe intersects
+	 * @param point1X
+	 *            x variable of first point
+	 * @param point1Y
+	 *            y variable of first point
+	 * @param point2X
+	 *            x variable of second point
+	 * @param point2Y
+	 *            y variable of second point
+	 * @return true if line is intersected by rect
+	 */
+	public boolean recIntersectLine(Rectangle2D.Float rect, float point1X,
+			float point1Y, float point2X, float point2Y) {
+		return (linesIntersect(point1X, point1Y, point2X, point2Y, rect.getX(),
+				rect.getY(), rect.getX() + rect.getWidth(),
+				rect.getY() + rect.getHeight()) || linesIntersect(point1X,
+				point1Y, point2X, point2Y, rect.getX(),
+				rect.getY() + rect.getHeight(), rect.getX() + rect.getWidth(),
+				rect.getY()));
 	}
 
 	/**
