@@ -21,6 +21,8 @@ import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.models.PistolModel;
 import se.chalmers.tda367.group15.game.models.UnarmedModel;
+import se.chalmers.tda367.group15.game.settings.KeyBindings;
+import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 import se.chalmers.tda367.group15.game.views.CharacterView;
 
 public class HeroController extends AbstractMovingModelController {
@@ -30,7 +32,8 @@ public class HeroController extends AbstractMovingModelController {
 	private boolean goingLeft;
 	private boolean goingRight;
 	private long timer = 0;
-	private SoundEffectsController soundController = SoundEffectsController.instance();
+	private SoundEffectsController soundController = SoundEffectsController
+			.instance();
 
 	/**
 	 * Create a new controller for the hero.
@@ -51,7 +54,7 @@ public class HeroController extends AbstractMovingModelController {
 		model.setAlive(true);
 
 		// add weapons
-	
+
 		model.addWeapon(new UnarmedModel());
 		model.addWeapon(new AxeModel());
 		model.addWeapon(new PistolModel());
@@ -118,13 +121,10 @@ public class HeroController extends AbstractMovingModelController {
 				+ model.getY() - mouseY),
 				(model.getWidth() / 2 + model.getX() - mouseX))));
 
-		goingUp = input.isKeyDown(Input.KEY_W) || input.isKeyDown(Input.KEY_UP);
-		goingDown = input.isKeyDown(Input.KEY_S)
-				|| input.isKeyDown(Input.KEY_DOWN);
-		goingRight = input.isKeyDown(Input.KEY_D)
-				|| input.isKeyDown(Input.KEY_RIGHT);
-		goingLeft = input.isKeyDown(Input.KEY_A)
-				|| input.isKeyDown(Input.KEY_LEFT);
+		goingUp = input.isKeyDown(KeyBindings.getBinding(Key.UP));
+		goingDown = input.isKeyDown(KeyBindings.getBinding(Key.DOWN));
+		goingRight = input.isKeyDown(KeyBindings.getBinding(Key.RIGHT));
+		goingLeft = input.isKeyDown(KeyBindings.getBinding(Key.LEFT));
 
 		// Calculate move direction and move
 		float speedY = (goingUp ? 1 : 0) - (goingDown ? 1 : 0);
@@ -172,7 +172,8 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	private void createBullet() {
-		soundController.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
+		soundController
+				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newBullet = new BulletModel();
 
@@ -200,7 +201,7 @@ public class HeroController extends AbstractMovingModelController {
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		// Run the swinging animation for the weapon
-		CharacterView view = (CharacterView)getView();
+		CharacterView view = (CharacterView) getView();
 		view.runAttackAnimation();
 
 		AbstractProjectileModel newSwing = new MeleeSwingModel();
