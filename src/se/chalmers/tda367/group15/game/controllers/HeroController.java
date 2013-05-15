@@ -163,12 +163,11 @@ public class HeroController extends AbstractMovingModelController {
 			model.setX(0);
 		} else if (tmpY <= 0) {
 			roomsController.moveUp();
-			model.setY(768);
+			model.setY(768 - model.getHeight());
 		} else if (tmpY >= 768) {
 			roomsController.moveDown();
 			model.setY(0);
 		}
-
 	}
 
 	private void createBullet() {

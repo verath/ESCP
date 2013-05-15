@@ -5,9 +5,9 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.DummyEnemyModel;
 
-public class SecondRoomController extends AbstractRoomController {
+public class ParkingLotRoomController extends AbstractRoomController {
 
-	protected SecondRoomController(GameController gameController) {
+	protected ParkingLotRoomController(GameController gameController) {
 		super(gameController);
 	}
 
@@ -17,14 +17,14 @@ public class SecondRoomController extends AbstractRoomController {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 
-		setMap("res/levels/left_room.tmx");
+		setMap("res/levels/parking_lot.tmx");
 
 		// create enemy models
-		DummyEnemyModel e1 = new DummyEnemyModel();
+		DummyEnemyModel e1 = new DummyEnemyModel(800, 500);
 		DummyEnemyModel e2 = new DummyEnemyModel(400, 200);
-		DummyEnemyModel e3 = new DummyEnemyModel(100, 600);
+		DummyEnemyModel e3 = new DummyEnemyModel(450, 600);
 		DummyEnemyModel e4 = new DummyEnemyModel(940, 600);
-		DummyEnemyModel e5 = new DummyEnemyModel(200, 270);
+		DummyEnemyModel e5 = new DummyEnemyModel(300, 400);
 
 		// add moving models to the room
 		addMovingModel(e1, 0, 10, 0, 10);

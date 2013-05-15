@@ -11,6 +11,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosition;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
@@ -79,14 +80,16 @@ public class GameController {
 		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
 
 		// Set up the rooms
-		AbstractRoomController startingRoom = new BasicRoomController(this);
-		AbstractRoomController secondRoom = new SecondRoomController(this);
+		AbstractRoomController parkingLot = new ParkingLotRoomController(this);
+		AbstractRoomController lobby = new LobbyRoomController(this);
+		AbstractRoomController office = new OfficeRoomController(this);
 
 		// Set up the room manager
 		roomController = new RoomsController();
-		roomController.addStartingRoom(startingRoom);
-		roomController.addRoom(startingRoom, secondRoom,
-				RoomsController.RelativePosition.LEFTOF);
+		roomController.addStartingRoom(parkingLot);
+		roomController.addRoom(parkingLot, lobby,
+				RoomsController.RelativePosition.ABOVE);
+		roomController.addRoom(lobby, office, RoomsController.RelativePosition.RIGHTOF);
 		roomController.init(container);
 
 		// Set up the hero controller

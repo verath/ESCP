@@ -294,11 +294,18 @@ public abstract class AbstractRoomController implements TileBasedMap {
 	public void setMap(String mapPath) {
 		try {
 			this.map = new TiledMap(mapPath);
+			int layerCount = map.getLayerCount();
+			int blockedLayerID = -1;
+			for(int i = 0; i < layerCount ; i++) {
+				if(map.getLayerProperty(i, "blocked", "false").equals("true")) {
+					blockedLayerID = i;
+				}
+			}
 
 			// add static collision bounds
 			for (int i = 0; i < map.getWidth(); i++) {
 				for (int j = 0; j < map.getHeight(); j++) {
-					int tileID = map.getTileId(i, j, 1);
+					int tileID = map.getTileId(i, j, blockedLayerID);
 					String property = map.getTileProperty(tileID, "blocked",
 							"false");
 					if (property.equals("true")) {
