@@ -23,9 +23,9 @@ public class LobbyRoomModel implements RoomModel {
 	public LobbyRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 		
-		CoworkerModel e1 = new CoworkerModel(9, 12);
-		CoworkerModel e2 = new CoworkerModel(12, 7);
-		CoworkerModel e3 = new CoworkerModel(25, 16);
+		CoworkerModel e1 = new CoworkerModel(9*32, 12*32);
+		CoworkerModel e2 = new CoworkerModel(12*32, 7*32);
+		CoworkerModel e3 = new CoworkerModel(25*32, 16*32);
 		
 		
 		npcModels.add(e1);

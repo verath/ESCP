@@ -18,7 +18,7 @@ public class CoworkerModel extends AbstractNpcModel {
 	}
 	
 	public CoworkerModel(float x, float y){
-		this(x*32, y*32, 360*Math.random());
+		this(x, y, 360*Math.random());
 	
 	}
 	
