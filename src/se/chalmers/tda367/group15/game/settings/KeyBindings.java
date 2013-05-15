@@ -28,6 +28,11 @@ public class KeyBindings {
 	public static final int DEFAULT_KEY_BIND_DOWN = Input.KEY_S;
 
 	/**
+	 * The default binding for going right
+	 */
+	public static final int DEFAULT_KEY_BIND_RIGHT = Input.KEY_D;
+
+	/**
 	 * The default binding for changing to weapon 1
 	 */
 	public static final int DEFAULT_KEY_BIND_WEAPON_1 = Input.KEY_1;
@@ -41,11 +46,6 @@ public class KeyBindings {
 	 * The default binding for changing to weapon 3
 	 */
 	public static final int DEFAULT_KEY_BIND_WEAPON_3 = Input.KEY_3;
-
-	/**
-	 * The default binding for going right
-	 */
-	public static final int DEFAULT_KEY_BIND_RIGHT = Input.KEY_D;
 
 	public enum Key {
 		LEFT(KeyBindings.DEFAULT_KEY_BIND_LEFT), UP(
