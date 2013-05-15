@@ -215,7 +215,7 @@ public class GameController {
 	 * 
 	 * @return
 	 */
-	protected RoomsController getRoomController() {
+	protected RoomsController getRoomsController() {
 		return roomController;
 	}
 

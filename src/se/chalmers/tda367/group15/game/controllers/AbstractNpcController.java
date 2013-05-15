@@ -78,19 +78,23 @@ public abstract class AbstractNpcController extends
 	private int startY;
 
 	/**
-	 * Create a new AbstractNpcController using a map.
+	 * Create a new npc controller.
 	 * 
 	 * @param gameController
-	 *            the main controller
+	 *            The GameController to be used.
+	 * @param model
+	 *            The model that this controller should control.
 	 * @param map
-	 *            the map to path find on
+	 *            The tile based map to be used.
 	 */
-	public AbstractNpcController(GameController gameController, AbstractNpcModel model, TileBasedMap map) {
+	public AbstractNpcController(GameController gameController,
+			AbstractNpcModel model, TileBasedMap map) {
 		super(gameController);
 		this.setpathFinder(new AStarPathFinder(map, 500, true));
 		this.setModel(model);
 		this.setView(new CharacterView(model));
-		this.setDefaultTiles(model.getMinTileX(), model.getMaxTileX(), model.getMinTileY(), model.getMaxTileY());
+		this.setDefaultTiles(model.getMinTileX(), model.getMaxTileX(),
+				model.getMinTileY(), model.getMaxTileY());
 		this.pauseTime = 0;
 	}
 
@@ -414,8 +418,8 @@ public abstract class AbstractNpcController extends
 				* ENEMY_DAMAGE_MODIFIER);
 		newSwing.setAlive(true);
 
-		RoomController currentRoom = getGameController()
-				.getRoomController().getCurrentRoom();
+		RoomController currentRoom = getGameController().getRoomsController()
+				.getCurrentRoom();
 
 		currentRoom.addSwing(newSwing);
 	}
