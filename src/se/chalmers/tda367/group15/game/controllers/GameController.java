@@ -148,13 +148,6 @@ public class GameController {
 		heroController.update(container, delta, staticBounds, dynamicBounds);
 		roomController.update(container, delta, staticBounds, dynamicBounds);
 
-		// TODO: Remove this.
-		if (container.getInput().isKeyPressed(Input.KEY_G)) {
-			gameOver(false);
-		} else if (container.getInput().isKeyPressed(Input.KEY_H)) {
-			gameOver(true);
-		}
-
 	}
 
 	/**
