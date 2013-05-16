@@ -8,17 +8,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
-import se.chalmers.tda367.group15.game.database.PsychoHeroDatabase;
+import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 
 public class ScoreControllerTest {
-	private static PsychoHeroDatabase db;
+	private static GameDatabase db;
 	private static ScoreModel sm;
 	private static ScoreController scoreController;
 
 	@Before
 	public void setUpBefore() throws Exception {
-		db = new PsychoHeroDatabase(true);
+		db = new GameDatabase(true);
 		sm = new ScoreModel(1000);
 		scoreController = new ScoreController(null, sm);
 		scoreController.setDatabase(db);

@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 
+import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.database.InsertableScore;
-import se.chalmers.tda367.group15.game.database.PsychoHeroDatabase;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
@@ -45,7 +45,7 @@ public class ScoreController {
 	/**
 	 * The database instance to use when saving score.
 	 */
-	private PsychoHeroDatabase db;
+	private GameDatabase db;
 
 	/**
 	 * The game controller for the game
@@ -102,7 +102,7 @@ public class ScoreController {
 
 		if (db == null) {
 			try {
-				db = new PsychoHeroDatabase();
+				db = new GameDatabase();
 			} catch (ClassNotFoundException e) {
 				System.err
 						.println("Could not connect to the database. Make sure you have the org.sqlite.JDBC library.");
@@ -124,7 +124,7 @@ public class ScoreController {
 	 * 
 	 * @param db
 	 */
-	protected void setDatabase(PsychoHeroDatabase db) {
+	protected void setDatabase(GameDatabase db) {
 		this.db = db;
 	}
 }

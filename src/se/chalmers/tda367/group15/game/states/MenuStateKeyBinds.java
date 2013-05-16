@@ -61,7 +61,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	/**
 	 * A map mapping the buttons to the key they are binding
 	 */
-	private Map<TextButton, Key> buttonToKeyBind = new HashMap<>();
+	private Map<TextButton, Key> buttonToKeyBind = new HashMap<TextButton, Key>();
 
 	/**
 	 * The currently clicked/active keybind button.
@@ -210,7 +210,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 * Starts listening for keybindings for the Key associated with the clicked
 	 * button.
 	 * 
-	 * @param textButton
+	 * @param button
 	 */
 	protected void startRebindKey(TextButton button) {
 		if (!buttonToKeyBind.containsKey(button)) {

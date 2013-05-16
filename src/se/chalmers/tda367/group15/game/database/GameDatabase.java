@@ -17,7 +17,7 @@ import org.apache.commons.dbutils.DbUtils;
  * @author Peter
  * 
  */
-public class PsychoHeroDatabase {
+public class GameDatabase {
 
 	/*
 	 * Score table constants
@@ -60,7 +60,7 @@ public class PsychoHeroDatabase {
 	private Connection connection;
 
 	/**
-	 * Creates a new PsychoHeroDatabase and sets up the database structure if
+	 * Creates a new GameDatabase and sets up the database structure if
 	 * needed.
 	 * 
 	 * @param tempDatabase
@@ -68,7 +68,7 @@ public class PsychoHeroDatabase {
 	 *            stored in the ram (and will therefore not be persistent)
 	 * @throws ClassNotFoundException
 	 */
-	public PsychoHeroDatabase(boolean tempDatabase)
+	public GameDatabase(boolean tempDatabase)
 			throws ClassNotFoundException {
 
 		this.ramDatabase = tempDatabase;
@@ -81,12 +81,12 @@ public class PsychoHeroDatabase {
 	}
 
 	/**
-	 * Creates a new PsychoHeroDatabase and sets up the database structure if
+	 * Creates a new GameDatabase and sets up the database structure if
 	 * needed.
 	 * 
 	 * @throws ClassNotFoundException
 	 */
-	public PsychoHeroDatabase() throws ClassNotFoundException {
+	public GameDatabase() throws ClassNotFoundException {
 		this(false);
 	}
 

@@ -3,8 +3,8 @@ package se.chalmers.tda367.group15.game.controllers;
 import java.util.LinkedList;
 import java.util.List;
 
+import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.database.InsertableEvent;
-import se.chalmers.tda367.group15.game.database.PsychoHeroDatabase;
 import se.chalmers.tda367.group15.game.event.Event;
 import se.chalmers.tda367.group15.game.event.EventHandler;
 import se.chalmers.tda367.group15.game.event.EventLogger;
@@ -28,13 +28,13 @@ public class EventLoggerController extends EventLogger {
 	 */
 	public void saveEvents() {
 		// If this is a new game. Save and clear events instead
-		List<InsertableEvent> insertEvts = new LinkedList<>();
+		List<InsertableEvent> insertEvts = new LinkedList<InsertableEvent>();
 		for (Event evt : this) {
 			insertEvts.add(new InsertableEvent(evt.getClass().getSimpleName()));
 		}
 
 		try {
-			PsychoHeroDatabase db = new PsychoHeroDatabase();
+			GameDatabase db = new GameDatabase();
 			db.addEvents(insertEvts);
 		} catch (ClassNotFoundException e) {
 			if (Constants.DEBUG) {

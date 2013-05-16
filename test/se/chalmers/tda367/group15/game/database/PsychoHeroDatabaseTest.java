@@ -14,13 +14,13 @@ public class PsychoHeroDatabaseTest {
 
 	@Test
 	public void testConnectToDatabase() throws ClassNotFoundException {
-		PsychoHeroDatabase psh = new PsychoHeroDatabase();
+		GameDatabase psh = new GameDatabase();
 		assertNotNull(psh);
 	}
 
 	@Test
 	public void testAddScoreToDatabase() throws ClassNotFoundException {
-		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+		GameDatabase psh = new GameDatabase(true);
 
 		InsertableScore score = new InsertableScore("Test", 200);
 		psh.addScore(score);
@@ -40,7 +40,7 @@ public class PsychoHeroDatabaseTest {
 
 	@Test
 	public void testAddEventToDatabase() throws ClassNotFoundException {
-		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+		GameDatabase psh = new GameDatabase(true);
 
 		InsertableEvent event = new InsertableEvent("Test");
 		psh.addEvent(event);
@@ -51,7 +51,7 @@ public class PsychoHeroDatabaseTest {
 
 	@Test
 	public void testAddMultipleScoresToDatabase() throws ClassNotFoundException {
-		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+		GameDatabase psh = new GameDatabase(true);
 
 		// Add some dummy scores
 		List<InsertableScore> scores = new ArrayList<InsertableScore>();
@@ -82,10 +82,10 @@ public class PsychoHeroDatabaseTest {
 
 	@Test
 	public void testAddMultipleEventToDatabase() throws ClassNotFoundException {
-		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+		GameDatabase psh = new GameDatabase(true);
 
 		// Add some dummy events
-		List<InsertableEvent> events = new ArrayList<>();
+		List<InsertableEvent> events = new ArrayList<InsertableEvent>();
 		events.add(new InsertableEvent("Test"));
 		events.add(new InsertableEvent("Test"));
 		events.add(new InsertableEvent("Test"));
@@ -102,7 +102,7 @@ public class PsychoHeroDatabaseTest {
 
 	@Test
 	public void testHighscoreSorted() throws ClassNotFoundException {
-		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+		GameDatabase psh = new GameDatabase(true);
 
 		// Add some dummy scores
 		List<InsertableScore> scores = new ArrayList<InsertableScore>();
@@ -121,7 +121,7 @@ public class PsychoHeroDatabaseTest {
 
 	@Test
 	public void testGetEmptyHighscore() throws ClassNotFoundException {
-		PsychoHeroDatabase psh = new PsychoHeroDatabase(true);
+		GameDatabase psh = new GameDatabase(true);
 
 		// Get 1 from the highscore list
 		List<DatabaseScore> result = psh.getHighscores();

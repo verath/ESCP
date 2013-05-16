@@ -8,7 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
-import se.chalmers.tda367.group15.game.database.PsychoHeroDatabase;
+import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -137,9 +137,9 @@ public class GameOverState extends AbstractMenuBasedState {
 
 	@Override
 	public void gameOver(boolean win) {
-		PsychoHeroDatabase db;
+		GameDatabase db;
 		try {
-			db = new PsychoHeroDatabase();
+			db = new GameDatabase();
 			highScores = db.getHighscores(5);
 		} catch (ClassNotFoundException e) {
 		}

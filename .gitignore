@@ -55,6 +55,11 @@ $RECYCLE.BIN/
 !.gitignore
 *~
 
+############
+# IntelliJ #
+############
+*.iml
+
 
 ###########
 # Eclipse #

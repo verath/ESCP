@@ -13,7 +13,7 @@ public class SingleEventHandler implements EventHandler {
 	/**
 	 * A list of eventListeners that should be notified of new events.
 	 */
-	private List<EventListener<?>> eventListeners = new LinkedList<>();
+	private List<EventListener<?>> eventListeners = new LinkedList<EventListener<?>>();
 
 	/**
 	 * {@inheritDoc}
