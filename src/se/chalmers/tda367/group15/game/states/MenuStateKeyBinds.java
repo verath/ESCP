@@ -22,7 +22,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
     /**
      * The true typed font used to draw text.
      */
-    private TrueTypeFont textFont = new TrueTypeFont(TextButton.DEFAULT_FONT,
+    private final TrueTypeFont textFont = new TrueTypeFont(TextButton.DEFAULT_FONT,
             true);
 
     /**
@@ -54,7 +54,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
     /**
      * A map mapping the buttons to the key they are binding
      */
-    private Map<TextButton, Key> buttonToKeyBind = new HashMap<TextButton, Key>();
+    private final Map<TextButton, Key> buttonToKeyBind = new HashMap<TextButton, Key>();
 
     /**
      * The currently clicked/active keybind button.

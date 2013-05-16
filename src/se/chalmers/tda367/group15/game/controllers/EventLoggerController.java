@@ -17,7 +17,7 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  * @author Peter
  * 
  */
-public class EventLoggerController extends EventLogger {
+class EventLoggerController extends EventLogger {
 
 	public EventLoggerController(EventHandler eventHandler) {
 		super(eventHandler);

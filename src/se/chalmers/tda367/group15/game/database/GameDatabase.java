@@ -247,7 +247,7 @@ public class GameDatabase {
      */
     public List<DatabaseScore> getHighscores(int limit) {
 
-        List<DatabaseScore> results = null;
+        List<DatabaseScore> results;
 
         // If we have a set limit, we know we will not get more than that amount
         // of results

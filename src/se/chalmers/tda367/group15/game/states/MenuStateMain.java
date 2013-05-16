@@ -125,7 +125,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 				MENUX, MENUY + 150) {
 			@Override
 			public void performAction() {
-				if (((StateController) game).closeRequested()) {
+				if (game.closeRequested()) {
 					container.exit();
 				}
 			}

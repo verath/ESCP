@@ -37,12 +37,12 @@ public class RoomsController {
      * A 2-dimensional array of rooms, describing the layout of the rooms in the
      * game.
      */
-    private Map<Point, RoomController> rooms;
+    private final Map<Point, RoomController> rooms;
 
     /**
      * The current "position", used as key to query for the room from the map.
      */
-    private Point currentPosition = STARTING_POINT;
+    private final Point currentPosition = STARTING_POINT;
 
     /**
      * RoomManager constructor

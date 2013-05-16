@@ -62,7 +62,7 @@ public class KeyBindings {
             this.preferenceKey = "KEYBINDS_" + name();
         }
 
-        protected String getPreferenceKey() {
+        String getPreferenceKey() {
             return this.preferenceKey;
         }
 

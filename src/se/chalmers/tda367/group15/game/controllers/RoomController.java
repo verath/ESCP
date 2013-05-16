@@ -160,7 +160,7 @@ public class RoomController implements TileBasedMap {
 		Iterator<AbstractMovingModel> it = dynamicBounds.keySet().iterator();
 
 		while (it.hasNext()) {
-			AbstractMovingModel model = (AbstractMovingModel) it.next();
+			AbstractMovingModel model = it.next();
 			if (model.isAlive()) {
 				dynamicBounds.put(model, model.getBounds());
 			} else {
