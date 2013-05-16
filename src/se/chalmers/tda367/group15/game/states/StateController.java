@@ -63,7 +63,7 @@ public class StateController extends StateBasedGame {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-	
+
 		music.loop();
 		music.setVolume(0.0f);
 		music.fade(40000, 1.0f, false);

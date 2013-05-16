@@ -22,11 +22,12 @@ import se.chalmers.tda367.group15.game.views.View;
  * 
  */
 public abstract class AbstractMovingModelController {
-	
+
 	/**
 	 * The controller for sound effects
 	 */
-	private SoundEffectsController soundController = SoundEffectsController.instance();
+	private SoundEffectsController soundController = SoundEffectsController
+			.instance();
 	/**
 	 * The model that the controller is managing
 	 */
@@ -124,7 +125,8 @@ public abstract class AbstractMovingModelController {
 	}
 
 	/**
-	 * Method for checking if collision with model in (x,y) position is about to happen.
+	 * Method for checking if collision with model in (x,y) position is about to
+	 * happen.
 	 * 
 	 * @param x
 	 *            the x coordinate
@@ -141,7 +143,7 @@ public abstract class AbstractMovingModelController {
 			List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
-		if(model.isAlive()) {
+		if (model.isAlive()) {
 			return isCollision(x, y, model.getWidth(), model.getHeight(),
 					staticBounds, dynamicBounds);
 		}
@@ -149,8 +151,8 @@ public abstract class AbstractMovingModelController {
 	}
 
 	/**
-	 * Method for checking if collision with width and height is about to
-	 * happen in position (x,y).
+	 * Method for checking if collision with width and height is about to happen
+	 * in position (x,y).
 	 * 
 	 * @param x
 	 *            the x coordinate
@@ -241,11 +243,11 @@ public abstract class AbstractMovingModelController {
 		for (Rectangle2D.Float bound2 : staticBounds) {
 			if (bound1.intersects(bound2)) {
 				staticCollision = true;
-				if(model instanceof AbstractProjectileModel) {
+				if (model instanceof AbstractProjectileModel) {
 					model.setAlive(false);
 				}
 			}
-			
+
 		}
 		return staticCollision;
 	}
@@ -287,7 +289,8 @@ public abstract class AbstractMovingModelController {
 		// check dynamic collisions
 		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
-			if (bound1.intersects(bound2) && this.model != otherModel && otherModel.isAlive()) {
+			if (bound1.intersects(bound2) && this.model != otherModel
+					&& otherModel.isAlive()) {
 				dynamicCollsion = true;
 				if (model instanceof AbstractProjectileModel
 						&& otherModel instanceof AbstractCharacterModel) {
@@ -295,11 +298,13 @@ public abstract class AbstractMovingModelController {
 					int damage = projectile.getDamage();
 					otherModel.takeDamage(damage);
 
-					if(otherModel.getHealth() <= 0) {
+					if (otherModel.getHealth() <= 0) {
 						otherModel.setAlive(false);
-						soundController.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);
-					}else {
-						soundController.playSound(SoundEffectsController.SoundEffect.ENEMY_HURT);
+						soundController
+								.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);
+					} else {
+						soundController
+								.playSound(SoundEffectsController.SoundEffect.ENEMY_HURT);
 
 					}
 					projectile.setAlive(false);

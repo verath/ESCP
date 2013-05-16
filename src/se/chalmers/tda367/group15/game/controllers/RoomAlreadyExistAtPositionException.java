@@ -6,7 +6,7 @@ public class RoomAlreadyExistAtPositionException extends RuntimeException {
 	public RoomAlreadyExistAtPositionException() {
 		super();
 	}
-	
+
 	public RoomAlreadyExistAtPositionException(String string) {
 		super(string);
 	}

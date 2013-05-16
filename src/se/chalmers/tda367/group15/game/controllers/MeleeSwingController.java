@@ -44,7 +44,8 @@ public class MeleeSwingController extends AbstractMovingModelController {
 			float newY = swing.getY()
 					- (float) Math.sin(Math.toRadians(swing.getRotation()))
 					* (swing.getVelocity() * delta);
-			if((float)Math.hypot((oldX-newX), (oldY-newY)) >= (float)(swing.getVelocity()*5f/4f)) 
+			if ((float) Math.hypot((oldX - newX), (oldY - newY)) >= (float) (swing
+					.getVelocity() * 5f / 4f))
 				swing.setAlive(false);
 			if (!isCollision(swing.getX(), swing.getY(), swing.getHeight(),
 					swing.getWidth(), staticBounds, dynamicBounds)) {

@@ -169,10 +169,10 @@ public abstract class AbstractNpcController extends
 		if (isInSight(staticBounds, model.getX() + model.getWidth() / 2,
 				model.getY() + model.getHeight() / 2, heroX, heroY)) {
 
-			myPath = getPathFinder().findPath(null, currX, currY, (int)heroX/32,
-					(int)heroY/32);
+			myPath = getPathFinder().findPath(null, currX, currY,
+					(int) heroX / 32, (int) heroY / 32);
 			currentStep = 1;
-			
+
 			if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) model)
 					.getCurrentWeapon().getFiringSpeed()) {
 				swingTimer = System.currentTimeMillis();

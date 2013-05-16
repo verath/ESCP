@@ -32,13 +32,13 @@ public class Constants {
 	public static final int GAME_STATE_MENU_KEY_BINDS = 3;
 	public static final int GAME_STATE_PLAYING = 4;
 	public static final int GAME_STATE_GAME_OVER = 5;
-	
+
 	/**
 	 * The upper left corner of every menu
 	 */
 	public static final int MENU_UPPER_X = 200;
 	public static final int MENU_UPPER_Y = 100;
-	
+
 	/**
 	 * The resolutions of the games maps.
 	 */

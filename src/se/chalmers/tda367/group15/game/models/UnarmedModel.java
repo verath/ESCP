@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-
 /**
  * The unarmed "weapon". The hero starts with this "weapon".
  * 
@@ -9,8 +8,8 @@ package se.chalmers.tda367.group15.game.models;
  * @author tholene
  * 
  */
-public class UnarmedModel extends AbstractMeleeWeaponModel{
-	
+public class UnarmedModel extends AbstractMeleeWeaponModel {
+
 	public UnarmedModel() {
 		super("unarmed", 5, 10, 350, true);
 	}

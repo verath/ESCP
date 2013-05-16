@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
  * 
  */
 public abstract class AbstractMovingModel {
-		
+
 	/**
 	 * Should be true if the model is to be displayed and is alive, otherwise
 	 * false
@@ -183,9 +183,10 @@ public abstract class AbstractMovingModel {
 
 	/**
 	 * Method for setting the height of the model.
-	 *
-     * @param height the height to be set
-     */
+	 * 
+	 * @param height
+	 *            the height to be set
+	 */
 	public void setHeight(float height) {
 		this.height = height;
 	}
@@ -233,9 +234,10 @@ public abstract class AbstractMovingModel {
 
 	/**
 	 * Method for setting the width of the model.
-	 *
-     * @param width the width to be set
-     */
+	 * 
+	 * @param width
+	 *            the width to be set
+	 */
 	public void setWidth(float width) {
 		this.width = width;
 	}
@@ -262,9 +264,10 @@ public abstract class AbstractMovingModel {
 
 	/**
 	 * Method for receiving damage.
-	 *
-     * @param damage the amount of damage that should be dealt
-     */
+	 * 
+	 * @param damage
+	 *            the amount of damage that should be dealt
+	 */
 	public void takeDamage(int damage) {
 		health -= damage;
 	}

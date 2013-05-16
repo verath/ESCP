@@ -142,9 +142,9 @@ public class GameOverState extends AbstractMenuBasedState {
 			db = new GameDatabase();
 			highScores = db.getHighscores(5);
 		} catch (ClassNotFoundException e) {
-            if(Constants.DEBUG) {
-                e.printStackTrace();
-            }
+			if (Constants.DEBUG) {
+				e.printStackTrace();
+			}
 		}
 	}
 

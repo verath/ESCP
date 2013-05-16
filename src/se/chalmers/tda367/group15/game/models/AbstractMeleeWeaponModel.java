@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-
 /**
  * A weapon that can only be used in melee range.
  * 

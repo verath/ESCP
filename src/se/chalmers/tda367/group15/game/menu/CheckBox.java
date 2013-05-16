@@ -137,7 +137,7 @@ public class CheckBox implements MenuItem {
 	 * with super from implementation!!!
 	 */
 	public void performAction() {
-        checked = !checked;
+		checked = !checked;
 		updateMoa();
 	}
 

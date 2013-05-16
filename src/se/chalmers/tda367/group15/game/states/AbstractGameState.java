@@ -85,7 +85,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	 *            True if the game was won.
 	 */
 	public void gameOver(boolean win) {
-    }
+	}
 
 	/**
 	 * init your state.

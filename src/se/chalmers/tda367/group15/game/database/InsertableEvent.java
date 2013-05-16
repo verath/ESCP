@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.database;
 
-
 /**
  * A class representing an event that can be inserted into the database
  * 

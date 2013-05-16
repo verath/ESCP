@@ -39,7 +39,7 @@ public class RoomController implements TileBasedMap {
 	 * A reference to the game's gameController.
 	 */
 	private GameController gameController;
-	
+
 	/**
 	 * The model of the room.
 	 */
@@ -127,8 +127,8 @@ public class RoomController implements TileBasedMap {
 		try {
 			int tileID = map.getTileId(tx, ty, blockedLayerID);
 			String property = map.getTileProperty(tileID, "blocked", "false");
-            return !property.equals("false");
-        } catch (ArrayIndexOutOfBoundsException e) {
+			return !property.equals("false");
+		} catch (ArrayIndexOutOfBoundsException e) {
 			return true;
 		}
 	}
@@ -223,9 +223,9 @@ public class RoomController implements TileBasedMap {
 	 */
 	public void init(GameContainer container) throws SlickException {
 		List<AbstractMovingModel> npcs = roomModel.getNpcModels();
-		for(AbstractMovingModel model : npcs) {
-			if(model instanceof CoworkerModel)
-			addMovingModel((CoworkerModel)model);
+		for (AbstractMovingModel model : npcs) {
+			if (model instanceof CoworkerModel)
+				addMovingModel((CoworkerModel) model);
 		}
 	}
 
@@ -287,8 +287,8 @@ public class RoomController implements TileBasedMap {
 			this.map = new TiledMap(mapPath);
 			int layerCount = map.getLayerCount();
 			blockedLayerID = -1;
-			for(int i = 0; i < layerCount ; i++) {
-				if(map.getLayerProperty(i, "blocked", "false").equals("true")) {
+			for (int i = 0; i < layerCount; i++) {
+				if (map.getLayerProperty(i, "blocked", "false").equals("true")) {
 					blockedLayerID = i;
 				}
 			}
@@ -334,7 +334,8 @@ public class RoomController implements TileBasedMap {
 			throws SlickException {
 		// tell enemy controllers to move
 
-		Iterator<AbstractMovingModelController> it1 = movingModelControllers.iterator();
+		Iterator<AbstractMovingModelController> it1 = movingModelControllers
+				.iterator();
 		while (it1.hasNext()) {
 			AbstractMovingModelController controller = it1.next();
 			if (controller.getModel().isAlive()) {
@@ -344,7 +345,8 @@ public class RoomController implements TileBasedMap {
 		}
 
 		// add new qued controllers to the movingModelControllers list
-		Iterator<AbstractMovingModelController> it2 = quedControllers.iterator();
+		Iterator<AbstractMovingModelController> it2 = quedControllers
+				.iterator();
 		while (it2.hasNext()) {
 			AbstractMovingModelController controller = it2.next();
 			movingModelControllers.add(controller);

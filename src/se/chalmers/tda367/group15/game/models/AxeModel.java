@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-
 /**
  * Placeholder class for an Axe. We might not use axes in the future, but this
  * is just for show.

@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.models;
 
-
 /**
  * Placeholder class for a pistol. We might not use pistols (probably bigger
  * guns!) in the future, but this is just for show.

@@ -34,8 +34,8 @@ public abstract class AbstractWeaponModel {
 	 * @param isEquipped
 	 *            Is the weapon equipped or not?
 	 */
-	public AbstractWeaponModel(String name, int baseDamage, int maxDamage, int firingSpeed,
-			boolean isEquipped) {
+	public AbstractWeaponModel(String name, int baseDamage, int maxDamage,
+			int firingSpeed, boolean isEquipped) {
 		this.name = name.toLowerCase();
 		this.baseDamage = baseDamage;
 		this.maxDamage = maxDamage - baseDamage;

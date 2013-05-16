@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
-public class MeleeSwingModel extends AbstractProjectileModel{
+public class MeleeSwingModel extends AbstractProjectileModel {
 
 	public MeleeSwingModel() {
 		setX(0);

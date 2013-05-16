@@ -34,7 +34,7 @@ public class CoworkerController extends AbstractNpcController {
 	 */
 	public CoworkerController(CoworkerModel model, TileBasedMap map,
 			GameController gameController) {
-		super(gameController, model, map );
+		super(gameController, model, map);
 	}
 
 	/**

@@ -7,10 +7,11 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
-public class BulletView implements View{
+public class BulletView implements View {
 
 	private AbstractMovingModel model;
 	private Image image;
+
 	public BulletView(AbstractMovingModel model) {
 		this.model = model;
 		try {
@@ -20,15 +21,15 @@ public class BulletView implements View{
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		if(model.isAlive()) {
+		if (model.isAlive()) {
 			double rotation = model.getRotation();
 			g.rotate(model.getX() + model.getWidth() / 2,
 					model.getY() + model.getHeight() / 2, (float) rotation - 90);
-			image.draw(model.getX()
-					, model.getY());
+			image.draw(model.getX(), model.getY());
 			g.resetTransform();
 		}
 	}
