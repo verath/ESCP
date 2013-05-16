@@ -127,11 +127,8 @@ public class RoomController implements TileBasedMap {
 		try {
 			int tileID = map.getTileId(tx, ty, blockedLayerID);
 			String property = map.getTileProperty(tileID, "blocked", "false");
-			if (property.equals("false")) {
-				return false;
-			}
-			return true;
-		} catch (ArrayIndexOutOfBoundsException e) {
+            return !property.equals("false");
+        } catch (ArrayIndexOutOfBoundsException e) {
 			return true;
 		}
 	}

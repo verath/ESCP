@@ -11,9 +11,8 @@ public class HeroModel extends AbstractCharacterModel {
 
 	/**
 	 * Create a new Hero.
-	 * 
-	 * @param eventHandler
-	 */
+	 *
+     */
 	public HeroModel() {
 		setWidth(42);
 		setHeight(42);

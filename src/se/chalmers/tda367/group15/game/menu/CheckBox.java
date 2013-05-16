@@ -137,11 +137,7 @@ public class CheckBox implements MenuItem {
 	 * with super from implementation!!!
 	 */
 	public void performAction() {
-		if (checked) {
-			checked = false;
-		} else {
-			checked = true;
-		}
+        checked = !checked;
 		updateMoa();
 	}
 

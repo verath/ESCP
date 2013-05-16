@@ -15,7 +15,7 @@ public class ScoreModel {
 	/**
 	 * Create a new Score model with the provided starting score.
 	 * 
-	 * @param score
+	 * @param score The starting score.
 	 */
 	public ScoreModel(int score) {
 		setScore(score);
@@ -24,7 +24,7 @@ public class ScoreModel {
 	/**
 	 * Sets the score to the value.
 	 * 
-	 * @param score
+	 * @param score The new score.
 	 */
 	public void setScore(int score) {
 		this.score = score;
@@ -33,7 +33,7 @@ public class ScoreModel {
 	/**
 	 * Returns the current score.
 	 * 
-	 * @return
+	 * @return The current score.
 	 */
 	public int getScore() {
 		return score;
@@ -49,7 +49,7 @@ public class ScoreModel {
 	/**
 	 * Decreases the score by amount.
 	 * 
-	 * @param amount
+	 * @param amount The amount to decrease the current score by.
 	 */
 	public void decreaseScore(int amount) {
 		score -= amount;
@@ -65,7 +65,7 @@ public class ScoreModel {
 	/**
 	 * Increases the score by amount.
 	 * 
-	 * @param amount
+	 * @param amount The amount to increase the current score by.
 	 */
 	public void increaseScore(int amount) {
 		score += amount;

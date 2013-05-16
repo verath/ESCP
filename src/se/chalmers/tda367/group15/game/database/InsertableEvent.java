@@ -29,7 +29,7 @@ public class InsertableEvent {
 	/**
 	 * Getter for the event type this object is representing.
 	 * 
-	 * @return
+	 * @return The String representation of the type of the Event.
 	 */
 	public String getEventType() {
 		return eventType;

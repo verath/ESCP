@@ -183,10 +183,9 @@ public abstract class AbstractMovingModel {
 
 	/**
 	 * Method for setting the height of the model.
-	 * 
-	 * @param the
-	 *            height to be set
-	 */
+	 *
+     * @param height the height to be set
+     */
 	public void setHeight(float height) {
 		this.height = height;
 	}
@@ -234,10 +233,9 @@ public abstract class AbstractMovingModel {
 
 	/**
 	 * Method for setting the width of the model.
-	 * 
-	 * @param the
-	 *            width to be set
-	 */
+	 *
+     * @param width the width to be set
+     */
 	public void setWidth(float width) {
 		this.width = width;
 	}
@@ -264,10 +262,9 @@ public abstract class AbstractMovingModel {
 
 	/**
 	 * Method for receiving damage.
-	 * 
-	 * @param the
-	 *            amount of damage that should be dealt
-	 */
+	 *
+     * @param damage the amount of damage that should be dealt
+     */
 	public void takeDamage(int damage) {
 		health -= damage;
 	}

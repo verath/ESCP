@@ -242,11 +242,11 @@ public abstract class AbstractNpcController extends
 	 * position will always be inside. If x1, x2, y1, y2 not used entire map
 	 * will be set as default.
 	 * 
-	 * @param x1
+	 * @param x
 	 *            minimum x tile random movement will occur on
 	 * @param x2
 	 *            maximum x tile random movement will occur on
-	 * @param y1
+	 * @param y
 	 *            minimum y tile random movement will occur on
 	 * @param y2
 	 *            maximum y tile random movement will occur on

@@ -16,8 +16,8 @@ public class ParkingLotRoomModel implements RoomModel {
 	
 	/**
 	 * Variable for storing all npc models
-	 */;
-	private List<AbstractMovingModel> npcModels;
+	 */
+    private List<AbstractMovingModel> npcModels;
 	
 	public ParkingLotRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();

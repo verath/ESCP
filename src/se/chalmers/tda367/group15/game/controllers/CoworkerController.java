@@ -27,8 +27,8 @@ public class CoworkerController extends AbstractNpcController {
 	 * 
 	 * @param model
 	 *            the DummyEnemy model
-	 * @param navigator
-	 *            The navigator to use.
+	 * @param map
+	 *            The map to use.
 	 * @param gameController
 	 *            A reference to the controller
 	 */
