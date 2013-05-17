@@ -337,10 +337,10 @@ public class RoomController implements TileBasedMap {
 			throws SlickException {
 		// tell enemy controllers to move
 
-		Iterator<AbstractMovingModelController> it1 = movingModelControllers
+		Iterator<AbstractMovingModelController> it = movingModelControllers
 				.iterator();
-		while (it1.hasNext()) {
-			AbstractMovingModelController controller = it1.next();
+		while (it.hasNext()) {
+			AbstractMovingModelController controller = it.next();
 			if (controller.getModel().isAlive()) {
 				controller
 						.update(container, delta, staticBounds, dynamicBounds);
@@ -348,10 +348,10 @@ public class RoomController implements TileBasedMap {
 		}
 
 		// add new qued controllers to the movingModelControllers list
-		Iterator<AbstractMovingModelController> it2 = quedControllers
+		it = quedControllers
 				.iterator();
-		while (it2.hasNext()) {
-			AbstractMovingModelController controller = it2.next();
+		while (it.hasNext()) {
+			AbstractMovingModelController controller = it.next();
 			movingModelControllers.add(controller);
 		}
 		quedControllers.clear();
