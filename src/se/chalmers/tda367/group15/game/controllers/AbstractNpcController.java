@@ -135,7 +135,8 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Makes npc move along path if path exists.
+	 * Makes npc move along path if path exists. Sets npc rotation to next path
+	 * node.
 	 * 
 	 * @param model
 	 *            the model that moves
@@ -185,19 +186,27 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Calculates a new path.
+	 * Make a new random path. Starting with current position. Goal is defined
+	 * by setDefaultTiles.
+	 */
+	public void calculateRandomPath() {
+		int tarX = startX + (int) (Math.random() * deltaX);
+		int tarY = startY + (int) (Math.random() * deltaY);
+
+		calculateNewPath(tarX, tarY);
+	}
+
+	/**
+	 * Calculates a new path from current position to (x, y)
 	 * 
-	 * @param currX
-	 *            Starting X position in tiles
-	 * @param currY
-	 *            Starting Y position in tiles
 	 * @param tarX
 	 *            ending X position in tiles
 	 * @param tarY
 	 *            ending Y position in tiles
 	 */
-	public void calculateNewPath(int currX, int currY, int tarX, int tarY) {
-		myPath = getPathFinder().findPath(null, currX, currY, tarX, tarY);
+	public void calculateNewPath(int tarX, int tarY) {
+		myPath = getPathFinder().findPath(null, (int) getModel().getX() / 32,
+				(int) getModel().getY() / 32, tarX, tarY);
 		currentStep = 1;
 	}
 
@@ -219,58 +228,15 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Makes npc move to random position restricted by setDefaultTiles(). If
-	 * collision occurs or target is reached a new random position is set as
-	 * target.
+	 * check if there is a path or if end of it reached.
 	 * 
-	 * @param container
-	 *            The container holding this game.
-	 * @param delta
-	 *            The amount of time thats passed since last update in
-	 *            milliseconds
-	 * @param dynamicBounds
-	 *            the dynamic bounds of moving objects
-	 * @param staticBounds
-	 *            the static bounds of current map
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
+	 * @return true if path is null or current step is end of path
 	 */
-	public void randomPosMove(GameContainer container, int delta,
-			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
-
-		AbstractMovingModel model = getModel();
-		AbstractMovingModel heroModel = getGameController().getHeroController()
-				.getModel();
-
-		int currX = (int) (model.getX() + (model.getWidth() / 2));
-		int currY = (int) (model.getY() + (model.getHeight() / 2));
-
-		float heroX = heroModel.getX() + heroModel.getWidth() / 2;
-		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
-
-		// if hero is in sight
-		if (isInSight(staticBounds, currX, currY, heroX, heroY)) {
-
-			calculateNewPath(currX / 32, currY / 32, (int) heroX / 32,
-					(int) heroY / 32);
-			if (Math.hypot(currX - heroX, currY - heroY) < 100) {
-				fireTimed();
-			}
+	public boolean existsPath() {
+		if (myPath == null || currentStep >= myPath.getLength()){
+		return true;
 		}
-		// If path is null or end of path reached
-		if (myPath == null || currentStep == myPath.getLength()) {
-
-			if (pauseTimer()) {
-				int tarX = startX + (int) (Math.random() * deltaX);
-				int tarY = startY + (int) (Math.random() * deltaY);
-
-				calculateNewPath(currX / 32, currY / 32, tarX, tarY);
-			}
-		} else { // If traveling along path
-			moveAlongPath(model, delta, dynamicBounds);
-		}
+		return false;
 	}
 
 	/**
