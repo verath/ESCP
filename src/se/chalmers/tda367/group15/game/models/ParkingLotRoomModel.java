@@ -10,10 +10,16 @@ import java.util.List;
  * 
  */
 public class ParkingLotRoomModel implements RoomModel {
+	
 	/**
-	 * Variable for storing path to a map.
+	 * Variable for storing path to map with unlocked doors.
 	 */
-	private String mapPath;
+	private String unlockedMapPath;
+	
+	/**
+	 * Variable for storing path to map with locked doors.
+	 */
+	private String lockedMapPath;
 
 	/**
 	 * Variable for storing all npc models
@@ -29,7 +35,8 @@ public class ParkingLotRoomModel implements RoomModel {
 		npcModels.add(e1);
 		npcModels.add(e2);
 
-		mapPath = "res/levels/parking_lot.tmx";
+		unlockedMapPath = "res/levels/parking_lot.tmx";
+		lockedMapPath = "res/levels/parking_lot_locked.tmx";
 	}
 
 	@Override
@@ -38,7 +45,12 @@ public class ParkingLotRoomModel implements RoomModel {
 	}
 
 	@Override
-	public String getMapPath() {
-		return mapPath;
+	public String getUnlockedMapPath() {
+		return unlockedMapPath;
+	}
+
+	@Override
+	public String getLockedMapPath() {
+		return lockedMapPath;
 	}
 }

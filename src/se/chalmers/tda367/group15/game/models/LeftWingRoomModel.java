@@ -10,11 +10,16 @@ import java.util.List;
  * 
  */
 public class LeftWingRoomModel implements RoomModel {
-
+	
 	/**
-	 * Variable for storing path to a map.
+	 * Variable for storing path to map with unlocked doors.
 	 */
-	private String mapPath;
+	private String unlockedMapPath;
+	
+	/**
+	 * Variable for storing path to map with locked doors.
+	 */
+	private String lockedMapPath;
 
 	/**
 	 * Variable for storing all npc models
@@ -61,7 +66,8 @@ public class LeftWingRoomModel implements RoomModel {
 		npcModels.add(e15);
 		npcModels.add(e16);
 
-		mapPath = "res/levels/left_room.tmx";
+		unlockedMapPath = "res/levels/left_room.tmx";
+		lockedMapPath = "res/levels/left_room_locked.tmx";
 	}
 
 	@Override
@@ -70,7 +76,12 @@ public class LeftWingRoomModel implements RoomModel {
 	}
 
 	@Override
-	public String getMapPath() {
-		return mapPath;
+	public String getUnlockedMapPath() {
+		return unlockedMapPath;
+	}
+
+	@Override
+	public String getLockedMapPath() {
+		return lockedMapPath;
 	}
 }
