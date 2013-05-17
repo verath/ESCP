@@ -12,9 +12,14 @@ import java.util.List;
 public class LobbyRoomModel implements RoomModel {
 
 	/**
-	 * Variable for storing path to a map.
+	 * Variable for storing path to map with unlocked doors.
 	 */
-	private String mapPath;
+	private String unlockedMapPath;
+	
+	/**
+	 * Variable for storing path to map with locked doors.
+	 */
+	private String lockedMapPath;
 
 	/**
 	 * Variable for storing all npc models
@@ -32,7 +37,8 @@ public class LobbyRoomModel implements RoomModel {
 		npcModels.add(e2);
 		npcModels.add(e3);
 
-		mapPath = "res/levels/lobby.tmx";
+		lockedMapPath = "res/levels/lobby_all_locked.tmx";
+		unlockedMapPath = "res/levels/lobby_boss_locked.tmx";
 	}
 
 	@Override
@@ -41,7 +47,12 @@ public class LobbyRoomModel implements RoomModel {
 	}
 
 	@Override
-	public String getMapPath() {
-		return mapPath;
+	public String getUnlockedMapPath() {
+		return unlockedMapPath;
+	}
+
+	@Override
+	public String getLockedMapPath() {
+		return lockedMapPath;
 	}
 }

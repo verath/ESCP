@@ -22,5 +22,8 @@ public interface RoomModel {
 	 * 
 	 * @return The path to a tmx file.
 	 */
-	public String getMapPath();
+	public String getUnlockedMapPath();
+	
+	public String getLockedMapPath();
+	
 }
