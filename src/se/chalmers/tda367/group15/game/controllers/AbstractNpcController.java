@@ -135,69 +135,18 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Makes npc move to random position restricted by setDefaultTiles(). If
-	 * collision occurs or target is reached a new random position is set as
-	 * target.
+	 * Makes npc move along path if path exists.
 	 * 
-	 * @param container
-	 *            The container holding this game.
+	 * @param model
+	 *            the model that moves
 	 * @param delta
-	 *            The amount of time thats passed since last update in
-	 *            milliseconds
+	 *            time since last update
 	 * @param dynamicBounds
-	 *            the dynamic bounds of moving objects
-	 * @param staticBounds
-	 *            the static bounds of current map
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
+	 *            other moving models
 	 */
-	public void randomPosMove(GameContainer container, int delta,
-			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
-
-		AbstractMovingModel model = getModel();
-		AbstractMovingModel heroModel = getGameController().getHeroController()
-				.getModel();
-
-		int currX = (int) (model.getX() + (model.getWidth() / 2)) / 32;
-		int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
-
-		float heroX = heroModel.getX() + heroModel.getWidth() / 2;
-		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
-
-		if (isInSight(staticBounds, model.getX() + model.getWidth() / 2,
-				model.getY() + model.getHeight() / 2, heroX, heroY)) {
-
-			myPath = getPathFinder().findPath(null, currX, currY,
-					(int) heroX / 32, (int) heroY / 32);
-			currentStep = 1;
-
-			if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) model)
-					.getCurrentWeapon().getFiringSpeed()) {
-				swingTimer = System.currentTimeMillis();
-				fire();
-			}
-		}
-
-		// If path is null or end of path reached
-		if (myPath == null || currentStep == myPath.getLength()) {
-
-			if (pauseTime == 0) {
-				pauseTime = System.currentTimeMillis();
-				waitTime = (long) (2000 * Math.random());
-			} else if (System.currentTimeMillis() >= waitTime + pauseTime) {
-				int tarX = startX + (int) (Math.random() * deltaX);
-				int tarY = startY + (int) (Math.random() * deltaY);
-
-				myPath = getPathFinder().findPath(null, currX, currY, tarX,
-						tarY);
-				currentStep = 1;
-				pauseTime = 0;
-			}
-
-			// If traveling along path
-		} else {
+	public void moveAlongPath(AbstractMovingModel model, int delta,
+			Map<AbstractMovingModel, Float> dynamicBounds) {
+		if (myPath.getLength() >= currentStep) {
 			float diffX = model.getX() - (myPath.getX(currentStep) * 32);
 			float diffY = model.getY() - (myPath.getY(currentStep) * 32);
 
@@ -224,11 +173,102 @@ public abstract class AbstractNpcController extends
 					model.setY(tmpNewY);
 				}
 
+				int currX = (int) (model.getX() + (model.getWidth() / 2)) / 32;
+				int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
+
 				if (currX == myPath.getX(currentStep)
 						&& currY == myPath.getY(currentStep)) {
 					currentStep++;
 				}
 			}
+		}
+	}
+
+	/**
+	 * Calculates a new path.
+	 * 
+	 * @param currX
+	 *            Starting X position in tiles
+	 * @param currY
+	 *            Starting Y position in tiles
+	 * @param tarX
+	 *            ending X position in tiles
+	 * @param tarY
+	 *            ending Y position in tiles
+	 */
+	public void calculateNewPath(int currX, int currY, int tarX, int tarY) {
+		myPath = getPathFinder().findPath(null, currX, currY, tarX, tarY);
+		currentStep = 1;
+	}
+
+	/**
+	 * If time == 0 starts a new random timer. If time has pased sets time to 0
+	 * and returns true
+	 * 
+	 * @return true if random time has passed
+	 */
+	public boolean pauseTimer() {
+		if (pauseTime == 0) {
+			pauseTime = System.currentTimeMillis();
+			waitTime = (long) (2000 * Math.random());
+		} else if (System.currentTimeMillis() >= waitTime + pauseTime) {
+			pauseTime = 0;
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Makes npc move to random position restricted by setDefaultTiles(). If
+	 * collision occurs or target is reached a new random position is set as
+	 * target.
+	 * 
+	 * @param container
+	 *            The container holding this game.
+	 * @param delta
+	 *            The amount of time thats passed since last update in
+	 *            milliseconds
+	 * @param dynamicBounds
+	 *            the dynamic bounds of moving objects
+	 * @param staticBounds
+	 *            the static bounds of current map
+	 * @throws SlickException
+	 *             Throw to indicate a internal error
+	 */
+	public void randomPosMove(GameContainer container, int delta,
+			List<Float> staticBounds,
+			Map<AbstractMovingModel, Float> dynamicBounds)
+			throws SlickException {
+
+		AbstractMovingModel model = getModel();
+		AbstractMovingModel heroModel = getGameController().getHeroController()
+				.getModel();
+
+		int currX = (int) (model.getX() + (model.getWidth() / 2));
+		int currY = (int) (model.getY() + (model.getHeight() / 2));
+
+		float heroX = heroModel.getX() + heroModel.getWidth() / 2;
+		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
+
+		// if hero is in sight
+		if (isInSight(staticBounds, currX, currY, heroX, heroY)) {
+
+			calculateNewPath(currX / 32, currY / 32, (int) heroX / 32,
+					(int) heroY / 32);
+
+			fireTimed();
+		}
+		// If path is null or end of path reached
+		if (myPath == null || currentStep == myPath.getLength()) {
+
+			if (pauseTimer()) {
+				int tarX = startX + (int) (Math.random() * deltaX);
+				int tarY = startY + (int) (Math.random() * deltaY);
+
+				calculateNewPath(currX / 32, currY / 32, tarX, tarY);
+			}
+		} else { // If traveling along path
+			moveAlongPath(model, delta, dynamicBounds);
 		}
 	}
 
@@ -264,6 +304,17 @@ public abstract class AbstractNpcController extends
 			deltaY = 24;
 			startX = 0;
 			startY = 0;
+		}
+	}
+
+	/**
+	 * Time the fire method so animation can run its course
+	 */
+	public void fireTimed() {
+		if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) getModel())
+				.getCurrentWeapon().getFiringSpeed()) {
+			swingTimer = System.currentTimeMillis();
+			fire();
 		}
 	}
 
