@@ -157,16 +157,16 @@ public class HeroController extends AbstractMovingModelController {
 
 		if (tmpX <= 0) {
 			roomsController.moveLeft();
-			model.setX(1024 - model.getWidth());
+			model.setX(1024 - model.getWidth() - 32);
 		} else if (tmpX >= 1024) {
 			roomsController.moveRight();
-			model.setX(0);
+			model.setX(0 + 32);
 		} else if (tmpY <= 0) {
 			roomsController.moveUp();
-			model.setY(768 - model.getHeight());
+			model.setY(768 - model.getHeight() - 32);
 		} else if (tmpY >= 768) {
 			roomsController.moveDown();
-			model.setY(0);
+			model.setY(0 + 32);
 		}
 	}
 

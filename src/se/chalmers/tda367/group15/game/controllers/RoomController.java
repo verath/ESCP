@@ -3,7 +3,6 @@ package se.chalmers.tda367.group15.game.controllers;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -82,7 +81,7 @@ public class RoomController implements TileBasedMap {
 		movingModelControllers = new ArrayList<AbstractMovingModelController>();
 		this.gameController = gameController;
 		this.roomModel = roomModel;
-		this.setMap(roomModel.getMapPath());
+		this.setMap(roomModel.getLockedMapPath());
 	}
 
 	/**
@@ -296,6 +295,7 @@ public class RoomController implements TileBasedMap {
 				}
 			}
 
+			staticBounds.clear();
 			// add static collision bounds
 			for (int i = 0; i < map.getWidth(); i++) {
 				for (int j = 0; j < map.getHeight(); j++) {
@@ -358,6 +358,10 @@ public class RoomController implements TileBasedMap {
 		
 		Collections.sort(movingModelControllers, new ControllerSorter());
 		
+		if(allDead()) {
+			setMap(roomModel.getUnlockedMapPath());
+		}
+		
 	}
 	
 	private class ControllerSorter implements Comparator<AbstractMovingModelController> {
@@ -376,6 +380,20 @@ public class RoomController implements TileBasedMap {
 			}
 		}
 		
+	}
+	
+	public boolean allDead() {
+		for(AbstractMovingModel model : roomModel.getNpcModels()) {
+			if(model.isAlive()) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public RoomModel getRoomModel() {
+		return roomModel;
 	}
 
 }
