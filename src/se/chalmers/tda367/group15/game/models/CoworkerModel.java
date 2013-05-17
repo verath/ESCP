@@ -53,6 +53,6 @@ public class CoworkerModel extends AbstractNpcModel {
 		setHealth(100);
 		addWeapon(new UnarmedModel());
 		setCurrentWeapon(getWeapons().get(0));
-		setAnimationPath("coworker");
+		setAnimationPath("coworker/1");
 	}
 }
