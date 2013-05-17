@@ -21,6 +21,8 @@ import se.chalmers.tda367.group15.game.models.CoworkerModel;
 public class CoworkerController extends AbstractNpcController {
 
 	private boolean hasFired;
+	
+	private boolean herotracking;
 
 	/**
 	 * Creates a new dummyenemy controller.
@@ -60,14 +62,55 @@ public class CoworkerController extends AbstractNpcController {
 			hasFired = false;
 		}
 
+		AbstractMovingModel model = getModel();
+		AbstractMovingModel heroModel = getGameController().getHeroController()
+				.getModel();
+		
 		// Save old position
-		float oldX = this.getModel().getX();
-		float oldY = this.getModel().getY();
+		float oldX = model.getX();
+		float oldY = model.getY();
 
-		// this moves the npc
-		randomPosMove(container, delta, staticBounds, dynamicBounds);
+		// NPC current position
+		int currX = (int) (oldX + (model.getWidth() / 2));
+		int currY = (int) (oldY + (model.getHeight() / 2));
 
-		// get new position
+		float heroX = heroModel.getX() + heroModel.getWidth() / 2;
+		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
+
+		// if hero is in sight
+		if (isInSight(staticBounds, currX, currY, heroX, heroY)) {
+			herotracking = true;
+			
+			// New path after hero pos
+			calculateNewPath((int) heroX / 32,
+					(int) heroY / 32);
+		} else {
+			herotracking = false;
+		}
+		if (existsPath()) { // If path is null or end of path reached
+
+			if (pauseTimer()) {
+				// After a short pause make new path.
+				calculateRandomPath();
+			}
+		} else {
+			// If traveling along path
+			moveAlongPath(model, delta, dynamicBounds);
+		}
+		
+		if (herotracking) {
+			
+			model.setRotation(Math.toDegrees(Math.atan2((currY - heroY),
+					(currX - heroX))));
+			
+			if (Math.hypot(currX - heroX, currY - heroY) < 100) {
+				//if hero is within reach. Fire!
+				fireTimed();
+			}
+		}
+		
+		
+		// NPC new position
 		float newX = this.getModel().getX();
 		float newY = this.getModel().getY();
 
