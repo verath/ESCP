@@ -10,10 +10,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosition;
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.BossRoomModel;
+import se.chalmers.tda367.group15.game.models.LeftWingRoomModel;
 import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
-import se.chalmers.tda367.group15.game.models.OfficeRoomModel;
+import se.chalmers.tda367.group15.game.models.WCRoomModel;
 import se.chalmers.tda367.group15.game.models.ParkingLotRoomModel;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
@@ -34,7 +37,7 @@ public class GameController {
 	/**
 	 * The roomsController handling what room is the current room.
 	 */
-	private RoomsController roomController;
+	private RoomsController roomsController;
 
 	/**
 	 * The hero controller, handling actions to be taken by the hero (ie. the
@@ -84,16 +87,20 @@ public class GameController {
 		RoomController parkingLot = new RoomController(this,
 				new ParkingLotRoomModel());
 		RoomController lobby = new RoomController(this, new LobbyRoomModel());
-		RoomController office = new RoomController(this, new OfficeRoomModel());
+		RoomController wcRoom = new RoomController(this, new WCRoomModel());
+		RoomController leftWing = new RoomController(this, new LeftWingRoomModel());
+		RoomController bossRoom = new RoomController(this, new BossRoomModel());
 
 		// Set up the room manager
-		roomController = new RoomsController();
-		roomController.addStartingRoom(parkingLot);
-		roomController.addRoom(parkingLot, lobby,
+		roomsController = new RoomsController();
+		roomsController.addStartingRoom(parkingLot);
+		roomsController.addRoom(parkingLot, lobby,
 				RoomsController.RelativePosition.ABOVE);
-		roomController.addRoom(lobby, office,
+		roomsController.addRoom(lobby, wcRoom,
 				RoomsController.RelativePosition.RIGHTOF);
-		roomController.init(container);
+		roomsController.addRoom(lobby, leftWing, RoomsController.RelativePosition.LEFTOF);
+		roomsController.addRoom(lobby, bossRoom, RoomsController.RelativePosition.ABOVE);
+		roomsController.init(container);
 
 		// Set up the hero controller
 		heroController = new HeroController(this);
@@ -133,7 +140,7 @@ public class GameController {
 		scoreController.update(container, delta);
 
 		// get current room
-		RoomController currentRoom = roomController.getCurrentRoom();
+		RoomController currentRoom = roomsController.getCurrentRoom();
 
 		// get all static bounds
 		List<Rectangle2D.Float> staticBounds = currentRoom.getStaticBounds();
@@ -145,7 +152,7 @@ public class GameController {
 				.getBounds());
 
 		heroController.update(container, delta, staticBounds, dynamicBounds);
-		roomController.update(container, delta, staticBounds, dynamicBounds);
+		roomsController.update(container, delta, staticBounds, dynamicBounds);
 
 	}
 
@@ -165,7 +172,7 @@ public class GameController {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 
-		roomController.render(container, g);
+		roomsController.render(container, g);
 		heroController.render(container, g);
 
 		hudView.render(container, g);
@@ -210,7 +217,7 @@ public class GameController {
 	 * @return
 	 */
 	protected RoomsController getRoomsController() {
-		return roomController;
+		return roomsController;
 	}
 
 	/**

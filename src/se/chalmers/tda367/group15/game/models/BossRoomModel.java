@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An office room.
+ * A lobby room.
  * 
  * @author simon
  * 
  */
-public class OfficeRoomModel implements RoomModel {
+public class BossRoomModel implements RoomModel {
+
 	/**
 	 * Variable for storing path to a map.
 	 */
@@ -20,22 +21,18 @@ public class OfficeRoomModel implements RoomModel {
 	 */
 	private List<AbstractMovingModel> npcModels;
 
-	public OfficeRoomModel() {
+	public BossRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
-		CoworkerModel e1 = new CoworkerModel(800, 500, 0, 10, 0, 10);
-		CoworkerModel e2 = new CoworkerModel(400, 200, 12, 32, 0, 9);
-		CoworkerModel e3 = new CoworkerModel(450, 600, 0, 18, 16, 24);
-		CoworkerModel e4 = new CoworkerModel(940, 600, 18, 32, 10, 24);
-		CoworkerModel e5 = new CoworkerModel(300, 400);
+		CoworkerModel e1 = new CoworkerModel(9 * 32, 12 * 32);
+		CoworkerModel e2 = new CoworkerModel(12 * 32, 7 * 32);
+		CoworkerModel e3 = new CoworkerModel(25 * 32, 16 * 32);
 
 		npcModels.add(e1);
 		npcModels.add(e2);
 		npcModels.add(e3);
-		npcModels.add(e4);
-		npcModels.add(e5);
 
-		mapPath = "res/levels/right_room.tmx";
+		mapPath = "res/levels/top_room.tmx";
 	}
 
 	@Override
