@@ -9,16 +9,16 @@ import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
 import se.chalmers.tda367.group15.game.database.GameDatabase;
+import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
- * A game over state. Displays a high score and allows the user to either replay
- * or go back to menu.
+ * State for showing the high scores
  * 
  * @author Peter
  * 
  */
-public class GameOverState extends AbstractMenuBasedState {
+public class MenuStateHighScore extends AbstractMenuBasedState {
 
 	/*
 	 * the upper left corner of the highscore list
@@ -39,7 +39,7 @@ public class GameOverState extends AbstractMenuBasedState {
 	/**
 	 * The number of high score entries to show
 	 */
-	private static final int NUM_HIGH_SCORE_ENTRIES = 5;
+	private static final int NUM_HIGH_SCORE_ENTRIES = 10;
 
 	/**
 	 * A placeholder name for when the high score is less than
@@ -59,12 +59,12 @@ public class GameOverState extends AbstractMenuBasedState {
 	private List<DatabaseScore> highScores;
 
 	/**
-	 * Creates a new GameOverState.
+	 * Creates a new MenuStateHighScore.
 	 * 
 	 * @param id
 	 *            The int used to identify the state.
 	 */
-	public GameOverState(int id) {
+	public MenuStateHighScore(int id) {
 		super(id);
 	}
 
@@ -75,12 +75,20 @@ public class GameOverState extends AbstractMenuBasedState {
 	public void init() {
 		try {
 			setBackground(new Image("res/menu/backgroundGameOver.png"));
+			addBackButton();
 		} catch (SlickException e) {
-			e.printStackTrace();
+			if (Constants.DEBUG) {
+				e.printStackTrace();
+			}
 		}
+        updateHighScoreList();
 	}
 
-	@Override
+    @Override
+    protected void initMenuItems() {
+    }
+
+    @Override
 	public void render(Graphics g) {
 		super.render(g);
 
@@ -119,11 +127,21 @@ public class GameOverState extends AbstractMenuBasedState {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void initMenuItems() {
+	private void addBackButton() throws SlickException {
+
+		Image backImage = new Image("res/menu/returnButton.png");
+		Image backImageMO = new Image("res/menu/returnButtonMO.png");
+
+		// Button for returning to main menu.
+		Button returnButton = new Button(container, backImage, backImageMO,
+				Constants.MENU_UPPER_X, Constants.MENU_UPPER_Y) {
+			@Override
+			public void performAction() {
+				game.enterState(Constants.GAME_STATE_MENU_MAIN);
+			}
+		};
+
+		addMenuItem(returnButton);
 	}
 
 	/**
@@ -137,15 +155,22 @@ public class GameOverState extends AbstractMenuBasedState {
 
 	@Override
 	public void gameOver(boolean win) {
-		GameDatabase db;
-		try {
-			db = new GameDatabase();
-			highScores = db.getHighscores(5);
-		} catch (ClassNotFoundException e) {
-			if (Constants.DEBUG) {
-				e.printStackTrace();
-			}
-		}
+		updateHighScoreList();
 	}
+
+    /**
+     * Forces a refresh of the displayed high score list
+     */
+    public void updateHighScoreList() {
+        GameDatabase db;
+        try {
+            db = new GameDatabase();
+            highScores = db.getHighscores(NUM_HIGH_SCORE_ENTRIES);
+        } catch (ClassNotFoundException e) {
+            if (Constants.DEBUG) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

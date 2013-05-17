@@ -96,7 +96,7 @@ public class ScoreController {
 	 *            The name of the player.
 	 */
 	public void saveScore(String name) {
-		if (name == null) {
+		if (name == null || name.isEmpty()) {
 			Collections.shuffle(DEFAULT_HIGH_SCORE_NAMES);
 			name = DEFAULT_HIGH_SCORE_NAMES.get(0);
 		}

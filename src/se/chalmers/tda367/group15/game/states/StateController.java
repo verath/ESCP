@@ -44,17 +44,20 @@ public class StateController extends StateBasedGame {
 				Constants.GAME_STATE_MENU_OPTIONS);
 		MenuStateKeyBinds keyBindsMenu = new MenuStateKeyBinds(
 				Constants.GAME_STATE_MENU_KEY_BINDS);
-		GameOverState gameOverState = new GameOverState(
-				Constants.GAME_STATE_GAME_OVER);
+		MenuStateHighScore menuStateHighScore = new MenuStateHighScore(
+				Constants.GAME_STATE_MENU_HIGH_SCORE);
+        GameLostState gameLostState = new GameLostState(Constants.GAME_STATE_GAME_LOST);
+        GameWonState gameWonState = new GameWonState(Constants.GAME_STATE_GAME_WON);
+		initMusic();
 
-		this.initMusic();
-
-		this.addState(playState);
-		this.addState(mainMenu);
-		this.addState(optionsMenu);
-		this.addState(keyBindsMenu);
-		this.addState(gameOverState);
-		this.enterState(Constants.GAME_STATE_MENU_MAIN);
+		addState(playState);
+        addState(gameLostState);
+        addState(gameWonState);
+		addState(mainMenu);
+		addState(optionsMenu);
+		addState(keyBindsMenu);
+		addState(menuStateHighScore);
+		enterState(Constants.GAME_STATE_MENU_MAIN);
 	}
 
 	public void initMusic() {
