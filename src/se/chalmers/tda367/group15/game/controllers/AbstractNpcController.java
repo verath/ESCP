@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
@@ -255,8 +256,9 @@ public abstract class AbstractNpcController extends
 
 			calculateNewPath(currX / 32, currY / 32, (int) heroX / 32,
 					(int) heroY / 32);
-
-			fireTimed();
+			if (Math.hypot(currX - heroX, currY - heroY) < 100) {
+				fireTimed();
+			}
 		}
 		// If path is null or end of path reached
 		if (myPath == null || currentStep == myPath.getLength()) {
@@ -351,7 +353,7 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * Check if line defined by two point is intersected by a rectangle rect.
+	 * Check if line defined by two points is intersected by a rectangle rect.
 	 * 
 	 * @param rect
 	 *            the Rectangle that maybe intersects
