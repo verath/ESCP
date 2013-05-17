@@ -90,6 +90,10 @@ public class CharacterView implements View {
 		// store death animation
 		String path = model.getAnimationPath() + "/death/";
 		deathAnimation = getAnimationFromPath(path);
+		if (!path.equals("hero/death/")) {
+			deathAnimation.setDuration(9, 2000);
+			deathAnimation.setDuration(14, 3000);
+		}
 		deathAnimation.setLooping(false);
 
 		// set initial animation

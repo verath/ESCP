@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.models;
 
+import java.util.Random;
+
 /**
  * Simple class for representing a dummy enemy. This enemy is only intended for
  * testing.
@@ -8,7 +10,9 @@ package se.chalmers.tda367.group15.game.models;
  * 
  */
 public class CoworkerModel extends AbstractNpcModel {
-
+	
+	private Random randgen;
+	
 	/**
 	 * Creates a new dummy enemy.
 	 */
@@ -42,6 +46,7 @@ public class CoworkerModel extends AbstractNpcModel {
 	public CoworkerModel(float x, float y, double rot, int x1, int x2, int y1,
 			int y2) {
 		super(x1, x2, y1, y2);
+		randgen = new Random();
 		setX(x);
 		setY(y);
 		setVelocity(0.1f);
@@ -53,6 +58,7 @@ public class CoworkerModel extends AbstractNpcModel {
 		setHealth(100);
 		addWeapon(new UnarmedModel());
 		setCurrentWeapon(getWeapons().get(0));
-		setAnimationPath("coworker/1");
+		int random = randgen.nextInt(2) + 1;
+		setAnimationPath("coworker/" + random);
 	}
 }
