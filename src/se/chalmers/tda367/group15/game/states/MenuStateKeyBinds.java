@@ -4,12 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.KeyListener;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.*;
 
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.TextButton;
@@ -207,7 +202,8 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 
 	/**
 	 * Starts listening for keybindings for the Key associated with the clicked
-	 * button.
+	 * button. If the button is clicked twice, the binding of the key will be
+	 * aborted.
 	 * 
 	 * @param button
 	 *            The button that was pressed.
@@ -217,11 +213,15 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 			return;
 		}
 
-		stopRebindKey();
-
-		button.setText("---");
-		activeBindButton = button;
-		isRebinding = true;
+		if (activeBindButton == button) {
+            // If clicked twice.
+			stopRebindKey();
+		} else {
+			stopRebindKey();
+			button.setText("---");
+			activeBindButton = button;
+			isRebinding = true;
+		}
 	}
 
 	/**
@@ -232,8 +232,23 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 */
 	protected void setRebindKey(int keyCode) {
 		Key key = buttonToKeyBind.get(activeBindButton);
+		int prevBind = KeyBindings.getBinding(key);
 		KeyBindings.setBinding(key, keyCode);
 		stopRebindKey();
+
+		// Check for duplicate binds to the same key. If one exist, set it's
+		// current bound to the previous bound that was changed (ie. prevBind).
+		// Also mark the duplicate for rebind.
+		for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
+			TextButton b = entry.getKey();
+			Key k = entry.getValue();
+			if (k != key && KeyBindings.getBinding(k) == keyCode) {
+				KeyBindings.setBinding(k, prevBind);
+				startRebindKey(b);
+				break;
+			}
+		}
+
 	}
 
 	/**
