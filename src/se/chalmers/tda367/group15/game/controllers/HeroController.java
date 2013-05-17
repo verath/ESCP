@@ -47,8 +47,8 @@ public class HeroController extends AbstractMovingModelController {
 		HeroModel model = new HeroModel();
 
 		// configure model
-		model.setX(16 * 32f);
-		model.setY(20 * 32f);
+		model.setX(2 * 32f);
+		model.setY(21 * 32f);
 		model.setVelocity(0.15f);
 		model.setHealth(100);
 		model.setAlive(true);
