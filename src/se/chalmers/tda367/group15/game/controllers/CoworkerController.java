@@ -21,8 +21,13 @@ import se.chalmers.tda367.group15.game.models.CoworkerModel;
 public class CoworkerController extends AbstractNpcController {
 
 	private boolean hasFired;
-	
-	private boolean herotracking;
+
+	private boolean heroTracking;
+
+	/**
+	 * The HP of the model last update. Used to determine if we were attacked.
+	 */
+	private int lastTickHP;
 
 	/**
 	 * Creates a new dummyenemy controller.
@@ -65,7 +70,16 @@ public class CoworkerController extends AbstractNpcController {
 		AbstractMovingModel model = getModel();
 		AbstractMovingModel heroModel = getGameController().getHeroController()
 				.getModel();
-		
+
+		// Check if we were hit since last update
+		boolean wasAttacked = false;
+		if (model.getHealth() != lastTickHP) {
+			wasAttacked = true;
+		}
+
+		// Save old HP
+		lastTickHP = model.getHealth();
+
 		// Save old position
 		float oldX = model.getX();
 		float oldY = model.getY();
@@ -77,17 +91,23 @@ public class CoworkerController extends AbstractNpcController {
 		float heroX = heroModel.getX() + heroModel.getWidth() / 2;
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
-		// if hero is in sight
-		if (isInSight(staticBounds, currX, currY, heroX, heroY)) {
-			herotracking = true;
-			
+		// Facing vs where the hero is.
+		double heroPosDirection = Math.toDegrees(Math.atan2(currY - heroY,
+				currX - heroX));
+		double heroPosDirOffset = Math.abs(model.getRotation()
+				- heroPosDirection);
+
+		// if hero is in sight, and within 60 * 2 degrees of current facing. If
+		// we were attacked this turn, ignore facing.
+		if (isInSight(staticBounds, currX, currY, heroX, heroY)
+				&& (heroPosDirOffset < 60 || wasAttacked)) {
+			heroTracking = true;
 			// New path after hero pos
-			calculateNewPath((int) heroX / 32,
-					(int) heroY / 32);
+			calculateNewPath((int) heroX / 32, (int) heroY / 32);
 		} else {
-			herotracking = false;
+			heroTracking = false;
 		}
-		
+
 		// If path is null or end of path reached
 		if (!existsPath()) {
 			// After a short pause make new path.
@@ -98,19 +118,19 @@ public class CoworkerController extends AbstractNpcController {
 			// travel along path
 			moveAlongPath(model, delta, dynamicBounds);
 		}
-		
+
 		// If hero is in sight set new direction and possibly attack
-		if (herotracking) {
-			
+		if (heroTracking) {
+
 			model.setRotation(Math.toDegrees(Math.atan2((currY - heroY),
 					(currX - heroX))));
-			
+
 			// If hero is in reach attack!
 			if (Math.hypot(currX - heroX, currY - heroY) < 100) {
 				fireTimed();
 			}
 		}
-		
+
 		// NPC new position
 		float newX = this.getModel().getX();
 		float newY = this.getModel().getY();
