@@ -3,6 +3,9 @@ package se.chalmers.tda367.group15.game.controllers;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -334,10 +337,10 @@ public class RoomController implements TileBasedMap {
 			throws SlickException {
 		// tell enemy controllers to move
 
-		Iterator<AbstractMovingModelController> it1 = movingModelControllers
+		Iterator<AbstractMovingModelController> it = movingModelControllers
 				.iterator();
-		while (it1.hasNext()) {
-			AbstractMovingModelController controller = it1.next();
+		while (it.hasNext()) {
+			AbstractMovingModelController controller = it.next();
 			if (controller.getModel().isAlive()) {
 				controller
 						.update(container, delta, staticBounds, dynamicBounds);
@@ -345,13 +348,34 @@ public class RoomController implements TileBasedMap {
 		}
 
 		// add new qued controllers to the movingModelControllers list
-		Iterator<AbstractMovingModelController> it2 = quedControllers
+		it = quedControllers
 				.iterator();
-		while (it2.hasNext()) {
-			AbstractMovingModelController controller = it2.next();
+		while (it.hasNext()) {
+			AbstractMovingModelController controller = it.next();
 			movingModelControllers.add(controller);
 		}
 		quedControllers.clear();
+		
+		Collections.sort(movingModelControllers, new ControllerSorter());
+		
+	}
+	
+	private class ControllerSorter implements Comparator<AbstractMovingModelController> {
+
+		@Override
+		public int compare(AbstractMovingModelController c1, AbstractMovingModelController c2) {
+			boolean m1Alive = c1.getModel().isAlive();
+			boolean m2Alive = c2.getModel().isAlive();
+			
+			if((m1Alive && m2Alive) || (!m1Alive && !m2Alive)) {
+				return 0;
+			}else if(m1Alive && !m2Alive) {
+				return 1;
+			}else{
+				return -1;
+			}
+		}
+		
 	}
 
 }
