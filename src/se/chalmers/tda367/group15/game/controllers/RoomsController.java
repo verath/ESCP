@@ -12,6 +12,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.BossRoomModel;
+import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
+import se.chalmers.tda367.group15.game.models.RoomModel;
 
 /**
  * A class for abstractly handling rooms.
@@ -189,6 +192,15 @@ public class RoomsController {
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
+		
+		if(allEnemiesDefeated()) {
+			for(RoomController controller : rooms.values()) {
+				RoomModel model = controller.getRoomModel();
+				if(model instanceof LobbyRoomModel) {
+					controller.setMap("res/levels/lobby.tmx");
+				}
+			}
+		}
 	}
 
 	/**
@@ -220,6 +232,19 @@ public class RoomsController {
 		for (RoomController room : rooms.values()) {
 			room.init(container);
 		}
+	}
+	
+	public boolean allEnemiesDefeated() {
+		boolean allDefeated = true;
+		for(RoomController controller : rooms.values()) {
+			if(!(controller.getRoomModel() instanceof BossRoomModel)) {
+				if(!controller.allDead()) {
+					allDefeated = false;
+				}
+			}
+		}
+		
+		return allDefeated;
 	}
 
 }

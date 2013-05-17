@@ -10,10 +10,16 @@ import java.util.List;
  * 
  */
 public class WCRoomModel implements RoomModel {
+
 	/**
-	 * Variable for storing path to a map.
+	 * Variable for storing path to map with unlocked doors.
 	 */
-	private String mapPath;
+	private String unlockedMapPath;
+
+	/**
+	 * Variable for storing path to map with locked doors.
+	 */
+	private String lockedMapPath;
 
 	/**
 	 * Variable for storing all npc models
@@ -35,7 +41,8 @@ public class WCRoomModel implements RoomModel {
 		npcModels.add(e4);
 		npcModels.add(e5);
 
-		mapPath = "res/levels/right_room.tmx";
+		unlockedMapPath = "res/levels/right_room.tmx";
+		lockedMapPath = "res/levels/right_room_locked.tmx";
 	}
 
 	@Override
@@ -44,7 +51,12 @@ public class WCRoomModel implements RoomModel {
 	}
 
 	@Override
-	public String getMapPath() {
-		return mapPath;
+	public String getUnlockedMapPath() {
+		return unlockedMapPath;
+	}
+
+	@Override
+	public String getLockedMapPath() {
+		return lockedMapPath;
 	}
 }
