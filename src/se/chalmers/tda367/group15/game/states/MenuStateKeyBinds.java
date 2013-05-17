@@ -214,7 +214,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		}
 
 		if (activeBindButton == button) {
-            // If clicked twice.
+			// If clicked twice.
 			stopRebindKey();
 		} else {
 			stopRebindKey();
@@ -238,13 +238,13 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 
 		// Check for duplicate binds to the same key. If one exist, set it's
 		// current bound to the previous bound that was changed (ie. prevBind).
-		// Also mark the duplicate for rebind.
 		for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
 			TextButton b = entry.getKey();
 			Key k = entry.getValue();
 			if (k != key && KeyBindings.getBinding(k) == keyCode) {
 				KeyBindings.setBinding(k, prevBind);
 				startRebindKey(b);
+				stopRebindKey();
 				break;
 			}
 		}
