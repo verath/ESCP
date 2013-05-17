@@ -1083,7 +1083,7 @@
    <property name="blocked" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCANOAKxMhp2JNEMSoAikWJD1X5s4UsorAnpIUUviM8CxJpArAXErGjqWbCYARK7D8QPsNAg/apArMYwcHHnCsRuA2g/PrtGuv240l8mEGcxYKY/attPyD2U5D90tdj8is2NUTjcloDHD8j51ROIvRiw51UYYMFhFkisCoeeBqj8PTzmkgJw2T8Lh/oFUPl/NLZ/Fw71B6DyqUCcRkP78QFQmmkF4jYy7CM2/dEC4Epv2OzHl24J2YFc77Ai8WFmEwLk5H9q6CUW4PMDPcpykB05WMR16Gh/DxZxHzraj6sNRA/7YWkMHZCbvgB6HikG
+   eJxjYCANOAKxMhp2JNEMSoAikWJD1X5s4UsorAnpIUUviM8CxJpArAXErGjqWbCYARK7D8QPsNAg/apArMYwcHHnCsRuA2g/PrtGuv240l8mEGcxYKY/attPyD2U5D90tdj8is2NUTjcloDHD8j51ROIvRiw51UYYMFhFkisCoeeBqj8PTzmkgJw2T8Lh/oFUPl/NLZ/Fw71B6DyqUCcRkP78QFQmmkF4jYy7CM2/dEC4Epv2OzHl24J2YFc77Ai8WFmEwLk5H9q6CUW4PMDPcpykB05WMR16Gh/DxZxHzraj6sNRA/78aUxctIXAJ42KZI=
   </data>
  </layer>
  <layer name="Door" width="32" height="24">
