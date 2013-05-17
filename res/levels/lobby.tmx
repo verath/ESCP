@@ -1088,7 +1088,7 @@
  </layer>
  <layer name="Door" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYCAPLAbiJWTqHQWjYLCA5AG2v3mA7R8Fo2CgQMoA298ywPaPglEwCkYBOeAgEB9CoskFAHE0Bhw=
+   eJxjYCAPHAfiE2TqHQWjYLCAYwNs/7MBtn8UjIKBAkcH2P6nA2z/KBgFo2AUkAMOAvEhJJpcAACDvgfs
   </data>
  </layer>
  <layer name="Small Object" width="32" height="24">

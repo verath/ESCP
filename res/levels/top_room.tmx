@@ -1075,7 +1075,7 @@
  </tileset>
  <layer name="Floor" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztwwENAAAMw6DOv+kLOSSsmqqq+uIBEw4DAQ==
+   eJxjYBicgJFKeNT+UftH7ae9PeS6bdT+UftH7R+1f6DsJwVQ27xR+0ftH2j7AdMRAeU=
   </data>
  </layer>
  <layer name="Blocked" width="32" height="24">
@@ -1083,7 +1083,7 @@
    <property name="blocked" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSgYBaNgFAxWoAzFuPikAgAySACN
+   eJxjYBicwBGIldEwNjF8co4U2K8IxCwU6GeBmkGJ/ZSC4Wb/fSB+AMS2QGwHxPZA7IAkzkpj++lpBr3sx5WnSM1P5ORXmBspyWfkAkUk+t4A2/+PSD2khj++eFNEo/GBdCDOYMAdV7CyThWI1YDYE4i9GCD5UROItUiwPxOIs6B6O4G4C4jbgbiDgFtBcq5A7EbQN/jtJzUckfURC+7hsZ8e4N8A249cN+ILb0rLH3LNwgUIpT9ag1H7B95+fOUfrQFyGocBStu6AAjkInI=
   </data>
  </layer>
  <layer name="Doors" width="32" height="24">
@@ -1093,7 +1093,7 @@
  </layer>
  <layer name="Small props" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztwQEBAAAAgiD/r25IQAEAAC8GDAAAAQ==
+   eJztyLEJAAAMw7DQ/4/unqF7QVoMTuCPqfYHAOC2Q6AABw==
   </data>
  </layer>
 </map>

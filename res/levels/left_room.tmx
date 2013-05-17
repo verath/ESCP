@@ -1083,7 +1083,7 @@
    <property name="blocked" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAtUIZiRyQ2shi9gCKRYqP2D0/7saU1eto/CjDBQIc/ve0fyPJvFIyCUTAKRsEoQAYAoNQDzg==
+   eJzNlksKwjAQhrNI7+BjVURB7+AjCwU9grjwHCLiOUR6EBGvokfxDySgYdKE2mT84dsMQz/KdNIoIcQgA8pTK4EU7eYJXua5QzAynjGYgDXYmFrZstvNEqw8nhz+T1fIPwUzMAcLUBA1GdnXxN8BXdADfeNya0VknxsV4efIP/mbzprqi3XXzT921lRfKJLwp0zd+ccR6v1T7j+VnPu/BbuAP2VO4MDor8Al4E+5/w9wC/hT7v9e8M7/DI6Mfj3/K6Nfz//O6Kdi/fqbsnfGQnzfH331X2PPX+q/kAvtfgNLbzpK
   </data>
  </layer>
  <layer name="Doors" width="32" height="24">
@@ -1093,7 +1093,7 @@
  </layer>
  <layer name="Small props" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJztwQEBAAAAgiD/r25IQAEAAC8GDAAAAQ==
+   eJxjYBh+gBmKR8EoGAWjYBSMglEwCkbBKMAHmNBoQuLDAQAAVhwADw==
   </data>
  </layer>
 </map>
