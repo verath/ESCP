@@ -69,6 +69,8 @@ public class CoworkerController extends AbstractNpcController {
 		// Save old position
 		float oldX = model.getX();
 		float oldY = model.getY();
+		
+		//myUpdate(container, delta, staticBounds, dynamicBounds);
 
 		// NPC current position
 		int currX = (int) (oldX + (model.getWidth() / 2));
@@ -87,7 +89,7 @@ public class CoworkerController extends AbstractNpcController {
 		} else {
 			herotracking = false;
 		}
-		if (existsPath()) { // If path is null or end of path reached
+		if (!existsPath()) { // If path is null or end of path reached
 
 			if (pauseTimer()) {
 				// After a short pause make new path.
@@ -108,7 +110,6 @@ public class CoworkerController extends AbstractNpcController {
 				fireTimed();
 			}
 		}
-		
 		
 		// NPC new position
 		float newX = this.getModel().getX();

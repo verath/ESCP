@@ -205,8 +205,10 @@ public abstract class AbstractNpcController extends
 	 *            ending Y position in tiles
 	 */
 	public void calculateNewPath(int tarX, int tarY) {
-		myPath = getPathFinder().findPath(null, (int) getModel().getX() / 32,
-				(int) getModel().getY() / 32, tarX, tarY);
+		myPath = getPathFinder().findPath(null,
+				(int) (getModel().getX() + (getModel().getWidth() / 2)) / 32,
+				(int) (getModel().getY() + (getModel().getHeight() / 2)) / 32,
+				tarX, tarY);
 		currentStep = 1;
 	}
 
@@ -230,13 +232,13 @@ public abstract class AbstractNpcController extends
 	/**
 	 * check if there is a path or if end of it reached.
 	 * 
-	 * @return true if path is null or current step is end of path
+	 * @return false if path is null or current step is end of path
 	 */
 	public boolean existsPath() {
-		if (myPath == null || currentStep >= myPath.getLength()){
-		return true;
+		if (myPath == null || currentStep >= myPath.getLength()) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**
