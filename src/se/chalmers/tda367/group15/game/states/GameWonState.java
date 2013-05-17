@@ -17,8 +17,8 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  */
 public class GameWonState extends AbstractMenuBasedState {
 	private final static int MAX_NAME_LENGTH = 15;
-	private final TrueTypeFont textFont = new TrueTypeFont(new Font("Monospaced",
-			Font.BOLD, 32), true);
+	private final TrueTypeFont textFont = new TrueTypeFont(new Font(
+			"Monospaced", Font.BOLD, 32), true);
 	private final static String ALLOWED_NAME_CHARS = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	private ScoreController scoreController;
@@ -71,11 +71,7 @@ public class GameWonState extends AbstractMenuBasedState {
 			if (paddedName.length() > 0) {
 				paddedName.append(' ');
 			}
-			if (name.length() > i) {
-				paddedName.append(name.charAt(i));
-			} else {
-				// paddedName.append('_');
-			}
+			paddedName.append(name.charAt(i));
 		}
 		textFont.drawString(Constants.MENU_UPPER_X,
 				Constants.MENU_UPPER_Y + 50, "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
@@ -90,11 +86,12 @@ public class GameWonState extends AbstractMenuBasedState {
 
 		// If enter key is pressed, save score and show high score
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			handleEnter();
+			saveName();
+			toMenu();
 		}
 	}
 
-	private void handleEnter() {
+	private void saveName() {
 		if (scoreController != null) {
 			scoreController.saveScore(name);
 			// Force a refresh of the high score state
@@ -103,7 +100,11 @@ public class GameWonState extends AbstractMenuBasedState {
 					.updateHighScoreList();
 		}
 
+	}
+
+	private void toMenu() {
 		name = "";
+		scoreController = null;
 		game.enterState(Constants.GAME_STATE_MENU_HIGH_SCORE);
 	}
 
@@ -112,8 +113,7 @@ public class GameWonState extends AbstractMenuBasedState {
 	 */
 	@Override
 	protected void escpAction() {
-		// escape returns you to main menu.
-		game.enterState(Constants.GAME_STATE_MENU_MAIN);
+		toMenu();
 	}
 
 	private class keyPressListener implements KeyListener {
