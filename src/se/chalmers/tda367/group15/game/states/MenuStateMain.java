@@ -81,6 +81,8 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		Image quitImageMO = new Image("res/menu/quitMO.png");
 		Image optionsImage = new Image("res/menu/options.png");
 		Image optionsImageMO = new Image("res/menu/optionsMO.png");
+        Image highScoreImage = new Image("res/menu/options.png");
+        Image highScoreImageMO = new Image("res/menu/optionsMO.png");
 		Image resumeImage = new Image("res/menu/resumeGame.png");
 		Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
 
@@ -120,9 +122,17 @@ public class MenuStateMain extends AbstractMenuBasedState {
 				game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
 			}
 		};
+        // Show high score
+        Button highScoreButton = new Button(container, optionsImage,
+                optionsImageMO, MENUX, MENUY + 150) {
+            @Override
+            public void performAction() {
+                game.enterState(Constants.GAME_STATE_MENU_HIGH_SCORE);
+            }
+        };
 		// Quit application
 		Button exitButton = new Button(container, quitImage, quitImageMO,
-				MENUX, MENUY + 150) {
+				MENUX, MENUY + 200) {
 			@Override
 			public void performAction() {
 				if (game.closeRequested()) {
@@ -138,6 +148,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		this.addMenuItem(resumeGameButton);
 		this.addMenuItem(newGameButton);
 		this.addMenuItem(optionsButton);
+        this.addMenuItem(highScoreButton);
 		this.addMenuItem(exitButton);
 	}
 

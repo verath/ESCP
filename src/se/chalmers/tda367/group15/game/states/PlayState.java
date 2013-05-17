@@ -28,7 +28,8 @@ public class PlayState extends BasicGameState {
 	 * A list of state-ids that should be updated when the game ends.
 	 */
 	private final static int[] gameOverListeningStates = {
-			Constants.GAME_STATE_GAME_OVER, Constants.GAME_STATE_MENU_MAIN };
+			Constants.GAME_STATE_MENU_HIGH_SCORE,
+			Constants.GAME_STATE_MENU_MAIN };
 
 	/**
 	 * The GameController controlling the game.
@@ -100,7 +101,15 @@ public class PlayState extends BasicGameState {
 				}
 			}
 
-			game.enterState(Constants.GAME_STATE_GAME_OVER);
+			// Enter the appropriate state for game over (lost or won)
+			if (gameWon) {
+                ((GameWonState) game.getState(Constants.GAME_STATE_GAME_WON))
+                        .setScoreController(gameController.getScoreController());
+				game.enterState(Constants.GAME_STATE_GAME_WON);
+			} else {
+				game.enterState(Constants.GAME_STATE_GAME_LOST);
+			}
+
 		}
 	}
 

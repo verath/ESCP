@@ -187,17 +187,11 @@ public class GameController {
 	public void gameOver(boolean win) {
 		// Save events
 		eventLogger.saveEvents();
-		if (win) {
-			// Save score
-			// TODO: Name for the saved score?
-			scoreController.saveScore(null);
-		}
 
 		// Set gameOver and gameWon flags. We can not directly reference the
 		// StateController, and must therefore wait until it asks "us"
 		gameOver = true;
 		gameWon = win;
-
 	}
 
 	/**
@@ -225,5 +219,13 @@ public class GameController {
 	protected HeroController getHeroController() {
 		return heroController;
 	}
+
+    /**
+     * Getter for the score controller. This is used by the won game state to save the score.
+     * @return The score controller used this game.
+     */
+    public ScoreController getScoreController() {
+        return this.scoreController;
+    }
 
 }
