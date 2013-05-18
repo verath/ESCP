@@ -74,7 +74,7 @@ public class MenuStateHighScore extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		try {
-			setBackground(new Image("res/menu/backgroundGameOver.png"));
+			setBackground(new Image("res/menu/backgroundScores.png"));
 			addBackButton();
 		} catch (SlickException e) {
 			if (Constants.DEBUG) {
@@ -134,7 +134,7 @@ public class MenuStateHighScore extends AbstractMenuBasedState {
 
 		// Button for returning to main menu.
 		Button returnButton = new Button(container, backImage, backImageMO,
-				Constants.MENU_UPPER_X, Constants.MENU_UPPER_Y) {
+				Constants.MENU_UPPER_X+50, Constants.MENU_UPPER_Y) {
 			@Override
 			public void performAction() {
 				game.enterState(Constants.GAME_STATE_MENU_MAIN);

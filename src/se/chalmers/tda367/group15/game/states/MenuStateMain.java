@@ -81,8 +81,8 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		Image quitImageMO = new Image("res/menu/quitMO.png");
 		Image optionsImage = new Image("res/menu/options.png");
 		Image optionsImageMO = new Image("res/menu/optionsMO.png");
-        Image highScoreImage = new Image("res/menu/options.png");
-        Image highScoreImageMO = new Image("res/menu/optionsMO.png");
+        Image highScoreImage = new Image("res/menu/score.png");
+        Image highScoreImageMO = new Image("res/menu/scoreMO.png");
 		Image resumeImage = new Image("res/menu/resumeGame.png");
 		Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
 
@@ -123,8 +123,8 @@ public class MenuStateMain extends AbstractMenuBasedState {
 			}
 		};
         // Show high score
-        Button highScoreButton = new Button(container, optionsImage,
-                optionsImageMO, MENUX, MENUY + 150) {
+        Button highScoreButton = new Button(container, highScoreImage,
+        		highScoreImageMO, MENUX, MENUY + 150) {
             @Override
             public void performAction() {
                 game.enterState(Constants.GAME_STATE_MENU_HIGH_SCORE);
