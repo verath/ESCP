@@ -25,11 +25,6 @@ public class CoworkerController extends AbstractNpcController {
 	private boolean heroTracking;
 
 	/**
-	 * The HP of the model last update. Used to determine if we were attacked.
-	 */
-	private int lastTickHP;
-
-	/**
 	 * Creates a new dummyenemy controller.
 	 * 
 	 * @param model
@@ -62,6 +57,7 @@ public class CoworkerController extends AbstractNpcController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
+		
 		if (hasFired) {
 			swingWeapon();
 			hasFired = false;
@@ -70,15 +66,6 @@ public class CoworkerController extends AbstractNpcController {
 		AbstractMovingModel model = getModel();
 		AbstractMovingModel heroModel = getGameController().getHeroController()
 				.getModel();
-
-		// Check if we were hit since last update
-		boolean wasAttacked = false;
-		if (model.getHealth() != lastTickHP) {
-			wasAttacked = true;
-		}
-
-		// Save old HP
-		lastTickHP = model.getHealth();
 
 		// Save old position
 		float oldX = model.getX();
@@ -91,16 +78,8 @@ public class CoworkerController extends AbstractNpcController {
 		float heroX = heroModel.getX() + heroModel.getWidth() / 2;
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
-		// Facing vs where the hero is.
-		double heroPosDirection = Math.toDegrees(Math.atan2(currY - heroY,
-				currX - heroX));
-		double heroPosDirOffset = Math.abs(model.getRotation()
-				- heroPosDirection);
-
-		// if hero is in sight, and within 80 * 2 degrees of current facing. If
-		// we were attacked this turn, ignore facing.
-		if (isInSight(staticBounds, currX, currY, heroX, heroY)
-				&& (heroPosDirOffset < 80 || wasAttacked)) {
+		// if hero is in sight.
+		if (isInSight(staticBounds, currX, currY, heroX, heroY)) {
 			heroTracking = true;
 			// New path after hero pos
 			calculateNewPath((int) heroX / 32, (int) heroY / 32);
@@ -125,7 +104,7 @@ public class CoworkerController extends AbstractNpcController {
 			model.setRotation(Math.toDegrees(Math.atan2((currY - heroY),
 					(currX - heroX))));
 
-			// If hero is in reach attack!
+			// If hero is in reach and no other npc is in the way attack!
 			if (Math.hypot(currX - heroX, currY - heroY) < 100
 					&& isWayClear(dynamicBounds, currX, currY, heroX, heroY)) {
 				fireTimed();
