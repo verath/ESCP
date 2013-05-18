@@ -97,10 +97,10 @@ public class CoworkerController extends AbstractNpcController {
 		double heroPosDirOffset = Math.abs(model.getRotation()
 				- heroPosDirection);
 
-		// if hero is in sight, and within 60 * 2 degrees of current facing. If
+		// if hero is in sight, and within 80 * 2 degrees of current facing. If
 		// we were attacked this turn, ignore facing.
 		if (isInSight(staticBounds, currX, currY, heroX, heroY)
-				&& (heroPosDirOffset < 60 || wasAttacked)) {
+				&& (heroPosDirOffset < 80 || wasAttacked)) {
 			heroTracking = true;
 			// New path after hero pos
 			calculateNewPath((int) heroX / 32, (int) heroY / 32);
@@ -126,7 +126,8 @@ public class CoworkerController extends AbstractNpcController {
 					(currX - heroX))));
 
 			// If hero is in reach attack!
-			if (Math.hypot(currX - heroX, currY - heroY) < 100) {
+			if (Math.hypot(currX - heroX, currY - heroY) < 100
+					&& isWayClear(dynamicBounds, currX, currY, heroX, heroY)) {
 				fireTimed();
 			}
 		}

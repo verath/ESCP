@@ -17,6 +17,7 @@ import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractNpcModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
 import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.views.CharacterView;
 
@@ -291,6 +292,23 @@ public abstract class AbstractNpcController extends
 	 * Method to tell npc to fire a weapon of some kind
 	 */
 	public abstract void fire();
+
+	public boolean isWayClear(Map<AbstractMovingModel, Float> dynamicBounds,
+			float point1X, float point1Y, float point2X, float point2Y) {
+
+		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
+
+			if (this.getModel() != otherModel && otherModel.isAlive()
+					&& !(otherModel instanceof HeroModel)) {
+
+				Rectangle2D.Float bound = otherModel.getBounds();
+				if (recIntersectLine(bound, point1X, point1Y, point2X, point2Y)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Method for checking if two pixel points are in sight of each other.
