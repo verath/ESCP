@@ -90,12 +90,13 @@ public class CharacterView implements View {
 		// store death animation
 		String path = model.getAnimationPath() + "/death/";
 		deathAnimation = getAnimationFromPath(path);
-
-		// The hero has a different "animation" where this would case a
-		// IndexOutOfBoundsException, so don't count it in
-		if (!path.equals("hero/death/")) {
+		// The enemies will bleed slowly when they die
+		if (path.equals("coworker/1/death/") || path.equals("coworker/2/death/")) {
+			deathAnimation.setDuration(7, 2000);
+			deathAnimation.setDuration(8, 2000);
 			deathAnimation.setDuration(9, 2000);
-			deathAnimation.setDuration(14, 3000);
+			deathAnimation.setDuration(10, 2000);
+			deathAnimation.setDuration(11, 2000);
 		}
 		deathAnimation.setLooping(false);
 
