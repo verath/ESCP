@@ -65,16 +65,18 @@ public class CollisionHelper {
 	}
 
 	/*
-	 * NOTE: The following method is taken from java-gaming.org where it was
-	 * posted by user JGO Knight. For some reason Java default intersect method
-	 * as declared in the interface Shape doesn't work.
+	 * 
 	 */
 	/**
 	 * 
 	 * The fastest way to test if 2 line segments intersect. Tests if the line
 	 * segment from (x1, y1) to (x2, y2) intersects the line segment from (x3,
 	 * y3) to (x4, y4). My tests showed that this method was about 25% faster
-	 * than java.awt.geom.Line2D.linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4):
+	 * than java.awt.geom.Line2D.linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4).
+	 * 
+	 * NOTE: This method is taken from java-gaming.org where it was posted by
+	 * user JGO Knight. For some reason Java default intersect method as
+	 * declared in the interface Shape doesn't work.
 	 * 
 	 * @param x1
 	 *            Point 1 X

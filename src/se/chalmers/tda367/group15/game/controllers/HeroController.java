@@ -200,12 +200,12 @@ public class HeroController extends AbstractMovingModelController {
 	private void fireWeapon(Input input, AbstractCharacterModel model) {
 		AbstractWeaponModel weapon = model.getCurrentWeapon();
 
-		// If last attack was less than the weapons allowed speed ago, don't do
-		// another.
-		if ((System.currentTimeMillis() - swingTimer) < model
-				.getCurrentWeapon().getFiringSpeed()) {
-			return;
-		}
+		// If last attack was less than the weapons allowed speed
+		boolean weaponCanFireAgain = (System.currentTimeMillis() - swingTimer) > model
+				.getCurrentWeapon().getFiringSpeed();
+		// If we can spam-attack again, this is 1/4th of the time of hold-and-shot
+		boolean weaponCanSpamAgain = (System.currentTimeMillis() - swingTimer) > model
+				.getCurrentWeapon().getFiringSpeed() / 4;
 
 		// Get status of mouse button
 		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
@@ -217,7 +217,8 @@ public class HeroController extends AbstractMovingModelController {
 
 		// Fire bullets if mouse clicked and a ranged weapon is equipped, or
 		// swing weapon if melee weapon.
-		if (isMousePressed || isMouseDown) {
+		if (isMousePressed && weaponCanSpamAgain || isMouseDown
+				&& weaponCanFireAgain) {
 			if (isRangedWeapon) {
 				createBullet();
 			} else if (isMeleeWeapon) {
