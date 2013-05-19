@@ -33,6 +33,11 @@ import se.chalmers.tda367.group15.game.settings.Constants;
 public class RoomController implements TileBasedMap {
 
 	/**
+	 * Variable used to check if room is unlocked.
+	 */
+	private boolean roomUnlocked;
+
+	/**
 	 * The layer containing the blocked boolean
 	 */
 	private int blockedLayerID = 0;
@@ -348,50 +353,52 @@ public class RoomController implements TileBasedMap {
 		}
 
 		// add new qued controllers to the movingModelControllers list
-		it = quedControllers
-				.iterator();
+		it = quedControllers.iterator();
 		while (it.hasNext()) {
 			AbstractMovingModelController controller = it.next();
 			movingModelControllers.add(controller);
 		}
 		quedControllers.clear();
-		
+
 		Collections.sort(movingModelControllers, new ControllerSorter());
-		
-		if(allDead()) {
+
+		if (allDead() && !roomUnlocked) {
 			setMap(roomModel.getUnlockedMapPath());
+			roomUnlocked = true;
 		}
-		
+
 	}
-	
-	private class ControllerSorter implements Comparator<AbstractMovingModelController> {
+
+	private class ControllerSorter implements
+			Comparator<AbstractMovingModelController> {
 
 		@Override
-		public int compare(AbstractMovingModelController c1, AbstractMovingModelController c2) {
+		public int compare(AbstractMovingModelController c1,
+				AbstractMovingModelController c2) {
 			boolean m1Alive = c1.getModel().isAlive();
 			boolean m2Alive = c2.getModel().isAlive();
-			
-			if((m1Alive && m2Alive) || (!m1Alive && !m2Alive)) {
+
+			if ((m1Alive && m2Alive) || (!m1Alive && !m2Alive)) {
 				return 0;
-			}else if(m1Alive && !m2Alive) {
+			} else if (m1Alive && !m2Alive) {
 				return 1;
-			}else{
+			} else {
 				return -1;
 			}
 		}
-		
+
 	}
-	
+
 	public boolean allDead() {
-		for(AbstractMovingModel model : roomModel.getNpcModels()) {
-			if(model.isAlive()) {
+		for (AbstractMovingModel model : roomModel.getNpcModels()) {
+			if (model.isAlive()) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	public RoomModel getRoomModel() {
 		return roomModel;
 	}

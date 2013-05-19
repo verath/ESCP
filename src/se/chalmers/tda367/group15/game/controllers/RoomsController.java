@@ -33,6 +33,11 @@ public class RoomsController {
 	}
 
 	/**
+	 * Variable used to check if boss room is unlocked.
+	 */
+	private boolean bossRoomUnlocked;
+
+	/**
 	 * The starting point of the first room.
 	 */
 	public static final Point STARTING_POINT = new Point(0, 0);
@@ -192,14 +197,15 @@ public class RoomsController {
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
-		
-		if(allEnemiesDefeated()) {
-			for(RoomController controller : rooms.values()) {
+
+		if (allEnemiesDefeated() && !bossRoomUnlocked) {
+			for (RoomController controller : rooms.values()) {
 				RoomModel model = controller.getRoomModel();
-				if(model instanceof LobbyRoomModel) {
+				if (model instanceof LobbyRoomModel) {
 					controller.setMap("res/levels/lobby.tmx");
 				}
 			}
+			bossRoomUnlocked = true;
 		}
 	}
 
@@ -233,17 +239,17 @@ public class RoomsController {
 			room.init(container);
 		}
 	}
-	
+
 	public boolean allEnemiesDefeated() {
 		boolean allDefeated = true;
-		for(RoomController controller : rooms.values()) {
-			if(!(controller.getRoomModel() instanceof BossRoomModel)) {
-				if(!controller.allDead()) {
+		for (RoomController controller : rooms.values()) {
+			if (!(controller.getRoomModel() instanceof BossRoomModel)) {
+				if (!controller.allDead()) {
 					allDefeated = false;
 				}
 			}
 		}
-		
+
 		return allDefeated;
 	}
 
