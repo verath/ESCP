@@ -18,6 +18,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
@@ -421,7 +422,9 @@ public class RoomController implements TileBasedMap {
 				return false;
 			}
 		}
-
+		SoundEffectsController soundEffectsController = SoundEffectsController.instance();
+		soundEffectsController.fadeGameMusic();
+		soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
 		return true;
 	}
 

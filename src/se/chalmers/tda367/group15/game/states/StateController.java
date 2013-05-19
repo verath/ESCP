@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.states;
 
+import java.util.Random;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -8,6 +10,8 @@ import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -20,7 +24,7 @@ public class StateController extends StateBasedGame {
 
 	private boolean pendingFullScreenAction;
 	private AppGameContainer gameContainer;
-	private Music music;
+	private SoundEffectsController soundEffectsController;
 
 	/**
 	 * creates a new StateController
@@ -37,6 +41,7 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
+		soundEffectsController = soundEffectsController.instance();
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MenuStateMain mainMenu = new MenuStateMain(
 				Constants.GAME_STATE_MENU_MAIN);
@@ -48,7 +53,6 @@ public class StateController extends StateBasedGame {
 				Constants.GAME_STATE_MENU_HIGH_SCORE);
         GameLostState gameLostState = new GameLostState(Constants.GAME_STATE_GAME_LOST);
         GameWonState gameWonState = new GameWonState(Constants.GAME_STATE_GAME_WON);
-		initMusic();
 
 		addState(playState);
         addState(gameLostState);
@@ -58,18 +62,6 @@ public class StateController extends StateBasedGame {
 		addState(keyBindsMenu);
 		addState(menuStateHighScore);
 		enterState(Constants.GAME_STATE_MENU_MAIN);
-	}
-
-	public void initMusic() {
-		try {
-			music = new Music("res/music/menu.aif");
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
-
-		music.loop();
-		music.setVolume(0.0f);
-		music.fade(40000, 1.0f, false);
 	}
 
 	/**
@@ -169,7 +161,7 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public boolean closeRequested() {
-		music.release();
+		soundEffectsController.stopAll();
 		return true;
 	}
 }

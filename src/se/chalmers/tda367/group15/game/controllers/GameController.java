@@ -22,7 +22,10 @@ import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
 public class GameController {
-
+	
+	
+	private SoundEffectsController soundEffectsController;
+	
 	/**
 	 * A flag for if the game is over
 	 */
@@ -73,7 +76,9 @@ public class GameController {
 	 */
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-
+		
+		soundEffectsController = SoundEffectsController.instance();
+		
 		// Reset the game over flags
 		gameOver = false;
 		gameWon = false;
@@ -81,7 +86,7 @@ public class GameController {
 		// Set up an event logger to listen for events on the shared event
 		// handler
 		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
-
+		
 		// Set up the rooms
 		RoomController parkingLot = new RoomController(this,
 				new ParkingLotRoomModel());
@@ -135,7 +140,9 @@ public class GameController {
 		if (gameOver) {
 			return;
 		}
-
+		
+		soundEffectsController.update();
+		
 		scoreController.update(container, delta);
 
 		// get current room

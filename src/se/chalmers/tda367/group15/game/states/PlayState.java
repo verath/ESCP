@@ -9,6 +9,8 @@ import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.controllers.GameController;
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -62,7 +64,6 @@ public class PlayState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		gameController.init(container, game);
-
 	}
 
 	/**
