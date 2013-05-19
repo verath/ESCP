@@ -78,6 +78,7 @@ public class SoundEffectsController {
 				if (music.playing()) {
 					queuedMusic = new Music(gameMusic.pathsToFiles[0]);
 					queued = true;
+					fadeGameMusic();
 				}
 			} else {
 				music = new Music(gameMusic.pathsToFiles[0]);
@@ -88,8 +89,9 @@ public class SoundEffectsController {
 		}
 	}
 
-	public void fadeGameMusic() {
+	private void fadeGameMusic() {
 		if (music != null) {
+			System.out.println("FADE");
 			music.fade(1500, 0.0f, true);
 		}
 	}
@@ -108,18 +110,19 @@ public class SoundEffectsController {
 
 	public void update() {
 		// If a piece of music has been queued
-		if (queued && music.getVolume() < 0.2f) {
+		if (queued && !music.playing()) {
 			music.setVolume(0.0f);
 			queuedMusic.setVolume(0.0f);
 			queuedMusic.fade(3000, 0.7f, false);
-			queuedMusic.loop();
+			music = queuedMusic;
+			music.loop();
 			queued = false;
 
 		}
 	}
 	
 	public void resetAll() {
-		music = null;
-		queuedMusic = null;
+//		music = null;
+//		queuedMusic = null;
 	}
 }

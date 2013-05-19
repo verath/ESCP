@@ -210,7 +210,6 @@ public class RoomsController {
 				}
 			}
 			bossRoomUnlocked = true;
-			soundEffectsController.fadeGameMusic();
 			soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
 		}
 	}

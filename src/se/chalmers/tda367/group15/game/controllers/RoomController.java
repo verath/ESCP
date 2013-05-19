@@ -384,6 +384,8 @@ public class RoomController implements TileBasedMap {
 		Collections.sort(movingModelControllers, new ControllerSorter());
 
 		if (allDead() && !roomUnlocked) {
+			SoundEffectsController soundEffectsController = SoundEffectsController.instance();
+			soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
 			setMap(roomModel.getUnlockedMapPath());
 			roomUnlocked = true;
 		}
@@ -422,9 +424,6 @@ public class RoomController implements TileBasedMap {
 				return false;
 			}
 		}
-		SoundEffectsController soundEffectsController = SoundEffectsController.instance();
-		soundEffectsController.fadeGameMusic();
-		soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
 		return true;
 	}
 
