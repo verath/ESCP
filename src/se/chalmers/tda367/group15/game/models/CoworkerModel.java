@@ -3,8 +3,7 @@ package se.chalmers.tda367.group15.game.models;
 import java.util.Random;
 
 /**
- * Simple class for representing a dummy enemy. This enemy is only intended for
- * testing.
+ * Simple class for representing a coworker.
  * 
  * @author simon
  * 

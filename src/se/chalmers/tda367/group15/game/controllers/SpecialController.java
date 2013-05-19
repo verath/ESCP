@@ -14,7 +14,7 @@ import se.chalmers.tda367.group15.game.models.SpecialModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
 /**
- * Creates a new dummy enemy
+ * Class for representing a soldier controller.
  * 
  * @author Simon Persson, Carl Jansson
  * 

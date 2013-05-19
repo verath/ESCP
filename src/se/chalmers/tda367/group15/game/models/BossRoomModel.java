@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A lobby room.
+ * A boss room.
  * 
  * @author simon
  * 
@@ -15,7 +15,7 @@ public class BossRoomModel implements RoomModel {
 	 * Variable for storing path to map with unlocked doors.
 	 */
 	private String unlockedMapPath;
-	
+
 	/**
 	 * Variable for storing path to map with locked doors.
 	 */
@@ -41,16 +41,25 @@ public class BossRoomModel implements RoomModel {
 		lockedMapPath = "res/levels/top_room_locked.tmx";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AbstractMovingModel> getNpcModels() {
 		return npcModels;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUnlockedMapPath() {
 		return unlockedMapPath;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getLockedMapPath() {
 		return lockedMapPath;

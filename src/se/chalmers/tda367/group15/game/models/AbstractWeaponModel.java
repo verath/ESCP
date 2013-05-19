@@ -84,10 +84,21 @@ public abstract class AbstractWeaponModel {
 		return baseDamage + randomGenerator.nextInt(maxDamage);
 	}
 
+	/**
+	 * Get the firing speed.
+	 * 
+	 * @return int representing the firing speed.
+	 */
 	public int getFiringSpeed() {
 		return firingSpeed;
 	}
 
+	/**
+	 * Set the firingspeed.
+	 * 
+	 * @param firingSpeed
+	 *            An int representing the firing speed.
+	 */
 	public void setFiringSpeed(int firingSpeed) {
 		this.firingSpeed = firingSpeed;
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A lobby room.
+ * An office room.
  * 
  * @author simon
  * 
@@ -70,16 +70,25 @@ public class LeftWingRoomModel implements RoomModel {
 		lockedMapPath = "res/levels/left_room_locked.tmx";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AbstractMovingModel> getNpcModels() {
 		return npcModels;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUnlockedMapPath() {
 		return unlockedMapPath;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getLockedMapPath() {
 		return lockedMapPath;

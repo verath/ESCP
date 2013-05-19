@@ -39,16 +39,25 @@ public class ParkingLotRoomModel implements RoomModel {
 		lockedMapPath = "res/levels/parking_lot_locked.tmx";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AbstractMovingModel> getNpcModels() {
 		return npcModels;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUnlockedMapPath() {
 		return unlockedMapPath;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getLockedMapPath() {
 		return lockedMapPath;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An office room.
+ * An office with toilets.
  * 
  * @author simon
  * 
@@ -26,6 +26,9 @@ public class WCRoomModel implements RoomModel {
 	 */
 	private List<AbstractMovingModel> npcModels;
 
+	/**
+	 * Create a wc room model.
+	 */
 	public WCRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
@@ -45,16 +48,25 @@ public class WCRoomModel implements RoomModel {
 		lockedMapPath = "res/levels/right_room_locked.tmx";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AbstractMovingModel> getNpcModels() {
 		return npcModels;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUnlockedMapPath() {
 		return unlockedMapPath;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getLockedMapPath() {
 		return lockedMapPath;

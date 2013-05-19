@@ -1,44 +1,84 @@
 package se.chalmers.tda367.group15.game.models;
 
-
 /**
- * Simple class for representing a dummy enemy. This enemy is only intended for
- * testing.
+ * Class representing a soldier model.
  * 
  * @author simon
  * 
  */
 public class SpecialModel extends AbstractNpcModel {
-		
+
 	/**
-	 * Creates a new dummy enemy.
+	 * Creates a new soldier.
 	 */
 	public SpecialModel() {
 		this(64f, 128f);
 	}
 
+	/**
+	 * Creates a new soldier.
+	 * 
+	 * @param x
+	 *            The x coordinate.
+	 * @param y
+	 *            The y coordinate.
+	 */
 	public SpecialModel(float x, float y) {
 		this(x, y, 360 * Math.random());
-
 	}
 
+	/**
+	 * Creates a new soldier.
+	 * 
+	 * @param x
+	 *            The x coordinate.
+	 * @param y
+	 *            The y coordinate.
+	 * @param rot
+	 *            The rotation angle.
+	 */
 	public SpecialModel(float x, float y, double rot) {
 		this(x, y, rot, 0, 32, 0, 24);
 	}
 
+	/**
+	 * 
+	 * Creates a new soldier.
+	 * 
+	 * @param x
+	 *            The x coordinate.
+	 * @param y
+	 *            The y coordinate.
+	 * @param x1
+	 *            The minimum tile x coordinate
+	 * @param x2
+	 *            The maximum tile x coordinate
+	 * @param y1
+	 *            The minimum tile y coordinate
+	 * @param y2
+	 *            The maximum tile y coordinate
+	 */
 	public SpecialModel(float x, float y, int x1, int x2, int y1, int y2) {
 		this(x, y, 0, x1, x2, y1, y2);
 	}
 
 	/**
-	 * Creates a new dummy enemy.
+	 * Creates a new soldier.
 	 * 
 	 * @param x
-	 *            x position of DummyEnemyModel
+	 *            The x coordinate.
 	 * @param y
-	 *            y position of DummyEnemyModel
+	 *            The y coordinate.
 	 * @param rot
-	 *            angle to face in beginning
+	 *            The rotation angle.
+	 * @param x1
+	 *            The minimum tile x coordinate
+	 * @param x2
+	 *            The maximum tile x coordinate
+	 * @param y1
+	 *            The minimum tile y coordinate
+	 * @param y2
+	 *            The maximum tile y coordinate
 	 */
 	public SpecialModel(float x, float y, double rot, int x1, int x2, int y1,
 			int y2) {
