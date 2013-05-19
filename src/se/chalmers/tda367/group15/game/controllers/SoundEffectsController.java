@@ -95,7 +95,6 @@ public class SoundEffectsController {
 
 	private void fadeGameMusic() {
 		if (music != null) {
-			System.out.println("FADE");
 			music.fade(1500, 0.0f, true);
 		}
 	}
