@@ -1,14 +1,15 @@
 package se.chalmers.tda367.group15.game.views;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 import se.chalmers.tda367.group15.game.models.ScoreModel;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 public class HUDView implements View {
 	private final ScoreModel scoreModel;
+
+    private final TrueTypeFont textFont = new TrueTypeFont(new java.awt.Font(
+            "Monospaced", java.awt.Font.BOLD, 16), true);
 
 	public HUDView(ScoreModel scoreModel) {
 		this.scoreModel = scoreModel;
@@ -22,15 +23,15 @@ public class HUDView implements View {
 
 		String scoreStr = "Score: " + currentScore;
 		String fpsStr = "FPS: " + container.getFPS();
-		int scoreStrWidth = g.getFont().getWidth(scoreStr);
+		int scoreStrWidth = textFont.getWidth(scoreStr);
 
-		g.setColor(Color.black);
-		g.drawString(scoreStr, container.getWidth() - (scoreStrWidth + 6), 6);
-		g.drawString(fpsStr, 6, 6);
+        // Draw black outline
+        textFont.drawString(Constants.GAME_WIDTH - (scoreStrWidth + 6), 6, scoreStr, Color.black);
+        textFont.drawString(6, 6, fpsStr, Color.black);
 
-		g.setColor(Color.white);
-		g.drawString(scoreStr, container.getWidth() - (scoreStrWidth + 5), 5);
-		g.drawString(fpsStr, 5, 5);
+        // Draw white on top
+        textFont.drawString(Constants.GAME_WIDTH - (scoreStrWidth + 5), 5, scoreStr, Color.white);
+        textFont.drawString(5, 5, fpsStr, Color.white);
 
 	}
 
