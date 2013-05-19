@@ -6,16 +6,17 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 
-public class BulletView implements View {
+public class ProjectileView implements View {
 
 	private AbstractMovingModel model;
 	private Image image;
 
-	public BulletView(AbstractMovingModel model) {
+	public ProjectileView(AbstractProjectileModel model) {
 		this.model = model;
 		try {
-			image = new Image("res/images/bullet.png");
+			image = new Image(model.getImagePath());
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

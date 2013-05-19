@@ -9,15 +9,16 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.views.BulletView;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.views.ProjectileView;
 
 public class ProjectileController extends AbstractMovingModelController {
 
 	protected ProjectileController(GameController gameController,
-			AbstractMovingModel projectile) {
+			AbstractProjectileModel projectile) {
 		super(gameController);
 		setModel(projectile);
-		setView(new BulletView(projectile));
+		setView(new ProjectileView(projectile));
 	}
 
 	@Override

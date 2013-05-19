@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.models;
 
+
 public abstract class AbstractProjectileModel extends AbstractMovingModel {
 
 	/**
@@ -24,4 +25,6 @@ public abstract class AbstractProjectileModel extends AbstractMovingModel {
 	public int getDamage() {
 		return damage;
 	}
+
+	public abstract String getImagePath();
 }

@@ -93,10 +93,10 @@ public class CharacterView implements View {
 
 		// The hero has a different "animation" where this would case a
 		// IndexOutOfBoundsException, so don't count it in
-		if (!path.equals("hero/death/")) {
-			deathAnimation.setDuration(9, 2000);
-			deathAnimation.setDuration(14, 3000);
-		}
+//		if (!path.equals("hero/death/")) {
+//			deathAnimation.setDuration(9, 2000);
+//			deathAnimation.setDuration(14, 3000);
+//		}
 		deathAnimation.setLooping(false);
 
 		// set initial animation

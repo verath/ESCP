@@ -10,4 +10,9 @@ public class MeleeSwingModel extends AbstractProjectileModel {
 		setWidth(10);
 		setHeight(10);
 	}
+
+	@Override
+	public String getImagePath() {
+		return null;
+	}
 }

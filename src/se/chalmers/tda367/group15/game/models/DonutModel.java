@@ -1,19 +1,19 @@
 package se.chalmers.tda367.group15.game.models;
 
-public class BulletModel extends AbstractProjectileModel {
+public class DonutModel extends AbstractProjectileModel {
 
-	public BulletModel() {
+	public DonutModel() {
 		setX(0);
 		setY(0);
 		setVelocity(0.4f);
 		setAlive(false);
-		setWidth(6);
-		setHeight(6);
+		setWidth(10);
+		setHeight(10);
 	}
 
 	@Override
 	public String getImagePath() {
-		return "res/images/bullet.png";
+		return "res/images/donut.png";
 	}
 
 }
