@@ -6,7 +6,7 @@ import java.util.Collection;
 /**
  * A class holding static utility functions for collisions and related events.
  * 
- * @author Peter
+ * @author Peter, Carl
  */
 public class CollisionHelper {
 
@@ -64,6 +64,11 @@ public class CollisionHelper {
 				rect.getY()));
 	}
 
+	/*
+	 * NOTE: The following method is taken from java-gaming.org where it was
+	 * posted by user JGO Knight. For some reason Java default intersect method
+	 * as declared in the interface Shape doesn't work.
+	 */
 	/**
 	 * 
 	 * The fastest way to test if 2 line segments intersect. Tests if the line
@@ -72,20 +77,22 @@ public class CollisionHelper {
 	 * than java.awt.geom.Line2D.linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4):
 	 * 
 	 * @param x1
+	 *            Point 1 X
 	 * @param y1
+	 *            Point 1 Y
 	 * @param x2
+	 *            Point 2 X
 	 * @param y2
+	 *            Point 2 Y
 	 * @param x3
+	 *            Point 3 X
 	 * @param y3
+	 *            Point 3 Y
 	 * @param x4
+	 *            Point 4 X
 	 * @param y4
+	 *            Point 4 Y
 	 * @return true if intersect
-	 * @author JGO Knight
-	 */
-	/*
-	 * NOTE: This method is taken from java-gaming.org where it was posted by
-	 * user JGO Knight. For some reason Java default intersect method as
-	 * declared in the interface Shape doesn't work.
 	 */
 	public static boolean linesIntersect(double x1, double y1, double x2,
 			double y2, double x3, double y3, double x4, double y4) {
