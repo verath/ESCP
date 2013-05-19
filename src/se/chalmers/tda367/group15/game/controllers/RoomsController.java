@@ -256,7 +256,9 @@ public class RoomsController {
 				}
 			}
 		}
-		return allDefeated;
+		//TODO return allDefeated; IMPORTANT!!!!
+		return true;
+		//return allDefeated;
 	}
 
 }

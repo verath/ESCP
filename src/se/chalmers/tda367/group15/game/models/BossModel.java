@@ -27,7 +27,7 @@ public class BossModel extends AbstractNpcModel {
 	}
 
 	public BossModel(float x, float y, int x1, int x2, int y1, int y2) {
-		this(x, y, 0, x1, x2, y1, y2);
+		this(x, y, 360 * Math.random(), x1, x2, y1, y2);
 	}
 
 	/**
