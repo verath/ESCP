@@ -1,13 +1,9 @@
 package se.chalmers.tda367.group15.game.states;
 
-import java.awt.*;
 import java.util.List;
 
 import org.newdawn.slick.*;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
 import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.menu.Button;
