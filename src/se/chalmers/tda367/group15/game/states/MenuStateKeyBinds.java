@@ -94,7 +94,10 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		}
 
 		try {
-			initElements();
+            addReturnButton();
+		    initKeyBindButtons();
+            addKeyBindButtons();
+
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -103,21 +106,36 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 
 	}
 
-	private void initElements() throws SlickException {
-		Image backImage = new Image("res/menu/returnButton.png");
-		Image backImageMO = new Image("res/menu/returnButtonMO.png");
+    private void addKeyBindButtons() {
+        // Set the text and add each button mapped in the buttonToKeyBind map
+        for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
+            String keyName = Input.getKeyName(KeyBindings.getBinding(entry
+                    .getValue()));
+            entry.getKey().setText(keyName);
 
-		// Button for returning to main menu.
-		Button returnButton = new Button(container, backImage, backImageMO,
-				MENUX, MENUY) {
-			@Override
-			public void performAction() {
-				stopRebindKey();
-				game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
-			}
-		};
+            // Add items so that they are drawn
+            addMenuItem(entry.getKey());
+        }
+    }
 
-		addMenuItem(returnButton);
+    private void addReturnButton() throws SlickException{
+        Image backImage = new Image("res/menu/returnButton.png");
+        Image backImageMO = new Image("res/menu/returnButtonMO.png");
+
+        // Button for returning to main menu.
+        Button returnButton = new Button(container, backImage, backImageMO,
+                MENUX, MENUY) {
+            @Override
+            public void performAction() {
+                stopRebindKey();
+                game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
+            }
+        };
+
+        addMenuItem(returnButton);
+    }
+
+    private void initKeyBindButtons() throws SlickException {
 
 		Image imageNormal = new Image(180, 40);
 		Image imageOver = new Image("res/menu/EmptyMO.png");
@@ -187,22 +205,6 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		buttonToKeyBind.put(bindWeapon1, Key.WEAPON_1);
 		buttonToKeyBind.put(bindWeapon2, Key.WEAPON_2);
 		buttonToKeyBind.put(bindWeapon3, Key.WEAPON_3);
-
-		// Set text from bind
-		for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
-			String keyName = Input.getKeyName(KeyBindings.getBinding(entry
-					.getValue()));
-			entry.getKey().setText(keyName);
-		}
-
-		// Add items so that they are drawn
-		addMenuItem(bindUp);
-		addMenuItem(bindDown);
-		addMenuItem(bindLeft);
-		addMenuItem(bindRight);
-		addMenuItem(bindWeapon1);
-		addMenuItem(bindWeapon2);
-		addMenuItem(bindWeapon3);
 	}
 
 	/**

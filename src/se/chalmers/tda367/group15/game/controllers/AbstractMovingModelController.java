@@ -125,32 +125,6 @@ public abstract class AbstractMovingModelController {
 	}
 
 	/**
-	 * Method for checking if collision with model in (x,y) position is about to
-	 * happen.
-	 * 
-	 * @param x
-	 *            the x coordinate
-	 * @param y
-	 *            the y coordinate
-	 * @param staticBounds
-	 *            list of rectangles representing static blocked object on the
-	 *            map
-	 * @param dynamicBounds
-	 *            map with moving models and their collision bounds
-	 * @return true if collision, false otherwise
-	 */
-	public boolean isCollision(float x, float y,
-			List<Rectangle2D.Float> staticBounds,
-			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
-
-		if (model.isAlive()) {
-			return isCollision(x, y, model.getWidth(), model.getHeight(),
-					staticBounds, dynamicBounds);
-		}
-		return false;
-	}
-
-	/**
 	 * Method for checking if collision with width and height is about to happen
 	 * in position (x,y).
 	 * 
@@ -199,29 +173,9 @@ public abstract class AbstractMovingModelController {
 		boolean staticCollision = isStaticCollision(staticBounds, bound1);
 
 		// check dynamic collisions
-		boolean dynamicCollsion = isDynamicCollision(dynamicBounds, bound1);
+		boolean dynamicCollision = isDynamicCollision(dynamicBounds, bound1);
 
-		return staticCollision || dynamicCollsion;
-	}
-
-	/**
-	 * Method for checking if static collision with model is about to happen.
-	 * 
-	 * @param x
-	 *            the x coordinate
-	 * @param y
-	 *            the y coordinate
-	 * @param staticBounds
-	 *            list of rectangles representing static blocked object on the
-	 *            map
-	 * @return true if collision, false otherwise
-	 */
-	public boolean isStaticCollision(float x, float y,
-			List<Rectangle2D.Float> staticBounds) {
-
-		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
-				model.getWidth(), model.getHeight());
-		return isStaticCollision(staticBounds, bound1);
+		return staticCollision || dynamicCollision;
 	}
 
 	/**
@@ -285,13 +239,13 @@ public abstract class AbstractMovingModelController {
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
 			Rectangle2D.Float bound1) {
 
-		boolean dynamicCollsion = false;
+		boolean dynamicCollision = false;
 		// check dynamic collisions
 		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
 			Rectangle2D.Float bound2 = otherModel.getBounds();
 			if (bound1.intersects(bound2) && this.model != otherModel
 					&& otherModel.isAlive()) {
-				dynamicCollsion = true;
+				dynamicCollision = true;
 				if (model instanceof AbstractProjectileModel
 						&& otherModel instanceof AbstractCharacterModel) {
 					AbstractProjectileModel projectile = (AbstractProjectileModel) model;
@@ -312,7 +266,7 @@ public abstract class AbstractMovingModelController {
 			}
 		}
 
-		return dynamicCollsion;
+		return dynamicCollision;
 	}
 
 	/**
