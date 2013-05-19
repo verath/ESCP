@@ -12,7 +12,15 @@ import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
-import se.chalmers.tda367.group15.game.models.*;
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
+import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractNpcModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.models.BulletModel;
+import se.chalmers.tda367.group15.game.models.DonutModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 import se.chalmers.tda367.group15.game.views.CharacterView;
 
@@ -26,7 +34,11 @@ public abstract class AbstractNpcController extends
 		AbstractMovingModelController {
 
 	private long swingTimer = 0;
-	private final int ENEMY_DAMAGE_MODIFIER = 2;
+	
+	protected int ENEMY_DAMAGE_MODIFIER = 2;
+
+	private SoundEffectsController soundController = SoundEffectsController
+			.instance();
 
 	/**
 	 * The path controller is traveling
@@ -353,5 +365,67 @@ public abstract class AbstractNpcController extends
 				.getCurrentRoom();
 
 		currentRoom.addSwing(newSwing);
+	}
+
+	/**
+	 * Create a bullet.
+	 */
+	public void createBullet() {
+		soundController
+				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		AbstractProjectileModel newDonut = new BulletModel();
+
+		float heroAngle = (float) Math.toRadians(model.getRotation());
+		float heroMiddleX = model.getX() + model.getWidth() / 2;
+		float heroMiddleY = model.getY() + model.getHeight() / 2;
+
+		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
+				* ((model.getWidth()));
+		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
+				* ((model.getHeight()));
+
+		newDonut.setX(heroFaceX - newDonut.getWidth() / 2);
+		newDonut.setY(heroFaceY - newDonut.getHeight() / 2);
+
+		newDonut.setRotation(model.getRotation());
+		newDonut.setDamage(model.getCurrentWeapon().getDamage()*ENEMY_DAMAGE_MODIFIER);
+		newDonut.setAlive(true);
+		RoomController currentRoom = getGameController().getRoomsController()
+				.getCurrentRoom();
+		currentRoom.addProjectile(newDonut);
+	}
+
+	/**
+	 * Create a donut.
+	 */
+	public void createDonut() {
+		soundController
+				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
+		
+		CharacterView view = (CharacterView) getView();
+		view.runAttackAnimation();
+		
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		AbstractProjectileModel newDonut = new DonutModel();
+
+		float heroAngle = (float) Math.toRadians(model.getRotation());
+		float heroMiddleX = model.getX() + model.getWidth() / 2;
+		float heroMiddleY = model.getY() + model.getHeight() / 2;
+
+		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
+				* ((model.getWidth()));
+		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
+				* ((model.getHeight()));
+
+		newDonut.setX(heroFaceX - newDonut.getWidth() / 2);
+		newDonut.setY(heroFaceY - newDonut.getHeight() / 2);
+
+		newDonut.setRotation(model.getRotation());
+		newDonut.setDamage(model.getCurrentWeapon().getDamage()*ENEMY_DAMAGE_MODIFIER);
+		newDonut.setAlive(true);
+		RoomController currentRoom = getGameController().getRoomsController()
+				.getCurrentRoom();
+		currentRoom.addProjectile(newDonut);
 	}
 }

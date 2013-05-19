@@ -240,6 +240,13 @@ public class RoomsController {
 		}
 	}
 
+	/**
+	 * Method for checking if all enemies in all existing rooms is defeated
+	 * (except for the boss room). This method is used to determine if to unlock
+	 * door to the boss room.
+	 * 
+	 * @return true if all enemies are dead, false otherwise.
+	 */
 	public boolean allEnemiesDefeated() {
 		boolean allDefeated = true;
 		for (RoomController controller : rooms.values()) {
@@ -249,7 +256,6 @@ public class RoomsController {
 				}
 			}
 		}
-
 		return allDefeated;
 	}
 

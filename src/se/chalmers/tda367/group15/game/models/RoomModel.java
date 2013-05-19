@@ -17,13 +17,18 @@ public interface RoomModel {
 	public List<AbstractMovingModel> getNpcModels();
 
 	/**
-	 * Method for getting the path to the tmx file to be used for creating a
-	 * Tiled Map.
+	 * Get the path to the tmx file to be used for creating an unlocked Tiled
+	 * Map.
 	 * 
 	 * @return The path to a tmx file.
 	 */
 	public String getUnlockedMapPath();
-	
+
+	/**
+	 * Get the path to the tmx file to be used for creating an locked Tiled Map.
+	 * 
+	 * @return The path to a tmx file.
+	 */
 	public String getLockedMapPath();
-	
+
 }
