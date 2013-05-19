@@ -41,16 +41,25 @@ public class LobbyRoomModel implements RoomModel {
 		unlockedMapPath = "res/levels/lobby_boss_locked.tmx";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AbstractMovingModel> getNpcModels() {
 		return npcModels;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUnlockedMapPath() {
 		return unlockedMapPath;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getLockedMapPath() {
 		return lockedMapPath;

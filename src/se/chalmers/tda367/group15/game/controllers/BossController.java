@@ -9,35 +9,40 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.CoworkerModel;
+import se.chalmers.tda367.group15.game.models.BossModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
 /**
- * Class for representing a coworker controller.
+ * Class for representing a boss controller
  * 
  * @author Simon Persson, Carl Jansson
  * 
  */
-public class CoworkerController extends AbstractNpcController {
+public class BossController extends AbstractNpcController {
 
 	private boolean hasFired;
 
 	private boolean heroTracking;
+	
+	private long swingTimer = 0;
+	
 
 	/**
-	 * Creates a new CoworkerController.
+	 * Creates a new boss controller.
 	 * 
 	 * @param model
-	 *            the CoworkerModel model
+	 *            the BossModel model
 	 * @param map
 	 *            The map to use.
 	 * @param gameController
 	 *            A reference to the gameController
 	 */
-	public CoworkerController(CoworkerModel model, TileBasedMap map,
+	public BossController(BossModel model, TileBasedMap map,
 			GameController gameController) {
 		super(gameController, model, map);
+		this.ENEMY_DAMAGE_MODIFIER = 3;
 	}
 
 	/**
@@ -60,7 +65,7 @@ public class CoworkerController extends AbstractNpcController {
 			throws SlickException {
 
 		if (hasFired) {
-			swingWeapon();
+			createDonut();
 			hasFired = false;
 		}
 
@@ -106,8 +111,7 @@ public class CoworkerController extends AbstractNpcController {
 					(currX - heroX))));
 
 			// If hero is in reach and no other npc is in the way attack!
-			if (Math.hypot(currX - heroX, currY - heroY) < 100
-					&& isWayClear(dynamicBounds, currX, currY, heroX, heroY)) {
+			if (isWayClear(dynamicBounds, currX, currY, heroX, heroY)) {
 				fireTimed();
 			}
 		}
@@ -128,5 +132,17 @@ public class CoworkerController extends AbstractNpcController {
 	public void fire() {
 		hasFired = true;
 
+	}
+	
+	/**
+	 * The boss is kinda slower than everybody else
+	 */
+	@Override
+	public void fireTimed() {
+		if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) getModel())
+				.getCurrentWeapon().getFiringSpeed()*2) {
+			swingTimer = System.currentTimeMillis();
+			fire();
+		}
 	}
 }

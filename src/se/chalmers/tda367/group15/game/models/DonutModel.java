@@ -1,20 +1,17 @@
 package se.chalmers.tda367.group15.game.models;
 
 /**
- * Class representing a melee swing model.
+ * Class representing a donut model.
  * 
  * @author simon
  * 
  */
-public class MeleeSwingModel extends AbstractProjectileModel {
+public class DonutModel extends AbstractProjectileModel {
 
-	/**
-	 * Create a melee swing model.
-	 */
-	public MeleeSwingModel() {
+	public DonutModel() {
 		setX(0);
 		setY(0);
-		setVelocity(0.1f);
+		setVelocity(0.4f);
 		setAlive(false);
 		setWidth(10);
 		setHeight(10);
@@ -25,6 +22,7 @@ public class MeleeSwingModel extends AbstractProjectileModel {
 	 */
 	@Override
 	public String getImagePath() {
-		return null;
+		return "res/images/donut.png";
 	}
+
 }

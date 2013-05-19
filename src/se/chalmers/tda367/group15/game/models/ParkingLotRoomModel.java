@@ -29,7 +29,7 @@ public class ParkingLotRoomModel implements RoomModel {
 	public ParkingLotRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
-		CoworkerModel e1 = new CoworkerModel(2*32, 5*32);
+		BossModel e1 = new BossModel(2*32, 5*32);
 		CoworkerModel e2 = new CoworkerModel(29*32, 11*32);
 
 		npcModels.add(e1);
@@ -39,16 +39,25 @@ public class ParkingLotRoomModel implements RoomModel {
 		lockedMapPath = "res/levels/parking_lot_locked.tmx";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AbstractMovingModel> getNpcModels() {
 		return npcModels;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUnlockedMapPath() {
 		return unlockedMapPath;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getLockedMapPath() {
 		return lockedMapPath;

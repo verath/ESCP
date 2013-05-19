@@ -10,6 +10,9 @@ package se.chalmers.tda367.group15.game.models;
  */
 public class UnarmedModel extends AbstractMeleeWeaponModel {
 
+	/**
+	 * Create a new unarmed model.
+	 */
 	public UnarmedModel() {
 		super("unarmed", 5, 10, 350, true);
 	}

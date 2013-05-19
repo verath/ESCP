@@ -10,16 +10,16 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.CoworkerModel;
+import se.chalmers.tda367.group15.game.models.SoldierModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
 /**
- * Class for representing a coworker controller.
+ * Class for representing a soldier controller.
  * 
  * @author Simon Persson, Carl Jansson
  * 
  */
-public class CoworkerController extends AbstractNpcController {
+public class SoldierController extends AbstractNpcController {
 
 	private boolean hasFired;
 
@@ -29,15 +29,16 @@ public class CoworkerController extends AbstractNpcController {
 	 * Creates a new CoworkerController.
 	 * 
 	 * @param model
-	 *            the CoworkerModel model
+	 *            the SpecialModel model
 	 * @param map
 	 *            The map to use.
 	 * @param gameController
 	 *            A reference to the gameController
 	 */
-	public CoworkerController(CoworkerModel model, TileBasedMap map,
+	public SoldierController(SoldierModel model, TileBasedMap map,
 			GameController gameController) {
 		super(gameController, model, map);
+		this.ENEMY_DAMAGE_MODIFIER = 1;
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class CoworkerController extends AbstractNpcController {
 			throws SlickException {
 
 		if (hasFired) {
-			swingWeapon();
+			createBullet();
 			hasFired = false;
 		}
 
@@ -106,8 +107,7 @@ public class CoworkerController extends AbstractNpcController {
 					(currX - heroX))));
 
 			// If hero is in reach and no other npc is in the way attack!
-			if (Math.hypot(currX - heroX, currY - heroY) < 100
-					&& isWayClear(dynamicBounds, currX, currY, heroX, heroY)) {
+			if (isWayClear(dynamicBounds, currX, currY, heroX, heroY)) {
 				fireTimed();
 			}
 		}
