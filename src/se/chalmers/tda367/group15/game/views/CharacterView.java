@@ -90,7 +90,6 @@ public class CharacterView implements View {
 		// store death animation
 		String path = model.getAnimationPath() + "/death/";
 		deathAnimation = getAnimationFromPath(path);
-		System.out.println(path);
 		// The enemies will bleed slowly when they die
 		if (path.equals("coworker/1/death/") || path.equals("coworker/2/death/")) {
 			deathAnimation.setDuration(7, 2000);
