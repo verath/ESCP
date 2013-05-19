@@ -4,12 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.KeyListener;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.*;
 
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.TextButton;
@@ -94,9 +89,9 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		}
 
 		try {
-            addReturnButton();
-		    initKeyBindButtons();
-            addKeyBindButtons();
+			addReturnButton();
+			initKeyBindButtons();
+			addKeyBindButtons();
 
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -106,36 +101,36 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 
 	}
 
-    private void addKeyBindButtons() {
-        // Set the text and add each button mapped in the buttonToKeyBind map
-        for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
-            String keyName = Input.getKeyName(KeyBindings.getBinding(entry
-                    .getValue()));
-            entry.getKey().setText(keyName);
+	private void addKeyBindButtons() {
+		// Set the text and add each button mapped in the buttonToKeyBind map
+		for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
+			String keyName = Input.getKeyName(KeyBindings.getBinding(entry
+					.getValue()));
+			entry.getKey().setText(keyName);
 
-            // Add items so that they are drawn
-            addMenuItem(entry.getKey());
-        }
-    }
+			// Add items so that they are drawn
+			addMenuItem(entry.getKey());
+		}
+	}
 
-    private void addReturnButton() throws SlickException{
-        Image backImage = new Image("res/menu/returnButton.png");
-        Image backImageMO = new Image("res/menu/returnButtonMO.png");
+	private void addReturnButton() throws SlickException {
+		Image backImage = new Image("res/menu/returnButton.png");
+		Image backImageMO = new Image("res/menu/returnButtonMO.png");
 
-        // Button for returning to main menu.
-        Button returnButton = new Button(container, backImage, backImageMO,
-                MENUX, MENUY) {
-            @Override
-            public void performAction() {
-                stopRebindKey();
-                game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
-            }
-        };
+		// Button for returning to main menu.
+		Button returnButton = new Button(container, backImage, backImageMO,
+				MENUX, MENUY) {
+			@Override
+			public void performAction() {
+				stopRebindKey();
+				game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
+			}
+		};
 
-        addMenuItem(returnButton);
-    }
+		addMenuItem(returnButton);
+	}
 
-    private void initKeyBindButtons() throws SlickException {
+	private void initKeyBindButtons() throws SlickException {
 
 		Image imageNormal = new Image(180, 40);
 		Image imageOver = new Image("res/menu/EmptyMO.png");
