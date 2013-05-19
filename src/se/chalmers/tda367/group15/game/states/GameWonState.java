@@ -70,7 +70,7 @@ public class GameWonState extends AbstractMenuBasedState {
 				Constants.MENU_UPPER_Y + 50, "Name:");
 
 		StringBuilder paddedName = new StringBuilder();
-		for (int i = 0; i < MAX_NAME_LENGTH; i++) {
+		for (int i = 0; i < name.length(); i++) {
 			if (paddedName.length() > 0) {
 				paddedName.append(' ');
 			}
