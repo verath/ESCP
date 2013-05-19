@@ -17,18 +17,14 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
 
 public class HeroController extends AbstractMovingModelController {
 
-	private boolean goingUp;
-	private boolean goingDown;
-	private boolean goingLeft;
-	private boolean goingRight;
-	private long swingTimer = 0;
+    private long swingTimer = 0;
 	private SoundEffectsController soundController = SoundEffectsController
 			.instance();
 
 	/**
 	 * Create a new controller for the hero.
 	 * 
-	 * @param gameController
+	 * @param gameController The gameController instance.
 	 * 
 	 */
 	public HeroController(GameController gameController) {
@@ -147,10 +143,10 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	private Point calculateNextPosition(Input input,
 			AbstractCharacterModel model, int delta) {
-		goingUp = input.isKeyDown(KeyBindings.getBinding(Key.UP));
-		goingDown = input.isKeyDown(KeyBindings.getBinding(Key.DOWN));
-		goingRight = input.isKeyDown(KeyBindings.getBinding(Key.RIGHT));
-		goingLeft = input.isKeyDown(KeyBindings.getBinding(Key.LEFT));
+        boolean goingUp = input.isKeyDown(KeyBindings.getBinding(Key.UP));
+        boolean goingDown = input.isKeyDown(KeyBindings.getBinding(Key.DOWN));
+        boolean goingRight = input.isKeyDown(KeyBindings.getBinding(Key.RIGHT));
+        boolean goingLeft = input.isKeyDown(KeyBindings.getBinding(Key.LEFT));
 
 		// Calculate move direction and move
 		float speedY = (goingUp ? 1 : 0) - (goingDown ? 1 : 0);
