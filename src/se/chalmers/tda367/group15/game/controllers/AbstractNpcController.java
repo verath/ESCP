@@ -401,7 +401,7 @@ public abstract class AbstractNpcController extends
 	 */
 	public void createDonut() {
 		soundController
-				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
+				.playSound(SoundEffectsController.SoundEffect.DONUT_FIRED);
 		
 		CharacterView view = (CharacterView) getView();
 		view.runAttackAnimation();

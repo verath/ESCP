@@ -19,6 +19,7 @@ import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
@@ -383,13 +384,6 @@ public class RoomController implements TileBasedMap {
 
 		Collections.sort(movingModelControllers, new ControllerSorter());
 
-		if (allDead() && !roomUnlocked) {
-			SoundEffectsController soundEffectsController = SoundEffectsController.instance();
-			soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
-			setMap(roomModel.getUnlockedMapPath());
-			roomUnlocked = true;
-		}
-
 	}
 
 	// an inner class used to sort controllers
@@ -434,6 +428,15 @@ public class RoomController implements TileBasedMap {
 	 */
 	public RoomModel getRoomModel() {
 		return roomModel;
+	}
+
+	public boolean isUnlocked() {
+		return roomUnlocked;
+	}
+	
+	public void unlockRoom() {
+		setMap(roomModel.getUnlockedMapPath());
+		roomUnlocked = true;
 	}
 
 }

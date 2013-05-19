@@ -20,12 +20,16 @@ public class SoundEffectsController {
 	private boolean queued = false;
 
 	public enum SoundEffect {
-		ENEMY_DEATH(new String[] { "res/sound/enemy/ondamage/die.aif" }), ENEMY_HURT(
+		ENEMY_DEATH(new String[] { "res/sound/enemy/ondeath/enemy_death1.aif", "res/sound/enemy/ondeath/enemy_death2.aif" }), ENEMY_HURT(
 				new String[] { "res/sound/enemy/ondamage/damage1.aif",
 						"res/sound/enemy/ondamage/damage2.aif",
 						"res/sound/enemy/ondamage/damage3.aif" }), PISTOL_FIRED(
 				new String[] { "res/sound/pistol/shoot.aif" }), ENEMY_COLLISION(
-				new String[] { "res/sound/enemy/collision.aif" });
+				new String[] { "res/sound/enemy/collision.aif" }), NARRATOR_NEXT(new String[] { "res/sound/narrator/next_room.aif" }), NARRATOR_BOSS(new String[] { "res/sound/narrator/boss_waiting.aif" }), AXE_SWING(
+						new String[] { "res/sound/axe/axe_swing.aif" }), UNARMED_SMASH(
+								new String[] { "res/sound/unarmed/melee_swing.aif" }), BOSS_DEATH(
+										new String[] { "res/sound/boss/ondeath/boss_death.aif" }), DONUT_FIRED(
+												new String[] { "res/sound/donut/donut.aif" });
 
 		private String[] pathsToFiles;
 
