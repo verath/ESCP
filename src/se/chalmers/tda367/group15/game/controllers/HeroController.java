@@ -8,19 +8,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Point;
 
-import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
-import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
-import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
-import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
-import se.chalmers.tda367.group15.game.models.AxeModel;
-import se.chalmers.tda367.group15.game.models.BulletModel;
-import se.chalmers.tda367.group15.game.models.HeroModel;
-import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
-import se.chalmers.tda367.group15.game.models.PistolModel;
-import se.chalmers.tda367.group15.game.models.UnarmedModel;
+import se.chalmers.tda367.group15.game.models.*;
 import se.chalmers.tda367.group15.game.settings.KeyBindings;
 import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 import se.chalmers.tda367.group15.game.views.CharacterView;
@@ -73,54 +63,90 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+
 		if (!model.isAlive()) {
 			getGameController().gameOver(false);
 			return;
 		}
 
 		Input input = container.getInput();
-		float mouseX = input.getMouseX();
-		float mouseY = input.getMouseY();
 
-		// Change weapons
+		// Handle changing of weapons
+		changeWeapons(input, model);
 
-		if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_1))) {
-			model.setCurrentWeapon(model.getWeapons().get(0));
-		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_2))) {
-			model.setCurrentWeapon(model.getWeapons().get(1));
-		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_3))) {
-			model.setCurrentWeapon(model.getWeapons().get(2));
+		// Handle firing of weapon
+		fireWeapon(input, model);
+
+		// Make the model face the mouse cross-hair
+		calculateFacing(input, model);
+
+		// Calculate the new x and y
+		Point nextPosition = calculateNextPosition(input, model, delta);
+
+		// Check the new X against collision bounds. If no collision, allow
+		// movement in X.
+		if (!isCollision(nextPosition.getX(), model.getY(), model.getHeight(),
+				model.getWidth(), staticBounds, dynamicBounds)) {
+			model.setX(nextPosition.getX());
 		}
 
-		AbstractWeaponModel weapon = model.getCurrentWeapon();
-
-		// Fire bullets if mouse clicked and a ranged weapon is equipped
-		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			if (weapon instanceof AbstractRangedWeaponModel) {
-				createBullet();
-			} else if (weapon instanceof AbstractMeleeWeaponModel) {
-				swingWeapon();
-			}
-			swingTimer = System.currentTimeMillis();
-		} else if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
-				&& System.currentTimeMillis() - swingTimer > model
-						.getCurrentWeapon().getFiringSpeed()) {
-
-			swingTimer = System.currentTimeMillis();
-
-			if (weapon instanceof AbstractRangedWeaponModel) {
-				createBullet();
-			} else if (weapon instanceof AbstractMeleeWeaponModel) {
-				swingWeapon();
-			}
+		// Check the new Y against collision bounds. If no collision, allow
+		// movement in Y.
+		if (!isCollision(model.getX(), nextPosition.getY(), model.getHeight(),
+				model.getWidth(), staticBounds, dynamicBounds)) {
+			model.setY(nextPosition.getY());
 		}
 
-		// Calculate facing depending on where the mouse is relative
-		// to the center of the hero
-		model.setRotation(Math.toDegrees(Math.atan2((model.getHeight() / 2
-				+ model.getY() - mouseY),
-				(model.getWidth() / 2 + model.getX() - mouseX))));
+		// Handle checking for change of room.
+		changeRoom(model);
 
+	}
+
+	/**
+	 * Checks the current location of the model against pre-defined room
+	 * borders. If the model is outside of the room border, move the game field
+	 * to the next room according to what direction the hero went outside.
+	 * 
+	 * @param model
+	 *            Model to calculate facing for.
+	 */
+	private void changeRoom(AbstractCharacterModel model) {
+		RoomsController roomsController = getGameController()
+				.getRoomsController();
+		float tmpX = model.getX() + model.getWidth() / 2;
+		float tmpY = model.getY() + model.getHeight() / 2;
+
+		if (tmpX <= 0) {
+			roomsController.moveLeft();
+			model.setX(1024 - model.getWidth() - 32);
+		} else if (tmpX >= 1024) {
+			roomsController.moveRight();
+			model.setX(32);
+		} else if (tmpY <= 0) {
+			roomsController.moveUp();
+			model.setY(768 - model.getHeight() - 32);
+		} else if (tmpY >= 768) {
+			roomsController.moveDown();
+			model.setY(32);
+		}
+	}
+
+	/**
+	 * Calculates the next position the model would be at by checking the user
+	 * input and the model's movement speed. Also sets the model's isMoving
+	 * property.
+	 * 
+	 * 
+	 * @param input
+	 *            Input object to mouse position against.
+	 * @param model
+	 *            Model to calculate facing for.
+	 * @param delta
+	 *            The time in milliseconds since the last update.
+	 * @return The next position the model would be in.
+	 */
+	private Point calculateNextPosition(Input input,
+			AbstractCharacterModel model, int delta) {
 		goingUp = input.isKeyDown(KeyBindings.getBinding(Key.UP));
 		goingDown = input.isKeyDown(KeyBindings.getBinding(Key.DOWN));
 		goingRight = input.isKeyDown(KeyBindings.getBinding(Key.RIGHT));
@@ -139,34 +165,86 @@ public class HeroController extends AbstractMovingModelController {
 		float newX = model.getX() - (delta * speedX);
 		float newY = model.getY() - (delta * speedY);
 
-		if (!isCollision(newX, model.getY(), model.getHeight(),
-				model.getWidth(), staticBounds, dynamicBounds)) {
-			model.setX(newX);
-		}
-
-		if (!isCollision(model.getX(), newY, model.getHeight(),
-				model.getWidth(), staticBounds, dynamicBounds)) {
-			model.setY(newY);
-		}
-
 		model.setMoving(speedY != 0 || speedX != 0);
-		RoomsController roomsController = getGameController()
-				.getRoomsController();
-		float tmpX = model.getX() + model.getWidth() / 2;
-		float tmpY = model.getY() + model.getHeight() / 2;
 
-		if (tmpX <= 0) {
-			roomsController.moveLeft();
-			model.setX(1024 - model.getWidth() - 32);
-		} else if (tmpX >= 1024) {
-			roomsController.moveRight();
-			model.setX(0 + 32);
-		} else if (tmpY <= 0) {
-			roomsController.moveUp();
-			model.setY(768 - model.getHeight() - 32);
-		} else if (tmpY >= 768) {
-			roomsController.moveDown();
-			model.setY(0 + 32);
+		return new Point(newX, newY);
+	}
+
+	/**
+	 * Calculate facing depending on where the mouse is relative to the center
+	 * of the model.
+	 * 
+	 * @param input
+	 *            Input object to mouse position against.
+	 * @param model
+	 *            Model to calculate facing for.
+	 */
+	private void calculateFacing(Input input, AbstractCharacterModel model) {
+
+		float mouseX = input.getMouseX();
+		float mouseY = input.getMouseY();
+		float yDiff = (model.getHeight() / 2 + model.getY() - mouseY);
+		float xDiff = (model.getWidth() / 2 + model.getX() - mouseX);
+		model.setRotation(Math.toDegrees(Math.atan2(yDiff, xDiff)));
+	}
+
+	/**
+	 * Handles firing of weapons depending on if the mouse is clicked and what
+	 * weapon is equipped.
+	 * 
+	 * @param input
+	 *            Input object to check key presses against.
+	 * @param model
+	 *            Model to fire weapons for.
+	 */
+	private void fireWeapon(Input input, AbstractCharacterModel model) {
+		AbstractWeaponModel weapon = model.getCurrentWeapon();
+
+		// If last attack was less than the weapons allowed speed
+		boolean weaponCanFireAgain = (System.currentTimeMillis() - swingTimer) > model
+				.getCurrentWeapon().getFiringSpeed();
+		// If we can spam-attack again, this is 1/4th of the time of
+		// hold-and-shot
+		boolean weaponCanSpamAgain = (System.currentTimeMillis() - swingTimer) > model
+				.getCurrentWeapon().getFiringSpeed() / 4;
+
+		// Get status of mouse button
+		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
+		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON);
+
+		// Get type of weapon currently equipped
+		boolean isRangedWeapon = weapon instanceof AbstractRangedWeaponModel;
+		boolean isMeleeWeapon = weapon instanceof AbstractMeleeWeaponModel;
+
+		// Fire bullets if mouse clicked and a ranged weapon is equipped, or
+		// swing weapon if melee weapon.
+		if (isMousePressed && weaponCanSpamAgain || isMouseDown
+				&& weaponCanFireAgain) {
+			if (isRangedWeapon) {
+				createBullet();
+			} else if (isMeleeWeapon) {
+				swingWeapon();
+			}
+			swingTimer = System.currentTimeMillis();
+		}
+	}
+
+	/**
+	 * Checks if a key bind for changing weapon is pressed, if so switches to
+	 * the appropriate weapon slot.
+	 * 
+	 * @param input
+	 *            Input object to check key presses against.
+	 * @param model
+	 *            Model to change weapons for.
+	 */
+	private void changeWeapons(Input input, AbstractCharacterModel model) {
+		if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_1))) {
+			model.setCurrentWeapon(model.getWeapons().get(0));
+		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_2))) {
+			model.setCurrentWeapon(model.getWeapons().get(1));
+		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_3))) {
+			model.setCurrentWeapon(model.getWeapons().get(2));
 		}
 	}
 

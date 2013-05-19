@@ -90,6 +90,9 @@ public class CharacterView implements View {
 		// store death animation
 		String path = model.getAnimationPath() + "/death/";
 		deathAnimation = getAnimationFromPath(path);
+
+		// The hero has a different "animation" where this would case a
+		// IndexOutOfBoundsException, so don't count it in
 		if (!path.equals("hero/death/")) {
 			deathAnimation.setDuration(9, 2000);
 			deathAnimation.setDuration(14, 3000);

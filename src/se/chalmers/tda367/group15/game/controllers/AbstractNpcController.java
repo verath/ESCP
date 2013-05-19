@@ -12,13 +12,8 @@ import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
-import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
-import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.AbstractNpcModel;
-import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
-import se.chalmers.tda367.group15.game.models.HeroModel;
-import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
+import se.chalmers.tda367.group15.game.models.*;
+import se.chalmers.tda367.group15.game.util.CollisionHelper;
 import se.chalmers.tda367.group15.game.views.CharacterView;
 
 /**
@@ -91,7 +86,7 @@ public abstract class AbstractNpcController extends
 	public AbstractNpcController(GameController gameController,
 			AbstractNpcModel model, TileBasedMap map) {
 		super(gameController);
-		this.setpathFinder(new AStarPathFinder(map, 500, true));
+		this.setPathFinder(new AStarPathFinder(map, 500, true));
 		this.setModel(model);
 		this.setView(new CharacterView(model));
 		this.setDefaultTiles(model.getMinTileX(), model.getMaxTileX(),
@@ -122,7 +117,7 @@ public abstract class AbstractNpcController extends
 	 * @param pathFinder
 	 *            the pathfinder to use
 	 */
-	public void setpathFinder(AStarPathFinder pathFinder) {
+	public void setPathFinder(AStarPathFinder pathFinder) {
 		this.myPathFinder = pathFinder;
 	}
 
@@ -214,7 +209,7 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
-	 * If time == 0 starts a new random timer. If time has pased sets time to 0
+	 * If time == 0 starts a new random timer. If time has passed sets time to 0
 	 * and returns true
 	 * 
 	 * @return true if random time has passed
@@ -278,6 +273,37 @@ public abstract class AbstractNpcController extends
 	}
 
 	/**
+	 * Checks a way between two points against dynamic bounds
+	 * 
+	 * @param dynamicBounds
+	 *            A map of models and their collision bounds
+	 * @param point1X
+	 *            x variable of first point
+	 * @param point1Y
+	 *            y variable of first point
+	 * @param point2X
+	 *            x variable of second point
+	 * @param point2Y
+	 *            y variable of second point
+	 * @return true if path is blocked by a moving model.
+	 */
+	public boolean isWayClear(Map<AbstractMovingModel, Float> dynamicBounds,
+			float point1X, float point1Y, float point2X, float point2Y) {
+		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
+			if (this.getModel() != otherModel && otherModel.isAlive()
+					&& !(otherModel instanceof HeroModel)) {
+
+				Rectangle2D.Float bound = otherModel.getBounds();
+				if (CollisionHelper.recIntersectLine(bound, point1X, point1Y,
+						point2X, point2Y)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Time the fire method so animation can run its course
 	 */
 	public void fireTimed() {
@@ -292,163 +318,6 @@ public abstract class AbstractNpcController extends
 	 * Method to tell npc to fire a weapon of some kind
 	 */
 	public abstract void fire();
-
-	public boolean isWayClear(Map<AbstractMovingModel, Float> dynamicBounds,
-			float point1X, float point1Y, float point2X, float point2Y) {
-
-		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
-
-			if (this.getModel() != otherModel && otherModel.isAlive()
-					&& !(otherModel instanceof HeroModel)) {
-
-				Rectangle2D.Float bound = otherModel.getBounds();
-				if (recIntersectLine(bound, point1X, point1Y, point2X, point2Y)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Method for checking if two pixel points are in sight of each other.
-	 * 
-	 * @param staticBounds
-	 *            The obstruction that can get in the way
-	 * @param point1X
-	 *            first points x position
-	 * @param point1Y
-	 *            first points y position
-	 * @param point2X
-	 *            second points x position
-	 * @param point2Y
-	 *            second points y position
-	 * @return true if they are in sight of each other
-	 */
-	public boolean isInSight(List<Rectangle2D.Float> staticBounds,
-			float point1X, float point1Y, float point2X, float point2Y) {
-
-		for (Rectangle2D.Float rect : staticBounds) {
-
-			if (recIntersectLine(rect, point1X, point1Y, point2X, point2Y)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Check if line defined by two points is intersected by a rectangle rect.
-	 * 
-	 * @param rect
-	 *            the Rectangle that maybe intersects
-	 * @param point1X
-	 *            x variable of first point
-	 * @param point1Y
-	 *            y variable of first point
-	 * @param point2X
-	 *            x variable of second point
-	 * @param point2Y
-	 *            y variable of second point
-	 * @return true if line is intersected by rect
-	 */
-	public boolean recIntersectLine(Rectangle2D.Float rect, float point1X,
-			float point1Y, float point2X, float point2Y) {
-		return (linesIntersect(point1X, point1Y, point2X, point2Y, rect.getX(),
-				rect.getY(), rect.getX() + rect.getWidth(),
-				rect.getY() + rect.getHeight()) || linesIntersect(point1X,
-				point1Y, point2X, point2Y, rect.getX(),
-				rect.getY() + rect.getHeight(), rect.getX() + rect.getWidth(),
-				rect.getY()));
-	}
-
-	/**
-	 * This method is taken from java-gaming.org where it was posted by user JGO
-	 * Knight. For some reason Java default intersect method as declared in the
-	 * interface Shape doesn't work.
-	 * 
-	 * JGO Knights own description:
-	 * 
-	 * The fastest way to test if 2 line segments intersect. Tests if the line
-	 * segment from (x1, y1) to (x2, y2) intersects the line segment from (x3,
-	 * y3) to (x4, y4). My tests showed that this method was about 25% faster
-	 * than java.awt.geom.Line2D.linesIntersect(x1, y1, x2, y2, x3, y3, x4, y4):
-	 * 
-	 * @param x1
-	 * @param y1
-	 * @param x2
-	 * @param y2
-	 * @param x3
-	 * @param y3
-	 * @param x4
-	 * @param y4
-	 * @return true if intersect
-	 * @author JGO Knight
-	 */
-	public static boolean linesIntersect(double x1, double y1, double x2,
-			double y2, double x3, double y3, double x4, double y4) {
-		// Return false if either of the lines have zero length
-		if (x1 == x2 && y1 == y2 || x3 == x4 && y3 == y4) {
-			return false;
-		}
-		// Fastest method, based on Franklin Antonio's
-		// "Faster Line Segment Intersection" topic "in Graphics Gems III" book
-		// (http://www.graphicsgems.org/)
-		double ax = x2 - x1;
-		double ay = y2 - y1;
-		double bx = x3 - x4;
-		double by = y3 - y4;
-		double cx = x1 - x3;
-		double cy = y1 - y3;
-
-		double alphaNumerator = by * cx - bx * cy;
-		double commonDenominator = ay * bx - ax * by;
-		if (commonDenominator > 0) {
-			if (alphaNumerator < 0 || alphaNumerator > commonDenominator) {
-				return false;
-			}
-		} else if (commonDenominator < 0) {
-			if (alphaNumerator > 0 || alphaNumerator < commonDenominator) {
-				return false;
-			}
-		}
-		double betaNumerator = ax * cy - ay * cx;
-		if (commonDenominator > 0) {
-			if (betaNumerator < 0 || betaNumerator > commonDenominator) {
-				return false;
-			}
-		} else if (commonDenominator < 0) {
-			if (betaNumerator > 0 || betaNumerator < commonDenominator) {
-				return false;
-			}
-		}
-		if (commonDenominator == 0) {
-			// This code wasn't in Franklin Antonio's method. It was added by
-			// Keith Woodward.
-			// The lines are parallel.
-			// Check if they're collinear.
-			double y3LessY1 = y3 - y1;
-			double collinearityTestForP3 = x1 * (y2 - y3) + x2 * (y3LessY1)
-					+ x3 * (y1 - y2); // see
-										// http://mathworld.wolfram.com/Collinear.html
-			// If p3 is collinear with p1 and p2 then p4 will also be collinear,
-			// since p1-p2 is parallel with p3-p4
-			if (collinearityTestForP3 == 0) {
-				// The lines are collinear. Now check if they overlap.
-				if (x1 >= x3 && x1 <= x4 || x1 <= x3 && x1 >= x4 || x2 >= x3
-						&& x2 <= x4 || x2 <= x3 && x2 >= x4 || x3 >= x1
-						&& x3 <= x2 || x3 <= x1 && x3 >= x2) {
-					if (y1 >= y3 && y1 <= y4 || y1 <= y3 && y1 >= y4
-							|| y2 >= y3 && y2 <= y4 || y2 <= y3 && y2 >= y4
-							|| y3 >= y1 && y3 <= y2 || y3 <= y1 && y3 >= y2) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-		return true;
-	}
 
 	/**
 	 * Swing the the currently equipped weapon of the enemy

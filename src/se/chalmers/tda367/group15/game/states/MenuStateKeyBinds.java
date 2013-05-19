@@ -4,12 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.KeyListener;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.*;
 
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.TextButton;
@@ -94,7 +89,10 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		}
 
 		try {
-			initElements();
+			addReturnButton();
+			initKeyBindButtons();
+			addKeyBindButtons();
+
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +101,19 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 
 	}
 
-	private void initElements() throws SlickException {
+	private void addKeyBindButtons() {
+		// Set the text and add each button mapped in the buttonToKeyBind map
+		for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
+			String keyName = Input.getKeyName(KeyBindings.getBinding(entry
+					.getValue()));
+			entry.getKey().setText(keyName);
+
+			// Add items so that they are drawn
+			addMenuItem(entry.getKey());
+		}
+	}
+
+	private void addReturnButton() throws SlickException {
 		Image backImage = new Image("res/menu/returnButton.png");
 		Image backImageMO = new Image("res/menu/returnButtonMO.png");
 
@@ -118,6 +128,9 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		};
 
 		addMenuItem(returnButton);
+	}
+
+	private void initKeyBindButtons() throws SlickException {
 
 		Image imageNormal = new Image(180, 40);
 		Image imageOver = new Image("res/menu/EmptyMO.png");
@@ -187,22 +200,6 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		buttonToKeyBind.put(bindWeapon1, Key.WEAPON_1);
 		buttonToKeyBind.put(bindWeapon2, Key.WEAPON_2);
 		buttonToKeyBind.put(bindWeapon3, Key.WEAPON_3);
-
-		// Set text from bind
-		for (Entry<TextButton, Key> entry : buttonToKeyBind.entrySet()) {
-			String keyName = Input.getKeyName(KeyBindings.getBinding(entry
-					.getValue()));
-			entry.getKey().setText(keyName);
-		}
-
-		// Add items so that they are drawn
-		addMenuItem(bindUp);
-		addMenuItem(bindDown);
-		addMenuItem(bindLeft);
-		addMenuItem(bindRight);
-		addMenuItem(bindWeapon1);
-		addMenuItem(bindWeapon2);
-		addMenuItem(bindWeapon3);
 	}
 
 	/**
