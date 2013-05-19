@@ -22,14 +22,6 @@ public class BossModel extends AbstractNpcModel {
 
 	}
 
-	public BossModel(float x, float y, double rot) {
-		this(x, y, rot, 0, 32, 0, 24);
-	}
-
-	public BossModel(float x, float y, int x1, int x2, int y1, int y2) {
-		this(x, y, 360 * Math.random(), x1, x2, y1, y2);
-	}
-
 	/**
 	 * Creates a new dummy enemy.
 	 * 
@@ -40,9 +32,8 @@ public class BossModel extends AbstractNpcModel {
 	 * @param rot
 	 *            angle to face in beginning
 	 */
-	public BossModel(float x, float y, double rot, int x1, int x2, int y1,
-			int y2) {
-		super(x1, x2, y1, y2);
+	public BossModel(float x, float y, double rot) {
+		super(0, 0, 0, 0); // Boss is heavily scripted and doesn't use tiles in the same way.
 		setX(x);
 		setY(y);
 		setVelocity(0.1f);

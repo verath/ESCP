@@ -17,6 +17,10 @@ import se.chalmers.tda367.group15.game.util.CollisionHelper;
 /**
  * Class for representing a boss controller
  * 
+ * Boss is in boss room. Only moves in a small space in upper part of map. Path
+ * Finding is supposed to not be used, instead has predefined scripted movement.
+ * 
+ * 
  * @author Simon Persson, Carl Jansson
  * 
  */
@@ -25,9 +29,11 @@ public class BossController extends AbstractNpcController {
 	private boolean hasFired;
 
 	private boolean heroTracking;
-	
+
 	private long swingTimer = 0;
-	
+
+	private int goalX;
+	private int goalY;
 
 	/**
 	 * Creates a new boss controller.
@@ -88,20 +94,21 @@ public class BossController extends AbstractNpcController {
 		if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
 			heroTracking = true;
 			// New path after hero pos
-			calculateNewPath((int) heroX / 32, (int) heroY / 32);
+			// calculateNewPath((int) heroX / 32, (int) heroY / 32);
+			// TODO Go after hero!
 		} else {
 			heroTracking = false;
 		}
 
 		// If path is null or end of path reached
-		if (!existsPath()) {
+		if (this.goalX == -1 || this.goalY == -1) {
 			// After a short pause make new path.
 			if (pauseTimer()) {
-				calculateRandomPath();
+				newRandomGoal();
 			}
 		} else {
 			// travel along path
-			moveAlongPath(model, delta, dynamicBounds);
+			moveToGoal(model, delta, dynamicBounds);
 		}
 
 		// If hero is in sight set new direction and possibly attack
@@ -125,6 +132,62 @@ public class BossController extends AbstractNpcController {
 
 	}
 
+	private void newRandomGoal() {
+		int minX = 32 * 8;
+		int maxX = (int) (32 * 22 - getModel().getWidth());
+		int minY = 32*2;
+		int maxY = (int) (32 * 5 - getModel().getHeight());
+
+		int newX = (int) Math.round(minX + Math.random() * (maxX - minX));
+		int newY = (int) Math.round(minY + Math.random() * (maxY - minY));
+
+		newGoal(newX, newY);
+	}
+
+	private void newGoal(int newX, int newY) {
+		this.goalX = newX;
+		this.goalY = newY;
+	}
+
+	private void moveToGoal(AbstractMovingModel model, int delta,
+			Map<AbstractMovingModel, Float> dynamicBounds) {
+		float diffX = model.getX() - this.goalX;
+		float diffY = model.getY() - this.goalY;
+
+		double dir = Math.atan2(diffY, diffX);
+		model.setRotation(Math.toDegrees(dir));
+
+		float speedY = (float) (model.getVelocity() * Math.sin(dir));
+		float speedX = (float) (model.getVelocity() * Math.cos(dir));
+
+		float tmpNewX = model.getX() - (delta * speedX);
+		float tmpNewY = model.getY() - (delta * speedY);
+
+		// if dynamic collision set path to null so a new random path will
+		// be created
+		if (isDynamicCollision(tmpNewX, tmpNewY, dynamicBounds)) {
+			this.goalX = -1;
+			this.goalY = -1;
+			// Set the new positions
+		} else {
+			if (!isDynamicCollision(tmpNewX, model.getY(), dynamicBounds)) {
+				model.setX(tmpNewX);
+			}
+
+			if (!isDynamicCollision(model.getX(), tmpNewY, dynamicBounds)) {
+				model.setY(tmpNewY);
+			}
+
+			int currX = (int) (model.getX() + (model.getWidth() / 2)) / 32;
+			int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
+
+			if (Math.abs(currX - this.goalX) < 10 && Math.abs( currY - this.goalY) < 10) {
+				this.goalX = -1;
+				this.goalY = -1;
+			}
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -133,14 +196,14 @@ public class BossController extends AbstractNpcController {
 		hasFired = true;
 
 	}
-	
+
 	/**
 	 * The boss is kinda slower than everybody else
 	 */
 	@Override
 	public void fireTimed() {
 		if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) getModel())
-				.getCurrentWeapon().getFiringSpeed()*2) {
+				.getCurrentWeapon().getFiringSpeed() * 2) {
 			swingTimer = System.currentTimeMillis();
 			fire();
 		}
