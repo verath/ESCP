@@ -3,6 +3,8 @@ package se.chalmers.tda367.group15.game.states;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
@@ -15,8 +17,9 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  * @version 2.0
  */
 public class MenuStateMain extends AbstractMenuBasedState {
-
-	/**
+	
+	private SoundEffectsController soundEffectsController; 
+	/**	
 	 * Resume button must be possible to set visible at will.
 	 */
 	private Button resumeGameButton;
@@ -49,6 +52,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		this.initMenuItems();
+		soundEffectsController = SoundEffectsController.instance();
 		try {
 			setBackground(new Image("res/menu/background.png"));
 		} catch (SlickException e) {
@@ -106,6 +110,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 					game.getState(Constants.GAME_STATE_PLAYING).init(container,
 							game);
 					existsGameCurrently = true;
+					soundEffectsController.playGameMusic(GameMusic.NORMAL_MUSIC);
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}

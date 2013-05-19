@@ -11,6 +11,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.BossRoomModel;
 import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
@@ -22,6 +24,8 @@ import se.chalmers.tda367.group15.game.models.RoomModel;
  * @author Peter, Simon
  */
 public class RoomsController {
+
+	private SoundEffectsController soundEffectsController;
 
 	/**
 	 * Enum for representing a relative position in the game map.
@@ -58,6 +62,7 @@ public class RoomsController {
 	 */
 	public RoomsController() {
 		rooms = new HashMap<Point, RoomController>();
+		soundEffectsController = soundEffectsController.instance();
 	}
 
 	/**
@@ -198,6 +203,8 @@ public class RoomsController {
 			throws SlickException {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
 
+		RoomController currentRoom = getCurrentRoom();
+		
 		if (allEnemiesDefeated() && !bossRoomUnlocked) {
 			for (RoomController controller : rooms.values()) {
 				RoomModel model = controller.getRoomModel();
@@ -206,6 +213,15 @@ public class RoomsController {
 				}
 			}
 			bossRoomUnlocked = true;
+			currentRoom.unlockRoom();
+			soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
+			soundEffectsController.playSound(SoundEffect.NARRATOR_BOSS);
+			
+		}else if(currentRoom.allDead() && !currentRoom.isUnlocked() && !bossRoomUnlocked) {
+			currentRoom.unlockRoom();
+			SoundEffectsController soundEffectsController = SoundEffectsController.instance();
+			soundEffectsController.playSound(SoundEffect.NARRATOR_NEXT);
+
 		}
 	}
 

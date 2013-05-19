@@ -1,7 +1,10 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
@@ -9,17 +12,39 @@ public class SoundEffectsController {
 
 	private static SoundEffectsController instance;
 
+	private List<Sound> sounds = new ArrayList<Sound>();
+
+	private Music music;
+	private Music queuedMusic;
+
+	private boolean queued = false;
+
 	public enum SoundEffect {
-		ENEMY_DEATH(new String[] { "res/sound/enemy/ondamage/die.aif" }), ENEMY_HURT(
+		ENEMY_DEATH(new String[] { "res/sound/enemy/ondeath/enemy_death1.aif", "res/sound/enemy/ondeath/enemy_death2.aif" }), ENEMY_HURT(
 				new String[] { "res/sound/enemy/ondamage/damage1.aif",
 						"res/sound/enemy/ondamage/damage2.aif",
 						"res/sound/enemy/ondamage/damage3.aif" }), PISTOL_FIRED(
 				new String[] { "res/sound/pistol/shoot.aif" }), ENEMY_COLLISION(
-				new String[] { "res/sound/enemy/collision.aif" });
+				new String[] { "res/sound/enemy/collision.aif" }), NARRATOR_NEXT(new String[] { "res/sound/narrator/next_room.aif" }), NARRATOR_BOSS(new String[] { "res/sound/narrator/boss_waiting.aif" }), AXE_SWING(
+						new String[] { "res/sound/axe/axe_swing.aif" }), UNARMED_SMASH(
+								new String[] { "res/sound/unarmed/melee_swing.aif" }), BOSS_DEATH(
+										new String[] { "res/sound/boss/ondeath/boss_death.aif" }), DONUT_FIRED(
+												new String[] { "res/sound/donut/donut.aif" });
 
 		private String[] pathsToFiles;
 
 		private SoundEffect(String[] pathsToFiles) {
+			this.pathsToFiles = pathsToFiles;
+		}
+	}
+
+	public enum GameMusic {
+		NORMAL_MUSIC(new String[] { "res/music/normal.aif" }), BOSS_MUSIC(
+				new String[] { "res/music/boss.aif" });
+
+		private String[] pathsToFiles;
+
+		private GameMusic(String[] pathsToFiles) {
 			this.pathsToFiles = pathsToFiles;
 		}
 	}
@@ -43,10 +68,60 @@ public class SoundEffectsController {
 			sound = new Sound(
 					soundEffect.pathsToFiles[generator.nextInt(maxRandomNbr)]);
 			sound.play();
-
+			sounds.add(sound);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void playGameMusic(GameMusic gameMusic) {
+
+		try {
+			if (music != null) {
+				if (music.playing()) {
+					queuedMusic = new Music(gameMusic.pathsToFiles[0]);
+					queued = true;
+					fadeGameMusic();
+				}
+			} else {
+				music = new Music(gameMusic.pathsToFiles[0]);
+				music.loop();
+			}
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void fadeGameMusic() {
+		if (music != null) {
+			System.out.println("FADE");
+			music.fade(1500, 0.0f, true);
+		}
+	}
+
+	public void stopAll() {
+		if (music != null) {
+			music.release();
+		}
+		if (queuedMusic != null) {
+			queuedMusic.release();
+		}
+		for (Sound s : sounds) {
+			s.release();
+		}
+	}
+
+	public void update() {
+		// If a piece of music has been queued
+		if (queued && !music.playing()) {
+			music.setVolume(0.0f);
+			queuedMusic.setVolume(0.0f);
+			queuedMusic.fade(3000, 0.7f, false);
+			music = queuedMusic;
+			music.loop();
+			queued = false;
+
+		}
 	}
 }

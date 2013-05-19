@@ -10,6 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
+import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
@@ -274,7 +275,7 @@ public class HeroController extends AbstractMovingModelController {
 		newBullet.setY(heroFaceY - newBullet.getHeight() / 2);
 
 		newBullet.setRotation(model.getRotation());
-		newBullet.setDamage(model.getCurrentWeapon().getDamage());
+		newBullet.setDamage(model.getCurrentWeapon().getDamage()*100);
 		newBullet.setAlive(true);
 		RoomController currentRoom = getGameController().getRoomsController()
 				.getCurrentRoom();
@@ -289,6 +290,11 @@ public class HeroController extends AbstractMovingModelController {
 		view.runAttackAnimation();
 
 		AbstractProjectileModel newSwing = new MeleeSwingModel();
+		if(model.getCurrentWeapon() instanceof AxeModel) {
+			soundController.playSound(SoundEffect.AXE_SWING);
+		}else{
+			soundController.playSound(SoundEffect.UNARMED_SMASH);
+		}
 
 		float heroAngle = (float) Math.toRadians(model.getRotation());
 		float heroMiddleX = model.getX() + model.getWidth() / 2;
