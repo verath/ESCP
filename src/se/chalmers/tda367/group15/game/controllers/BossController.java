@@ -131,7 +131,10 @@ public class BossController extends AbstractNpcController {
 
 		// Set whether model is moving or not
 		this.getModel().setMoving(!((oldX == newX) || (oldY == newY)));
+		if(!getModel().isAlive()) {
+			getGameController().gameOver(true);
 
+		}
 	}
 
 	/**

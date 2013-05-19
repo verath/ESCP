@@ -82,7 +82,6 @@ public class GameController {
 		// Reset the game over flags
 		gameOver = false;
 		gameWon = false;
-
 		// Set up an event logger to listen for events on the shared event
 		// handler
 		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
