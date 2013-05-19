@@ -11,6 +11,7 @@ import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.CoworkerModel;
+import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
 /**
  * Creates a new dummy enemy
@@ -25,14 +26,14 @@ public class CoworkerController extends AbstractNpcController {
 	private boolean heroTracking;
 
 	/**
-	 * Creates a new dummyenemy controller.
+	 * Creates a new CoworkerController.
 	 * 
 	 * @param model
-	 *            the DummyEnemy model
+	 *            the CoworkerModel model
 	 * @param map
 	 *            The map to use.
 	 * @param gameController
-	 *            A reference to the controller
+	 *            A reference to the gameController
 	 */
 	public CoworkerController(CoworkerModel model, TileBasedMap map,
 			GameController gameController) {
@@ -57,7 +58,7 @@ public class CoworkerController extends AbstractNpcController {
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
 			throws SlickException {
-		
+
 		if (hasFired) {
 			swingWeapon();
 			hasFired = false;
@@ -79,7 +80,7 @@ public class CoworkerController extends AbstractNpcController {
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
 		// if hero is in sight.
-		if (isInSight(staticBounds, currX, currY, heroX, heroY)) {
+		if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
 			heroTracking = true;
 			// New path after hero pos
 			calculateNewPath((int) heroX / 32, (int) heroY / 32);
