@@ -275,7 +275,7 @@ public class HeroController extends AbstractMovingModelController {
 		newBullet.setY(heroFaceY - newBullet.getHeight() / 2);
 
 		newBullet.setRotation(model.getRotation());
-		newBullet.setDamage(model.getCurrentWeapon().getDamage()*100);
+		newBullet.setDamage(model.getCurrentWeapon().getDamage());
 		newBullet.setAlive(true);
 		RoomController currentRoom = getGameController().getRoomsController()
 				.getCurrentRoom();

@@ -42,7 +42,7 @@ public class BossModel extends AbstractNpcModel {
 		setRotation(rot);
 		setOffset(8);
 		setAlive(true);
-		setHealth(100);
+		setHealth(500);
 		addWeapon(new UnarmedModel());
 		setCurrentWeapon(getWeapons().get(0));
 		setAnimationPath("boss/");
