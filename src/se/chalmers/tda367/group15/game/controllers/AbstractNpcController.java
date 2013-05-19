@@ -34,7 +34,8 @@ public abstract class AbstractNpcController extends
 		AbstractMovingModelController {
 
 	private long swingTimer = 0;
-	private final int ENEMY_DAMAGE_MODIFIER = 2;
+	
+	protected int ENEMY_DAMAGE_MODIFIER = 2;
 
 	private SoundEffectsController soundController = SoundEffectsController
 			.instance();
@@ -385,7 +386,7 @@ public abstract class AbstractNpcController extends
 		newDonut.setY(heroFaceY - newDonut.getHeight() / 2);
 
 		newDonut.setRotation(model.getRotation());
-		newDonut.setDamage(model.getCurrentWeapon().getDamage());
+		newDonut.setDamage(model.getCurrentWeapon().getDamage()*ENEMY_DAMAGE_MODIFIER);
 		newDonut.setAlive(true);
 		RoomController currentRoom = getGameController().getRoomsController()
 				.getCurrentRoom();
@@ -395,6 +396,10 @@ public abstract class AbstractNpcController extends
 	public void createDonut() {
 		soundController
 				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
+		
+		CharacterView view = (CharacterView) getView();
+		view.runAttackAnimation();
+		
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newDonut = new DonutModel();
 
@@ -411,7 +416,7 @@ public abstract class AbstractNpcController extends
 		newDonut.setY(heroFaceY - newDonut.getHeight() / 2);
 
 		newDonut.setRotation(model.getRotation());
-		newDonut.setDamage(model.getCurrentWeapon().getDamage());
+		newDonut.setDamage(model.getCurrentWeapon().getDamage()*ENEMY_DAMAGE_MODIFIER);
 		newDonut.setAlive(true);
 		RoomController currentRoom = getGameController().getRoomsController()
 				.getCurrentRoom();

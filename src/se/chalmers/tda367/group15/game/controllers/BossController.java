@@ -9,6 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
@@ -24,6 +25,9 @@ public class BossController extends AbstractNpcController {
 	private boolean hasFired;
 
 	private boolean heroTracking;
+	
+	private long swingTimer = 0;
+	
 
 	/**
 	 * Creates a new CoworkerController.
@@ -38,6 +42,7 @@ public class BossController extends AbstractNpcController {
 	public BossController(BossModel model, TileBasedMap map,
 			GameController gameController) {
 		super(gameController, model, map);
+		this.ENEMY_DAMAGE_MODIFIER = 3;
 	}
 
 	/**
@@ -127,5 +132,17 @@ public class BossController extends AbstractNpcController {
 	public void fire() {
 		hasFired = true;
 
+	}
+	
+	/**
+	 * The boss is kinda slower than everybody else
+	 */
+	@Override
+	public void fireTimed() {
+		if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) getModel())
+				.getCurrentWeapon().getFiringSpeed()*2) {
+			swingTimer = System.currentTimeMillis();
+			fire();
+		}
 	}
 }

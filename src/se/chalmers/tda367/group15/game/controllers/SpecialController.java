@@ -38,6 +38,7 @@ public class SpecialController extends AbstractNpcController {
 	public SpecialController(SpecialModel model, TileBasedMap map,
 			GameController gameController) {
 		super(gameController, model, map);
+		this.ENEMY_DAMAGE_MODIFIER = 1;
 	}
 
 	/**
