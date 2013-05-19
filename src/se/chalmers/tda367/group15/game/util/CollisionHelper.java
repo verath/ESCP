@@ -64,9 +64,6 @@ public class CollisionHelper {
 				rect.getY()));
 	}
 
-	/*
-	 * 
-	 */
 	/**
 	 * 
 	 * The fastest way to test if 2 line segments intersect. Tests if the line

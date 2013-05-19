@@ -203,7 +203,8 @@ public class HeroController extends AbstractMovingModelController {
 		// If last attack was less than the weapons allowed speed
 		boolean weaponCanFireAgain = (System.currentTimeMillis() - swingTimer) > model
 				.getCurrentWeapon().getFiringSpeed();
-		// If we can spam-attack again, this is 1/4th of the time of hold-and-shot
+		// If we can spam-attack again, this is 1/4th of the time of
+		// hold-and-shot
 		boolean weaponCanSpamAgain = (System.currentTimeMillis() - swingTimer) > model
 				.getCurrentWeapon().getFiringSpeed() / 4;
 
