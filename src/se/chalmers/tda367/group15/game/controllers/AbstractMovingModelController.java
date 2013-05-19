@@ -262,6 +262,8 @@ public abstract class AbstractMovingModelController {
 						otherModel.setAlive(false);
 						if(otherModel instanceof BossModel) {
 							soundController.playSound(SoundEffect.BOSS_DEATH);
+							getGameController().gameOver(true);
+
 						}else {
 							soundController
 							.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);

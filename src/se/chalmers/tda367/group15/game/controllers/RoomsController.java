@@ -272,7 +272,7 @@ public class RoomsController {
 				}
 			}
 		}
-		return allDefeated;
+		return true;
 	}
 
 }
