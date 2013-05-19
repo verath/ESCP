@@ -247,7 +247,12 @@ public abstract class AbstractMovingModelController {
 					&& otherModel.isAlive()) {
 				dynamicCollision = true;
 				if (model instanceof AbstractProjectileModel
+						&& otherModel instanceof AbstractProjectileModel) {
+					dynamicCollision = false;
+
+				} else if (model instanceof AbstractProjectileModel
 						&& otherModel instanceof AbstractCharacterModel) {
+					
 					AbstractProjectileModel projectile = (AbstractProjectileModel) model;
 					int damage = projectile.getDamage();
 					otherModel.takeDamage(damage);

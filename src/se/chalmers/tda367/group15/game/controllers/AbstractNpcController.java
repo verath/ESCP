@@ -27,6 +27,8 @@ public abstract class AbstractNpcController extends
 
 	private long swingTimer = 0;
 	private final int ENEMY_DAMAGE_MODIFIER = 2;
+	
+	private SoundEffectsController soundController = SoundEffectsController.instance();
 
 	/**
 	 * The path controller is traveling
@@ -353,5 +355,31 @@ public abstract class AbstractNpcController extends
 				.getCurrentRoom();
 
 		currentRoom.addSwing(newSwing);
+	}
+	
+	public void createBullet() {
+		soundController
+				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		AbstractProjectileModel newBullet = new BulletModel();
+
+		float heroAngle = (float) Math.toRadians(model.getRotation());
+		float heroMiddleX = model.getX() + model.getWidth() / 2;
+		float heroMiddleY = model.getY() + model.getHeight() / 2;
+
+		float heroFaceX = heroMiddleX - (float) Math.cos(heroAngle)
+				* ((model.getWidth()));
+		float heroFaceY = heroMiddleY - (float) Math.sin(heroAngle)
+				* ((model.getHeight()));
+
+		newBullet.setX(heroFaceX - newBullet.getWidth() / 2);
+		newBullet.setY(heroFaceY - newBullet.getHeight() / 2);
+
+		newBullet.setRotation(model.getRotation());
+		newBullet.setDamage(model.getCurrentWeapon().getDamage());
+		newBullet.setAlive(true);
+		RoomController currentRoom = getGameController().getRoomsController()
+				.getCurrentRoom();
+		currentRoom.addProjectile(newBullet);
 	}
 }

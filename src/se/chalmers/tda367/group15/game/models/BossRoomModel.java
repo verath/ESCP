@@ -29,9 +29,9 @@ public class BossRoomModel implements RoomModel {
 	public BossRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
-		CoworkerModel e1 = new CoworkerModel(9 * 32, 12 * 32);
-		CoworkerModel e2 = new CoworkerModel(12 * 32, 7 * 32);
-		CoworkerModel e3 = new CoworkerModel(25 * 32, 16 * 32);
+		SpecialModel e1 = new SpecialModel(9 * 32, 12 * 32);
+		SpecialModel e2 = new SpecialModel(12 * 32, 7 * 32);
+		SpecialModel e3 = new SpecialModel(25 * 32, 16 * 32);
 
 		npcModels.add(e1);
 		npcModels.add(e2);

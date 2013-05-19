@@ -21,6 +21,7 @@ import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.CoworkerModel;
 import se.chalmers.tda367.group15.game.models.RoomModel;
+import se.chalmers.tda367.group15.game.models.SpecialModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -97,6 +98,12 @@ public class RoomController implements TileBasedMap {
 	 */
 	public void addMovingModel(CoworkerModel model) {
 		movingModelControllers.add(new CoworkerController(model, this,
+				gameController));
+		dynamicBounds.put(model, model.getBounds());
+	}
+	
+	private void addMovingModel(SpecialModel model) {
+		movingModelControllers.add(new SpecialController(model, this,
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
 	}
@@ -233,6 +240,9 @@ public class RoomController implements TileBasedMap {
 		for (AbstractMovingModel model : npcs) {
 			if (model instanceof CoworkerModel)
 				addMovingModel((CoworkerModel) model);
+			else if(model instanceof SpecialModel) {
+				addMovingModel((SpecialModel) model);
+			}
 		}
 	}
 
