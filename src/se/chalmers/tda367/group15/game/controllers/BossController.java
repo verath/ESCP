@@ -49,6 +49,8 @@ public class BossController extends AbstractNpcController {
 			GameController gameController) {
 		super(gameController, model, map);
 		this.ENEMY_DAMAGE_MODIFIER = 3;
+		this.goalX = -1;
+		this.goalY = -1;
 	}
 
 	/**
@@ -108,7 +110,7 @@ public class BossController extends AbstractNpcController {
 			}
 		} else {
 			// travel along path
-			moveToGoal(model, delta, dynamicBounds);
+			moveToGoal(model, delta, staticBounds, dynamicBounds);
 		}
 
 		// If hero is in sight set new direction and possibly attack
@@ -124,8 +126,8 @@ public class BossController extends AbstractNpcController {
 		}
 
 		// NPC new position
-		float newX = this.getModel().getX();
-		float newY = this.getModel().getY();
+		float newX = model.getX();
+		float newY = model.getY();
 
 		// Set whether model is moving or not
 		this.getModel().setMoving(!((oldX == newX) || (oldY == newY)));
@@ -149,7 +151,7 @@ public class BossController extends AbstractNpcController {
 		this.goalY = newY;
 	}
 
-	private void moveToGoal(AbstractMovingModel model, int delta,
+	private void moveToGoal(AbstractMovingModel model, int delta, List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 		float diffX = model.getX() - this.goalX;
 		float diffY = model.getY() - this.goalY;
@@ -170,16 +172,16 @@ public class BossController extends AbstractNpcController {
 			this.goalY = -1;
 			// Set the new positions
 		} else {
-			if (!isDynamicCollision(tmpNewX, model.getY(), dynamicBounds)) {
+			if (!isCollision(tmpNewX, model.getY(), model.getWidth(), model.getHeight(), staticBounds, dynamicBounds)) {
 				model.setX(tmpNewX);
 			}
 
-			if (!isDynamicCollision(model.getX(), tmpNewY, dynamicBounds)) {
+			if (!isCollision(model.getX(), tmpNewY, model.getWidth(), model.getHeight(), staticBounds, dynamicBounds)) {
 				model.setY(tmpNewY);
 			}
 
-			int currX = (int) (model.getX() + (model.getWidth() / 2)) / 32;
-			int currY = (int) (model.getY() + (model.getHeight() / 2)) / 32;
+			int currX = (int)model.getX();
+			int currY = (int)model.getY();
 
 			if (Math.abs(currX - this.goalX) < 10 && Math.abs( currY - this.goalY) < 10) {
 				this.goalX = -1;
