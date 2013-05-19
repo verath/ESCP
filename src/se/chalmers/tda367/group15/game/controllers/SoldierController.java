@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.SpecialModel;
+import se.chalmers.tda367.group15.game.models.SoldierModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
 /**
@@ -19,7 +19,7 @@ import se.chalmers.tda367.group15.game.util.CollisionHelper;
  * @author Simon Persson, Carl Jansson
  * 
  */
-public class SpecialController extends AbstractNpcController {
+public class SoldierController extends AbstractNpcController {
 
 	private boolean hasFired;
 
@@ -35,7 +35,7 @@ public class SpecialController extends AbstractNpcController {
 	 * @param gameController
 	 *            A reference to the gameController
 	 */
-	public SpecialController(SpecialModel model, TileBasedMap map,
+	public SoldierController(SoldierModel model, TileBasedMap map,
 			GameController gameController) {
 		super(gameController, model, map);
 	}

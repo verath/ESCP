@@ -6,12 +6,12 @@ package se.chalmers.tda367.group15.game.models;
  * @author simon
  * 
  */
-public class SpecialModel extends AbstractNpcModel {
+public class SoldierModel extends AbstractNpcModel {
 
 	/**
 	 * Creates a new soldier.
 	 */
-	public SpecialModel() {
+	public SoldierModel() {
 		this(64f, 128f);
 	}
 
@@ -23,7 +23,7 @@ public class SpecialModel extends AbstractNpcModel {
 	 * @param y
 	 *            The y coordinate.
 	 */
-	public SpecialModel(float x, float y) {
+	public SoldierModel(float x, float y) {
 		this(x, y, 360 * Math.random());
 	}
 
@@ -37,7 +37,7 @@ public class SpecialModel extends AbstractNpcModel {
 	 * @param rot
 	 *            The rotation angle.
 	 */
-	public SpecialModel(float x, float y, double rot) {
+	public SoldierModel(float x, float y, double rot) {
 		this(x, y, rot, 0, 32, 0, 24);
 	}
 
@@ -58,7 +58,7 @@ public class SpecialModel extends AbstractNpcModel {
 	 * @param y2
 	 *            The maximum tile y coordinate
 	 */
-	public SpecialModel(float x, float y, int x1, int x2, int y1, int y2) {
+	public SoldierModel(float x, float y, int x1, int x2, int y1, int y2) {
 		this(x, y, 0, x1, x2, y1, y2);
 	}
 
@@ -80,7 +80,7 @@ public class SpecialModel extends AbstractNpcModel {
 	 * @param y2
 	 *            The maximum tile y coordinate
 	 */
-	public SpecialModel(float x, float y, double rot, int x1, int x2, int y1,
+	public SoldierModel(float x, float y, double rot, int x1, int x2, int y1,
 			int y2) {
 		super(x1, x2, y1, y2);
 		setX(x);
