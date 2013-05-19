@@ -8,11 +8,30 @@ import org.newdawn.slick.SlickException;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 
+/**
+ * Class representing a view for a projectile.
+ * 
+ * @author simon
+ * 
+ */
 public class ProjectileView implements View {
 
+	/**
+	 * The projectile model.
+	 */
 	private AbstractMovingModel model;
+
+	/**
+	 * The image for the projectile model.
+	 */
 	private Image image;
 
+	/**
+	 * Create a new projectile view.
+	 * 
+	 * @param model
+	 *            The model that this view should render.
+	 */
 	public ProjectileView(AbstractProjectileModel model) {
 		this.model = model;
 		try {
@@ -23,6 +42,9 @@ public class ProjectileView implements View {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {

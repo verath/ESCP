@@ -1,7 +1,15 @@
 package se.chalmers.tda367.group15.game.models;
 
+/**
+ * Class representing a bullet model.
+ * @author simon
+ *
+ */
 public class BulletModel extends AbstractProjectileModel {
 
+	/**
+	 * Create a new bullet model.
+	 */
 	public BulletModel() {
 		setX(0);
 		setY(0);
@@ -11,6 +19,9 @@ public class BulletModel extends AbstractProjectileModel {
 		setHeight(6);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getImagePath() {
 		return "res/images/bullet.png";

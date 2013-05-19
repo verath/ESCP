@@ -23,7 +23,7 @@ import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
 import se.chalmers.tda367.group15.game.models.CoworkerModel;
 import se.chalmers.tda367.group15.game.models.RoomModel;
-import se.chalmers.tda367.group15.game.models.SpecialModel;
+import se.chalmers.tda367.group15.game.models.SoldierModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -103,19 +103,18 @@ public class RoomController implements TileBasedMap {
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
 	}
-	
-	private void addMovingModel(SpecialModel model) {
-		movingModelControllers.add(new SpecialController(model, this,
+
+	private void addMovingModel(SoldierModel model) {
+		movingModelControllers.add(new SoldierController(model, this,
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
 	}
-	
+
 	private void addMovingModel(BossModel model) {
 		movingModelControllers.add(new BossController(model, this,
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
 	}
-
 
 	/**
 	 * Method for adding a projectile to the room.
@@ -249,9 +248,9 @@ public class RoomController implements TileBasedMap {
 		for (AbstractMovingModel model : npcs) {
 			if (model instanceof CoworkerModel)
 				addMovingModel((CoworkerModel) model);
-			else if(model instanceof SpecialModel) {
-				addMovingModel((SpecialModel) model);
-			}else if(model instanceof BossModel) {
+			else if (model instanceof SoldierModel) {
+				addMovingModel((SoldierModel) model);
+			} else if (model instanceof BossModel) {
 				addMovingModel((BossModel) model);
 			}
 		}
@@ -390,6 +389,7 @@ public class RoomController implements TileBasedMap {
 
 	}
 
+	// an inner class used to sort controllers
 	private class ControllerSorter implements
 			Comparator<AbstractMovingModelController> {
 
@@ -410,6 +410,11 @@ public class RoomController implements TileBasedMap {
 
 	}
 
+	/**
+	 * Method for checking if all npc are dead.
+	 * 
+	 * @return true if all dead, false otherwise.
+	 */
 	public boolean allDead() {
 		for (AbstractMovingModel model : roomModel.getNpcModels()) {
 			if (model.isAlive()) {
@@ -420,6 +425,11 @@ public class RoomController implements TileBasedMap {
 		return true;
 	}
 
+	/**
+	 * Method for getting the room model for this controller.
+	 * 
+	 * @return the RoomModel object.
+	 */
 	public RoomModel getRoomModel() {
 		return roomModel;
 	}

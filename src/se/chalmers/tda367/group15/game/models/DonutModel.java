@@ -1,5 +1,11 @@
 package se.chalmers.tda367.group15.game.models;
 
+/**
+ * Class representing a donut model.
+ * 
+ * @author simon
+ * 
+ */
 public class DonutModel extends AbstractProjectileModel {
 
 	public DonutModel() {
@@ -11,6 +17,9 @@ public class DonutModel extends AbstractProjectileModel {
 		setHeight(10);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getImagePath() {
 		return "res/images/donut.png";

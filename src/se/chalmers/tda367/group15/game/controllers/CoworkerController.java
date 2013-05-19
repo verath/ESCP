@@ -14,7 +14,7 @@ import se.chalmers.tda367.group15.game.models.CoworkerModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
 /**
- * Creates a new dummy enemy
+ * Class for representing a coworker controller.
  * 
  * @author Simon Persson, Carl Jansson
  * 

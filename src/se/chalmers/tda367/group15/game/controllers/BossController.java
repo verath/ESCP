@@ -15,7 +15,7 @@ import se.chalmers.tda367.group15.game.models.BossModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
 /**
- * Creates a new dummy enemy
+ * Class for representing a boss controller
  * 
  * @author Simon Persson, Carl Jansson
  * 
@@ -30,10 +30,10 @@ public class BossController extends AbstractNpcController {
 	
 
 	/**
-	 * Creates a new CoworkerController.
+	 * Creates a new boss controller.
 	 * 
 	 * @param model
-	 *            the SpecialModel model
+	 *            the BossModel model
 	 * @param map
 	 *            The map to use.
 	 * @param gameController

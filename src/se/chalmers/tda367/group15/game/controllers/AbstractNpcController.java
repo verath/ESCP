@@ -367,6 +367,9 @@ public abstract class AbstractNpcController extends
 		currentRoom.addSwing(newSwing);
 	}
 
+	/**
+	 * Create a bullet.
+	 */
 	public void createBullet() {
 		soundController
 				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
@@ -393,6 +396,9 @@ public abstract class AbstractNpcController extends
 		currentRoom.addProjectile(newDonut);
 	}
 
+	/**
+	 * Create a donut.
+	 */
 	public void createDonut() {
 		soundController
 				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
