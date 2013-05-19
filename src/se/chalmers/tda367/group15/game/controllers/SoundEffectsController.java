@@ -2,12 +2,15 @@ package se.chalmers.tda367.group15.game.controllers;
 
 import java.util.Random;
 
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
 public class SoundEffectsController {
 
 	private static SoundEffectsController instance;
+	
+	private Music music;
 
 	public enum SoundEffect {
 		ENEMY_DEATH(new String[] { "res/sound/enemy/ondamage/die.aif" }), ENEMY_HURT(
@@ -20,6 +23,16 @@ public class SoundEffectsController {
 		private String[] pathsToFiles;
 
 		private SoundEffect(String[] pathsToFiles) {
+			this.pathsToFiles = pathsToFiles;
+		}
+	}
+	
+	public enum GameMusic {
+		NORMAL_MUSIC(new String[] {"res/music/normal.aif" }), BOSS_MUSIC(new String[] {"res/music/boss.aif" });
+		
+		private String[] pathsToFiles;
+		
+		private GameMusic(String[] pathsToFiles) {
 			this.pathsToFiles = pathsToFiles;
 		}
 	}
@@ -48,5 +61,21 @@ public class SoundEffectsController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void playGameMusic(GameMusic gameMusic) {
+		
+		try {
+			music = new Music(gameMusic.pathsToFiles[0]);
+			music.loop();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
+	 
+	public void stopGameMusic() {
+		if(music != null) {
+			music.fade(3000,0f, true);
+		}
 	}
 }
