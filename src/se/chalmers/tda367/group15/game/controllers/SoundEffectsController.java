@@ -120,9 +120,4 @@ public class SoundEffectsController {
 
 		}
 	}
-	
-	public void resetAll() {
-//		music = null;
-//		queuedMusic = null;
-	}
 }

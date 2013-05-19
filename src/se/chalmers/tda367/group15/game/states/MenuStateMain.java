@@ -110,8 +110,6 @@ public class MenuStateMain extends AbstractMenuBasedState {
 					game.getState(Constants.GAME_STATE_PLAYING).init(container,
 							game);
 					existsGameCurrently = true;
-					soundEffectsController = SoundEffectsController.instance();
-					soundEffectsController.resetAll();
 					soundEffectsController.playGameMusic(GameMusic.NORMAL_MUSIC);
 				} catch (SlickException e) {
 					e.printStackTrace();
