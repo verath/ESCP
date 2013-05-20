@@ -64,7 +64,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initMenuItems() {
+    protected void initMenuItems() {
 		try {
 			this.createButtons();
 		} catch (SlickException e) {

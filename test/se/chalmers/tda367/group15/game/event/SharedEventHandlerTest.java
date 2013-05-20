@@ -23,7 +23,7 @@ public class SharedEventHandlerTest {
 	}
 
 	// The sub event is extending the SuperEvent
-	class SubEvent extends SuperEvent {
+    private class SubEvent extends SuperEvent {
 	}
 
 	/*

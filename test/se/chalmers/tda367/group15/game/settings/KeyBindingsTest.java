@@ -24,7 +24,7 @@ public class KeyBindingsTest {
 	 * Helper method for clearing the preference store. So that we can try
 	 * default values.
 	 */
-	public static void clearPrefs() {
+	private static void clearPrefs() {
 		try {
 			prefs.clear();
 		} catch (Exception e) {

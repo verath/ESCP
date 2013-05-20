@@ -44,7 +44,7 @@ public class RoomsController {
 	/**
 	 * The starting point of the first room.
 	 */
-	public static final Point STARTING_POINT = new Point(0, 0);
+	private static final Point STARTING_POINT = new Point(0, 0);
 
 	/**
 	 * A 2-dimensional array of rooms, describing the layout of the rooms in the
@@ -263,7 +263,7 @@ public class RoomsController {
 	 * 
 	 * @return true if all enemies are dead, false otherwise.
 	 */
-	public boolean allEnemiesDefeated() {
+    boolean allEnemiesDefeated() {
 		boolean allDefeated = true;
 		for (RoomController controller : rooms.values()) {
 			if (!(controller.getRoomModel() instanceof BossRoomModel)) {

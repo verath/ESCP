@@ -21,7 +21,7 @@ public class TextButton implements MenuItem {
 	/**
 	 * The default color used to display the text.
 	 */
-	public static final Color DEFAULT_COLOR = Color.black;
+	private static final Color DEFAULT_COLOR = Color.black;
 
 	/**
 	 * The button we are decorating
@@ -66,7 +66,7 @@ public class TextButton implements MenuItem {
 	 * @param font
 	 *            The font of the text shown.
 	 */
-	public TextButton(Button button, String text, Color color, Font font) {
+    private TextButton(Button button, String text, Color color, Font font) {
 		this.button = button;
 		setText(text);
 		setFont(font);
@@ -89,7 +89,7 @@ public class TextButton implements MenuItem {
 	 * @param color
 	 *            The color of the text shown.
 	 */
-	public TextButton(Button button, String text, Color color) {
+    private TextButton(Button button, String text, Color color) {
 		this(button, text, color, null);
 	}
 
@@ -135,7 +135,7 @@ public class TextButton implements MenuItem {
 	 * @param font
 	 *            The font of the text shown.
 	 */
-	public final void setFont(Font font) {
+	final void setFont(Font font) {
 		font = (font == null) ? TextButton.DEFAULT_FONT : font;
 		textFont = new TrueTypeFont(font, true);
 	}
@@ -146,7 +146,7 @@ public class TextButton implements MenuItem {
 	 * @param color
 	 *            The color of the text shown.
 	 */
-	public final void setColor(Color color) {
+	final void setColor(Color color) {
 		this.color = (color == null) ? TextButton.DEFAULT_COLOR : color;
 	}
 

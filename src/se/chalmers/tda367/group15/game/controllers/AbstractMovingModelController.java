@@ -23,7 +23,7 @@ import se.chalmers.tda367.group15.game.views.View;
  * @author simon
  * 
  */
-public abstract class AbstractMovingModelController {
+abstract class AbstractMovingModelController {
 
 	/**
 	 * The controller for sound effects
@@ -50,7 +50,7 @@ public abstract class AbstractMovingModelController {
 	 * 
 	 * @param gameController
 	 */
-	protected AbstractMovingModelController(GameController gameController) {
+    AbstractMovingModelController(GameController gameController) {
 		this.setGameController(gameController);
 	}
 
@@ -102,7 +102,7 @@ public abstract class AbstractMovingModelController {
 	 * 
 	 * @return the view
 	 */
-	public View getView() {
+    View getView() {
 		return view;
 	}
 
@@ -112,7 +112,7 @@ public abstract class AbstractMovingModelController {
 	 * @param model
 	 *            to be set
 	 */
-	public void setModel(AbstractMovingModel model) {
+    void setModel(AbstractMovingModel model) {
 		this.model = model;
 	}
 
@@ -122,7 +122,7 @@ public abstract class AbstractMovingModelController {
 	 * @param view
 	 *            to be set
 	 */
-	public void setView(View view) {
+    void setView(View view) {
 		this.view = view;
 	}
 
@@ -145,9 +145,9 @@ public abstract class AbstractMovingModelController {
 	 *            map with moving models and their collision bounds
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isCollision(float x, float y, float width, float height,
-			List<Rectangle2D.Float> staticBounds,
-			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
+    boolean isCollision(float x, float y, float width, float height,
+                        List<Rectangle2D.Float> staticBounds,
+                        Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
 		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y, width, height);
 
@@ -167,9 +167,9 @@ public abstract class AbstractMovingModelController {
 	 *            the Rectangle2D witch to check if colliding
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isCollision(List<Rectangle2D.Float> staticBounds,
-			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
-			Rectangle2D.Float bound1) {
+    boolean isCollision(List<Rectangle2D.Float> staticBounds,
+                        Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
+                        Rectangle2D.Float bound1) {
 
 		// check static collisions
 		boolean staticCollision = isStaticCollision(staticBounds, bound1);
@@ -191,8 +191,8 @@ public abstract class AbstractMovingModelController {
 	 *            the Rectangle2D witch to check if col23liding
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isStaticCollision(List<Rectangle2D.Float> staticBounds,
-			Rectangle2D.Float bound1) {
+    boolean isStaticCollision(List<Rectangle2D.Float> staticBounds,
+                              Rectangle2D.Float bound1) {
 
 		boolean staticCollision = false;
 		// check static collisions
@@ -219,8 +219,8 @@ public abstract class AbstractMovingModelController {
 	 *            map with moving models and their collision bounds
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isDynamicCollision(float x, float y,
-			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
+    boolean isDynamicCollision(float x, float y,
+                               Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
 		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
 				model.getWidth(), model.getHeight());
@@ -237,9 +237,9 @@ public abstract class AbstractMovingModelController {
 	 *            the Rectangle2D witch to check if colliding
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isDynamicCollision(
-			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
-			Rectangle2D.Float bound1) {
+    boolean isDynamicCollision(
+            Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
+            Rectangle2D.Float bound1) {
 
 		boolean dynamicCollision = false;
 		// check dynamic collisions
@@ -287,7 +287,7 @@ public abstract class AbstractMovingModelController {
 	 * 
 	 * @return
 	 */
-	protected GameController getGameController() {
+    GameController getGameController() {
 		return gameController;
 	}
 
@@ -296,7 +296,7 @@ public abstract class AbstractMovingModelController {
 	 * 
 	 * @param gameController
 	 */
-	protected void setGameController(GameController gameController) {
+    void setGameController(GameController gameController) {
 		this.gameController = gameController;
 	}
 }

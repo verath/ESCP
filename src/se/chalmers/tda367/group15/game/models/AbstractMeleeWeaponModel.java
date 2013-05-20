@@ -23,8 +23,8 @@ public abstract class AbstractMeleeWeaponModel extends AbstractWeaponModel {
 	 * @param isEquipped
 	 *            Is the weapon equipped?
 	 */
-	public AbstractMeleeWeaponModel(String name, int baseDamage, int maxDamage,
-			int firingSpeed, boolean isEquipped) {
+    AbstractMeleeWeaponModel(String name, int baseDamage, int maxDamage,
+                             int firingSpeed, boolean isEquipped) {
 		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
 	}
 }

@@ -85,7 +85,7 @@ public class RoomController implements TileBasedMap {
 	 * 
 	 * @param gameController
 	 */
-	protected RoomController(GameController gameController, RoomModel roomModel) {
+    RoomController(GameController gameController, RoomModel roomModel) {
 		staticBounds = new ArrayList<Rectangle2D.Float>();
 		dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
 		movingModelControllers = new ArrayList<AbstractMovingModelController>();
@@ -100,7 +100,7 @@ public class RoomController implements TileBasedMap {
 	 * @param model
 	 *            The model to be added
 	 */
-	public void addMovingModel(CoworkerModel model) {
+    void addMovingModel(CoworkerModel model) {
 		movingModelControllers.add(new CoworkerController(model, this,
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
@@ -199,7 +199,7 @@ public class RoomController implements TileBasedMap {
 	 * 
 	 * @return the game controller
 	 */
-	protected GameController getGameController() {
+    GameController getGameController() {
 		return gameController;
 	}
 

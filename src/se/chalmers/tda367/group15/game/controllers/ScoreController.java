@@ -121,7 +121,7 @@ public class ScoreController {
 	 * @param db
 	 *            The database object to use for saving scores.
 	 */
-	protected void setDatabase(GameDatabase db) {
+    void setDatabase(GameDatabase db) {
 		this.db = db;
 	}
 }

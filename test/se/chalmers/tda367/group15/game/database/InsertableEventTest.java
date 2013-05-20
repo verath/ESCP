@@ -7,7 +7,7 @@ import org.junit.Test;
 import se.chalmers.tda367.group15.game.event.Event;
 
 public class InsertableEventTest {
-	public class TestEvent extends Event {
+	private class TestEvent extends Event {
 	}
 
 	/*

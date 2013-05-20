@@ -22,8 +22,8 @@ public abstract class AbstractRangedWeaponModel extends AbstractWeaponModel {
 	 * @param isEquipped
 	 *            Is the weapon equipped?
 	 */
-	public AbstractRangedWeaponModel(String name, int baseDamage,
-			int maxDamage, int firingSpeed, boolean isEquipped) {
+    AbstractRangedWeaponModel(String name, int baseDamage,
+                              int maxDamage, int firingSpeed, boolean isEquipped) {
 		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
 	}
 

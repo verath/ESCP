@@ -20,8 +20,8 @@ import se.chalmers.tda367.group15.game.views.ProjectileView;
  */
 public class ProjectileController extends AbstractMovingModelController {
 
-	protected ProjectileController(GameController gameController,
-			AbstractProjectileModel projectile) {
+	ProjectileController(GameController gameController,
+                         AbstractProjectileModel projectile) {
 		super(gameController);
 		setModel(projectile);
 		setView(new ProjectileView(projectile));

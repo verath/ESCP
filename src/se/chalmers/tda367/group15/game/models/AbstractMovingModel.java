@@ -198,7 +198,7 @@ public abstract class AbstractMovingModel {
 	 *            The amount of pixels from the edge of the image itself, to the
 	 *            preferred collision bound rectangle
 	 */
-	public void setOffset(int offset) {
+    void setOffset(int offset) {
 		this.offset = offset;
 	}
 

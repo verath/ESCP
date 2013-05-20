@@ -215,14 +215,14 @@ public class GameController {
 	 * 
 	 * @return
 	 */
-	protected RoomsController getRoomsController() {
+    RoomsController getRoomsController() {
 		return roomsController;
 	}
 
 	/**
 	 * Getter for the HeroController associated with this controller.
 	 */
-	protected HeroController getHeroController() {
+    HeroController getHeroController() {
 		return heroController;
 	}
 

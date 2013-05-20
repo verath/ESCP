@@ -20,7 +20,7 @@ public class SingleEventHandlerTest {
 	 * SingleEventHandlerTest
 	 */
 	// The super event is directly extending the Event superclass
-	class SuperEvent extends Event {
+    private class SuperEvent extends Event {
 	}
 
 	/*

@@ -14,37 +14,37 @@ public class KeyBindings {
 	/**
 	 * The default binding for going left
 	 */
-	public static final int DEFAULT_KEY_BIND_LEFT = Input.KEY_A;
+	private static final int DEFAULT_KEY_BIND_LEFT = Input.KEY_A;
 
 	/**
 	 * The default binding for going up
 	 */
-	public static final int DEFAULT_KEY_BIND_UP = Input.KEY_W;
+	private static final int DEFAULT_KEY_BIND_UP = Input.KEY_W;
 
 	/**
 	 * The default binding for going down
 	 */
-	public static final int DEFAULT_KEY_BIND_DOWN = Input.KEY_S;
+	private static final int DEFAULT_KEY_BIND_DOWN = Input.KEY_S;
 
 	/**
 	 * The default binding for going right
 	 */
-	public static final int DEFAULT_KEY_BIND_RIGHT = Input.KEY_D;
+	private static final int DEFAULT_KEY_BIND_RIGHT = Input.KEY_D;
 
 	/**
 	 * The default binding for changing to weapon 1
 	 */
-	public static final int DEFAULT_KEY_BIND_WEAPON_1 = Input.KEY_1;
+	private static final int DEFAULT_KEY_BIND_WEAPON_1 = Input.KEY_1;
 
 	/**
 	 * The default binding for changing to weapon 2
 	 */
-	public static final int DEFAULT_KEY_BIND_WEAPON_2 = Input.KEY_2;
+	private static final int DEFAULT_KEY_BIND_WEAPON_2 = Input.KEY_2;
 
 	/**
 	 * The default binding for changing to weapon 3
 	 */
-	public static final int DEFAULT_KEY_BIND_WEAPON_3 = Input.KEY_3;
+	private static final int DEFAULT_KEY_BIND_WEAPON_3 = Input.KEY_3;
 
 	public enum Key {
 		LEFT(KeyBindings.DEFAULT_KEY_BIND_LEFT), UP(
@@ -134,7 +134,7 @@ public class KeyBindings {
 	 * @param prefs
 	 *            A new Preference object to be used for storing keys.
 	 */
-	protected static void setPreferences(Preferences prefs) {
+	static void setPreferences(Preferences prefs) {
 		KeyBindings.prefs = prefs;
 	}
 }

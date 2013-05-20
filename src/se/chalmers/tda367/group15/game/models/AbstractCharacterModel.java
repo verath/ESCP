@@ -62,7 +62,7 @@ public class AbstractCharacterModel extends AbstractMovingModel {
 		return animationPath;
 	}
 
-	public void setAnimationPath(String path) {
+	void setAnimationPath(String path) {
 		this.animationPath = path;
 	}
 }

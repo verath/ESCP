@@ -22,7 +22,7 @@ public class CoworkerModel extends AbstractNpcModel {
 
 	}
 
-	public CoworkerModel(float x, float y, double rot) {
+	private CoworkerModel(float x, float y, double rot) {
 		this(x, y, rot, 0, 32, 0, 24);
 	}
 
@@ -40,8 +40,8 @@ public class CoworkerModel extends AbstractNpcModel {
 	 * @param rot
 	 *            angle to face in beginning
 	 */
-	public CoworkerModel(float x, float y, double rot, int x1, int x2, int y1,
-			int y2) {
+    private CoworkerModel(float x, float y, double rot, int x1, int x2, int y1,
+                          int y2) {
 		super(x1, x2, y1, y2);
         Random randgen = new Random();
 		setX(x);

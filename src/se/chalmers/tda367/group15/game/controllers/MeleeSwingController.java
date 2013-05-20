@@ -13,8 +13,8 @@ import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 
 public class MeleeSwingController extends AbstractMovingModelController {
 
-	protected MeleeSwingController(GameController gameController,
-			AbstractMovingModel swing) {
+	MeleeSwingController(GameController gameController,
+                         AbstractMovingModel swing) {
 		super(gameController);
 		setModel(swing);
 

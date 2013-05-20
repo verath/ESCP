@@ -41,7 +41,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * @param id
 	 *            the state identification with which state is fetched.
 	 */
-	public AbstractMenuBasedState(int id) {
+    AbstractMenuBasedState(int id) {
 		super(id);
 		pendingEscpAction = false;
 	}
@@ -107,7 +107,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	/**
 	 * Check if mouse clicked and perform action.
 	 */
-	protected final void checkForButtonClicks() {
+	final void checkForButtonClicks() {
 		if (leftMouseButtonReleased) {
 			leftMouseButtonReleased = false;
 			this.clickButton();
@@ -132,15 +132,15 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * @param item
 	 *            the item to add to list.
 	 */
-	public final void addMenuItem(MenuItem item) {
+	final void addMenuItem(MenuItem item) {
 		this.menuItems.add(item);
 	}
 
-	protected Image getBackground() {
+	Image getBackground() {
 		return background;
 	}
 
-	protected void setBackground(Image background) {
+	void setBackground(Image background) {
 		this.background = background;
 	}
 }

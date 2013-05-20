@@ -17,7 +17,7 @@ public class BossModel extends AbstractNpcModel {
 		this(64f, 128f);
 	}
 
-	public BossModel(float x, float y) {
+	private BossModel(float x, float y) {
 		this(x, y, 360 * Math.random());
 
 	}

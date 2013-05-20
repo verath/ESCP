@@ -99,7 +99,7 @@ public abstract class AbstractWeaponModel {
 	 * @param firingSpeed
 	 *            An int representing the firing speed.
 	 */
-	public void setFiringSpeed(int firingSpeed) {
+    void setFiringSpeed(int firingSpeed) {
 		this.firingSpeed = firingSpeed;
 	}
 }

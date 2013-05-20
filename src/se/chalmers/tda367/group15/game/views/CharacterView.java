@@ -164,7 +164,7 @@ public class CharacterView implements View {
 	 *            The path to the animation files
 	 * @return An animation object
 	 */
-	public Animation getAnimationFromPath(String animationPath) {
+    Animation getAnimationFromPath(String animationPath) {
 		File folder = new File("res/animation/" + animationPath);
 		if (folder != null) {
 			File[] files = folder.listFiles();

@@ -35,7 +35,7 @@ public abstract class AbstractNpcController extends
 
 	private long swingTimer = 0;
 	
-	protected int ENEMY_DAMAGE_MODIFIER = 2;
+	int ENEMY_DAMAGE_MODIFIER = 2;
 
 	private SoundEffectsController soundController = SoundEffectsController
 			.instance();
@@ -95,8 +95,8 @@ public abstract class AbstractNpcController extends
 	 * @param map
 	 *            The tile based map to be used.
 	 */
-	public AbstractNpcController(GameController gameController,
-			AbstractNpcModel model, TileBasedMap map) {
+    AbstractNpcController(GameController gameController,
+                          AbstractNpcModel model, TileBasedMap map) {
 		super(gameController);
 		this.setPathFinder(new AStarPathFinder(map, 500, true));
 		this.setModel(model);
@@ -129,7 +129,7 @@ public abstract class AbstractNpcController extends
 	 * @param pathFinder
 	 *            the pathfinder to use
 	 */
-	public void setPathFinder(AStarPathFinder pathFinder) {
+    void setPathFinder(AStarPathFinder pathFinder) {
 		this.myPathFinder = pathFinder;
 	}
 
@@ -138,7 +138,7 @@ public abstract class AbstractNpcController extends
 	 * 
 	 * @return the active pathfinder
 	 */
-	public AStarPathFinder getPathFinder() {
+    AStarPathFinder getPathFinder() {
 		return myPathFinder;
 	}
 
@@ -153,8 +153,8 @@ public abstract class AbstractNpcController extends
 	 * @param dynamicBounds
 	 *            other moving models
 	 */
-	public void moveAlongPath(AbstractMovingModel model, int delta,
-			Map<AbstractMovingModel, Float> dynamicBounds) {
+    void moveAlongPath(AbstractMovingModel model, int delta,
+                       Map<AbstractMovingModel, Float> dynamicBounds) {
 		if (myPath.getLength() >= currentStep) {
 			float diffX = model.getX() - (myPath.getX(currentStep) * 32);
 			float diffY = model.getY() - (myPath.getY(currentStep) * 32);
@@ -197,7 +197,7 @@ public abstract class AbstractNpcController extends
 	 * Make a new random path. Starting with current position. Goal is defined
 	 * by setDefaultTiles.
 	 */
-	public void calculateRandomPath() {
+    void calculateRandomPath() {
 		int tarX = startX + (int) (Math.random() * deltaX);
 		int tarY = startY + (int) (Math.random() * deltaY);
 
@@ -212,7 +212,7 @@ public abstract class AbstractNpcController extends
 	 * @param tarY
 	 *            ending Y position in tiles
 	 */
-	public void calculateNewPath(int tarX, int tarY) {
+    void calculateNewPath(int tarX, int tarY) {
 		myPath = getPathFinder().findPath(null,
 				(int) (getModel().getX() + (getModel().getWidth() / 2)) / 32,
 				(int) (getModel().getY() + (getModel().getHeight() / 2)) / 32,
@@ -226,7 +226,7 @@ public abstract class AbstractNpcController extends
 	 * 
 	 * @return true if random time has passed
 	 */
-	public boolean pauseTimer() {
+    boolean pauseTimer() {
 		if (pauseTime == 0) {
 			pauseTime = System.currentTimeMillis();
 			waitTime = (long) (2000 * Math.random());
@@ -242,7 +242,7 @@ public abstract class AbstractNpcController extends
 	 * 
 	 * @return false if path is null or current step is end of path
 	 */
-	public boolean existsPath() {
+    boolean existsPath() {
         return !(myPath == null || currentStep >= myPath.getLength());
     }
 
@@ -265,7 +265,7 @@ public abstract class AbstractNpcController extends
 	 * @param y2
 	 *            maximum y tile random movement will occur on
 	 */
-	public void setDefaultTiles(int x, int x2, int y, int y2) {
+    void setDefaultTiles(int x, int x2, int y, int y2) {
 
 		if (x >= 0 && y >= 0 && x < x2 && y < y2 && x2 <= 32 && y2 <= 24) {
 			deltaX = x2 - x;
@@ -296,8 +296,8 @@ public abstract class AbstractNpcController extends
 	 *            y variable of second point
 	 * @return true if path is blocked by a moving model.
 	 */
-	public boolean isWayClear(Map<AbstractMovingModel, Float> dynamicBounds,
-			float point1X, float point1Y, float point2X, float point2Y) {
+    boolean isWayClear(Map<AbstractMovingModel, Float> dynamicBounds,
+                       float point1X, float point1Y, float point2X, float point2Y) {
 		for (AbstractMovingModel otherModel : dynamicBounds.keySet()) {
 			if (this.getModel() != otherModel && otherModel.isAlive()
 					&& !(otherModel instanceof HeroModel)) {
@@ -315,7 +315,7 @@ public abstract class AbstractNpcController extends
 	/**
 	 * Time the fire method so animation can run its course
 	 */
-	public void fireTimed() {
+    void fireTimed() {
 		if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) getModel())
 				.getCurrentWeapon().getFiringSpeed()) {
 			swingTimer = System.currentTimeMillis();
@@ -326,12 +326,12 @@ public abstract class AbstractNpcController extends
 	/**
 	 * Method to tell npc to fire a weapon of some kind
 	 */
-	public abstract void fire();
+	protected abstract void fire();
 
 	/**
 	 * Swing the the currently equipped weapon of the enemy
 	 */
-	protected void swingWeapon() {
+    void swingWeapon() {
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		// Run the swinging animation for the weapon
@@ -367,7 +367,7 @@ public abstract class AbstractNpcController extends
 	/**
 	 * Create a bullet.
 	 */
-	public void createBullet() {
+    void createBullet() {
 		soundController
 				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
@@ -396,7 +396,7 @@ public abstract class AbstractNpcController extends
 	/**
 	 * Create a donut.
 	 */
-	public void createDonut() {
+    void createDonut() {
 		soundController
 				.playSound(SoundEffectsController.SoundEffect.DONUT_FIRED);
 		

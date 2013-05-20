@@ -20,12 +20,12 @@ public class CheckBox implements MenuItem {
 	/**
 	 * the area and pictures compromising the checkbox.
 	 */
-	protected MouseOverArea moa;
+    private MouseOverArea moa;
 
 	/**
 	 * the container to paint in
 	 */
-	protected GUIContext guiContext;
+    private GUIContext guiContext;
 
 	/**
 	 * Empty checkbox.
@@ -136,7 +136,7 @@ public class CheckBox implements MenuItem {
 	/**
 	 * Changes pictures used to correct.
 	 */
-	public void updateMoa() {
+    void updateMoa() {
 		/*
 	  Image of currently active box when mouse down over it.
 	 */

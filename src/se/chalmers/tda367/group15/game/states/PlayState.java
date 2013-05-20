@@ -20,7 +20,7 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  * @author Carl Jansson, Peter, Simon Persson
  * 
  */
-public class PlayState extends BasicGameState {
+class PlayState extends BasicGameState {
 
 	private final int ID;
 

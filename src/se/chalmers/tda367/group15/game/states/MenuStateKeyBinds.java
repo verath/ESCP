@@ -215,7 +215,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 * @param button
 	 *            The button that was pressed.
 	 */
-	protected void startRebindKey(TextButton button) {
+    void startRebindKey(TextButton button) {
 		if (!buttonToKeyBind.containsKey(button)) {
 			return;
 		}
@@ -237,7 +237,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 * @param keyCode
 	 *            The key code of the key to bind to.
 	 */
-	protected void setRebindKey(int keyCode) {
+    void setRebindKey(int keyCode) {
 		Key key = buttonToKeyBind.get(activeBindButton);
 		int prevBind = KeyBindings.getBinding(key);
 		KeyBindings.setBinding(key, keyCode);
