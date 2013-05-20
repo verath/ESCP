@@ -398,7 +398,7 @@ public class RoomController implements TileBasedMap {
 
 			if ((m1Alive && m2Alive) || (!m1Alive && !m2Alive)) {
 				return 0;
-			} else if (m1Alive && !m2Alive) {
+			} else if (m1Alive) {
 				return 1;
 			} else {
 				return -1;
