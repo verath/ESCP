@@ -190,17 +190,14 @@ public class RoomsController {
 	 * @param container
 	 *            The container holing this game
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds
 	 * @param dynamicBounds A map of dynamic collision bounds.
 	 * @param staticBounds A list of static collision bounds.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
 	 */
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
 
 		RoomController currentRoom = getCurrentRoom();
@@ -234,11 +231,8 @@ public class RoomsController {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		getCurrentRoom().render(container, g);
 	}
 
@@ -247,10 +241,8 @@ public class RoomsController {
 	 * 
 	 * @param container
 	 *            The container holding this game.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error.
 	 */
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container) {
 		for (RoomController room : rooms.values()) {
 			room.init(container);
 		}

@@ -43,7 +43,7 @@ public abstract class AbstractMovingModel {
 	private double rotation;
 
 	/**
-	 * Velocity of the model, pixels per mili-second
+	 * Velocity of the model, pixels per millisecond
 	 */
 	private float velocity;
 
@@ -203,7 +203,7 @@ public abstract class AbstractMovingModel {
 	}
 
 	/**
-	 * Method for setting wether the model is moving or not
+	 * Method for setting whether the model is moving or not
 	 * 
 	 * @param isMoving
 	 *            Should true if model is moving, false otherwise
@@ -216,7 +216,7 @@ public abstract class AbstractMovingModel {
 	 * Method for setting the rotation angle of the model.
 	 * 
 	 * @param rotation
-	 *            The roration angle, in degrees.
+	 *            The rotation angle, in degrees.
 	 */
 	public void setRotation(double rotation) {
 		this.rotation = rotation;

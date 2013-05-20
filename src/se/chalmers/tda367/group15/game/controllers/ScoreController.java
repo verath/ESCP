@@ -110,7 +110,7 @@ public class ScoreController {
 		db.addScore(s);
 
 		if (Constants.DEBUG) {
-			System.out.println("Succesfully inserted " + s
+			System.out.println("Successfully inserted " + s
 					+ " into the database!");
 		}
 	}

@@ -41,7 +41,7 @@ public class EventLogger implements Iterable<Event> {
 	}
 
 	/**
-	 * Sets the EventHander this EventLogger is listening to.
+	 * Sets the EventHandler this EventLogger is listening to.
 	 * 
 	 * @param eventHandler
 	 *            The new EventHandler to use for listening to events.

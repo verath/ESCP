@@ -62,11 +62,9 @@ abstract class AbstractMovingModelController {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
 	public abstract void render(GameContainer container, Graphics g)
-			throws SlickException;
+    ;
 
 	/**
 	 * Method for updating the logic of all the models
@@ -74,14 +72,12 @@ abstract class AbstractMovingModelController {
 	 * @param container
 	 *            The container holding this game.
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds
 	 * @param dynamicBounds
 	 *            the dynamic bounds of moving objects
 	 * @param staticBounds
 	 *            the static bounds of current map
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
 	public abstract void update(GameContainer container, int delta,
 			List<Float> staticBounds,
@@ -188,7 +184,7 @@ abstract class AbstractMovingModelController {
 	 *            list of rectangles representing static blocked object on the
 	 *            map
 	 * @param bound1
-	 *            the Rectangle2D witch to check if col23liding
+	 *            the Rectangle2D witch to check if colliding
 	 * @return true if collision, false otherwise
 	 */
     boolean isStaticCollision(List<Rectangle2D.Float> staticBounds,

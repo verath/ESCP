@@ -24,7 +24,7 @@ abstract class AbstractGameState extends BasicGameState {
     GameContainer container;
 
 	/**
-	 * The controller containging to states.
+	 * The controller containing to states.
 	 */
     StateBasedGame game;
 

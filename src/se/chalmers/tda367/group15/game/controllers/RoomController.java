@@ -131,7 +131,7 @@ public class RoomController implements TileBasedMap {
 	}
 
 	/**
-	 * Method for adding a swing infront of the hero
+	 * Method for adding a swing in front of the hero
 	 * 
 	 * @param swing
 	 *            The swing to be added
@@ -242,8 +242,6 @@ public class RoomController implements TileBasedMap {
 	 * 
 	 * @param container
 	 *            The container holding this game.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error.
 	 */
 	public void init(GameContainer container) {
 		List<AbstractMovingModel> npcs = roomModel.getNpcModels();
@@ -274,11 +272,8 @@ public class RoomController implements TileBasedMap {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
 	 */
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		// render map
 		map.render(0, 0);
 
@@ -347,7 +342,7 @@ public class RoomController implements TileBasedMap {
 	 * @param container
 	 *            The container holding this game.
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds.
 	 * @param staticBounds
 	 *            the static collision bounds to be sent to all controllers of
@@ -355,13 +350,10 @@ public class RoomController implements TileBasedMap {
 	 * @param dynamicBounds
 	 *            the dynamic collision bounds to be sent to all controllers of
 	 *            the room.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error.
 	 */
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 		// tell enemy controllers to move
 
 		Iterator<AbstractMovingModelController> it = movingModelControllers
@@ -374,7 +366,7 @@ public class RoomController implements TileBasedMap {
 			}
 		}
 
-		// add new qued controllers to the movingModelControllers list
+		// add new queued controllers to the movingModelControllers list
 		it = quedControllers.iterator();
 		while (it.hasNext()) {
 			AbstractMovingModelController controller = it.next();

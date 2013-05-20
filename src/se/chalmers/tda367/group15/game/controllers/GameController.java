@@ -71,11 +71,8 @@ public class GameController {
 	 *            The container holding the game
 	 * @param game
 	 *            The state based game currently running.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
 	 */
-	public void init(GameContainer container, StateBasedGame game)
-			throws SlickException {
+	public void init(GameContainer container, StateBasedGame game) {
 		
 		soundEffectsController = SoundEffectsController.instance();
 		
@@ -128,13 +125,10 @@ public class GameController {
 	 * @param game
 	 *            The state based game currently running.
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
 	 */
-	public void update(GameContainer container, StateBasedGame game, int delta)
-			throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta) {
 
 		if (gameOver) {
 			return;
@@ -171,11 +165,8 @@ public class GameController {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
-	public void render(GameContainer container, StateBasedGame game, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 
 		roomsController.render(container, g);
 		heroController.render(container, g);
@@ -203,7 +194,7 @@ public class GameController {
 	/**
 	 * Method for checking if a game is over and if so, if it was won or not.
 	 * 
-	 * @return An array of lenght 2, where the first element is whether the game
+	 * @return An array of length 2, where the first element is whether the game
 	 *         is over and the second if the game was won.
 	 */
 	public boolean[] isGameOver() {

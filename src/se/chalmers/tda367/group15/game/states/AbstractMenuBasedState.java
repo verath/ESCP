@@ -68,7 +68,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(Graphics g) {
+    protected void render(Graphics g) {
 		if (getBackground() != null) {
 			getBackground().draw();
 		}
@@ -83,7 +83,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(int delta) {
+    protected void update(int delta) {
 		this.checkForButtonClicks();
 		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = true;
@@ -127,7 +127,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	}
 
 	/**
-	 * Adds a MenuItem to ArayList menuItems.
+	 * Adds a MenuItem to ArrayList menuItems.
 	 * 
 	 * @param item
 	 *            the item to add to list.

@@ -19,8 +19,6 @@ public interface View {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
 	public void render(GameContainer container, Graphics g)
     ;

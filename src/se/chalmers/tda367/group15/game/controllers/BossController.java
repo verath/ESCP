@@ -56,8 +56,7 @@ public class BossController extends AbstractNpcController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		getView().render(container, g);
 
 	}
@@ -195,7 +194,7 @@ public class BossController extends AbstractNpcController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void fire() {
+    protected void fire() {
 		hasFired = true;
 
 	}
@@ -204,7 +203,7 @@ public class BossController extends AbstractNpcController {
 	 * The boss is kinda slower than everybody else
 	 */
 	@Override
-	public void fireTimed() {
+    void fireTimed() {
 		if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) getModel())
 				.getCurrentWeapon().getFiringSpeed() * 2) {
 			swingTimer = System.currentTimeMillis();

@@ -17,7 +17,7 @@ public abstract class AbstractRangedWeaponModel extends AbstractWeaponModel {
 	 * @param maxDamage
 	 *            The maximum damage of the weapon.
 	 * @param firingSpeed
-	 *            The firingspeed of the weapon. 0 is really fast while 100 is
+	 *            The firing speed of the weapon. 0 is really fast while 100 is
 	 *            really slow.
 	 * @param isEquipped
 	 *            Is the weapon equipped?

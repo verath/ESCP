@@ -111,7 +111,7 @@ public abstract class AbstractNpcController extends
 	 */
 	@Override
 	public abstract void render(GameContainer container, Graphics g)
-			throws SlickException;
+    ;
 
 	/**
 	 * {@inheritDoc}

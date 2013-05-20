@@ -67,7 +67,7 @@ public abstract class AbstractWeaponModel {
 	}
 
 	/**
-	 * Check wether the weapon is equipped or not.
+	 * Check whether the weapon is equipped or not.
 	 * 
 	 * @return true if the weapon is currently equipped, else false.
 	 */
@@ -94,7 +94,7 @@ public abstract class AbstractWeaponModel {
 	}
 
 	/**
-	 * Set the firingspeed.
+	 * Set the firing speed.
 	 * 
 	 * @param firingSpeed
 	 *            An int representing the firing speed.

@@ -321,8 +321,7 @@ public class HeroController extends AbstractMovingModelController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		getView().render(container, g);
 	}
 }

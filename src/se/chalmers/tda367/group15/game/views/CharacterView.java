@@ -156,7 +156,7 @@ public class CharacterView implements View {
 
 	/**
 	 * Method for getting an Animation object from a specified path in the
-	 * filesystem. The method asumes that the root folder to the animation files
+	 * filesystem. The method assumes that the root folder to the animation files
 	 * is 'res/animation/specifiedanimationpath'.
 	 * 
 	 * @param animationPath
