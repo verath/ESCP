@@ -44,11 +44,6 @@ public class GameLostState extends AbstractMenuBasedState {
 	protected void initMenuItems() {
 	}
 
-	@Override
-	public void render(Graphics g) {
-		super.render(g);
-	}
-
 	private void addBackButton() throws SlickException {
 		Image backImage = new Image("res/menu/returnButton.png");
 		Image backImageMO = new Image("res/menu/returnButtonMO.png");
