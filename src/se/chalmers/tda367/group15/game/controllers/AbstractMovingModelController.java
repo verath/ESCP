@@ -86,7 +86,7 @@ abstract class AbstractMovingModelController {
 	public abstract void update(GameContainer container, int delta,
 			List<Float> staticBounds,
 			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException;
+    ;
 
 	/**
 	 * Method for getting the model that the controller is managing

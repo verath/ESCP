@@ -16,8 +16,7 @@ public class HUDView implements View {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 
 		int currentScore = scoreModel.getScore();
 

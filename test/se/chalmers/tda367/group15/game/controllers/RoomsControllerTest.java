@@ -18,7 +18,7 @@ public class RoomsControllerTest {
 		}
 
 		@Override
-		public void init(GameContainer container) throws SlickException {
+		public void init(GameContainer container) {
 		}
 
 		@Override

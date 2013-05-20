@@ -46,8 +46,7 @@ public class ProjectileView implements View {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		if (model.isAlive()) {
 			double rotation = model.getRotation();
 			g.rotate(model.getX() + model.getWidth() / 2,

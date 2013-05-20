@@ -108,8 +108,7 @@ public class CharacterView implements View {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 
 		float rotation = (float) model.getRotation();
 

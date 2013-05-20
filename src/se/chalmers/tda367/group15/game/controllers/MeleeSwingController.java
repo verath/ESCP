@@ -30,8 +30,7 @@ public class MeleeSwingController extends AbstractMovingModelController {
 	@Override
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 		AbstractMovingModel swing = (MeleeSwingModel) getModel();
 		if (swing.isAlive()) {
 

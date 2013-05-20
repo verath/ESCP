@@ -23,5 +23,5 @@ public interface View {
 	 *             Throw to indicate a internal error
 	 */
 	public void render(GameContainer container, Graphics g)
-			throws SlickException;
+    ;
 }

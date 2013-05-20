@@ -245,7 +245,7 @@ public class RoomController implements TileBasedMap {
 	 * @throws SlickException
 	 *             Throw to indicate an internal error.
 	 */
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container) {
 		List<AbstractMovingModel> npcs = roomModel.getNpcModels();
 		for (AbstractMovingModel model : npcs) {
 			if (model instanceof CoworkerModel)
