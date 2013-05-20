@@ -50,5 +50,10 @@ public class Constants {
 	/**
 	 * The starting score of the game.
 	 */
-	public static final int STARTING_SCORE = 300;
+	public static final int STARTING_SCORE = 600;
+
+    /**
+     * The amount of milliseconds between each decrease in score.
+     */
+    public final static int SCORE_DECREASE_INTERVAL = 500;
 }

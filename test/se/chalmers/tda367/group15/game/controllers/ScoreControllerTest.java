@@ -10,6 +10,7 @@ import org.junit.Test;
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
 import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 public class ScoreControllerTest {
 	private static GameDatabase db;
@@ -27,7 +28,7 @@ public class ScoreControllerTest {
 	@Test
 	public final void testDecreaseScoreOverTime() {
 		scoreController.update(null,
-				ScoreController.SCORE_DECREASE_INTERVAL + 1);
+				Constants.SCORE_DECREASE_INTERVAL + 1);
 		assertTrue(sm.getScore() == 999);
 		scoreController.update(null, -1);
 		assertTrue(sm.getScore() == 999);

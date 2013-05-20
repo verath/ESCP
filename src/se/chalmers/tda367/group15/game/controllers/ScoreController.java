@@ -19,11 +19,6 @@ import se.chalmers.tda367.group15.game.settings.Constants;
 public class ScoreController {
 
 	/**
-	 * The amount of milliseconds between each decrease in score.
-	 */
-	public final static int SCORE_DECREASE_INTERVAL = 1000;
-
-	/**
 	 * A list of names used if no name was provided when saving to the database.
 	 */
 	private final static List<String> DEFAULT_HIGH_SCORE_NAMES = Arrays.asList(
@@ -75,7 +70,7 @@ public class ScoreController {
 	public void update(GameContainer container, int delta) {
 		lastChange += delta;
 
-		if (lastChange > SCORE_DECREASE_INTERVAL) {
+		if (lastChange > Constants.SCORE_DECREASE_INTERVAL) {
 			lastChange = 0;
 			scoreModel.decreaseScore();
 		}
