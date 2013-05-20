@@ -110,7 +110,7 @@ public class ScoreController {
 		db.addScore(s);
 
 		if (Constants.DEBUG) {
-			System.out.println("Succesfully inserted " + s
+			System.out.println("Successfully inserted " + s
 					+ " into the database!");
 		}
 	}
@@ -121,7 +121,7 @@ public class ScoreController {
 	 * @param db
 	 *            The database object to use for saving scores.
 	 */
-	protected void setDatabase(GameDatabase db) {
+	void setDatabase(GameDatabase db) {
 		this.db = db;
 	}
 }

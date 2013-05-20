@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
@@ -22,8 +21,6 @@ import se.chalmers.tda367.group15.game.util.CollisionHelper;
 public class CoworkerController extends AbstractNpcController {
 
 	private boolean hasFired;
-
-	private boolean heroTracking;
 
 	/**
 	 * Creates a new CoworkerController.
@@ -44,8 +41,7 @@ public class CoworkerController extends AbstractNpcController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		getView().render(container, g);
 
 	}
@@ -56,8 +52,7 @@ public class CoworkerController extends AbstractNpcController {
 	@Override
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		if (hasFired) {
 			swingWeapon();
@@ -80,6 +75,7 @@ public class CoworkerController extends AbstractNpcController {
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
 		// if hero is in sight.
+		boolean heroTracking;
 		if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
 			heroTracking = true;
 			// New path after hero pos

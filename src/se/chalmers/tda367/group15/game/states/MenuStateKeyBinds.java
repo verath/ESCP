@@ -4,12 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.KeyListener;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.*;
 
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.TextButton;
@@ -141,8 +136,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		Image imageOver = new Image("res/menu/EmptyMO.png");
 
 		TextButton bindUp = new TextButton(new Button(container, imageNormal,
-				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
-						+ LIST_Y_SPACING * 0), null) {
+				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y), null) {
 			@Override
 			public void performAction() {
 				startRebindKey(this);
@@ -150,7 +144,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		};
 		TextButton bindDown = new TextButton(new Button(container, imageNormal,
 				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
-						+ LIST_Y_SPACING * 1), null) {
+						+ LIST_Y_SPACING), null) {
 			@Override
 			public void performAction() {
 				startRebindKey(this);
@@ -215,7 +209,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 * @param button
 	 *            The button that was pressed.
 	 */
-	protected void startRebindKey(TextButton button) {
+	void startRebindKey(TextButton button) {
 		if (!buttonToKeyBind.containsKey(button)) {
 			return;
 		}
@@ -237,7 +231,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 * @param keyCode
 	 *            The key code of the key to bind to.
 	 */
-	protected void setRebindKey(int keyCode) {
+	void setRebindKey(int keyCode) {
 		Key key = buttonToKeyBind.get(activeBindButton);
 		int prevBind = KeyBindings.getBinding(key);
 		KeyBindings.setBinding(key, keyCode);
@@ -276,9 +270,8 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
-		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 0, "Up: ");
-		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 1,
-				"Down: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y, "Up: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING, "Down: ");
 		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 2,
 				"Left: ");
 		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 3,

@@ -12,8 +12,7 @@ public class AbstractWeaponModelTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		testedModel = new AbstractWeaponModel("test", MIN_DMG, MAX_DMG, 1,
-				false) {
+		testedModel = new AbstractWeaponModel("test", MIN_DMG, MAX_DMG, 1) {
 		};
 	}
 

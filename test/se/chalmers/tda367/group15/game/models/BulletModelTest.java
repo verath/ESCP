@@ -13,13 +13,13 @@ public class BulletModelTest {
 	@Test
 	public final void testCreateBullet() {
 		BulletModel bm = new BulletModel();
-		
+
 		// Basic properties
 		assertFalse(bm.isAlive());
 		assertTrue(bm.getX() >= 0);
 		assertTrue(bm.getY() >= 0);
 		assertTrue(bm.getVelocity() > 0);
-		
+
 		// Should have a non-empty collision bound
 		assertFalse(bm.getBounds().isEmpty());
 	}

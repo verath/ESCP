@@ -6,13 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
@@ -30,22 +24,22 @@ public class CharacterView implements View {
 	/**
 	 * The character model that this view is rendering.
 	 */
-	private AbstractCharacterModel model;
+	private final AbstractCharacterModel model;
 
 	/**
 	 * Map of weapons and it's corresponding walk animations.
 	 */
-	private Map<AbstractWeaponModel, Animation> walkAnimations;
+	private final Map<AbstractWeaponModel, Animation> walkAnimations;
 
 	/**
 	 * Map of weapons and it's corresponding attack animations.
 	 */
-	private Map<AbstractWeaponModel, Animation> attackAnimations;
+	private final Map<AbstractWeaponModel, Animation> attackAnimations;
 
 	/**
 	 * The death animation.
 	 */
-	private Animation deathAnimation;
+	private final Animation deathAnimation;
 
 	/**
 	 * Variable for holding the active animation running.
@@ -91,7 +85,8 @@ public class CharacterView implements View {
 		String path = model.getAnimationPath() + "/death/";
 		deathAnimation = getAnimationFromPath(path);
 		// The enemies will bleed slowly when they die
-		if (path.equals("coworker/1/death/") || path.equals("coworker/2/death/")) {
+		if (path.equals("coworker/1/death/")
+				|| path.equals("coworker/2/death/")) {
 			deathAnimation.setDuration(7, 2000);
 			deathAnimation.setDuration(8, 2000);
 			deathAnimation.setDuration(9, 2000);
@@ -108,8 +103,7 @@ public class CharacterView implements View {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 
 		float rotation = (float) model.getRotation();
 
@@ -157,14 +151,14 @@ public class CharacterView implements View {
 
 	/**
 	 * Method for getting an Animation object from a specified path in the
-	 * filesystem. The method asumes that the root folder to the animation files
-	 * is 'res/animation/specifiedanimationpath'.
+	 * filesystem. The method assumes that the root folder to the animation
+	 * files is 'res/animation/specifiedanimationpath'.
 	 * 
 	 * @param animationPath
 	 *            The path to the animation files
 	 * @return An animation object
 	 */
-	public Animation getAnimationFromPath(String animationPath) {
+	Animation getAnimationFromPath(String animationPath) {
 		File folder = new File("res/animation/" + animationPath);
 		if (folder != null) {
 			File[] files = folder.listFiles();

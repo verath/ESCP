@@ -1,8 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,8 +25,7 @@ public class ScoreControllerTest {
 
 	@Test
 	public final void testDecreaseScoreOverTime() {
-		scoreController.update(null,
-				Constants.SCORE_DECREASE_INTERVAL + 1);
+		scoreController.update(null, Constants.SCORE_DECREASE_INTERVAL + 1);
 		assertTrue(sm.getScore() == 999);
 		scoreController.update(null, -1);
 		assertTrue(sm.getScore() == 999);

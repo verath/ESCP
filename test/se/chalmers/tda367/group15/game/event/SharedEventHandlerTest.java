@@ -1,14 +1,12 @@
 package se.chalmers.tda367.group15.game.event;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 /**
- * Test for the SingleEventHandler class, and by doing so also testing Events and
- * EventListener.
+ * Test for the SingleEventHandler class, and by doing so also testing Events
+ * and EventListener.
  * 
  * @author Peter
  * 
@@ -23,7 +21,7 @@ public class SharedEventHandlerTest {
 	}
 
 	// The sub event is extending the SuperEvent
-	class SubEvent extends SuperEvent {
+	private class SubEvent extends SuperEvent {
 	}
 
 	/*

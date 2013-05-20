@@ -46,13 +46,13 @@ public class MenuStateHighScore extends AbstractMenuBasedState {
 
 	/**
 	 * A placeholder name for when the high score is less than
-	 * NUM_HIGH_SCORE_ENTIES.
+	 * NUM_HIGH_SCORE_ENTRIES.
 	 */
 	private final static String DEFAULT_NAME = "<No One>";
 
 	/**
 	 * A placeholder score for when the high score is less than
-	 * NUM_HIGH_SCORE_ENTIES.
+	 * NUM_HIGH_SCORE_ENTRIES.
 	 */
 	private final static String DEFAULT_SCORE = "----";
 

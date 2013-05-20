@@ -1,6 +1,5 @@
 package se.chalmers.tda367.group15.game.states;
 
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -42,11 +41,6 @@ public class GameLostState extends AbstractMenuBasedState {
 
 	@Override
 	protected void initMenuItems() {
-	}
-
-	@Override
-	public void render(Graphics g) {
-		super.render(g);
 	}
 
 	private void addBackButton() throws SlickException {

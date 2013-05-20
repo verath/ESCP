@@ -11,7 +11,7 @@ import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 
 public class KeyBindingsTest {
 
-	private static Preferences prefs = Preferences
+	private static final Preferences prefs = Preferences
 			.userNodeForPackage(KeyBindingsTest.class);
 
 	@BeforeClass
@@ -24,7 +24,7 @@ public class KeyBindingsTest {
 	 * Helper method for clearing the preference store. So that we can try
 	 * default values.
 	 */
-	public static void clearPrefs() {
+	private static void clearPrefs() {
 		try {
 			prefs.clear();
 		} catch (Exception e) {

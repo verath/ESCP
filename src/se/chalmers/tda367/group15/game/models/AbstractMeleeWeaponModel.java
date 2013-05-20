@@ -24,5 +24,6 @@ public abstract class AbstractMeleeWeaponModel extends AbstractWeaponModel {
 	public AbstractMeleeWeaponModel(String name, int baseDamage, int maxDamage,
 			int firingSpeed) {
 		super(name, baseDamage, maxDamage, firingSpeed);
+
 	}
 }

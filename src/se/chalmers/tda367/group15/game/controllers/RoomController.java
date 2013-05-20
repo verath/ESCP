@@ -2,13 +2,7 @@ package se.chalmers.tda367.group15.game.controllers;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Float;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -18,14 +12,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
-import se.chalmers.tda367.group15.game.models.BossModel;
-import se.chalmers.tda367.group15.game.models.CoworkerModel;
-import se.chalmers.tda367.group15.game.models.RoomModel;
-import se.chalmers.tda367.group15.game.models.SoldierModel;
+import se.chalmers.tda367.group15.game.models.*;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -55,7 +42,7 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * The model of the room.
 	 */
-	private RoomModel roomModel;
+	private final RoomModel roomModel;
 
 	/**
 	 * The tiled map to be used in the room
@@ -65,27 +52,28 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * List containing the static bounds represented by rectangles.
 	 */
-	private List<Rectangle2D.Float> staticBounds;
+	private final List<Rectangle2D.Float> staticBounds;
 
 	/**
 	 * Map containing models and it's corresponding collision rectangles.
 	 */
-	private Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
+	private final Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
 
 	/**
 	 * List containing controllers for all moving models in the room.
 	 */
-	private List<AbstractMovingModelController> movingModelControllers;
+	private final List<AbstractMovingModelController> movingModelControllers;
 
 	// List used in update method to add new controllers
-	private List<AbstractMovingModelController> quedControllers = new ArrayList<AbstractMovingModelController>();
+	private final List<AbstractMovingModelController> quedControllers = new ArrayList<AbstractMovingModelController>();
 
 	/**
 	 * Creates a new AbstractMovingModelController.
 	 * 
 	 * @param gameController
+	 *            The game controller used in this game.
 	 */
-	protected RoomController(GameController gameController, RoomModel roomModel) {
+	RoomController(GameController gameController, RoomModel roomModel) {
 		staticBounds = new ArrayList<Rectangle2D.Float>();
 		dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
 		movingModelControllers = new ArrayList<AbstractMovingModelController>();
@@ -100,7 +88,7 @@ public class RoomController implements TileBasedMap {
 	 * @param model
 	 *            The model to be added
 	 */
-	public void addMovingModel(CoworkerModel model) {
+	void addMovingModel(CoworkerModel model) {
 		movingModelControllers.add(new CoworkerController(model, this,
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
@@ -131,7 +119,7 @@ public class RoomController implements TileBasedMap {
 	}
 
 	/**
-	 * Method for adding a swing infront of the hero
+	 * Method for adding a swing in front of the hero
 	 * 
 	 * @param swing
 	 *            The swing to be added
@@ -199,7 +187,7 @@ public class RoomController implements TileBasedMap {
 	 * 
 	 * @return the game controller
 	 */
-	protected GameController getGameController() {
+	GameController getGameController() {
 		return gameController;
 	}
 
@@ -242,10 +230,8 @@ public class RoomController implements TileBasedMap {
 	 * 
 	 * @param container
 	 *            The container holding this game.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error.
 	 */
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container) {
 		List<AbstractMovingModel> npcs = roomModel.getNpcModels();
 		for (AbstractMovingModel model : npcs) {
 			if (model instanceof CoworkerModel)
@@ -274,11 +260,8 @@ public class RoomController implements TileBasedMap {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
 	 */
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		// render map
 		map.render(0, 0);
 
@@ -300,6 +283,7 @@ public class RoomController implements TileBasedMap {
 	 * Setter for the gameController to be associated with this controller.
 	 * 
 	 * @param gameController
+	 *            The game controller used in this game.
 	 */
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;
@@ -347,7 +331,7 @@ public class RoomController implements TileBasedMap {
 	 * @param container
 	 *            The container holding this game.
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds.
 	 * @param staticBounds
 	 *            the static collision bounds to be sent to all controllers of
@@ -355,13 +339,10 @@ public class RoomController implements TileBasedMap {
 	 * @param dynamicBounds
 	 *            the dynamic collision bounds to be sent to all controllers of
 	 *            the room.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error.
 	 */
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 		// tell enemy controllers to move
 
 		Iterator<AbstractMovingModelController> it = movingModelControllers
@@ -374,7 +355,7 @@ public class RoomController implements TileBasedMap {
 			}
 		}
 
-		// add new qued controllers to the movingModelControllers list
+		// add new queued controllers to the movingModelControllers list
 		it = quedControllers.iterator();
 		while (it.hasNext()) {
 			AbstractMovingModelController controller = it.next();
@@ -398,7 +379,7 @@ public class RoomController implements TileBasedMap {
 
 			if ((m1Alive && m2Alive) || (!m1Alive && !m2Alive)) {
 				return 0;
-			} else if (m1Alive && !m2Alive) {
+			} else if (m1Alive) {
 				return 1;
 			} else {
 				return -1;
@@ -433,7 +414,7 @@ public class RoomController implements TileBasedMap {
 	public boolean isUnlocked() {
 		return roomUnlocked;
 	}
-	
+
 	public void unlockRoom() {
 		setMap(roomModel.getUnlockedMapPath());
 		roomUnlocked = true;

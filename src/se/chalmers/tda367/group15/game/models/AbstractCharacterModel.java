@@ -12,7 +12,7 @@ public class AbstractCharacterModel extends AbstractMovingModel {
 	/**
 	 * A list of the character's weapon arsenal
 	 */
-	private List<AbstractWeaponModel> weapons = new ArrayList<AbstractWeaponModel>();
+	private final List<AbstractWeaponModel> weapons = new ArrayList<AbstractWeaponModel>();
 	/**
 	 * The currently equipped weapon
 	 */
@@ -62,7 +62,7 @@ public class AbstractCharacterModel extends AbstractMovingModel {
 		return animationPath;
 	}
 
-	public void setAnimationPath(String path) {
+	void setAnimationPath(String path) {
 		this.animationPath = path;
 	}
 }

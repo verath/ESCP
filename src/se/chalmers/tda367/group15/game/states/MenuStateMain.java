@@ -17,9 +17,9 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  * @version 2.0
  */
 public class MenuStateMain extends AbstractMenuBasedState {
-	
-	private SoundEffectsController soundEffectsController; 
-	/**	
+
+	private SoundEffectsController soundEffectsController;
+	/**
 	 * Resume button must be possible to set visible at will.
 	 */
 	private Button resumeGameButton;
@@ -64,7 +64,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initMenuItems() {
+	protected void initMenuItems() {
 		try {
 			this.createButtons();
 		} catch (SlickException e) {
@@ -85,8 +85,8 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		Image quitImageMO = new Image("res/menu/quitMO.png");
 		Image optionsImage = new Image("res/menu/options.png");
 		Image optionsImageMO = new Image("res/menu/optionsMO.png");
-        Image highScoreImage = new Image("res/menu/score.png");
-        Image highScoreImageMO = new Image("res/menu/scoreMO.png");
+		Image highScoreImage = new Image("res/menu/score.png");
+		Image highScoreImageMO = new Image("res/menu/scoreMO.png");
 		Image resumeImage = new Image("res/menu/resumeGame.png");
 		Image resumeImageMO = new Image("res/menu/resumeGameMO.png");
 
@@ -110,7 +110,8 @@ public class MenuStateMain extends AbstractMenuBasedState {
 					game.getState(Constants.GAME_STATE_PLAYING).init(container,
 							game);
 					existsGameCurrently = true;
-					soundEffectsController.playGameMusic(GameMusic.NORMAL_MUSIC);
+					soundEffectsController
+							.playGameMusic(GameMusic.NORMAL_MUSIC);
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}
@@ -127,14 +128,14 @@ public class MenuStateMain extends AbstractMenuBasedState {
 				game.enterState(Constants.GAME_STATE_MENU_OPTIONS);
 			}
 		};
-        // Show high score
-        Button highScoreButton = new Button(container, highScoreImage,
-        		highScoreImageMO, MENUX, MENUY + 150) {
-            @Override
-            public void performAction() {
-                game.enterState(Constants.GAME_STATE_MENU_HIGH_SCORE);
-            }
-        };
+		// Show high score
+		Button highScoreButton = new Button(container, highScoreImage,
+				highScoreImageMO, MENUX, MENUY + 150) {
+			@Override
+			public void performAction() {
+				game.enterState(Constants.GAME_STATE_MENU_HIGH_SCORE);
+			}
+		};
 		// Quit application
 		Button exitButton = new Button(container, quitImage, quitImageMO,
 				MENUX, MENUY + 200) {
@@ -153,7 +154,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 		this.addMenuItem(resumeGameButton);
 		this.addMenuItem(newGameButton);
 		this.addMenuItem(optionsButton);
-        this.addMenuItem(highScoreButton);
+		this.addMenuItem(highScoreButton);
 		this.addMenuItem(exitButton);
 	}
 

@@ -9,7 +9,7 @@ package se.chalmers.tda367.group15.game.models;
  * 
  */
 public class AxeModel extends AbstractMeleeWeaponModel {
-	
+
 	public AxeModel() {
 		super("axe", 50, 110, 350);
 	}

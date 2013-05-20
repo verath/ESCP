@@ -15,7 +15,7 @@ public abstract class AbstractWeaponModel {
 	private int maxDamage;
 	private int firingSpeed;
 
-	private Random randomGenerator = new Random();
+	private final Random randomGenerator = new Random();
 
 	/**
 	 * Create a new weapon.
@@ -66,12 +66,12 @@ public abstract class AbstractWeaponModel {
 	}
 
 	/**
-	 * Set the firingspeed.
+	 * Set the firing speed.
 	 * 
 	 * @param firingSpeed
 	 *            The firing speed in ms.
 	 */
-	public void setFiringSpeed(int firingSpeed) {
+	void setFiringSpeed(int firingSpeed) {
 		this.firingSpeed = firingSpeed;
 	}
 }

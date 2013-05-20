@@ -16,27 +16,27 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author unknown, shiroto?
  * @version 1.1
  */
-public abstract class AbstractGameState extends BasicGameState {
+abstract class AbstractGameState extends BasicGameState {
 
 	/**
 	 * the container for the game.
 	 */
-	protected GameContainer container;
+	GameContainer container;
 
 	/**
-	 * The controller containging to states.
+	 * The controller containing to states.
 	 */
-	protected StateBasedGame game;
+	StateBasedGame game;
 
 	/**
 	 * The identification for the state.
 	 */
-	public final int ID;
+	private final int ID;
 
 	/**
 	 * input received.
 	 */
-	protected Input input;
+	Input input;
 
 	/**
 	 * Creates a new abstracted game state
@@ -44,7 +44,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	 * @param id
 	 *            the identification for the state.
 	 */
-	public AbstractGameState(int id) {
+	AbstractGameState(int id) {
 		ID = id;
 	}
 
@@ -90,21 +90,23 @@ public abstract class AbstractGameState extends BasicGameState {
 	/**
 	 * init your state.
 	 */
-	public abstract void init();
+	protected abstract void init();
 
 	/**
 	 * Paint your state.
 	 * 
 	 * @param g
+	 *            The graphics object used to draw.
 	 */
-	public abstract void render(Graphics g);
+	protected abstract void render(Graphics g);
 
 	/**
 	 * update your state.
 	 * 
 	 * @param delta
+	 *            Time passed since last game update call.
 	 */
-	public abstract void update(int delta);
+	protected abstract void update(int delta);
 
 	/**
 	 * Returns this states ID.

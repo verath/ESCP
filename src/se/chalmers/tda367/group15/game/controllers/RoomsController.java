@@ -1,6 +1,6 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.Point;
+import java.awt.*;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
@@ -44,7 +43,7 @@ public class RoomsController {
 	/**
 	 * The starting point of the first room.
 	 */
-	public static final Point STARTING_POINT = new Point(0, 0);
+	private static final Point STARTING_POINT = new Point(0, 0);
 
 	/**
 	 * A 2-dimensional array of rooms, describing the layout of the rooms in the
@@ -190,21 +189,20 @@ public class RoomsController {
 	 * @param container
 	 *            The container holing this game
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds
 	 * @param dynamicBounds
+	 *            A map of dynamic collision bounds.
 	 * @param staticBounds
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
+	 *            A list of static collision bounds.
 	 */
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
 
 		RoomController currentRoom = getCurrentRoom();
-		
+
 		if (allEnemiesDefeated() && !bossRoomUnlocked) {
 			for (RoomController controller : rooms.values()) {
 				RoomModel model = controller.getRoomModel();
@@ -216,10 +214,12 @@ public class RoomsController {
 			currentRoom.unlockRoom();
 			soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
 			soundEffectsController.playSound(SoundEffect.NARRATOR_BOSS);
-			
-		}else if(currentRoom.allDead() && !currentRoom.isUnlocked() && !bossRoomUnlocked) {
+
+		} else if (currentRoom.allDead() && !currentRoom.isUnlocked()
+				&& !bossRoomUnlocked) {
 			currentRoom.unlockRoom();
-			SoundEffectsController soundEffectsController = SoundEffectsController.instance();
+			SoundEffectsController soundEffectsController = SoundEffectsController
+					.instance();
 			soundEffectsController.playSound(SoundEffect.NARRATOR_NEXT);
 
 		}
@@ -234,11 +234,8 @@ public class RoomsController {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		getCurrentRoom().render(container, g);
 	}
 
@@ -247,10 +244,8 @@ public class RoomsController {
 	 * 
 	 * @param container
 	 *            The container holding this game.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error.
 	 */
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container) {
 		for (RoomController room : rooms.values()) {
 			room.init(container);
 		}
@@ -263,7 +258,7 @@ public class RoomsController {
 	 * 
 	 * @return true if all enemies are dead, false otherwise.
 	 */
-	public boolean allEnemiesDefeated() {
+	boolean allEnemiesDefeated() {
 		boolean allDefeated = true;
 		for (RoomController controller : rooms.values()) {
 			if (!(controller.getRoomModel() instanceof BossRoomModel)) {

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
@@ -23,12 +22,12 @@ import se.chalmers.tda367.group15.game.views.View;
  * @author simon
  * 
  */
-public abstract class AbstractMovingModelController {
+abstract class AbstractMovingModelController {
 
 	/**
 	 * The controller for sound effects
 	 */
-	private SoundEffectsController soundController = SoundEffectsController
+	private final SoundEffectsController soundController = SoundEffectsController
 			.instance();
 	/**
 	 * The model that the controller is managing
@@ -49,8 +48,9 @@ public abstract class AbstractMovingModelController {
 	 * Creates a new AbstractMovingModelController.
 	 * 
 	 * @param gameController
+	 *            The game controller of the game.
 	 */
-	protected AbstractMovingModelController(GameController gameController) {
+	AbstractMovingModelController(GameController gameController) {
 		this.setGameController(gameController);
 	}
 
@@ -62,11 +62,8 @@ public abstract class AbstractMovingModelController {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
-	public abstract void render(GameContainer container, Graphics g)
-			throws SlickException;
+	public abstract void render(GameContainer container, Graphics g);
 
 	/**
 	 * Method for updating the logic of all the models
@@ -74,19 +71,16 @@ public abstract class AbstractMovingModelController {
 	 * @param container
 	 *            The container holding this game.
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds
 	 * @param dynamicBounds
 	 *            the dynamic bounds of moving objects
 	 * @param staticBounds
 	 *            the static bounds of current map
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
 	public abstract void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException;
+			Map<AbstractMovingModel, Float> dynamicBounds);
 
 	/**
 	 * Method for getting the model that the controller is managing
@@ -102,7 +96,7 @@ public abstract class AbstractMovingModelController {
 	 * 
 	 * @return the view
 	 */
-	public View getView() {
+	View getView() {
 		return view;
 	}
 
@@ -112,7 +106,7 @@ public abstract class AbstractMovingModelController {
 	 * @param model
 	 *            to be set
 	 */
-	public void setModel(AbstractMovingModel model) {
+	void setModel(AbstractMovingModel model) {
 		this.model = model;
 	}
 
@@ -122,7 +116,7 @@ public abstract class AbstractMovingModelController {
 	 * @param view
 	 *            to be set
 	 */
-	public void setView(View view) {
+	void setView(View view) {
 		this.view = view;
 	}
 
@@ -145,7 +139,7 @@ public abstract class AbstractMovingModelController {
 	 *            map with moving models and their collision bounds
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isCollision(float x, float y, float width, float height,
+	boolean isCollision(float x, float y, float width, float height,
 			List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
@@ -167,7 +161,7 @@ public abstract class AbstractMovingModelController {
 	 *            the Rectangle2D witch to check if colliding
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isCollision(List<Rectangle2D.Float> staticBounds,
+	boolean isCollision(List<Rectangle2D.Float> staticBounds,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
 			Rectangle2D.Float bound1) {
 
@@ -188,10 +182,10 @@ public abstract class AbstractMovingModelController {
 	 *            list of rectangles representing static blocked object on the
 	 *            map
 	 * @param bound1
-	 *            the Rectangle2D witch to check if col23liding
+	 *            the Rectangle2D witch to check if colliding
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isStaticCollision(List<Rectangle2D.Float> staticBounds,
+	boolean isStaticCollision(List<Rectangle2D.Float> staticBounds,
 			Rectangle2D.Float bound1) {
 
 		boolean staticCollision = false;
@@ -219,7 +213,7 @@ public abstract class AbstractMovingModelController {
 	 *            map with moving models and their collision bounds
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isDynamicCollision(float x, float y,
+	boolean isDynamicCollision(float x, float y,
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds) {
 
 		Rectangle2D.Float bound1 = new Rectangle2D.Float(x, y,
@@ -237,7 +231,7 @@ public abstract class AbstractMovingModelController {
 	 *            the Rectangle2D witch to check if colliding
 	 * @return true if collision, false otherwise
 	 */
-	public boolean isDynamicCollision(
+	boolean isDynamicCollision(
 			Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds,
 			Rectangle2D.Float bound1) {
 
@@ -260,15 +254,15 @@ public abstract class AbstractMovingModelController {
 
 					if (otherModel.getHealth() <= 0) {
 						otherModel.setAlive(false);
-						if(otherModel instanceof BossModel) {
+						if (otherModel instanceof BossModel) {
 							soundController.playSound(SoundEffect.BOSS_DEATH);
 							getGameController().gameOver(true);
 
-						}else {
+						} else {
 							soundController
-							.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);
+									.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);
 						}
-						
+
 					} else {
 						soundController
 								.playSound(SoundEffectsController.SoundEffect.ENEMY_HURT);
@@ -285,9 +279,9 @@ public abstract class AbstractMovingModelController {
 	/**
 	 * Getter for the gameController associated with this controller.
 	 * 
-	 * @return
+	 * @return The game controller of this game.
 	 */
-	protected GameController getGameController() {
+	GameController getGameController() {
 		return gameController;
 	}
 
@@ -295,8 +289,9 @@ public abstract class AbstractMovingModelController {
 	 * Setter for the gameController to be associated with this controller.
 	 * 
 	 * @param gameController
+	 *            The game controller of this game.
 	 */
-	protected void setGameController(GameController gameController) {
+	void setGameController(GameController gameController) {
 		this.gameController = gameController;
 	}
 }

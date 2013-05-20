@@ -93,7 +93,7 @@ public class CollisionHelper {
 	 *            Point 4 Y
 	 * @return true if intersect
 	 */
-	public static boolean linesIntersect(double x1, double y1, double x2,
+	private static boolean linesIntersect(double x1, double y1, double x2,
 			double y2, double x3, double y3, double x4, double y4) {
 		// Return false if either of the lines have zero length
 		if (x1 == x2 && y1 == y2 || x3 == x4 && y3 == y4) {

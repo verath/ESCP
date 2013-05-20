@@ -3,22 +3,21 @@ package se.chalmers.tda367.group15.game.controllers;
 import static org.junit.Assert.assertEquals;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosition;
 
 public class RoomsControllerTest {
 
 	private class DummyRoom extends RoomController {
-		private String name;
+		private final String name;
 
-		protected DummyRoom(String name) {
+		DummyRoom(String name) {
 			super(null, null);
 			this.name = (name == null) ? "" : name;
 		}
 
 		@Override
-		public void init(GameContainer container) throws SlickException {
+		public void init(GameContainer container) {
 		}
 
 		@Override

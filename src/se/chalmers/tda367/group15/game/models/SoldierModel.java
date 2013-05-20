@@ -37,7 +37,7 @@ public class SoldierModel extends AbstractNpcModel {
 	 * @param rot
 	 *            The rotation angle.
 	 */
-	public SoldierModel(float x, float y, double rot) {
+	private SoldierModel(float x, float y, double rot) {
 		this(x, y, rot, 0, 32, 0, 24);
 	}
 
@@ -80,7 +80,7 @@ public class SoldierModel extends AbstractNpcModel {
 	 * @param y2
 	 *            The maximum tile y coordinate
 	 */
-	public SoldierModel(float x, float y, double rot, int x1, int x2, int y1,
+	private SoldierModel(float x, float y, double rot, int x1, int x2, int y1,
 			int y2) {
 		super(x1, x2, y1, y2);
 		setX(x);

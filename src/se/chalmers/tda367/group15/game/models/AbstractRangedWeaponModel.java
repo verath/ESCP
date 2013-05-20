@@ -23,6 +23,7 @@ public abstract class AbstractRangedWeaponModel extends AbstractWeaponModel {
 	public AbstractRangedWeaponModel(String name, int baseDamage,
 			int maxDamage, int firingSpeed) {
 		super(name, baseDamage, maxDamage, firingSpeed);
+
 	}
 
 }

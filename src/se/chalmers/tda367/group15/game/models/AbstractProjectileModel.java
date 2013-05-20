@@ -17,6 +17,7 @@ public abstract class AbstractProjectileModel extends AbstractMovingModel {
 	 * Set the amount of damage this projectile can deal.
 	 * 
 	 * @param damage
+	 *            An int representing damage amount.
 	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
@@ -34,7 +35,7 @@ public abstract class AbstractProjectileModel extends AbstractMovingModel {
 	/**
 	 * Method for getting the path to the image of this projectile.
 	 * 
-	 * @return
+	 * @return Path to an image.
 	 */
 	public abstract String getImagePath();
 }

@@ -10,27 +10,27 @@ import java.util.List;
  * 
  */
 public class ParkingLotRoomModel implements RoomModel {
-	
+
 	/**
 	 * Variable for storing path to map with unlocked doors.
 	 */
-	private String unlockedMapPath;
-	
+	private final String unlockedMapPath;
+
 	/**
 	 * Variable for storing path to map with locked doors.
 	 */
-	private String lockedMapPath;
+	private final String lockedMapPath;
 
 	/**
 	 * Variable for storing all npc models
 	 */
-	private List<AbstractMovingModel> npcModels;
+	private final List<AbstractMovingModel> npcModels;
 
 	public ParkingLotRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
-		CoworkerModel e1 = new CoworkerModel(2*32, 5*32);
-		CoworkerModel e2 = new CoworkerModel(29*32, 11*32);
+		CoworkerModel e1 = new CoworkerModel(2 * 32, 5 * 32);
+		CoworkerModel e2 = new CoworkerModel(29 * 32, 11 * 32);
 
 		npcModels.add(e1);
 		npcModels.add(e2);

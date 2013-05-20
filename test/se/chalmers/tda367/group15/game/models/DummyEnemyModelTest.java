@@ -16,7 +16,7 @@ public class DummyEnemyModelTest {
 		assertTrue(dem.getX() >= 0);
 		assertTrue(dem.getY() >= 0);
 		assertTrue(dem.getVelocity() > 0);
-		
+
 		// Should have a non-empty collision bound
 		assertFalse(dem.getBounds().isEmpty());
 	}

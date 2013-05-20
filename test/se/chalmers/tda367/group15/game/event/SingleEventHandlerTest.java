@@ -20,7 +20,7 @@ public class SingleEventHandlerTest {
 	 * SingleEventHandlerTest
 	 */
 	// The super event is directly extending the Event superclass
-	class SuperEvent extends Event {
+	private class SuperEvent extends Event {
 	}
 
 	/*
@@ -49,12 +49,13 @@ public class SingleEventHandlerTest {
 		// after each test!
 		eh.removeListener(el);
 	}
-	
+
 	/*
-	 * Test that listeners to the SharedEH doesn't receive events published by other handlers 
+	 * Test that listeners to the SharedEH doesn't receive events published by
+	 * other handlers
 	 */
 	@Test
-	public final void testOnlyReceiveOwnPublishedEvents(){
+	public final void testOnlyReceiveOwnPublishedEvents() {
 		EventHandler eh = SharedEventHandler.INSTANCE;
 		EventHandler eh2 = new SingleEventHandler();
 

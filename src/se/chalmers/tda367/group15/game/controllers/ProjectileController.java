@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
@@ -20,7 +19,7 @@ import se.chalmers.tda367.group15.game.views.ProjectileView;
  */
 public class ProjectileController extends AbstractMovingModelController {
 
-	protected ProjectileController(GameController gameController,
+	ProjectileController(GameController gameController,
 			AbstractProjectileModel projectile) {
 		super(gameController);
 		setModel(projectile);
@@ -31,8 +30,7 @@ public class ProjectileController extends AbstractMovingModelController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, Graphics g) {
 		getView().render(container, g);
 	}
 
@@ -42,8 +40,7 @@ public class ProjectileController extends AbstractMovingModelController {
 	@Override
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
-			Map<AbstractMovingModel, Float> dynamicBounds)
-			throws SlickException {
+			Map<AbstractMovingModel, Float> dynamicBounds) {
 		AbstractMovingModel projectile = getModel();
 		if (projectile.isAlive()) {
 

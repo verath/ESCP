@@ -7,25 +7,17 @@ import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import se.chalmers.tda367.group15.game.event.SharedEventHandler;
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.BossRoomModel;
-import se.chalmers.tda367.group15.game.models.LeftWingRoomModel;
-import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
-import se.chalmers.tda367.group15.game.models.ParkingLotRoomModel;
-import se.chalmers.tda367.group15.game.models.ScoreModel;
-import se.chalmers.tda367.group15.game.models.WCRoomModel;
+import se.chalmers.tda367.group15.game.models.*;
 import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
 public class GameController {
-	
-	
+
 	private SoundEffectsController soundEffectsController;
-	
+
 	/**
 	 * A flag for if the game is over
 	 */
@@ -71,27 +63,25 @@ public class GameController {
 	 *            The container holding the game
 	 * @param game
 	 *            The state based game currently running.
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
 	 */
-	public void init(GameContainer container, StateBasedGame game)
-			throws SlickException {
-		
+	public void init(GameContainer container, StateBasedGame game) {
+
 		soundEffectsController = SoundEffectsController.instance();
-		
+
 		// Reset the game over flags
 		gameOver = false;
 		gameWon = false;
 		// Set up an event logger to listen for events on the shared event
 		// handler
 		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
-		
+
 		// Set up the rooms
 		RoomController parkingLot = new RoomController(this,
 				new ParkingLotRoomModel());
 		RoomController lobby = new RoomController(this, new LobbyRoomModel());
 		RoomController wcRoom = new RoomController(this, new WCRoomModel());
-		RoomController leftWing = new RoomController(this, new LeftWingRoomModel());
+		RoomController leftWing = new RoomController(this,
+				new LeftWingRoomModel());
 		RoomController bossRoom = new RoomController(this, new BossRoomModel());
 
 		// Set up the room manager
@@ -101,8 +91,10 @@ public class GameController {
 				RoomsController.RelativePosition.ABOVE);
 		roomsController.addRoom(lobby, wcRoom,
 				RoomsController.RelativePosition.RIGHTOF);
-		roomsController.addRoom(lobby, leftWing, RoomsController.RelativePosition.LEFTOF);
-		roomsController.addRoom(lobby, bossRoom, RoomsController.RelativePosition.ABOVE);
+		roomsController.addRoom(lobby, leftWing,
+				RoomsController.RelativePosition.LEFTOF);
+		roomsController.addRoom(lobby, bossRoom,
+				RoomsController.RelativePosition.ABOVE);
 		roomsController.init(container);
 
 		// Set up the hero controller
@@ -128,20 +120,17 @@ public class GameController {
 	 * @param game
 	 *            The state based game currently running.
 	 * @param delta
-	 *            The amount of time thats passed since last update in
+	 *            The amount of time that's passed since last update in
 	 *            milliseconds
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
 	 */
-	public void update(GameContainer container, StateBasedGame game, int delta)
-			throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta) {
 
 		if (gameOver) {
 			return;
 		}
-		
+
 		soundEffectsController.update();
-		
+
 		scoreController.update(container, delta);
 
 		// get current room
@@ -171,11 +160,8 @@ public class GameController {
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
-	 * @throws SlickException
-	 *             Throw to indicate a internal error
 	 */
-	public void render(GameContainer container, StateBasedGame game, Graphics g)
-			throws SlickException {
+	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 
 		roomsController.render(container, g);
 		heroController.render(container, g);
@@ -203,7 +189,7 @@ public class GameController {
 	/**
 	 * Method for checking if a game is over and if so, if it was won or not.
 	 * 
-	 * @return An array of lenght 2, where the first element is whether the game
+	 * @return An array of length 2, where the first element is whether the game
 	 *         is over and the second if the game was won.
 	 */
 	public boolean[] isGameOver() {
@@ -213,25 +199,27 @@ public class GameController {
 	/**
 	 * Getter for the RoomsController associated with this controller.
 	 * 
-	 * @return
+	 * @return A RoomsController.
 	 */
-	protected RoomsController getRoomsController() {
+	RoomsController getRoomsController() {
 		return roomsController;
 	}
 
 	/**
 	 * Getter for the HeroController associated with this controller.
 	 */
-	protected HeroController getHeroController() {
+	HeroController getHeroController() {
 		return heroController;
 	}
 
-    /**
-     * Getter for the score controller. This is used by the won game state to save the score.
-     * @return The score controller used this game.
-     */
-    public ScoreController getScoreController() {
-        return this.scoreController;
-    }
+	/**
+	 * Getter for the score controller. This is used by the won game state to
+	 * save the score.
+	 * 
+	 * @return The score controller used this game.
+	 */
+	public ScoreController getScoreController() {
+		return this.scoreController;
+	}
 
 }
