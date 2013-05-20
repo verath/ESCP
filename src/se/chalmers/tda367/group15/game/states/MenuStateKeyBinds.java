@@ -141,8 +141,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		Image imageOver = new Image("res/menu/EmptyMO.png");
 
 		TextButton bindUp = new TextButton(new Button(container, imageNormal,
-				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
-						+ LIST_Y_SPACING * 0), null) {
+				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y), null) {
 			@Override
 			public void performAction() {
 				startRebindKey(this);
@@ -150,7 +149,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 		};
 		TextButton bindDown = new TextButton(new Button(container, imageNormal,
 				imageOver, LIST_TOP_X + LIST_X_SPACING, LIST_TOP_Y
-						+ LIST_Y_SPACING * 1), null) {
+						+ LIST_Y_SPACING), null) {
 			@Override
 			public void performAction() {
 				startRebindKey(this);
@@ -276,8 +275,8 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
-		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 0, "Up: ");
-		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 1,
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y, "Up: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING,
 				"Down: ");
 		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 2,
 				"Left: ");
