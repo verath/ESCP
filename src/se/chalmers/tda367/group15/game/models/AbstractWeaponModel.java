@@ -3,8 +3,7 @@ package se.chalmers.tda367.group15.game.models;
 import java.util.Random;
 
 /**
- * An abstract definition of a weapon in the game. Every weapon should be able
- * to fire.
+ * An abstract definition of a weapon in the game.
  * 
  * @author tholene
  * 
@@ -12,7 +11,6 @@ import java.util.Random;
 public abstract class AbstractWeaponModel {
 
 	private String name;
-	private boolean isEquipped;
 	private int baseDamage;
 	private int maxDamage;
 	private int firingSpeed;
@@ -31,30 +29,13 @@ public abstract class AbstractWeaponModel {
 	 * @param firingSpeed
 	 *            The amount of time (in ms) that will pass between every shot
 	 *            while firing.
-	 * @param isEquipped
-	 *            Is the weapon equipped or not?
 	 */
 	public AbstractWeaponModel(String name, int baseDamage, int maxDamage,
-			int firingSpeed, boolean isEquipped) {
+			int firingSpeed) {
 		this.name = name.toLowerCase();
 		this.baseDamage = baseDamage;
 		this.maxDamage = maxDamage - baseDamage;
 		this.setFiringSpeed(firingSpeed);
-		this.isEquipped = isEquipped;
-	}
-
-	/**
-	 * Equip the weapon.
-	 */
-	public void equip() {
-		isEquipped = true;
-	}
-
-	/**
-	 * Unequip the weapon.
-	 */
-	public void unequip() {
-		isEquipped = false;
 	}
 
 	/**
@@ -64,15 +45,6 @@ public abstract class AbstractWeaponModel {
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * Check wether the weapon is equipped or not.
-	 * 
-	 * @return true if the weapon is currently equipped, else false.
-	 */
-	public boolean isEquipped() {
-		return isEquipped;
 	}
 
 	/**
@@ -87,7 +59,7 @@ public abstract class AbstractWeaponModel {
 	/**
 	 * Get the firing speed.
 	 * 
-	 * @return int representing the firing speed.
+	 * @return int The firing speed of the weapon
 	 */
 	public int getFiringSpeed() {
 		return firingSpeed;
@@ -97,7 +69,7 @@ public abstract class AbstractWeaponModel {
 	 * Set the firingspeed.
 	 * 
 	 * @param firingSpeed
-	 *            An int representing the firing speed.
+	 *            The firing speed in ms.
 	 */
 	public void setFiringSpeed(int firingSpeed) {
 		this.firingSpeed = firingSpeed;

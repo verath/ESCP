@@ -14,6 +14,6 @@ public class UnarmedModel extends AbstractMeleeWeaponModel {
 	 * Create a new unarmed model.
 	 */
 	public UnarmedModel() {
-		super("unarmed", 5, 10, 350, true);
+		super("unarmed", 5, 10, 350);
 	}
 }

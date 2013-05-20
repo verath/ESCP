@@ -18,13 +18,11 @@ public abstract class AbstractMeleeWeaponModel extends AbstractWeaponModel {
 	 * @param maxDamage
 	 *            The maximum damage of the weapon.
 	 * @param firingSpeed
-	 *            The firingspeed of the weapon. 0 is really fast while 100 is
-	 *            really slow.
-	 * @param isEquipped
-	 *            Is the weapon equipped?
+	 *            The amount of time (in ms) that will pass between every shot
+	 *            while firing.
 	 */
 	public AbstractMeleeWeaponModel(String name, int baseDamage, int maxDamage,
-			int firingSpeed, boolean isEquipped) {
-		super(name, baseDamage, maxDamage, firingSpeed, isEquipped);
+			int firingSpeed) {
+		super(name, baseDamage, maxDamage, firingSpeed);
 	}
 }
