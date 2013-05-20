@@ -48,7 +48,7 @@ abstract class AbstractMovingModelController {
 	/**
 	 * Creates a new AbstractMovingModelController.
 	 * 
-	 * @param gameController
+	 * @param gameController The game controller of the game.
 	 */
     AbstractMovingModelController(GameController gameController) {
 		this.setGameController(gameController);
@@ -285,7 +285,7 @@ abstract class AbstractMovingModelController {
 	/**
 	 * Getter for the gameController associated with this controller.
 	 * 
-	 * @return
+	 * @return The game controller of this game.
 	 */
     GameController getGameController() {
 		return gameController;
@@ -294,7 +294,7 @@ abstract class AbstractMovingModelController {
 	/**
 	 * Setter for the gameController to be associated with this controller.
 	 * 
-	 * @param gameController
+	 * @param gameController The game controller of this game.
 	 */
     void setGameController(GameController gameController) {
 		this.gameController = gameController;

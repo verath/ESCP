@@ -44,7 +44,7 @@ public abstract class AbstractEventListener<T extends Event> implements
 	/**
 	 * The method for the event of type T, that this class is listening for.
 	 * 
-	 * @param event
+	 * @param event An event of some kind.
 	 */
 	public abstract void onEvent(T event);
 }

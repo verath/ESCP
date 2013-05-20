@@ -83,7 +83,7 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * Creates a new AbstractMovingModelController.
 	 * 
-	 * @param gameController
+	 * @param gameController The game controller used in this game.
 	 */
     RoomController(GameController gameController, RoomModel roomModel) {
 		staticBounds = new ArrayList<Rectangle2D.Float>();
@@ -299,7 +299,7 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * Setter for the gameController to be associated with this controller.
 	 * 
-	 * @param gameController
+	 * @param gameController The game controller used in this game.
 	 */
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;

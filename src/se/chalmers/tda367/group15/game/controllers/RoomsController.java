@@ -192,8 +192,8 @@ public class RoomsController {
 	 * @param delta
 	 *            The amount of time thats passed since last update in
 	 *            milliseconds
-	 * @param dynamicBounds
-	 * @param staticBounds
+	 * @param dynamicBounds A map of dynamic collision bounds.
+	 * @param staticBounds A list of static collision bounds.
 	 * @throws SlickException
 	 *             Throw to indicate an internal error
 	 */

@@ -95,14 +95,14 @@ abstract class AbstractGameState extends BasicGameState {
 	/**
 	 * Paint your state.
 	 * 
-	 * @param g
+	 * @param g The graphics object used to draw.
 	 */
 	protected abstract void render(Graphics g);
 
 	/**
 	 * update your state.
 	 * 
-	 * @param delta
+	 * @param delta Time passed since last game update call.
 	 */
 	protected abstract void update(int delta);
 

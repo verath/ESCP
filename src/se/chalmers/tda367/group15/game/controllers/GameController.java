@@ -213,7 +213,7 @@ public class GameController {
 	/**
 	 * Getter for the RoomsController associated with this controller.
 	 * 
-	 * @return
+	 * @return A RoomsController.
 	 */
     RoomsController getRoomsController() {
 		return roomsController;
