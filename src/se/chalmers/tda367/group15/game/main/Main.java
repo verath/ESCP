@@ -19,6 +19,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		System.out.println("native/" + LWJGLUtil.getPlatformName());
+
 		// lwjgl settings, see
 		// http://www.lwjgl.org/wiki/index.php?title=LWJGL_Hidden_Switches
 		System.setProperty("org.lwjgl.librarypath", new File("native/"
