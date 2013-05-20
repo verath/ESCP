@@ -334,8 +334,6 @@ public abstract class AbstractNpcController extends
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
 		// Run the swinging animation for the weapon
-		AbstractMeleeWeaponModel weapon = (AbstractMeleeWeaponModel) model
-				.getCurrentWeapon();
 		CharacterView view = (CharacterView) getView();
 		view.runAttackAnimation();
 
