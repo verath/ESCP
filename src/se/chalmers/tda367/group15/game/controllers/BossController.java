@@ -29,9 +29,7 @@ public class BossController extends AbstractNpcController {
 
 	private boolean hasFired;
 
-	private boolean heroTracking;
-
-	private long swingTimer = 0;
+    private long swingTimer = 0;
 
 	private int goalX;
 	private int goalY;
@@ -94,7 +92,8 @@ public class BossController extends AbstractNpcController {
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
 		// if hero is in sight.
-		if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
+        boolean heroTracking;
+        if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
 			heroTracking = true;
 			// TODO Maybe go after hero?
 		} else {

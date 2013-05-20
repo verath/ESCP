@@ -23,9 +23,7 @@ public class CoworkerController extends AbstractNpcController {
 
 	private boolean hasFired;
 
-	private boolean heroTracking;
-
-	/**
+    /**
 	 * Creates a new CoworkerController.
 	 * 
 	 * @param model
@@ -80,7 +78,8 @@ public class CoworkerController extends AbstractNpcController {
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
 		// if hero is in sight.
-		if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
+        boolean heroTracking;
+        if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
 			heroTracking = true;
 			// New path after hero pos
 			calculateNewPath((int) heroX / 32, (int) heroY / 32);

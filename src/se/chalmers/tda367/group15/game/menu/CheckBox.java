@@ -47,22 +47,7 @@ public class CheckBox implements MenuItem {
 	 */
 	private Image CheckedBoxImgMO;
 
-	/**
-	 * Image of the currently active box
-	 */
-	private Image theNormalImg;
-
-	/**
-	 * Image of currently active box when mouse is over.
-	 */
-	private Image theNormalImgMO;
-
-	/**
-	 * Image of currently active box when mouse down over it.
-	 */
-	private Image theNormalImgMDown;
-
-	/**
+    /**
 	 * Is box checked.
 	 */
 	private boolean checked;
@@ -152,7 +137,17 @@ public class CheckBox implements MenuItem {
 	 * Changes pictures used to correct.
 	 */
 	public void updateMoa() {
-		if (checked) {
+		/*
+	  Image of currently active box when mouse down over it.
+	 */
+        Image theNormalImgMDown;/*
+	  Image of currently active box when mouse is over.
+	 */
+        Image theNormalImgMO;/*
+	  Image of the currently active box
+	 */
+        Image theNormalImg;
+        if (checked) {
 			theNormalImg = CheckedBoxImg;
 			theNormalImgMO = CheckedBoxImgMO;
 			theNormalImgMDown = boxImg;
