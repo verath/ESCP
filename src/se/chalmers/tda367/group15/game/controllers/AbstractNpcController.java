@@ -243,11 +243,8 @@ public abstract class AbstractNpcController extends
 	 * @return false if path is null or current step is end of path
 	 */
 	public boolean existsPath() {
-		if (myPath == null || currentStep >= myPath.getLength()) {
-			return false;
-		}
-		return true;
-	}
+        return !(myPath == null || currentStep >= myPath.getLength());
+    }
 
 	/**
 	 * Set max and min positions. If given coordinates not allowed sets entire

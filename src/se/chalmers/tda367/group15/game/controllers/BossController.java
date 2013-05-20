@@ -93,12 +93,7 @@ public class BossController extends AbstractNpcController {
 
 		// if hero is in sight.
         boolean heroTracking;
-        if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
-			heroTracking = true;
-			// TODO Maybe go after hero?
-		} else {
-			heroTracking = false;
-		}
+        heroTracking = CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY);
 
 		// If path is null or end of path reached
 		if (this.goalX == -1 || this.goalY == -1) {
