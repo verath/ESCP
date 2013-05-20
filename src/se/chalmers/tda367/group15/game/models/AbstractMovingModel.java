@@ -198,7 +198,7 @@ public abstract class AbstractMovingModel {
 	 *            The amount of pixels from the edge of the image itself, to the
 	 *            preferred collision bound rectangle
 	 */
-    void setOffset(int offset) {
+	void setOffset(int offset) {
 		this.offset = offset;
 	}
 
@@ -225,7 +225,8 @@ public abstract class AbstractMovingModel {
 	/**
 	 * Method for setting the movement velocity of the MovingModel.
 	 * 
-	 * @param velocity A floating point representing the velocity of the model.
+	 * @param velocity
+	 *            A floating point representing the velocity of the model.
 	 */
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;

@@ -1,13 +1,12 @@
 package se.chalmers.tda367.group15.game.states;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-
 import se.chalmers.tda367.group15.game.menu.MenuItem;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A class with the purpose of making it easy to create menus in a graphical
@@ -41,7 +40,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * @param id
 	 *            the state identification with which state is fetched.
 	 */
-    AbstractMenuBasedState(int id) {
+	AbstractMenuBasedState(int id) {
 		super(id);
 		pendingEscpAction = false;
 	}
@@ -68,7 +67,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * {@inheritDoc}
 	 */
 	@Override
-    protected void render(Graphics g) {
+	protected void render(Graphics g) {
 		if (getBackground() != null) {
 			getBackground().draw();
 		}
@@ -83,7 +82,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	 * {@inheritDoc}
 	 */
 	@Override
-    protected void update(int delta) {
+	protected void update(int delta) {
 		this.checkForButtonClicks();
 		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			pendingEscpAction = true;

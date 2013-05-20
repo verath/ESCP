@@ -20,12 +20,12 @@ public class CheckBox implements MenuItem {
 	/**
 	 * the area and pictures compromising the checkbox.
 	 */
-    private MouseOverArea moa;
+	private MouseOverArea moa;
 
 	/**
 	 * the container to paint in
 	 */
-    private final GUIContext guiContext;
+	private final GUIContext guiContext;
 
 	/**
 	 * Empty checkbox.
@@ -47,7 +47,7 @@ public class CheckBox implements MenuItem {
 	 */
 	private Image CheckedBoxImgMO;
 
-    /**
+	/**
 	 * Is box checked.
 	 */
 	private boolean checked;
@@ -56,7 +56,7 @@ public class CheckBox implements MenuItem {
 	 * upper left corner of box.
 	 */
 	private final int xPos;
-    private final int yPos;
+	private final int yPos;
 
 	/**
 	 * the text to print with the box.
@@ -137,18 +137,19 @@ public class CheckBox implements MenuItem {
 	/**
 	 * Changes pictures used to correct.
 	 */
-    void updateMoa() {
+	void updateMoa() {
 		/*
-	  Image of currently active box when mouse down over it.
-	 */
-        Image theNormalImgMDown;/*
-	  Image of currently active box when mouse is over.
-	 */
-        Image theNormalImgMO;/*
-	  Image of the currently active box
-	 */
-        Image theNormalImg;
-        if (checked) {
+		 * Image of currently active box when mouse down over it.
+		 */
+		Image theNormalImgMDown;/*
+								 * Image of currently active box when mouse is
+								 * over.
+								 */
+		Image theNormalImgMO;/*
+							 * Image of the currently active box
+							 */
+		Image theNormalImg;
+		if (checked) {
 			theNormalImg = CheckedBoxImg;
 			theNormalImgMO = CheckedBoxImgMO;
 			theNormalImgMDown = boxImg;

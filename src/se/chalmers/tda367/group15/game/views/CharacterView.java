@@ -1,23 +1,16 @@
 package se.chalmers.tda367.group15.game.views;
 
+import org.newdawn.slick.*;
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
+import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
+import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
+import se.chalmers.tda367.group15.game.settings.Constants;
+
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-
-import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
-import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
-import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
-import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
  * Class representing a view for a character model.
@@ -91,7 +84,8 @@ public class CharacterView implements View {
 		String path = model.getAnimationPath() + "/death/";
 		deathAnimation = getAnimationFromPath(path);
 		// The enemies will bleed slowly when they die
-		if (path.equals("coworker/1/death/") || path.equals("coworker/2/death/")) {
+		if (path.equals("coworker/1/death/")
+				|| path.equals("coworker/2/death/")) {
 			deathAnimation.setDuration(7, 2000);
 			deathAnimation.setDuration(8, 2000);
 			deathAnimation.setDuration(9, 2000);
@@ -156,14 +150,14 @@ public class CharacterView implements View {
 
 	/**
 	 * Method for getting an Animation object from a specified path in the
-	 * filesystem. The method assumes that the root folder to the animation files
-	 * is 'res/animation/specifiedanimationpath'.
+	 * filesystem. The method assumes that the root folder to the animation
+	 * files is 'res/animation/specifiedanimationpath'.
 	 * 
 	 * @param animationPath
 	 *            The path to the animation files
 	 * @return An animation object
 	 */
-    Animation getAnimationFromPath(String animationPath) {
+	Animation getAnimationFromPath(String animationPath) {
 		File folder = new File("res/animation/" + animationPath);
 		if (folder != null) {
 			File[] files = folder.listFiles();

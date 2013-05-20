@@ -1,16 +1,12 @@
 package se.chalmers.tda367.group15.game.states;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.KeyListener;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
-
+import org.newdawn.slick.*;
 import se.chalmers.tda367.group15.game.controllers.ScoreController;
 import se.chalmers.tda367.group15.game.settings.Constants;
+
+import java.awt.Font;
 
 /**
  * State displayed when game is won

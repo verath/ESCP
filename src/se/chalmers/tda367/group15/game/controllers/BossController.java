@@ -1,22 +1,20 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D.Float;
-import java.util.List;
-import java.util.Map;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
-
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 
+import java.awt.geom.Rectangle2D.Float;
+import java.util.List;
+import java.util.Map;
+
 /**
- * NOTE: This class is pretty much hard coded!
- * Class for representing a boss controller
+ * NOTE: This class is pretty much hard coded! Class for representing a boss
+ * controller
  * 
  * Boss is in boss room. Only moves in a small space in upper part of map. Path
  * Finding is supposed to not be used, instead has predefined scripted movement.
@@ -29,7 +27,7 @@ public class BossController extends AbstractNpcController {
 
 	private boolean hasFired;
 
-    private long swingTimer = 0;
+	private long swingTimer = 0;
 
 	private int goalX;
 	private int goalY;
@@ -90,12 +88,13 @@ public class BossController extends AbstractNpcController {
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
 		// if hero is in sight.
-        boolean heroTracking;
-        heroTracking = CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY);
+		boolean heroTracking;
+		heroTracking = CollisionHelper.isInSight(staticBounds, currX, currY,
+				heroX, heroY);
 
 		// If path is null or end of path reached
 		if (this.goalX == -1 || this.goalY == -1) {
-			
+
 			// After a short pause make new path.
 			if (pauseTimer()) {
 				newRandomGoal();
@@ -142,6 +141,7 @@ public class BossController extends AbstractNpcController {
 
 	/**
 	 * Make new walking goal. Boss tries to walk straight to this!
+	 * 
 	 * @param newX
 	 * @param newY
 	 */
@@ -151,7 +151,9 @@ public class BossController extends AbstractNpcController {
 	}
 
 	/**
-	 * Moves straight to the walking goal. If path blocked Boss will not be able to get loose.
+	 * Moves straight to the walking goal. If path blocked Boss will not be able
+	 * to get loose.
+	 * 
 	 * @param model
 	 * @param delta
 	 * @param staticBounds
@@ -194,7 +196,7 @@ public class BossController extends AbstractNpcController {
 	 * {@inheritDoc}
 	 */
 	@Override
-    protected void fire() {
+	protected void fire() {
 		hasFired = true;
 
 	}
@@ -203,7 +205,7 @@ public class BossController extends AbstractNpcController {
 	 * The boss is kinda slower than everybody else
 	 */
 	@Override
-    void fireTimed() {
+	void fireTimed() {
 		if (System.currentTimeMillis() - swingTimer > ((AbstractCharacterModel) getModel())
 				.getCurrentWeapon().getFiringSpeed() * 2) {
 			swingTimer = System.currentTimeMillis();

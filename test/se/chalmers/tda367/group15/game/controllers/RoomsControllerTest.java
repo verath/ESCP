@@ -1,11 +1,9 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import static org.junit.Assert.assertEquals;
-
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
-
 import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosition;
+
+import static org.junit.Assert.assertEquals;
 
 public class RoomsControllerTest {
 

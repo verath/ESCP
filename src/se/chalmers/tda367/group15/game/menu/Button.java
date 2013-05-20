@@ -20,12 +20,12 @@ public class Button implements MenuItem {
 	 * The mouse over area for this button. This holds both the area of the
 	 * "mouse over box" and the images used to represent the different states.
 	 */
-    final MouseOverArea mouseOverArea;
+	final MouseOverArea mouseOverArea;
 
 	/**
 	 * The container containing the button.
 	 */
-    private final GUIContext guiContext;
+	private final GUIContext guiContext;
 
 	/**
 	 * A boolean indicating if this button should be drawn or not.
@@ -83,8 +83,8 @@ public class Button implements MenuItem {
 	 * @param y
 	 *            y coordinate for button upper left corner.
 	 */
-    private Button(GUIContext guiContext, Image image, Image moImage,
-                   Image mdImage, int x, int y) {
+	private Button(GUIContext guiContext, Image image, Image moImage,
+			Image mdImage, int x, int y) {
 		this.guiContext = guiContext;
 		mouseOverArea = new MouseOverArea(guiContext, image, x, y);
 		mouseOverArea.setMouseOverImage(moImage);

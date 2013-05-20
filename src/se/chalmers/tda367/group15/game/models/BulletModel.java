@@ -2,8 +2,9 @@ package se.chalmers.tda367.group15.game.models;
 
 /**
  * Class representing a bullet model.
+ * 
  * @author simon
- *
+ * 
  */
 public class BulletModel extends AbstractProjectileModel {
 

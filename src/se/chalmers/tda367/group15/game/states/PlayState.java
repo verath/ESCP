@@ -7,10 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
-
 import se.chalmers.tda367.group15.game.controllers.GameController;
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -104,8 +101,8 @@ class PlayState extends BasicGameState {
 
 			// Enter the appropriate state for game over (lost or won)
 			if (gameWon) {
-                ((GameWonState) game.getState(Constants.GAME_STATE_GAME_WON))
-                        .setScoreController(gameController.getScoreController());
+				((GameWonState) game.getState(Constants.GAME_STATE_GAME_WON))
+						.setScoreController(gameController.getScoreController());
 				game.enterState(Constants.GAME_STATE_GAME_WON);
 			} else {
 				game.enterState(Constants.GAME_STATE_GAME_LOST);

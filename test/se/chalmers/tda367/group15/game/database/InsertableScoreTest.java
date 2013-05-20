@@ -1,10 +1,9 @@
 package se.chalmers.tda367.group15.game.database;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class InsertableScoreTest {
 
@@ -13,8 +12,8 @@ public class InsertableScoreTest {
 		InsertableScore s = new InsertableScore("abc", 200);
 		assertTrue(s.getName().equals("abc") && s.getScore() == 200);
 	}
-	
-	@Test (expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testCreateScoreNullName() {
 		new InsertableScore(null, 200);
 	}
@@ -37,9 +36,9 @@ public class InsertableScoreTest {
 		assertTrue(s1.equals(s2) && s2.equals(s1));
 		assertFalse(s3.equals(s1) || s1.equals(s3));
 	}
-	
+
 	@Test
-	public void testScoreHashCode () {
+	public void testScoreHashCode() {
 		InsertableScore s1 = new InsertableScore("abc", 123);
 		InsertableScore s2 = new InsertableScore("abc", 123);
 		InsertableScore s3 = new InsertableScore("abcd", 123);

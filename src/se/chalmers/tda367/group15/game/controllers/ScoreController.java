@@ -1,15 +1,14 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.newdawn.slick.GameContainer;
-
 import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.database.InsertableScore;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Class for handling the score in the game.
@@ -121,7 +120,7 @@ public class ScoreController {
 	 * @param db
 	 *            The database object to use for saving scores.
 	 */
-    void setDatabase(GameDatabase db) {
+	void setDatabase(GameDatabase db) {
 		this.db = db;
 	}
 }

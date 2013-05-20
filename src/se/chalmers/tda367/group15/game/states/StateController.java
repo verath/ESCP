@@ -1,17 +1,8 @@
 package se.chalmers.tda367.group15.game.states;
 
-import java.util.Random;
-
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.ScalableGame;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
-
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -51,12 +42,14 @@ public class StateController extends StateBasedGame {
 				Constants.GAME_STATE_MENU_KEY_BINDS);
 		MenuStateHighScore menuStateHighScore = new MenuStateHighScore(
 				Constants.GAME_STATE_MENU_HIGH_SCORE);
-        GameLostState gameLostState = new GameLostState(Constants.GAME_STATE_GAME_LOST);
-        GameWonState gameWonState = new GameWonState(Constants.GAME_STATE_GAME_WON);
+		GameLostState gameLostState = new GameLostState(
+				Constants.GAME_STATE_GAME_LOST);
+		GameWonState gameWonState = new GameWonState(
+				Constants.GAME_STATE_GAME_WON);
 
 		addState(playState);
-        addState(gameLostState);
-        addState(gameWonState);
+		addState(gameLostState);
+		addState(gameWonState);
 		addState(mainMenu);
 		addState(optionsMenu);
 		addState(keyBindsMenu);

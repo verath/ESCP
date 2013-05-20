@@ -1,13 +1,12 @@
 package se.chalmers.tda367.group15.game.states;
 
-import java.util.List;
-
 import org.newdawn.slick.*;
-
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
 import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.settings.Constants;
+
+import java.util.List;
 
 /**
  * State for showing the high scores

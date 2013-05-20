@@ -1,15 +1,5 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -17,16 +7,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
-
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
-import se.chalmers.tda367.group15.game.models.BossModel;
-import se.chalmers.tda367.group15.game.models.CoworkerModel;
-import se.chalmers.tda367.group15.game.models.RoomModel;
-import se.chalmers.tda367.group15.game.models.SoldierModel;
+import se.chalmers.tda367.group15.game.models.*;
 import se.chalmers.tda367.group15.game.settings.Constants;
+
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.*;
 
 /**
  * Abstract class for representing a room containing a tiled map and controllers
@@ -83,9 +69,10 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * Creates a new AbstractMovingModelController.
 	 * 
-	 * @param gameController The game controller used in this game.
+	 * @param gameController
+	 *            The game controller used in this game.
 	 */
-    RoomController(GameController gameController, RoomModel roomModel) {
+	RoomController(GameController gameController, RoomModel roomModel) {
 		staticBounds = new ArrayList<Rectangle2D.Float>();
 		dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
 		movingModelControllers = new ArrayList<AbstractMovingModelController>();
@@ -100,7 +87,7 @@ public class RoomController implements TileBasedMap {
 	 * @param model
 	 *            The model to be added
 	 */
-    void addMovingModel(CoworkerModel model) {
+	void addMovingModel(CoworkerModel model) {
 		movingModelControllers.add(new CoworkerController(model, this,
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
@@ -199,7 +186,7 @@ public class RoomController implements TileBasedMap {
 	 * 
 	 * @return the game controller
 	 */
-    GameController getGameController() {
+	GameController getGameController() {
 		return gameController;
 	}
 
@@ -294,7 +281,8 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * Setter for the gameController to be associated with this controller.
 	 * 
-	 * @param gameController The game controller used in this game.
+	 * @param gameController
+	 *            The game controller used in this game.
 	 */
 	protected void setGameController(GameController gameController) {
 		this.gameController = gameController;
@@ -425,7 +413,7 @@ public class RoomController implements TileBasedMap {
 	public boolean isUnlocked() {
 		return roomUnlocked;
 	}
-	
+
 	public void unlockRoom() {
 		setMap(roomModel.getUnlockedMapPath());
 		roomUnlocked = true;

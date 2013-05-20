@@ -21,12 +21,12 @@ abstract class AbstractGameState extends BasicGameState {
 	/**
 	 * the container for the game.
 	 */
-    GameContainer container;
+	GameContainer container;
 
 	/**
 	 * The controller containing to states.
 	 */
-    StateBasedGame game;
+	StateBasedGame game;
 
 	/**
 	 * The identification for the state.
@@ -36,7 +36,7 @@ abstract class AbstractGameState extends BasicGameState {
 	/**
 	 * input received.
 	 */
-    Input input;
+	Input input;
 
 	/**
 	 * Creates a new abstracted game state
@@ -44,7 +44,7 @@ abstract class AbstractGameState extends BasicGameState {
 	 * @param id
 	 *            the identification for the state.
 	 */
-    AbstractGameState(int id) {
+	AbstractGameState(int id) {
 		ID = id;
 	}
 
@@ -95,14 +95,16 @@ abstract class AbstractGameState extends BasicGameState {
 	/**
 	 * Paint your state.
 	 * 
-	 * @param g The graphics object used to draw.
+	 * @param g
+	 *            The graphics object used to draw.
 	 */
 	protected abstract void render(Graphics g);
 
 	/**
 	 * update your state.
 	 * 
-	 * @param delta Time passed since last game update call.
+	 * @param delta
+	 *            Time passed since last game update call.
 	 */
 	protected abstract void update(int delta);
 

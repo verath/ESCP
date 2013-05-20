@@ -1,10 +1,10 @@
 package se.chalmers.tda367.group15.game.menu;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
+
+import java.awt.*;
 
 /**
  * A decorator class for Buttons, adding a changeable text string on top of the
@@ -66,7 +66,7 @@ public class TextButton implements MenuItem {
 	 * @param font
 	 *            The font of the text shown.
 	 */
-    private TextButton(Button button, String text, Color color, Font font) {
+	private TextButton(Button button, String text, Color color, Font font) {
 		this.button = button;
 		setText(text);
 		setFont(font);
@@ -89,7 +89,7 @@ public class TextButton implements MenuItem {
 	 * @param color
 	 *            The color of the text shown.
 	 */
-    private TextButton(Button button, String text, Color color) {
+	private TextButton(Button button, String text, Color color) {
 		this(button, text, color, null);
 	}
 

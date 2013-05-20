@@ -15,7 +15,7 @@ public class LobbyRoomModel implements RoomModel {
 	 * Variable for storing path to map with unlocked doors.
 	 */
 	private final String unlockedMapPath;
-	
+
 	/**
 	 * Variable for storing path to map with locked doors.
 	 */

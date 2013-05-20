@@ -16,7 +16,8 @@ public abstract class AbstractProjectileModel extends AbstractMovingModel {
 	/**
 	 * Set the amount of damage this projectile can deal.
 	 * 
-	 * @param damage An int representing damage amount.
+	 * @param damage
+	 *            An int representing damage amount.
 	 */
 	public void setDamage(int damage) {
 		this.damage = damage;

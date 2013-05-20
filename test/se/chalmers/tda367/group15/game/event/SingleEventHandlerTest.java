@@ -1,9 +1,9 @@
 package se.chalmers.tda367.group15.game.event;
 
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
-import org.junit.Test;
 
 /**
  * Test for the SharedEventHandler class. Not as thorough as the test for the
@@ -20,7 +20,7 @@ public class SingleEventHandlerTest {
 	 * SingleEventHandlerTest
 	 */
 	// The super event is directly extending the Event superclass
-    private class SuperEvent extends Event {
+	private class SuperEvent extends Event {
 	}
 
 	/*
@@ -49,12 +49,13 @@ public class SingleEventHandlerTest {
 		// after each test!
 		eh.removeListener(el);
 	}
-	
+
 	/*
-	 * Test that listeners to the SharedEH doesn't receive events published by other handlers 
+	 * Test that listeners to the SharedEH doesn't receive events published by
+	 * other handlers
 	 */
 	@Test
-	public final void testOnlyReceiveOwnPublishedEvents(){
+	public final void testOnlyReceiveOwnPublishedEvents() {
 		EventHandler eh = SharedEventHandler.INSTANCE;
 		EventHandler eh2 = new SingleEventHandler();
 

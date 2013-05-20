@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class CoworkerModel extends AbstractNpcModel {
 
-    /**
+	/**
 	 * Creates a new dummy enemy.
 	 */
 	public CoworkerModel() {
@@ -40,10 +40,10 @@ public class CoworkerModel extends AbstractNpcModel {
 	 * @param rot
 	 *            angle to face in beginning
 	 */
-    private CoworkerModel(float x, float y, double rot, int x1, int x2, int y1,
-                          int y2) {
+	private CoworkerModel(float x, float y, double rot, int x1, int x2, int y1,
+			int y2) {
 		super(x1, x2, y1, y2);
-        Random randgen = new Random();
+		Random randgen = new Random();
 		setX(x);
 		setY(y);
 		setVelocity(0.1f);

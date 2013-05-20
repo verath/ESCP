@@ -1,21 +1,15 @@
 package se.chalmers.tda367.group15.game.states;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.KeyListener;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
-
+import org.newdawn.slick.*;
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.TextButton;
 import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.settings.KeyBindings;
 import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * A game over state. Displays a high score and allows the user to either replay
@@ -214,7 +208,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 * @param button
 	 *            The button that was pressed.
 	 */
-    void startRebindKey(TextButton button) {
+	void startRebindKey(TextButton button) {
 		if (!buttonToKeyBind.containsKey(button)) {
 			return;
 		}
@@ -236,7 +230,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	 * @param keyCode
 	 *            The key code of the key to bind to.
 	 */
-    void setRebindKey(int keyCode) {
+	void setRebindKey(int keyCode) {
 		Key key = buttonToKeyBind.get(activeBindButton);
 		int prevBind = KeyBindings.getBinding(key);
 		KeyBindings.setBinding(key, keyCode);
@@ -276,8 +270,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	public void render(Graphics g) {
 		super.render(g);
 		textFont.drawString(LIST_TOP_X, LIST_TOP_Y, "Up: ");
-		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING,
-				"Down: ");
+		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING, "Down: ");
 		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 2,
 				"Left: ");
 		textFont.drawString(LIST_TOP_X, LIST_TOP_Y + LIST_Y_SPACING * 3,

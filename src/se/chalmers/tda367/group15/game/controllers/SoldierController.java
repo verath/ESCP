@@ -1,17 +1,15 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D.Float;
-import java.util.List;
-import java.util.Map;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
-
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.SoldierModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
+
+import java.awt.geom.Rectangle2D.Float;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class for representing a soldier controller.
@@ -23,7 +21,7 @@ public class SoldierController extends AbstractNpcController {
 
 	private boolean hasFired;
 
-    /**
+	/**
 	 * Creates a new CoworkerController.
 	 * 
 	 * @param model
@@ -77,8 +75,8 @@ public class SoldierController extends AbstractNpcController {
 		float heroY = heroModel.getY() + heroModel.getHeight() / 2;
 
 		// if hero is in sight.
-        boolean heroTracking;
-        if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
+		boolean heroTracking;
+		if (CollisionHelper.isInSight(staticBounds, currX, currY, heroX, heroY)) {
 			heroTracking = true;
 			// New path after hero pos
 			calculateNewPath((int) heroX / 32, (int) heroY / 32);

@@ -1,22 +1,20 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.Point;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.BossRoomModel;
 import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
 import se.chalmers.tda367.group15.game.models.RoomModel;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * A class for abstractly handling rooms.
@@ -192,8 +190,10 @@ public class RoomsController {
 	 * @param delta
 	 *            The amount of time that's passed since last update in
 	 *            milliseconds
-	 * @param dynamicBounds A map of dynamic collision bounds.
-	 * @param staticBounds A list of static collision bounds.
+	 * @param dynamicBounds
+	 *            A map of dynamic collision bounds.
+	 * @param staticBounds
+	 *            A list of static collision bounds.
 	 */
 	public void update(GameContainer container, int delta,
 			List<Float> staticBounds,
@@ -201,7 +201,7 @@ public class RoomsController {
 		getCurrentRoom().update(container, delta, staticBounds, dynamicBounds);
 
 		RoomController currentRoom = getCurrentRoom();
-		
+
 		if (allEnemiesDefeated() && !bossRoomUnlocked) {
 			for (RoomController controller : rooms.values()) {
 				RoomModel model = controller.getRoomModel();
@@ -213,10 +213,12 @@ public class RoomsController {
 			currentRoom.unlockRoom();
 			soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
 			soundEffectsController.playSound(SoundEffect.NARRATOR_BOSS);
-			
-		}else if(currentRoom.allDead() && !currentRoom.isUnlocked() && !bossRoomUnlocked) {
+
+		} else if (currentRoom.allDead() && !currentRoom.isUnlocked()
+				&& !bossRoomUnlocked) {
 			currentRoom.unlockRoom();
-			SoundEffectsController soundEffectsController = SoundEffectsController.instance();
+			SoundEffectsController soundEffectsController = SoundEffectsController
+					.instance();
 			soundEffectsController.playSound(SoundEffect.NARRATOR_NEXT);
 
 		}
@@ -255,7 +257,7 @@ public class RoomsController {
 	 * 
 	 * @return true if all enemies are dead, false otherwise.
 	 */
-    boolean allEnemiesDefeated() {
+	boolean allEnemiesDefeated() {
 		boolean allDefeated = true;
 		for (RoomController controller : rooms.values()) {
 			if (!(controller.getRoomModel() instanceof BossRoomModel)) {

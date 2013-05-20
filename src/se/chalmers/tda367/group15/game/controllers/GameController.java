@@ -1,31 +1,22 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.state.StateBasedGame;
+import se.chalmers.tda367.group15.game.event.SharedEventHandler;
+import se.chalmers.tda367.group15.game.models.*;
+import se.chalmers.tda367.group15.game.settings.Constants;
+import se.chalmers.tda367.group15.game.views.HUDView;
+
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
-
-import se.chalmers.tda367.group15.game.event.SharedEventHandler;
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.BossRoomModel;
-import se.chalmers.tda367.group15.game.models.LeftWingRoomModel;
-import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
-import se.chalmers.tda367.group15.game.models.ParkingLotRoomModel;
-import se.chalmers.tda367.group15.game.models.ScoreModel;
-import se.chalmers.tda367.group15.game.models.WCRoomModel;
-import se.chalmers.tda367.group15.game.settings.Constants;
-import se.chalmers.tda367.group15.game.views.HUDView;
-
 public class GameController {
-	
-	
+
 	private SoundEffectsController soundEffectsController;
-	
+
 	/**
 	 * A flag for if the game is over
 	 */
@@ -73,22 +64,23 @@ public class GameController {
 	 *            The state based game currently running.
 	 */
 	public void init(GameContainer container, StateBasedGame game) {
-		
+
 		soundEffectsController = SoundEffectsController.instance();
-		
+
 		// Reset the game over flags
 		gameOver = false;
 		gameWon = false;
 		// Set up an event logger to listen for events on the shared event
 		// handler
 		eventLogger = new EventLoggerController(SharedEventHandler.INSTANCE);
-		
+
 		// Set up the rooms
 		RoomController parkingLot = new RoomController(this,
 				new ParkingLotRoomModel());
 		RoomController lobby = new RoomController(this, new LobbyRoomModel());
 		RoomController wcRoom = new RoomController(this, new WCRoomModel());
-		RoomController leftWing = new RoomController(this, new LeftWingRoomModel());
+		RoomController leftWing = new RoomController(this,
+				new LeftWingRoomModel());
 		RoomController bossRoom = new RoomController(this, new BossRoomModel());
 
 		// Set up the room manager
@@ -98,8 +90,10 @@ public class GameController {
 				RoomsController.RelativePosition.ABOVE);
 		roomsController.addRoom(lobby, wcRoom,
 				RoomsController.RelativePosition.RIGHTOF);
-		roomsController.addRoom(lobby, leftWing, RoomsController.RelativePosition.LEFTOF);
-		roomsController.addRoom(lobby, bossRoom, RoomsController.RelativePosition.ABOVE);
+		roomsController.addRoom(lobby, leftWing,
+				RoomsController.RelativePosition.LEFTOF);
+		roomsController.addRoom(lobby, bossRoom,
+				RoomsController.RelativePosition.ABOVE);
 		roomsController.init(container);
 
 		// Set up the hero controller
@@ -133,9 +127,9 @@ public class GameController {
 		if (gameOver) {
 			return;
 		}
-		
+
 		soundEffectsController.update();
-		
+
 		scoreController.update(container, delta);
 
 		// get current room
@@ -206,23 +200,25 @@ public class GameController {
 	 * 
 	 * @return A RoomsController.
 	 */
-    RoomsController getRoomsController() {
+	RoomsController getRoomsController() {
 		return roomsController;
 	}
 
 	/**
 	 * Getter for the HeroController associated with this controller.
 	 */
-    HeroController getHeroController() {
+	HeroController getHeroController() {
 		return heroController;
 	}
 
-    /**
-     * Getter for the score controller. This is used by the won game state to save the score.
-     * @return The score controller used this game.
-     */
-    public ScoreController getScoreController() {
-        return this.scoreController;
-    }
+	/**
+	 * Getter for the score controller. This is used by the won game state to
+	 * save the score.
+	 * 
+	 * @return The score controller used this game.
+	 */
+	public ScoreController getScoreController() {
+		return this.scoreController;
+	}
 
 }

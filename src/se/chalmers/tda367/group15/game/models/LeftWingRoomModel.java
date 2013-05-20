@@ -10,12 +10,12 @@ import java.util.List;
  * 
  */
 public class LeftWingRoomModel implements RoomModel {
-	
+
 	/**
 	 * Variable for storing path to map with unlocked doors.
 	 */
 	private final String unlockedMapPath;
-	
+
 	/**
 	 * Variable for storing path to map with locked doors.
 	 */
@@ -33,17 +33,17 @@ public class LeftWingRoomModel implements RoomModel {
 		CoworkerModel e2 = new CoworkerModel(3 * 32, 10 * 32);
 		CoworkerModel e3 = new CoworkerModel(3 * 32, 14 * 32);
 		CoworkerModel e4 = new CoworkerModel(3 * 32, 18 * 32);
-		
+
 		CoworkerModel e5 = new CoworkerModel(8 * 32, 6 * 32);
 		CoworkerModel e6 = new CoworkerModel(8 * 32, 10 * 32);
 		CoworkerModel e7 = new CoworkerModel(8 * 32, 14 * 32);
 		CoworkerModel e8 = new CoworkerModel(8 * 32, 18 * 32);
-		
+
 		CoworkerModel e9 = new CoworkerModel(13 * 32, 6 * 32);
 		CoworkerModel e10 = new CoworkerModel(13 * 32, 10 * 32);
 		CoworkerModel e11 = new CoworkerModel(13 * 32, 14 * 32);
 		CoworkerModel e12 = new CoworkerModel(13 * 32, 18 * 32);
-		
+
 		CoworkerModel e13 = new CoworkerModel(18 * 32, 6 * 32);
 		CoworkerModel e14 = new CoworkerModel(18 * 32, 10 * 32);
 		CoworkerModel e15 = new CoworkerModel(18 * 32, 14 * 32);

@@ -30,10 +30,10 @@ public class Constants {
 	public static final int GAME_STATE_MENU_MAIN = 1;
 	public static final int GAME_STATE_MENU_OPTIONS = 2;
 	public static final int GAME_STATE_MENU_KEY_BINDS = 3;
-    public static final int GAME_STATE_MENU_HIGH_SCORE = 4;
+	public static final int GAME_STATE_MENU_HIGH_SCORE = 4;
 	public static final int GAME_STATE_PLAYING = 5;
-    public static final int GAME_STATE_GAME_LOST = 6;
-    public static final int GAME_STATE_GAME_WON = 7;
+	public static final int GAME_STATE_GAME_LOST = 6;
+	public static final int GAME_STATE_GAME_WON = 7;
 
 	/**
 	 * The upper left corner of every menu
@@ -52,8 +52,8 @@ public class Constants {
 	 */
 	public static final int STARTING_SCORE = 600;
 
-    /**
-     * The amount of milliseconds between each decrease in score.
-     */
-    public final static int SCORE_DECREASE_INTERVAL = 500;
+	/**
+	 * The amount of milliseconds between each decrease in score.
+	 */
+	public final static int SCORE_DECREASE_INTERVAL = 500;
 }

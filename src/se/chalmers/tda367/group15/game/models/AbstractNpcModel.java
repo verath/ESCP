@@ -12,9 +12,9 @@ public class AbstractNpcModel extends AbstractCharacterModel {
 	 * Coordinates for pathfinding.
 	 */
 	private final int x1;
-    private final int x2;
-    private final int y1;
-    private final int y2;
+	private final int x2;
+	private final int y1;
+	private final int y2;
 
 	/**
 	 * Creates a new npc model.
@@ -28,7 +28,7 @@ public class AbstractNpcModel extends AbstractCharacterModel {
 	 * @param y2
 	 *            maximum y
 	 */
-    AbstractNpcModel(int x1, int x2, int y1, int y2) {
+	AbstractNpcModel(int x1, int x2, int y1, int y2) {
 		this.x1 = x1;
 		this.x2 = x2;
 		this.y1 = y1;
