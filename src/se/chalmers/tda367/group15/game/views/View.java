@@ -12,10 +12,10 @@ import org.newdawn.slick.SlickException;
  */
 public interface View {
 	/**
-	 * Render the game's screen here.
+	 * Render a view here.
 	 * 
 	 * @param container
-	 *            The container holing this game
+	 *            The container holding this game
 	 * @param g
 	 *            The graphics context that can be used to render. However,
 	 *            normal rendering routines can also be used.
@@ -24,15 +24,4 @@ public interface View {
 	 */
 	public void render(GameContainer container, Graphics g)
 			throws SlickException;
-
-	/**
-	 * Initialise the game. This can be used to load static resources. It's
-	 * called before the game loop starts
-	 * 
-	 * @param container
-	 *            The container holding the game
-	 * @throws SlickException
-	 *             Throw to indicate an internal error
-	 */
-	public void init(GameContainer container) throws SlickException;
 }
