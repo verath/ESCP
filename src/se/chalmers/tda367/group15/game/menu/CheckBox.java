@@ -25,7 +25,7 @@ public class CheckBox implements MenuItem {
 	/**
 	 * the container to paint in
 	 */
-    private GUIContext guiContext;
+    private final GUIContext guiContext;
 
 	/**
 	 * Empty checkbox.
@@ -55,12 +55,13 @@ public class CheckBox implements MenuItem {
 	/**
 	 * upper left corner of box.
 	 */
-	private int xPos, yPos;
+	private final int xPos;
+    private final int yPos;
 
 	/**
 	 * the text to print with the box.
 	 */
-	private String theText;
+	private final String theText;
 
 	/**
 	 * creates a new checkbox.

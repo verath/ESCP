@@ -20,12 +20,12 @@ public class Button implements MenuItem {
 	 * The mouse over area for this button. This holds both the area of the
 	 * "mouse over box" and the images used to represent the different states.
 	 */
-    MouseOverArea mouseOverArea;
+    final MouseOverArea mouseOverArea;
 
 	/**
 	 * The container containing the button.
 	 */
-    private GUIContext guiContext;
+    private final GUIContext guiContext;
 
 	/**
 	 * A boolean indicating if this button should be drawn or not.

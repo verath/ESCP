@@ -28,7 +28,7 @@ abstract class AbstractMovingModelController {
 	/**
 	 * The controller for sound effects
 	 */
-	private SoundEffectsController soundController = SoundEffectsController
+	private final SoundEffectsController soundController = SoundEffectsController
 			.instance();
 	/**
 	 * The model that the controller is managing

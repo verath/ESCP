@@ -11,7 +11,7 @@ import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 
 public class KeyBindingsTest {
 
-	private static Preferences prefs = Preferences
+	private static final Preferences prefs = Preferences
 			.userNodeForPackage(KeyBindingsTest.class);
 
 	@BeforeClass

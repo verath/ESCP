@@ -11,13 +11,13 @@ import java.util.Random;
  */
 public abstract class AbstractWeaponModel {
 
-	private String name;
+	private final String name;
 	private boolean isEquipped;
-	private int baseDamage;
-	private int maxDamage;
+	private final int baseDamage;
+	private final int maxDamage;
 	private int firingSpeed;
 
-	private Random randomGenerator = new Random();
+	private final Random randomGenerator = new Random();
 
 	/**
 	 * Create a new weapon.

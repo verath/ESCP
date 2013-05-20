@@ -19,7 +19,7 @@ public class ProjectileView implements View {
 	/**
 	 * The projectile model.
 	 */
-	private AbstractMovingModel model;
+	private final AbstractMovingModel model;
 
 	/**
 	 * The image for the projectile model.

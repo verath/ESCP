@@ -37,7 +37,7 @@ public abstract class AbstractNpcController extends
 	
 	int ENEMY_DAMAGE_MODIFIER = 2;
 
-	private SoundEffectsController soundController = SoundEffectsController
+	private final SoundEffectsController soundController = SoundEffectsController
 			.instance();
 
 	/**

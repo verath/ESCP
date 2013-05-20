@@ -10,7 +10,7 @@ import se.chalmers.tda367.group15.game.controllers.RoomsController.RelativePosit
 public class RoomsControllerTest {
 
 	private class DummyRoom extends RoomController {
-		private String name;
+		private final String name;
 
 		DummyRoom(String name) {
 			super(null, null);

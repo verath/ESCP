@@ -55,7 +55,7 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * The model of the room.
 	 */
-	private RoomModel roomModel;
+	private final RoomModel roomModel;
 
 	/**
 	 * The tiled map to be used in the room
@@ -65,20 +65,20 @@ public class RoomController implements TileBasedMap {
 	/**
 	 * List containing the static bounds represented by rectangles.
 	 */
-	private List<Rectangle2D.Float> staticBounds;
+	private final List<Rectangle2D.Float> staticBounds;
 
 	/**
 	 * Map containing models and it's corresponding collision rectangles.
 	 */
-	private Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
+	private final Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds;
 
 	/**
 	 * List containing controllers for all moving models in the room.
 	 */
-	private List<AbstractMovingModelController> movingModelControllers;
+	private final List<AbstractMovingModelController> movingModelControllers;
 
 	// List used in update method to add new controllers
-	private List<AbstractMovingModelController> quedControllers = new ArrayList<AbstractMovingModelController>();
+	private final List<AbstractMovingModelController> quedControllers = new ArrayList<AbstractMovingModelController>();
 
 	/**
 	 * Creates a new AbstractMovingModelController.

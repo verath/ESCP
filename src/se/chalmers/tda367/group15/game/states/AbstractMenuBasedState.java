@@ -30,7 +30,7 @@ public abstract class AbstractMenuBasedState extends AbstractGameState {
 	/**
 	 * List with all MenuItems on page.
 	 */
-	private Set<MenuItem> menuItems = new HashSet<MenuItem>();
+	private final Set<MenuItem> menuItems = new HashSet<MenuItem>();
 
 	/**
 	 * The background for current menu page.

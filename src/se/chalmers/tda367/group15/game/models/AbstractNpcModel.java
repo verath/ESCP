@@ -11,7 +11,10 @@ public class AbstractNpcModel extends AbstractCharacterModel {
 	/**
 	 * Coordinates for pathfinding.
 	 */
-	private int x1, x2, y1, y2;
+	private final int x1;
+    private final int x2;
+    private final int y1;
+    private final int y2;
 
 	/**
 	 * Creates a new npc model.

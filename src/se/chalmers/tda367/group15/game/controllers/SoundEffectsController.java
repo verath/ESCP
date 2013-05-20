@@ -12,7 +12,7 @@ public class SoundEffectsController {
 
 	private static SoundEffectsController instance;
 
-	private List<Sound> sounds = new ArrayList<Sound>();
+	private final List<Sound> sounds = new ArrayList<Sound>();
 
 	private Music music;
 	private Music queuedMusic;
@@ -33,7 +33,7 @@ public class SoundEffectsController {
 				new String[] { "res/sound/boss/ondeath/boss_death.aif" }), DONUT_FIRED(
 				new String[] { "res/sound/donut/donut.aif" });
 
-		private String[] pathsToFiles;
+		private final String[] pathsToFiles;
 
 		private SoundEffect(String[] pathsToFiles) {
 			this.pathsToFiles = pathsToFiles;
@@ -44,7 +44,7 @@ public class SoundEffectsController {
 		NORMAL_MUSIC(new String[] { "res/music/normal.aif" }), BOSS_MUSIC(
 				new String[] { "res/music/boss.aif" });
 
-		private String[] pathsToFiles;
+		private final String[] pathsToFiles;
 
 		private GameMusic(String[] pathsToFiles) {
 			this.pathsToFiles = pathsToFiles;

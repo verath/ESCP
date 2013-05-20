@@ -30,22 +30,22 @@ public class CharacterView implements View {
 	/**
 	 * The character model that this view is rendering.
 	 */
-	private AbstractCharacterModel model;
+	private final AbstractCharacterModel model;
 
 	/**
 	 * Map of weapons and it's corresponding walk animations.
 	 */
-	private Map<AbstractWeaponModel, Animation> walkAnimations;
+	private final Map<AbstractWeaponModel, Animation> walkAnimations;
 
 	/**
 	 * Map of weapons and it's corresponding attack animations.
 	 */
-	private Map<AbstractWeaponModel, Animation> attackAnimations;
+	private final Map<AbstractWeaponModel, Animation> attackAnimations;
 
 	/**
 	 * The death animation.
 	 */
-	private Animation deathAnimation;
+	private final Animation deathAnimation;
 
 	/**
 	 * Variable for holding the active animation running.
