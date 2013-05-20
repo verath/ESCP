@@ -1,13 +1,12 @@
 package se.chalmers.tda367.group15.game.main;
 
-import java.io.File;
-
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
-
 import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.states.StateController;
+
+import java.io.File;
 
 /**
  * Starting point of the game.

@@ -1,13 +1,12 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+
 import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
-
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 public class MeleeSwingController extends AbstractMovingModelController {
 

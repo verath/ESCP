@@ -1,8 +1,8 @@
 package se.chalmers.tda367.group15.game.event;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Test for the SingleEventHandler class, and by doing so also testing Events

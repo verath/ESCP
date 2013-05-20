@@ -1,14 +1,14 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.database.InsertableEvent;
 import se.chalmers.tda367.group15.game.event.Event;
 import se.chalmers.tda367.group15.game.event.EventHandler;
 import se.chalmers.tda367.group15.game.event.EventLogger;
 import se.chalmers.tda367.group15.game.settings.Constants;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A wrapper class around the EventLogger providing a method to save the

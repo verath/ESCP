@@ -1,9 +1,5 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.*;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,9 +7,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
-
 import se.chalmers.tda367.group15.game.models.*;
 import se.chalmers.tda367.group15.game.settings.Constants;
+
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.*;
 
 /**
  * Abstract class for representing a room containing a tiled map and controllers
@@ -365,6 +364,19 @@ public class RoomController implements TileBasedMap {
 
 		Collections.sort(movingModelControllers, new ControllerSorter());
 
+	}
+
+	public void removeBullets() {
+		Iterator<AbstractMovingModelController> it = movingModelControllers
+				.iterator();
+		while (it.hasNext()) {
+			AbstractMovingModelController controller = it.next();
+			AbstractMovingModel model = controller.getModel();
+			if (model instanceof AbstractProjectileModel) {
+				dynamicBounds.remove(model);
+				it.remove();
+			}
+		}
 	}
 
 	// an inner class used to sort controllers

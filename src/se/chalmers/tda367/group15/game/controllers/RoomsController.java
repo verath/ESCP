@@ -1,21 +1,20 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.*;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.BossRoomModel;
 import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
 import se.chalmers.tda367.group15.game.models.RoomModel;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * A class for abstractly handling rooms.
@@ -158,6 +157,7 @@ public class RoomsController {
 	 * Moves the room selector upwards
 	 */
 	public void moveUp() {
+		removeBullets();
 		currentPosition.translate(0, 1);
 	}
 
@@ -165,6 +165,7 @@ public class RoomsController {
 	 * Moves the room selector downwards
 	 */
 	public void moveDown() {
+		removeBullets();
 		currentPosition.translate(0, -1);
 	}
 
@@ -172,6 +173,7 @@ public class RoomsController {
 	 * Moves the room selector to the left
 	 */
 	public void moveLeft() {
+		removeBullets();
 		currentPosition.translate(-1, 0);
 	}
 
@@ -179,6 +181,7 @@ public class RoomsController {
 	 * Moves the room selector to the right
 	 */
 	public void moveRight() {
+		removeBullets();
 		currentPosition.translate(1, 0);
 	}
 
@@ -268,6 +271,12 @@ public class RoomsController {
 			}
 		}
 		return allDefeated;
+	}
+
+	void removeBullets() {
+		RoomController currentRoom = getCurrentRoom();
+		currentRoom.removeBullets();
+
 	}
 
 }

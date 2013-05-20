@@ -1,10 +1,9 @@
 package se.chalmers.tda367.group15.game.database;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import se.chalmers.tda367.group15.game.event.Event;
+
+import static org.junit.Assert.assertTrue;
 
 public class InsertableEventTest {
 	private class TestEvent extends Event {

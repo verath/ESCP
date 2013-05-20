@@ -1,19 +1,18 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.awt.geom.Rectangle2D.Float;
-import java.util.List;
-import java.util.Map;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Point;
-
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.*;
 import se.chalmers.tda367.group15.game.settings.KeyBindings;
 import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 import se.chalmers.tda367.group15.game.views.CharacterView;
+
+import java.awt.geom.Rectangle2D.Float;
+import java.util.List;
+import java.util.Map;
 
 public class HeroController extends AbstractMovingModelController {
 

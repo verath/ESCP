@@ -1,8 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class ScoreModelTest {
 

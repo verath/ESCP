@@ -1,12 +1,12 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class SoundEffectsController {
 
