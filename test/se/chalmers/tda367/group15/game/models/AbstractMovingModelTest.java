@@ -1,14 +1,14 @@
 package se.chalmers.tda367.group15.game.models;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.awt.geom.Rectangle2D;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MovingModelTest {
+import java.awt.geom.Rectangle2D;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class AbstractMovingModelTest {
 
 	private static AbstractMovingModel testedModel;
 

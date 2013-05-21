@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class PsychoHeroDatabaseTest {
+public class GameDatabaseTest {
 
 	@Test
 	public void testConnectToDatabase() throws ClassNotFoundException {
