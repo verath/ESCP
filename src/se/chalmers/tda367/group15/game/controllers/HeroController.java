@@ -26,6 +26,12 @@ import se.chalmers.tda367.group15.game.settings.KeyBindings;
 import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 import se.chalmers.tda367.group15.game.views.CharacterView;
 
+/**
+ * Class for controlling the hero.
+ * 
+ * @author Carl, Peter, Simon, Erik
+ *
+ */
 public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;

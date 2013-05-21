@@ -12,6 +12,8 @@ import org.newdawn.slick.Graphics;
 
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
+import se.chalmers.tda367.group15.game.exceptions.RoomAlreadyExistAtPositionException;
+import se.chalmers.tda367.group15.game.exceptions.RoomDoesNotExistException;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.BossRoomModel;
 import se.chalmers.tda367.group15.game.models.LobbyRoomModel;

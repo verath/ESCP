@@ -20,6 +20,10 @@ import se.chalmers.tda367.group15.game.models.WCRoomModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.views.HUDView;
 
+/**
+ * A controller that manages the game. Both creation and updating.
+ * 
+ */
 public class GameController {
 
 	private SoundEffectsController soundEffectsController;

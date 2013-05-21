@@ -9,6 +9,9 @@ import org.newdawn.slick.Graphics;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
+/**
+ * Controller for melee attacks.
+ */
 public class MeleeSwingController extends AbstractMovingModelController {
 
 	MeleeSwingController(GameController gameController,
