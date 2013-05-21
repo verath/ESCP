@@ -1,10 +1,15 @@
 package se.chalmers.tda367.group15.game.database;
 
-import org.apache.commons.dbutils.DbUtils;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.dbutils.DbUtils;
 
 /**
  * A database for holding statistics about the game, such as (high)scores.

@@ -1,18 +1,30 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.geom.Rectangle2D.Float;
+import java.util.List;
+import java.util.Map;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Point;
+
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
-import se.chalmers.tda367.group15.game.models.*;
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
+import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.models.AbstractRangedWeaponModel;
+import se.chalmers.tda367.group15.game.models.AbstractWeaponModel;
+import se.chalmers.tda367.group15.game.models.AxeModel;
+import se.chalmers.tda367.group15.game.models.BulletModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
+import se.chalmers.tda367.group15.game.models.PistolModel;
+import se.chalmers.tda367.group15.game.models.UnarmedModel;
 import se.chalmers.tda367.group15.game.settings.KeyBindings;
 import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 import se.chalmers.tda367.group15.game.views.CharacterView;
-
-import java.awt.geom.Rectangle2D.Float;
-import java.util.List;
-import java.util.Map;
 
 public class HeroController extends AbstractMovingModelController {
 

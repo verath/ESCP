@@ -1,18 +1,26 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.List;
+import java.util.Map;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
-import se.chalmers.tda367.group15.game.models.*;
+
+import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractNpcModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.models.BulletModel;
+import se.chalmers.tda367.group15.game.models.DonutModel;
+import se.chalmers.tda367.group15.game.models.HeroModel;
+import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.util.CollisionHelper;
 import se.chalmers.tda367.group15.game.views.CharacterView;
-
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.List;
-import java.util.Map;
 
 /**
  * AbstractNpcController implements methods for pathfinding and movement of npc

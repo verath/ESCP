@@ -1,12 +1,17 @@
 package se.chalmers.tda367.group15.game.states;
 
-import org.newdawn.slick.*;
+import java.util.List;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
+
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
 import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.settings.Constants;
-
-import java.util.List;
 
 /**
  * State for showing the high scores

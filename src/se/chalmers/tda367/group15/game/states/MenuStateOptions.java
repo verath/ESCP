@@ -1,12 +1,13 @@
 package se.chalmers.tda367.group15.game.states;
 
+import java.util.prefs.Preferences;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.menu.CheckBox;
 import se.chalmers.tda367.group15.game.settings.Constants;
-
-import java.util.prefs.Preferences;
 
 /**
  * A state with different settings you can choose between. Class based on

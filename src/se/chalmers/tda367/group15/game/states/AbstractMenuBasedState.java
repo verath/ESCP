@@ -1,12 +1,13 @@
 package se.chalmers.tda367.group15.game.states;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import se.chalmers.tda367.group15.game.menu.MenuItem;
 
-import java.util.HashSet;
-import java.util.Set;
+import se.chalmers.tda367.group15.game.menu.MenuItem;
 
 /**
  * A class with the purpose of making it easy to create menus in a graphical

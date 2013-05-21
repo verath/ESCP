@@ -1,5 +1,15 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -7,12 +17,14 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
-import se.chalmers.tda367.group15.game.models.*;
-import se.chalmers.tda367.group15.game.settings.Constants;
 
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.*;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
+import se.chalmers.tda367.group15.game.models.BossModel;
+import se.chalmers.tda367.group15.game.models.CoworkerModel;
+import se.chalmers.tda367.group15.game.models.RoomModel;
+import se.chalmers.tda367.group15.game.models.SoldierModel;
+import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
  * Abstract class for representing a room containing a tiled map and controllers

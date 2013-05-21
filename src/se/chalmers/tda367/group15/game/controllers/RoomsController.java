@@ -1,20 +1,21 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.Point;
+import java.awt.geom.Rectangle2D.Float;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.BossRoomModel;
 import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
 import se.chalmers.tda367.group15.game.models.RoomModel;
-
-import java.awt.*;
-import java.awt.geom.Rectangle2D.Float;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * A class for abstractly handling rooms.

@@ -1,17 +1,24 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.state.StateBasedGame;
-import se.chalmers.tda367.group15.game.event.SharedEventHandler;
-import se.chalmers.tda367.group15.game.models.*;
-import se.chalmers.tda367.group15.game.settings.Constants;
-import se.chalmers.tda367.group15.game.views.HUDView;
-
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.state.StateBasedGame;
+
+import se.chalmers.tda367.group15.game.event.SharedEventHandler;
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.BossRoomModel;
+import se.chalmers.tda367.group15.game.models.LeftWingRoomModel;
+import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
+import se.chalmers.tda367.group15.game.models.ParkingLotRoomModel;
+import se.chalmers.tda367.group15.game.models.ScoreModel;
+import se.chalmers.tda367.group15.game.models.WCRoomModel;
+import se.chalmers.tda367.group15.game.settings.Constants;
+import se.chalmers.tda367.group15.game.views.HUDView;
 
 public class GameController {
 

@@ -1,8 +1,8 @@
 package se.chalmers.tda367.group15.game.settings;
 
-import org.newdawn.slick.Input;
-
 import java.util.prefs.Preferences;
+
+import org.newdawn.slick.Input;
 
 /**
  * A class providing static access to the stored key binds for the user.

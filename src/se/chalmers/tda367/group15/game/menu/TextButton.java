@@ -1,10 +1,10 @@
 package se.chalmers.tda367.group15.game.menu;
 
+import java.awt.Font;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
-
-import java.awt.*;
 
 /**
  * A decorator class for Buttons, adding a changeable text string on top of the

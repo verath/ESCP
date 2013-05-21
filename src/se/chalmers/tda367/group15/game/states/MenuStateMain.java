@@ -4,6 +4,7 @@ import java.util.prefs.Preferences;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
 import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
 import se.chalmers.tda367.group15.game.menu.Button;
@@ -111,12 +112,15 @@ public class MenuStateMain extends AbstractMenuBasedState {
 					game.getState(Constants.GAME_STATE_PLAYING).init(container,
 							game);
 					existsGameCurrently = true;
-					
-					Preferences prefSettings = Preferences.userNodeForPackage(MenuStateOptions.class);
+
+					Preferences prefSettings = Preferences
+							.userNodeForPackage(MenuStateOptions.class);
 					soundEffectsController
 							.playGameMusic(GameMusic.NORMAL_MUSIC);
-					container.setMusicOn(prefSettings.getBoolean("Music", true));
-					container.setSoundOn(prefSettings.getBoolean("Sound", true));
+					container
+							.setMusicOn(prefSettings.getBoolean("Music", true));
+					container
+							.setSoundOn(prefSettings.getBoolean("Sound", true));
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}
