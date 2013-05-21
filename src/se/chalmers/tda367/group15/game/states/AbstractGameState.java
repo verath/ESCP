@@ -13,7 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * http://slick.javaunlimited.net/ by user shiroto. Comments added by Carl
  * Jansson.
  * 
- * @author unknown, shiroto?
+ * @author shiroto
  * @version 1.1
  */
 abstract class AbstractGameState extends BasicGameState {

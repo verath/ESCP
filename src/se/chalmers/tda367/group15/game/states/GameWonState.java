@@ -13,7 +13,8 @@ import se.chalmers.tda367.group15.game.controllers.ScoreController;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
- * State displayed when game is won
+ * State displayed when game is won. Write a name and press enter to see high
+ * score list.
  * 
  * @author Peter
  * 

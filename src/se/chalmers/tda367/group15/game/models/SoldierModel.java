@@ -9,46 +9,49 @@ package se.chalmers.tda367.group15.game.models;
 public class SoldierModel extends AbstractNpcModel {
 
 	/**
-	 * Creates a new soldier.
+	 * Creates a new SoldierModel enemy at position (64, 128) facing left
 	 */
 	public SoldierModel() {
 		this(64f, 128f);
 	}
 
 	/**
-	 * Creates a new soldier.
+	 * Creates a new SoldierModel enemy at position (x, y) facing a random
+	 * direction
 	 * 
 	 * @param x
-	 *            The x coordinate.
+	 *            pixels from left wall of window
 	 * @param y
-	 *            The y coordinate.
+	 *            pixels from top of window
 	 */
 	public SoldierModel(float x, float y) {
 		this(x, y, 360 * Math.random());
 	}
 
 	/**
-	 * Creates a new soldier.
+	 * Creates a new SoldierModel enemy at position (x, y) and facing direction
+	 * rot
 	 * 
 	 * @param x
-	 *            The x coordinate.
+	 *            pixels from left wall of window
 	 * @param y
-	 *            The y coordinate.
+	 *            pixels from top of window
 	 * @param rot
-	 *            The rotation angle.
+	 *            Clockwise rotation in degrees starting facing left of screen.
 	 */
 	private SoldierModel(float x, float y, double rot) {
 		this(x, y, rot, 0, 32, 0, 24);
 	}
 
 	/**
-	 * 
-	 * Creates a new soldier.
+	 * Creates a new SoldierModel enemy at position (x, y) and facing a random
+	 * direction. random movement is restricted by (x1, y1) and (x2, y2) which
+	 * is tile coordinates.
 	 * 
 	 * @param x
-	 *            The x coordinate.
+	 *            pixels from left wall of window
 	 * @param y
-	 *            The y coordinate.
+	 *            pixels from top of window
 	 * @param x1
 	 *            The minimum tile x coordinate
 	 * @param x2
@@ -59,11 +62,13 @@ public class SoldierModel extends AbstractNpcModel {
 	 *            The maximum tile y coordinate
 	 */
 	public SoldierModel(float x, float y, int x1, int x2, int y1, int y2) {
-		this(x, y, 0, x1, x2, y1, y2);
+		this(x, y, Math.random(), x1, x2, y1, y2);
 	}
 
 	/**
-	 * Creates a new soldier.
+	 * Creates a new SoldierModel enemy at position (x, y) and facing a random
+	 * direction. random movement is restricted by (x1, y1) and (x2, y2) which
+	 * is tile coordinates.
 	 * 
 	 * @param x
 	 *            The x coordinate.

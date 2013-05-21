@@ -14,7 +14,8 @@ import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
- * State for showing the high scores
+ * State for showing the high scores, Accessed through main menu or after
+ * writing mane when winning game.
  * 
  * @author Peter
  * 

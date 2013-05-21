@@ -11,7 +11,9 @@ import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
- * a container for the different states.
+ * This class controls which state is currently active. All game updates go
+ * through this class before passing to active state. All states and the window
+ * are created here. Also has sets cursor and listens for alt+enter command.
  * 
  * @author Carl
  * @version 2.0

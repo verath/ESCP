@@ -1,8 +1,7 @@
 package se.chalmers.tda367.group15.game.models;
 
 /**
- * Simple class for representing a dummy enemy. This enemy is only intended for
- * testing.
+ * Simple class for representing a Boss enemy.
  * 
  * @author simon
  * 
@@ -10,19 +9,20 @@ package se.chalmers.tda367.group15.game.models;
 public class BossModel extends AbstractNpcModel {
 
 	/**
-	 * Creates a new dummy enemy.
+	 * Creates a new BossModel enemy at position (x, y) facing a random
+	 * direction
+	 * 
+	 * @param x
+	 *            pixels from left wall of window
+	 * @param y
+	 *            pixels from top of window
 	 */
-	public BossModel() {
-		this(64f, 128f);
-	}
-
 	private BossModel(float x, float y) {
 		this(x, y, 360 * Math.random());
-
 	}
 
 	/**
-	 * Creates a new dummy enemy.
+	 * Creates a new BossModel enemy at position (x, y) facing direction rot
 	 * 
 	 * @param x
 	 *            x position of DummyEnemyModel
@@ -33,7 +33,7 @@ public class BossModel extends AbstractNpcModel {
 	 */
 	public BossModel(float x, float y, double rot) {
 		super(0, 0, 0, 0); // Boss is heavily scripted and doesn't use tiles in
-							// the same way.
+							// the same way as other NPCs.
 		setX(x);
 		setY(y);
 		setVelocity(0.1f);

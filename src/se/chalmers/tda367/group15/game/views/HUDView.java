@@ -8,6 +8,12 @@ import org.newdawn.slick.TrueTypeFont;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
+/**
+ * writes score and fps on screen
+ * 
+ * @author 
+ *
+ */
 public class HUDView implements View {
 	private final ScoreModel scoreModel;
 

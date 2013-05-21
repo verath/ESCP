@@ -11,34 +11,82 @@ import java.util.Random;
 public class CoworkerModel extends AbstractNpcModel {
 
 	/**
-	 * Creates a new dummy enemy.
+	 * Creates a new CoworkerModel enemy at position (64, 128) facing left
 	 */
 	public CoworkerModel() {
 		this(64f, 128f);
 	}
 
+	/**
+	 * Creates a new CoworkerModel enemy at position (x, y) facing a random
+	 * direction
+	 * 
+	 * @param x
+	 *            pixels from left wall of window
+	 * @param y
+	 *            pixels from top of window
+	 */
 	public CoworkerModel(float x, float y) {
 		this(x, y, 360 * Math.random());
 
 	}
 
+	/**
+	 * Creates a new CoworkerModel enemy at position (x, y) and facing direction
+	 * rot
+	 * 
+	 * @param x
+	 *            pixels from left wall of window
+	 * @param y
+	 *            pixels from top of window
+	 * @param rot
+	 *            Clockwise rotation in degrees starting facing left of screen.
+	 */
 	private CoworkerModel(float x, float y, double rot) {
 		this(x, y, rot, 0, 32, 0, 24);
 	}
 
+	/**
+	 * Creates a new CoworkerModel enemy at position (x, y) and facing a random
+	 * direction. random movement is restricted by (x1, y1) and (x2, y2) which
+	 * is tile coordinates.
+	 * 
+	 * @param x
+	 *            pixels from left wall of window
+	 * @param y
+	 *            pixels from top of window
+	 * @param x1
+	 *            The minimum tile x coordinate
+	 * @param x2
+	 *            The maximum tile x coordinate
+	 * @param y1
+	 *            The minimum tile y coordinate
+	 * @param y2
+	 *            The maximum tile y coordinate
+	 */
 	public CoworkerModel(float x, float y, int x1, int x2, int y1, int y2) {
-		this(x, y, 0, x1, x2, y1, y2);
+		this(x, y, 360 * Math.random(), x1, x2, y1, y2);
 	}
 
 	/**
-	 * Creates a new dummy enemy.
+	 * Creates a new CoworkerModel enemy at position (x, y) and facing direction
+	 * rot. random movement is restricted by (x1, y1) and (x2, y2) which is tile
+	 * coordinates.
 	 * 
 	 * @param x
-	 *            x position of DummyEnemyModel
+	 *            pixels from left wall of window
 	 * @param y
-	 *            y position of DummyEnemyModel
+	 *            pixels from top of window
 	 * @param rot
-	 *            angle to face in beginning
+	 *            Clockwise rotation in degrees starting facing left of screen.
+	 * @param x1
+	 *            The minimum tile x coordinate
+	 * @param x2
+	 *            The maximum tile x coordinate
+	 * @param y1
+	 *            The minimum tile y coordinate
+	 * @param y2
+	 *            The maximum tile y coordinate
 	 */
 	private CoworkerModel(float x, float y, double rot, int x1, int x2, int y1,
 			int y2) {

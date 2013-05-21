@@ -18,8 +18,8 @@ import se.chalmers.tda367.group15.game.settings.KeyBindings;
 import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 
 /**
- * A game over state. Displays a high score and allows the user to either replay
- * or go back to menu.
+ * A KeyBinding state. Has options for changing key bindings. Accessed through
+ * options.
  * 
  * @author Peter
  */

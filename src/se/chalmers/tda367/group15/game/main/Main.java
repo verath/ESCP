@@ -10,7 +10,7 @@ import se.chalmers.tda367.group15.game.settings.Constants;
 import se.chalmers.tda367.group15.game.states.StateController;
 
 /**
- * Starting point of the game.
+ * Starting point of the game. Creates the StateController and initializes it.
  * 
  * @author Peter
  * 

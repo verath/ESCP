@@ -13,9 +13,9 @@ import se.chalmers.tda367.group15.game.menu.MenuItem;
  * A class with the purpose of making it easy to create menus in a graphical
  * environment. Class based on tutorial for writing menus in Slick2D Originally
  * posted on http://slick.javaunlimited.net/ by user shiroto. Remade to suit our
- * purpose. Comments added by Carl Jansson
+ * purpose.
  * 
- * @author unknown, shiroto?, Carl Jansson
+ * @author shiroto, Carl Jansson
  * @version 4.0
  */
 public abstract class AbstractMenuBasedState extends AbstractGameState {
