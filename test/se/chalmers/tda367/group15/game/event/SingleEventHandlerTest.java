@@ -1,9 +1,9 @@
 package se.chalmers.tda367.group15.game.event;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
 
 /**
  * Test for the SharedEventHandler class. Not as thorough as the test for the

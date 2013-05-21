@@ -1,12 +1,13 @@
 package se.chalmers.tda367.group15.game.settings;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
+import static org.junit.Assert.assertTrue;
 
 import java.util.prefs.Preferences;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import se.chalmers.tda367.group15.game.settings.KeyBindings.Key;
 
 public class KeyBindingsTest {
 

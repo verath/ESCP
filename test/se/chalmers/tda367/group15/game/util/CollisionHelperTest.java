@@ -57,4 +57,10 @@ public class CollisionHelperTest {
 		// And should not be able to see diagonally (A to D)
 		assertFalse(CollisionHelper.isInSight(blockers, 0, 0, 10, 10));
 	}
+
+	@Test
+	public void testZeroLengthLine() {
+		assertFalse(CollisionHelper.recIntersectLine(new Rectangle2D.Float(0,
+				0, 1, 1), 0, 0, 0, 0));
+	}
 }

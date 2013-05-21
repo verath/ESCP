@@ -1,13 +1,14 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import se.chalmers.tda367.group15.game.database.DatabaseScore;
 import se.chalmers.tda367.group15.game.database.GameDatabase;
 import se.chalmers.tda367.group15.game.models.ScoreModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
-
-import static org.junit.Assert.*;
 
 public class ScoreControllerTest {
 	private static GameDatabase db;

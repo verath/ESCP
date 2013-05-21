@@ -1,11 +1,11 @@
 package se.chalmers.tda367.group15.game.database;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class GameDatabaseTest {
 

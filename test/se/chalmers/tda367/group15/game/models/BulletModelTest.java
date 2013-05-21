@@ -1,9 +1,8 @@
 package se.chalmers.tda367.group15.game.models;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class BulletModelTest {
 
@@ -22,6 +21,20 @@ public class BulletModelTest {
 
 		// Should have a non-empty collision bound
 		assertFalse(bm.getBounds().isEmpty());
+
+	}
+
+	@Test
+	public final void changeDamage() {
+		BulletModel bm = new BulletModel();
+		bm.setDamage(5);
+		assertEquals(bm.getDamage(), 5);
+	}
+
+	@Test
+	public final void testImagePathNotNull() {
+		DonutModel dm = new DonutModel();
+		assertNotNull(dm.getImagePath());
 	}
 
 }
