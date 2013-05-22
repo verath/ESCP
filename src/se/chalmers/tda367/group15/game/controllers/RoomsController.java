@@ -10,8 +10,8 @@ import java.util.Map.Entry;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
+import se.chalmers.tda367.group15.game.controllers.SoundController.GameMusic;
+import se.chalmers.tda367.group15.game.controllers.SoundController.SoundEffect;
 import se.chalmers.tda367.group15.game.exceptions.RoomAlreadyExistAtPositionException;
 import se.chalmers.tda367.group15.game.exceptions.RoomDoesNotExistException;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
@@ -26,7 +26,7 @@ import se.chalmers.tda367.group15.game.models.RoomModel;
  */
 public class RoomsController {
 
-	private SoundEffectsController soundEffectsController;
+	private SoundController soundController;
 
 	/**
 	 * Enum for representing a relative position in the game map.
@@ -63,7 +63,7 @@ public class RoomsController {
 	 */
 	public RoomsController() {
 		rooms = new HashMap<Point, RoomController>();
-		soundEffectsController = soundEffectsController.instance();
+		soundController = soundController.instance();
 	}
 
 	/**
@@ -218,15 +218,15 @@ public class RoomsController {
 			}
 			bossRoomUnlocked = true;
 			currentRoom.unlockRoom();
-			soundEffectsController.playGameMusic(GameMusic.BOSS_MUSIC);
-			soundEffectsController.playSound(SoundEffect.NARRATOR_BOSS);
+			soundController.playGameMusic(GameMusic.BOSS_MUSIC);
+			soundController.playSound(SoundEffect.NARRATOR_BOSS);
 
 		} else if (currentRoom.allDead() && !currentRoom.isUnlocked()
 				&& !bossRoomUnlocked) {
 			currentRoom.unlockRoom();
-			SoundEffectsController soundEffectsController = SoundEffectsController
+			SoundController soundController = SoundController
 					.instance();
-			soundEffectsController.playSound(SoundEffect.NARRATOR_NEXT);
+			soundController.playSound(SoundEffect.NARRATOR_NEXT);
 
 		}
 	}

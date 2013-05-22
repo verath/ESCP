@@ -8,9 +8,9 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
-public class SoundEffectsController {
+public class SoundController {
 
-	private static SoundEffectsController instance;
+	private static SoundController instance;
 
 	private final List<Sound> sounds = new ArrayList<Sound>();
 
@@ -51,12 +51,12 @@ public class SoundEffectsController {
 		}
 	}
 
-	private SoundEffectsController() {
+	private SoundController() {
 	}
 
-	public static SoundEffectsController instance() {
+	public static SoundController instance() {
 		if (instance == null) {
-			instance = new SoundEffectsController();
+			instance = new SoundController();
 		}
 		return instance;
 	}

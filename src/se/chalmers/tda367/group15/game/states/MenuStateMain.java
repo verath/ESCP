@@ -5,8 +5,8 @@ import java.util.prefs.Preferences;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.GameMusic;
+import se.chalmers.tda367.group15.game.controllers.SoundController;
+import se.chalmers.tda367.group15.game.controllers.SoundController.GameMusic;
 import se.chalmers.tda367.group15.game.menu.Button;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
@@ -20,7 +20,7 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  */
 public class MenuStateMain extends AbstractMenuBasedState {
 
-	private SoundEffectsController soundEffectsController;
+	private SoundController soundController;
 	/**
 	 * Resume button must be possible to set visible at will.
 	 */
@@ -54,7 +54,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		this.initMenuItems();
-		soundEffectsController = SoundEffectsController.instance();
+		soundController = SoundController.instance();
 		try {
 			setBackground(new Image("res/menu/background.png"));
 		} catch (SlickException e) {
@@ -115,7 +115,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 
 					Preferences prefSettings = Preferences
 							.userNodeForPackage(MenuStateOptions.class);
-					soundEffectsController
+					soundController
 							.playGameMusic(GameMusic.NORMAL_MUSIC);
 					container
 							.setMusicOn(prefSettings.getBoolean("Music", true));
