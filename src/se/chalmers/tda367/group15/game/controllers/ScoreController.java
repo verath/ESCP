@@ -22,9 +22,9 @@ public class ScoreController {
 	 * A list of names used if no name was provided when saving to the database.
 	 */
 	private final static List<String> DEFAULT_HIGH_SCORE_NAMES = Arrays.asList(
-			"TheMaster", "XxMEGAMANxX", "1337Skillz", "YOUR MOM", "H4xx0rMega",
-			"MoreMega", "SuperDragon", "TinyGiant", "GiganticDwarf", "Red Car",
-			"ILikeYou", "Random", "LoL", "AnotherOne", "NoNamez");
+			"TheMaster", "XxMEGAMANxX", "1337Skillz", "H4xx0rMega", "MoreMega",
+			"SuperDragon", "TinyGiant", "GiganticDwarf", "Red Car", "ILikeYou",
+			"Random", "LoL", "AnotherOne", "NoNamez");
 
 	/**
 	 * The ScoreModel, holding the current score in the game. decrease interval
