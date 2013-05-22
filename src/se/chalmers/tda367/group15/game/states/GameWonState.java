@@ -21,8 +21,7 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  */
 public class GameWonState extends AbstractMenuBasedState {
 	private final static int MAX_NAME_LENGTH = 15;
-	private final TrueTypeFont textFont = new TrueTypeFont(new Font(
-			"Monospaced", Font.BOLD, 32), true);
+	private TrueTypeFont textFont;
 	private final static String ALLOWED_NAME_CHARS = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	private ScoreController scoreController;
@@ -46,6 +45,8 @@ public class GameWonState extends AbstractMenuBasedState {
 	public void init() {
 		try {
 			setBackground(new Image("res/menu/backgroundEpicWin.png"));
+			textFont = new TrueTypeFont(new Font("Monospaced", Font.BOLD, 32),
+					true);
 		} catch (SlickException e) {
 			if (Constants.DEBUG) {
 				e.printStackTrace();

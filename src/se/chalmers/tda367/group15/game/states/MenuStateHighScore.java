@@ -31,8 +31,7 @@ public class MenuStateHighScore extends AbstractMenuBasedState {
 	/**
 	 * The font used in this state to draw string
 	 */
-	private final TrueTypeFont textFont = new TrueTypeFont(new java.awt.Font(
-			"Monospaced", java.awt.Font.BOLD, 24), true);
+	private TrueTypeFont textFont;
 
 	/**
 	 * Horizontal spacing between entries
@@ -84,6 +83,8 @@ public class MenuStateHighScore extends AbstractMenuBasedState {
 		try {
 			setBackground(new Image("res/menu/backgroundScores.png"));
 			addBackButton();
+			textFont = new TrueTypeFont(new java.awt.Font("Monospaced",
+					java.awt.Font.BOLD, 24), true);
 		} catch (SlickException e) {
 			if (Constants.DEBUG) {
 				e.printStackTrace();

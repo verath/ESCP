@@ -1,5 +1,6 @@
 package se.chalmers.tda367.group15.game.states;
 
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,8 +29,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	/**
 	 * The true typed font used to draw text.
 	 */
-	private final TrueTypeFont textFont = new TrueTypeFont(
-			TextButton.DEFAULT_FONT, true);
+	private TrueTypeFont textFont;
 
 	/**
 	 * the upper left corner of button group
@@ -89,6 +89,7 @@ public class MenuStateKeyBinds extends AbstractMenuBasedState {
 	public void init() {
 		try {
 			setBackground(new Image("res/menu/backgroundKeys.png"));
+			textFont = new TrueTypeFont(new Font("Arial", Font.BOLD, 32), true);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

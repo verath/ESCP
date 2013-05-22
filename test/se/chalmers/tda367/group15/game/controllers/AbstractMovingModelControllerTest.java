@@ -1,6 +1,8 @@
 package se.chalmers.tda367.group15.game.controllers;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
