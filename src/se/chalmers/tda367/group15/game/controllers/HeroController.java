@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Point;
 
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
+import se.chalmers.tda367.group15.game.controllers.SoundController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMeleeWeaponModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
@@ -35,7 +35,7 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
 public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
-	private final SoundEffectsController soundController = SoundEffectsController
+	private final SoundController soundController = SoundController
 			.instance();
 
 	/**
@@ -264,7 +264,7 @@ public class HeroController extends AbstractMovingModelController {
 
 	private void createBullet() {
 		soundController
-				.playSound(SoundEffectsController.SoundEffect.PISTOL_FIRED);
+				.playSound(SoundController.SoundEffect.PISTOL_FIRED);
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newBullet = new BulletModel();
 

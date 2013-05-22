@@ -8,7 +8,7 @@ import java.util.Map;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController.SoundEffect;
+import se.chalmers.tda367.group15.game.controllers.SoundController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
@@ -27,7 +27,7 @@ abstract class AbstractMovingModelController {
 	/**
 	 * The controller for sound effects
 	 */
-	private final SoundEffectsController soundController = SoundEffectsController
+	private final SoundController soundController = SoundController
 			.instance();
 	/**
 	 * The model that the controller is managing
@@ -260,12 +260,12 @@ abstract class AbstractMovingModelController {
 
 						} else {
 							soundController
-									.playSound(SoundEffectsController.SoundEffect.ENEMY_DEATH);
+									.playSound(SoundController.SoundEffect.ENEMY_DEATH);
 						}
 
 					} else {
 						soundController
-								.playSound(SoundEffectsController.SoundEffect.ENEMY_HURT);
+								.playSound(SoundController.SoundEffect.ENEMY_HURT);
 
 					}
 					projectile.setAlive(false);

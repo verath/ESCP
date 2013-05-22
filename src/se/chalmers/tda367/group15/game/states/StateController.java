@@ -7,7 +7,7 @@ import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import se.chalmers.tda367.group15.game.controllers.SoundEffectsController;
+import se.chalmers.tda367.group15.game.controllers.SoundController;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**
@@ -22,7 +22,7 @@ public class StateController extends StateBasedGame {
 
 	private boolean pendingFullScreenAction;
 	private AppGameContainer gameContainer;
-	private SoundEffectsController soundEffectsController;
+	private SoundController soundController;
 
 	/**
 	 * creates a new StateController
@@ -39,7 +39,7 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		soundEffectsController = soundEffectsController.instance();
+		soundController = soundController.instance();
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MenuStateMain mainMenu = new MenuStateMain(
 				Constants.GAME_STATE_MENU_MAIN);
@@ -161,7 +161,7 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public boolean closeRequested() {
-		soundEffectsController.stopAll();
+		soundController.stopAll();
 		return true;
 	}
 }

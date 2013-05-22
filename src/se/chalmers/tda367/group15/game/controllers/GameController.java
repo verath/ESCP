@@ -26,7 +26,7 @@ import se.chalmers.tda367.group15.game.views.HUDView;
  */
 public class GameController {
 
-	private SoundEffectsController soundEffectsController;
+	private SoundController soundController;
 
 	/**
 	 * A flag for if the game is over
@@ -76,7 +76,7 @@ public class GameController {
 	 */
 	public void init(GameContainer container, StateBasedGame game) {
 
-		soundEffectsController = SoundEffectsController.instance();
+		soundController = SoundController.instance();
 
 		// Reset the game over flags
 		gameOver = false;
@@ -139,7 +139,7 @@ public class GameController {
 			return;
 		}
 
-		soundEffectsController.update();
+		soundController.update();
 
 		scoreController.update(container, delta);
 
