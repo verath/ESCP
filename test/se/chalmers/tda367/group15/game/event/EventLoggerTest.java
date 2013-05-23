@@ -7,7 +7,11 @@ import org.junit.Test;
 
 public class EventLoggerTest {
 
-	private class SubEvent extends Event {
+    private class SuperEvent extends  Event {
+
+    }
+
+	private class SubEvent extends SuperEvent {
 
 	}
 
@@ -20,7 +24,7 @@ public class EventLoggerTest {
 		EventLogger logger = new EventLogger(evtHandler);
 
 		assertTrue(logger.getLoggedEvents().size() == 0);
-		Event evt = new Event();
+		Event evt = new SuperEvent();
 		evtHandler.publish(evt);
 		assertTrue(logger.getLoggedEvents().size() == 1);
 		assertEquals(logger.getLoggedEvents().get(0), evt);
@@ -37,10 +41,10 @@ public class EventLoggerTest {
 
 		logger.setEventHandler(evtHandler2);
 
-		evtHandler1.publish(new Event());
+		evtHandler1.publish(new SuperEvent());
 		assertTrue(logger.getLoggedEvents().size() == 0);
 
-		evtHandler2.publish(new Event());
+		evtHandler2.publish(new SuperEvent());
 		assertTrue(logger.getLoggedEvents().size() == 1);
 	}
 
@@ -65,7 +69,7 @@ public class EventLoggerTest {
 		SingleEventHandler evtHandler = new SingleEventHandler();
 		EventLogger logger = new EventLogger(evtHandler);
 
-		Event evt1 = new Event();
+		Event evt1 = new SuperEvent();
 		Event evt2 = new SubEvent();
 
 		evtHandler.publish(evt1);
@@ -84,7 +88,7 @@ public class EventLoggerTest {
 		SingleEventHandler evtHandler = new SingleEventHandler();
 		EventLogger logger = new EventLogger(evtHandler);
 
-		evtHandler.publish(new Event());
+		evtHandler.publish(new SuperEvent());
 		logger.clear();
 
 		assertTrue(logger.getLoggedEvents().size() == 0);
