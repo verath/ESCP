@@ -1,4 +1,4 @@
-package se.chalmers.tda367.group15.game.models;
+package se.chalmers.tda367.group15.game.models.weapons;
 
 /**
  * An axe to be wielded by the hero!

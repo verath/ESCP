@@ -1,15 +1,19 @@
-package se.chalmers.tda367.group15.game.models;
+package se.chalmers.tda367.group15.game.models.rooms;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.BossModel;
+import se.chalmers.tda367.group15.game.models.SoldierModel;
+
 /**
- * A parking lot room.
+ * A boss room.
  * 
  * @author simon
  * 
  */
-public class ParkingLotRoomModel implements RoomModel {
+public class BossRoomModel implements RoomModel {
 
 	/**
 	 * Variable for storing path to map with unlocked doors.
@@ -26,17 +30,20 @@ public class ParkingLotRoomModel implements RoomModel {
 	 */
 	private final List<AbstractMovingModel> npcModels;
 
-	public ParkingLotRoomModel() {
+	public BossRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
-		CoworkerModel e1 = new CoworkerModel(2 * 32, 5 * 32);
-		CoworkerModel e2 = new CoworkerModel(29 * 32, 11 * 32);
-
+		SoldierModel e1 = new SoldierModel(9 * 32, 12 * 32, 0, 11, 7, 13);
+		SoldierModel e2 = new SoldierModel(12 * 32, 7 * 32);
+		SoldierModel e3 = new SoldierModel(25 * 32, 16 * 32, 18, 30, 7, 16);
+		BossModel b1 = new BossModel(480, 66, 270);
 		npcModels.add(e1);
 		npcModels.add(e2);
+		npcModels.add(e3);
+		npcModels.add(b1);
 
-		unlockedMapPath = "res/levels/parking_lot.tmx";
-		lockedMapPath = "res/levels/parking_lot_locked.tmx";
+		unlockedMapPath = "res/levels/top_room.tmx";
+		lockedMapPath = "res/levels/top_room_locked.tmx";
 	}
 
 	/**

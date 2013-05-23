@@ -1,5 +1,7 @@
 package se.chalmers.tda367.group15.game.models;
 
+import se.chalmers.tda367.group15.game.models.weapons.PistolModel;
+
 /**
  * Class representing a soldier model.
  * 

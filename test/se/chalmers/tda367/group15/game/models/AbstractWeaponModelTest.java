@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import se.chalmers.tda367.group15.game.models.weapons.AbstractWeaponModel;
+
 public class AbstractWeaponModelTest {
 	private static AbstractWeaponModel testedModel;
 	private static final int MIN_DMG = 1;

@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
+import se.chalmers.tda367.group15.game.models.rooms.LobbyRoomModel;
+
 public class LobbyRoomModelTest {
 	private LobbyRoomModel lobbyRoomModel;
 

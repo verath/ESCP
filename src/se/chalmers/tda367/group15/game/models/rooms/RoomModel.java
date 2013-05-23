@@ -1,6 +1,8 @@
-package se.chalmers.tda367.group15.game.models;
+package se.chalmers.tda367.group15.game.models.rooms;
 
 import java.util.List;
+
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 
 /**
  * Interface for representing a room model.

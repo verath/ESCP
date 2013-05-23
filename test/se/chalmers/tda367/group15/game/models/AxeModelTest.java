@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import se.chalmers.tda367.group15.game.models.weapons.AxeModel;
+
 public class AxeModelTest {
 	@Test
 	public void testCreateAxeModel() {

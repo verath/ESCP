@@ -1,15 +1,14 @@
-package se.chalmers.tda367.group15.game.models;
+package se.chalmers.tda367.group15.game.models.weapons;
 
 /**
- * A weapon that can only be used in melee range.
+ * A weapon that can be fired from a distance.
  * 
  * @author tholene
  * 
  */
-public abstract class AbstractMeleeWeaponModel extends AbstractWeaponModel {
-
+public abstract class AbstractRangedWeaponModel extends AbstractWeaponModel {
 	/**
-	 * Create a new melee weapon.
+	 * Create a new ranged weapon.
 	 * 
 	 * @param name
 	 *            The name of the weapon.
@@ -21,9 +20,10 @@ public abstract class AbstractMeleeWeaponModel extends AbstractWeaponModel {
 	 *            The amount of time (in ms) that will pass between every shot
 	 *            while firing.
 	 */
-	public AbstractMeleeWeaponModel(String name, int baseDamage, int maxDamage,
-			int firingSpeed) {
+	public AbstractRangedWeaponModel(String name, int baseDamage,
+			int maxDamage, int firingSpeed) {
 		super(name, baseDamage, maxDamage, firingSpeed);
 
 	}
+
 }

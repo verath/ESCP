@@ -1,7 +1,10 @@
-package se.chalmers.tda367.group15.game.models;
+package se.chalmers.tda367.group15.game.models.rooms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.CoworkerModel;
 
 /**
  * An office room.
