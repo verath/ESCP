@@ -330,4 +330,11 @@ public class HeroController extends AbstractMovingModelController {
 	public void render(GameContainer container, Graphics g) {
 		getView().render(container, g);
 	}
+
+	public void incHealth() {
+		AbstractCharacterModel model = (AbstractCharacterModel)getModel();
+		int heal = model.getCurrentWeapon().getDamage()/5 + model.getHealth();
+		model.setHealth(heal > 100 ? 100 : heal);
+		
+	}
 }

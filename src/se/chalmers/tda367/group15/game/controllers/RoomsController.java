@@ -15,9 +15,9 @@ import se.chalmers.tda367.group15.game.controllers.SoundController.SoundEffect;
 import se.chalmers.tda367.group15.game.exceptions.RoomAlreadyExistAtPositionException;
 import se.chalmers.tda367.group15.game.exceptions.RoomDoesNotExistException;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.rooms.BossRoomModel;
-import se.chalmers.tda367.group15.game.models.rooms.LobbyRoomModel;
-import se.chalmers.tda367.group15.game.models.rooms.RoomModel;
+import se.chalmers.tda367.group15.game.models.BossRoomModel;
+import se.chalmers.tda367.group15.game.models.LobbyRoomModel;
+import se.chalmers.tda367.group15.game.models.RoomModel;
 
 /**
  * A class for abstractly handling rooms.

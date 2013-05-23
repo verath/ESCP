@@ -11,8 +11,10 @@ import org.newdawn.slick.Graphics;
 import se.chalmers.tda367.group15.game.controllers.SoundController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractNpcModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
+import se.chalmers.tda367.group15.game.models.MeleeSwingModel;
 import se.chalmers.tda367.group15.game.views.View;
 
 /**
@@ -242,7 +244,10 @@ abstract class AbstractMovingModelController {
 			if (bound1.intersects(bound2) && this.model != otherModel
 					&& otherModel.isAlive()) {
 				dynamicCollision = true;
-
+				
+				if(model instanceof MeleeSwingModel && otherModel instanceof AbstractNpcModel) {
+					getGameController().getHeroController().incHealth();
+				}
 				if (model instanceof AbstractProjectileModel
 						&& otherModel instanceof AbstractProjectileModel) {
 					dynamicCollision = false;

@@ -1,11 +1,8 @@
-package se.chalmers.tda367.group15.game.models.rooms;
+package se.chalmers.tda367.group15.game.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.BossModel;
-import se.chalmers.tda367.group15.game.models.SoldierModel;
 
 /**
  * A boss room.

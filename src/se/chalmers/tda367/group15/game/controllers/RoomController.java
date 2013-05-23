@@ -22,8 +22,8 @@ import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
 import se.chalmers.tda367.group15.game.models.CoworkerModel;
+import se.chalmers.tda367.group15.game.models.RoomModel;
 import se.chalmers.tda367.group15.game.models.SoldierModel;
-import se.chalmers.tda367.group15.game.models.rooms.RoomModel;
 import se.chalmers.tda367.group15.game.settings.Constants;
 
 /**

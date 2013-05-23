@@ -1,18 +1,16 @@
-package se.chalmers.tda367.group15.game.models.rooms;
+package se.chalmers.tda367.group15.game.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
-import se.chalmers.tda367.group15.game.models.CoworkerModel;
 
 /**
- * A lobby room.
+ * An office with toilets.
  * 
  * @author simon
  * 
  */
-public class LobbyRoomModel implements RoomModel {
+public class WCRoomModel implements RoomModel {
 
 	/**
 	 * Variable for storing path to map with unlocked doors.
@@ -29,19 +27,26 @@ public class LobbyRoomModel implements RoomModel {
 	 */
 	private final List<AbstractMovingModel> npcModels;
 
-	public LobbyRoomModel() {
+	/**
+	 * Create a wc room model.
+	 */
+	public WCRoomModel() {
 		npcModels = new ArrayList<AbstractMovingModel>();
 
-		CoworkerModel e1 = new CoworkerModel(9 * 32, 12 * 32);
-		CoworkerModel e2 = new CoworkerModel(12 * 32, 7 * 32);
-		CoworkerModel e3 = new CoworkerModel(25 * 32, 16 * 32);
+		CoworkerModel e1 = new CoworkerModel(800, 500, 0, 10, 0, 10);
+		CoworkerModel e2 = new CoworkerModel(400, 200, 12, 32, 0, 9);
+		CoworkerModel e3 = new CoworkerModel(450, 600, 0, 18, 16, 24);
+		CoworkerModel e4 = new CoworkerModel(940, 600, 18, 32, 10, 24);
+		CoworkerModel e5 = new CoworkerModel(300, 400);
 
 		npcModels.add(e1);
 		npcModels.add(e2);
 		npcModels.add(e3);
+		npcModels.add(e4);
+		npcModels.add(e5);
 
-		lockedMapPath = "res/levels/lobby_all_locked.tmx";
-		unlockedMapPath = "res/levels/lobby_boss_locked.tmx";
+		unlockedMapPath = "res/levels/right_room.tmx";
+		lockedMapPath = "res/levels/right_room_locked.tmx";
 	}
 
 	/**
