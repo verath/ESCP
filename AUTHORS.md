@@ -15,7 +15,7 @@ Real Name       | Git alias(es)
 Peter Eliasson  | Peter, Peter Eliasson, verath
 Carl Jansson    | HeyHoProBro
 Simon Persson   | Simon, Simon Persson, simonjrp, sjrp
-Erik Tholen     | Erik, Erik Thol├®n, Erik Tholen  
+Erik Tholen     | Erik, Erik Tholén, Erik Tholen  
 
 
  
