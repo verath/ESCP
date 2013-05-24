@@ -6,7 +6,7 @@
 
 [Simon Persson](https://github.com/tholene)
 
-[Erik Tholen](https://github.com/tholene)
+[Erik Tholén](https://github.com/tholene)
 
 ## Git usernames
 
