@@ -4,7 +4,7 @@
 
 [Carl Jansson](https://github.com/HeyHoProBro)
 
-[Simon Persson](https://github.com/tholene)
+[Simon Persson](https://github.com/simonjrp)
 
 [Erik Tholén](https://github.com/tholene)
 
