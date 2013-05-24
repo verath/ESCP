@@ -2,6 +2,11 @@
 <map version="1.0" orientation="orthogonal" width="32" height="24" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="default" tilewidth="32" tileheight="32">
   <image source="../tiles/sprite_sheet.png" trans="ff00ff" width="1024" height="1024"/>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
   <tile id="4">
    <properties>
     <property name="blocked" value="true"/>
