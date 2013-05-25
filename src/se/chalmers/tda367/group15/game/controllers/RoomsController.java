@@ -26,8 +26,6 @@ import se.chalmers.tda367.group15.game.models.RoomModel;
  */
 public class RoomsController {
 
-	private SoundController soundController;
-
 	/**
 	 * Enum for representing a relative position in the game map.
 	 * 
@@ -63,7 +61,6 @@ public class RoomsController {
 	 */
 	public RoomsController() {
 		rooms = new HashMap<Point, RoomController>();
-		soundController = new SoundController();
 	}
 
 	/**
@@ -218,13 +215,13 @@ public class RoomsController {
 			}
 			bossRoomUnlocked = true;
 			currentRoom.unlockRoom();
-			soundController.playGameMusic(GameMusic.BOSS_MUSIC);
-			soundController.playSound(SoundEffect.NARRATOR_BOSS);
+			SoundController.playGameMusic(GameMusic.BOSS_MUSIC);
+			SoundController.playSound(SoundEffect.NARRATOR_BOSS);
 
 		} else if (currentRoom.allDead() && !currentRoom.isUnlocked()
 				&& !bossRoomUnlocked) {
 			currentRoom.unlockRoom();
-			soundController.playSound(SoundEffect.NARRATOR_NEXT);
+			SoundController.playSound(SoundEffect.NARRATOR_NEXT);
 
 		}
 	}

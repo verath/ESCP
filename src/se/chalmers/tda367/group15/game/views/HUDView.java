@@ -11,8 +11,8 @@ import se.chalmers.tda367.group15.game.settings.Constants;
 /**
  * writes score and fps on screen
  * 
- * @author 
- *
+ * @author
+ * 
  */
 public class HUDView implements View {
 	private final ScoreModel scoreModel;

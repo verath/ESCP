@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class LobbyRoomModelTest {
 	private LobbyRoomModel lobbyRoomModel;
 

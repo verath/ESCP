@@ -27,10 +27,6 @@ import se.chalmers.tda367.group15.game.views.View;
 abstract class AbstractMovingModelController {
 
 	/**
-	 * The controller for sound effects
-	 */
-	private final SoundController soundController = new SoundController();
-	/**
 	 * The model that the controller is managing
 	 */
 	private AbstractMovingModel model;
@@ -243,8 +239,9 @@ abstract class AbstractMovingModelController {
 			if (bound1.intersects(bound2) && this.model != otherModel
 					&& otherModel.isAlive()) {
 				dynamicCollision = true;
-				
-				if(model instanceof MeleeSwingModel && otherModel instanceof AbstractNpcModel) {
+
+				if (model instanceof MeleeSwingModel
+						&& otherModel instanceof AbstractNpcModel) {
 					getGameController().getHeroController().incHealth();
 				}
 				if (model instanceof AbstractProjectileModel
@@ -259,16 +256,16 @@ abstract class AbstractMovingModelController {
 					if (otherModel.getHealth() <= 0) {
 						otherModel.setAlive(false);
 						if (otherModel instanceof BossModel) {
-							soundController.playSound(SoundEffect.BOSS_DEATH);
+							SoundController.playSound(SoundEffect.BOSS_DEATH);
 							getGameController().gameOver(true);
 
 						} else {
-							soundController
+							SoundController
 									.playSound(SoundController.SoundEffect.ENEMY_DEATH);
 						}
 
 					} else {
-						soundController
+						SoundController
 								.playSound(SoundController.SoundEffect.ENEMY_HURT);
 
 					}

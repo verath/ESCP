@@ -2,7 +2,6 @@ package se.chalmers.tda367.group15.game.models;
 
 import java.util.List;
 
-
 /**
  * Interface for representing a room model.
  * 

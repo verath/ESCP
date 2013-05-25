@@ -7,9 +7,9 @@ import org.junit.Test;
 
 public class EventLoggerTest {
 
-    private class SuperEvent extends  Event {
+	private class SuperEvent extends Event {
 
-    }
+	}
 
 	private class SubEvent extends SuperEvent {
 

@@ -30,12 +30,11 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
  * Class for controlling the hero.
  * 
  * @author Carl, Peter, Simon, Erik
- *
+ * 
  */
 public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
-	private final SoundController soundController = new SoundController();
 
 	/**
 	 * Create a new controller for the hero.
@@ -262,8 +261,7 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	private void createBullet() {
-		soundController
-				.playSound(SoundController.SoundEffect.PISTOL_FIRED);
+		SoundController.playSound(SoundController.SoundEffect.PISTOL_FIRED);
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newBullet = new BulletModel();
 
@@ -296,9 +294,9 @@ public class HeroController extends AbstractMovingModelController {
 
 		AbstractProjectileModel newSwing = new MeleeSwingModel();
 		if (model.getCurrentWeapon() instanceof AxeModel) {
-			soundController.playSound(SoundEffect.AXE_SWING);
+			SoundController.playSound(SoundEffect.AXE_SWING);
 		} else {
-			soundController.playSound(SoundEffect.UNARMED_SMASH);
+			SoundController.playSound(SoundEffect.UNARMED_SMASH);
 		}
 
 		float heroAngle = (float) Math.toRadians(model.getRotation());
@@ -331,9 +329,9 @@ public class HeroController extends AbstractMovingModelController {
 	}
 
 	public void incHealth() {
-		AbstractCharacterModel model = (AbstractCharacterModel)getModel();
-		int heal = model.getCurrentWeapon().getDamage()/5 + model.getHealth();
+		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
+		int heal = model.getCurrentWeapon().getDamage() / 5 + model.getHealth();
 		model.setHealth(heal > 100 ? 100 : heal);
-		
+
 	}
 }

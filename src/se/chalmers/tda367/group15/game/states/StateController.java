@@ -22,7 +22,6 @@ public class StateController extends StateBasedGame {
 
 	private boolean pendingFullScreenAction;
 	private AppGameContainer gameContainer;
-	private SoundController soundController;
 
 	/**
 	 * creates a new StateController
@@ -39,7 +38,6 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		soundController = new SoundController();
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MenuStateMain mainMenu = new MenuStateMain(
 				Constants.GAME_STATE_MENU_MAIN);
@@ -161,7 +159,7 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public boolean closeRequested() {
-		soundController.stopAll();
+		SoundController.stopAll();
 		return true;
 	}
 }

@@ -20,7 +20,6 @@ import se.chalmers.tda367.group15.game.settings.Constants;
  */
 public class MenuStateMain extends AbstractMenuBasedState {
 
-	private SoundController soundController;
 	/**
 	 * Resume button must be possible to set visible at will.
 	 */
@@ -54,7 +53,6 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		this.initMenuItems();
-		soundController = new SoundController();
 		try {
 			setBackground(new Image("res/menu/background.png"));
 		} catch (SlickException e) {
@@ -115,8 +113,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 
 					Preferences prefSettings = Preferences
 							.userNodeForPackage(MenuStateOptions.class);
-					soundController
-							.playGameMusic(GameMusic.NORMAL_MUSIC);
+					SoundController.playGameMusic(GameMusic.NORMAL_MUSIC);
 					container
 							.setMusicOn(prefSettings.getBoolean("Music", true));
 					container

@@ -3,7 +3,6 @@ package se.chalmers.tda367.group15.game.models;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * An office with toilets.
  * 

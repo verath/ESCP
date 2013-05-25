@@ -35,8 +35,6 @@ public abstract class AbstractNpcController extends
 
 	int ENEMY_DAMAGE_MODIFIER = 2;
 
-	private final SoundController soundController = new SoundController();
-
 	/**
 	 * The path controller is traveling
 	 */
@@ -361,8 +359,7 @@ public abstract class AbstractNpcController extends
 	 * Create a bullet.
 	 */
 	void createBullet() {
-		soundController
-				.playSound(SoundController.SoundEffect.PISTOL_FIRED);
+		SoundController.playSound(SoundController.SoundEffect.PISTOL_FIRED);
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 		AbstractProjectileModel newDonut = new BulletModel();
 
@@ -391,8 +388,7 @@ public abstract class AbstractNpcController extends
 	 * Create a donut.
 	 */
 	void createDonut() {
-		soundController
-				.playSound(SoundController.SoundEffect.DONUT_FIRED);
+		SoundController.playSound(SoundController.SoundEffect.DONUT_FIRED);
 
 		CharacterView view = (CharacterView) getView();
 		view.runAttackAnimation();
