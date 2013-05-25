@@ -87,12 +87,12 @@ public class AbstractMovingModelControllerTest {
 	public void testIsCollision() throws Exception {
 
 		// Set up static bounds list
-		List<Rectangle2D.Float> staticBounds = new ArrayList<>();
+		List<Rectangle2D.Float> staticBounds = new ArrayList<Rectangle2D.Float>();
 		// Add a static bound, (0, 0) to (10, 10)
 		staticBounds.add(new Rectangle2D.Float(0, 0, 10, 10));
 
 		// Set up dynamic bounds map
-		Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds = new HashMap<>();
+		Map<AbstractMovingModel, Rectangle2D.Float> dynamicBounds = new HashMap<AbstractMovingModel, Rectangle2D.Float>();
 		// Add a dynamic bound, (10,10) to (20,20)
 		dynamicBounds.put(new TestModel(10, 10, 10, 10), new Rectangle2D.Float(
 				10, 10, 10, 10));

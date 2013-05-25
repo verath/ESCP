@@ -63,7 +63,7 @@ public class RoomsController {
 	 */
 	public RoomsController() {
 		rooms = new HashMap<Point, RoomController>();
-		soundController = soundController.instance();
+		soundController = new SoundController();
 	}
 
 	/**
@@ -224,8 +224,6 @@ public class RoomsController {
 		} else if (currentRoom.allDead() && !currentRoom.isUnlocked()
 				&& !bossRoomUnlocked) {
 			currentRoom.unlockRoom();
-			SoundController soundController = SoundController
-					.instance();
 			soundController.playSound(SoundEffect.NARRATOR_NEXT);
 
 		}

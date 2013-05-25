@@ -39,7 +39,7 @@ public class StateController extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		soundController = SoundController.instance();
+		soundController = new SoundController();
 		PlayState playState = new PlayState(Constants.GAME_STATE_PLAYING);
 		MenuStateMain mainMenu = new MenuStateMain(
 				Constants.GAME_STATE_MENU_MAIN);

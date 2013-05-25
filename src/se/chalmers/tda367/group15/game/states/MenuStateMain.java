@@ -54,7 +54,7 @@ public class MenuStateMain extends AbstractMenuBasedState {
 	@Override
 	public void init() {
 		this.initMenuItems();
-		soundController = SoundController.instance();
+		soundController = new SoundController();
 		try {
 			setBackground(new Image("res/menu/background.png"));
 		} catch (SlickException e) {

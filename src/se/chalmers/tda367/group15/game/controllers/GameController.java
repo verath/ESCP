@@ -76,7 +76,7 @@ public class GameController {
 	 */
 	public void init(GameContainer container, StateBasedGame game) {
 
-		soundController = SoundController.instance();
+		soundController = new SoundController();
 
 		// Reset the game over flags
 		gameOver = false;

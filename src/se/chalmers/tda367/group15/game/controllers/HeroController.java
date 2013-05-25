@@ -35,8 +35,7 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
 public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
-	private final SoundController soundController = SoundController
-			.instance();
+	private final SoundController soundController = new SoundController();
 
 	/**
 	 * Create a new controller for the hero.

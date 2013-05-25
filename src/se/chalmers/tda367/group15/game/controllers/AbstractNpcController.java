@@ -35,8 +35,7 @@ public abstract class AbstractNpcController extends
 
 	int ENEMY_DAMAGE_MODIFIER = 2;
 
-	private final SoundController soundController = SoundController
-			.instance();
+	private final SoundController soundController = new SoundController();
 
 	/**
 	 * The path controller is traveling

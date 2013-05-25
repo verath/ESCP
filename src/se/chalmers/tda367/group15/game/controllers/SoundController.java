@@ -10,14 +10,12 @@ import org.newdawn.slick.Sound;
 
 public class SoundController {
 
-	private static SoundController instance;
+	private static final List<Sound> sounds = new ArrayList<Sound>();
 
-	private final List<Sound> sounds = new ArrayList<Sound>();
+	private static Music music;
+	private static Music queuedMusic;
 
-	private Music music;
-	private Music queuedMusic;
-
-	private boolean queued = false;
+	private static boolean queued = false;
 
 	public enum SoundEffect {
 		ENEMY_DEATH(new String[] { "res/sound/enemy/ondeath/enemy_death.aif" }), ENEMY_HURT(
@@ -51,17 +49,7 @@ public class SoundController {
 		}
 	}
 
-	private SoundController() {
-	}
-
-	public static SoundController instance() {
-		if (instance == null) {
-			instance = new SoundController();
-		}
-		return instance;
-	}
-
-	public void playSound(SoundEffect soundEffect) {
+	public static void playSound(SoundEffect soundEffect) {
 		Sound sound;
 		int maxRandomNbr = soundEffect.pathsToFiles.length;
 		Random generator = new Random();
@@ -77,7 +65,7 @@ public class SoundController {
 
 	}
 
-	public void playGameMusic(GameMusic gameMusic) {
+	public static void playGameMusic(GameMusic gameMusic) {
 
 		try {
 			if (music != null) {
@@ -95,13 +83,13 @@ public class SoundController {
 		}
 	}
 
-	private void fadeGameMusic() {
+	private static void fadeGameMusic() {
 		if (music != null) {
 			music.fade(1500, 0.0f, true);
 		}
 	}
 
-	public void stopAll() {
+	public static void stopAll() {
 		if (music != null) {
 			music.release();
 		}
@@ -113,7 +101,7 @@ public class SoundController {
 		}
 	}
 
-	public void update() {
+	public static void update() {
 		// If a piece of music has been queued
 		if (queued && !music.playing()) {
 			music.setVolume(0.0f);
