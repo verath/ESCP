@@ -19,6 +19,7 @@ import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
+import se.chalmers.tda367.group15.game.models.AbstractPickupModel;
 import se.chalmers.tda367.group15.game.models.AbstractProjectileModel;
 import se.chalmers.tda367.group15.game.models.BossModel;
 import se.chalmers.tda367.group15.game.models.CoworkerModel;
@@ -115,6 +116,10 @@ public class RoomController implements TileBasedMap {
 		movingModelControllers.add(new BossController(model, this,
 				gameController));
 		dynamicBounds.put(model, model.getBounds());
+	}
+	
+	private void addMovingModel(AbstractPickupModel model) {
+		movingModelControllers.add(new HealthPickupController(model, gameController));
 	}
 
 	/**
@@ -251,6 +256,8 @@ public class RoomController implements TileBasedMap {
 				addMovingModel((SoldierModel) model);
 			} else if (model instanceof BossModel) {
 				addMovingModel((BossModel) model);
+			} else if (model instanceof AbstractPickupModel) {
+				addMovingModel((AbstractPickupModel) model);
 			}
 		}
 	}
@@ -419,6 +426,8 @@ public class RoomController implements TileBasedMap {
 	 */
 	public boolean allDead() {
 		for (AbstractMovingModel model : roomModel.getNpcModels()) {
+			if(model instanceof AbstractPickupModel) 
+				return true;
 			if (model.isAlive()) {
 				return false;
 			}
