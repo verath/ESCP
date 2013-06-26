@@ -17,7 +17,6 @@ public class PickupView implements View{
 		this.model = model;
 		try {
 			this.image = new Image("res/images/pickups/" + model.getAnimationPath() + "sprite.png");
-			System.out.println(image);
 		} catch (SlickException e) {
 			System.out.println("The image for " + model.getAnimationPath() + " can not be found!");
 			e.printStackTrace();

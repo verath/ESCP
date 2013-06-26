@@ -37,13 +37,19 @@ public class WCRoomModel implements RoomModel {
 		CoworkerModel e3 = new CoworkerModel(450, 600, 0, 18, 16, 24);
 		CoworkerModel e4 = new CoworkerModel(940, 600, 18, 32, 10, 24);
 		CoworkerModel e5 = new CoworkerModel(300, 400);
+		
+		HealthPickupModel hp1 = new HealthPickupModel(30 * 32, 15 * 32);
+		HealthPickupModel hp2 = new HealthPickupModel(30 * 32, 18 * 32);
 
 		npcModels.add(e1);
 		npcModels.add(e2);
 		npcModels.add(e3);
 		npcModels.add(e4);
 		npcModels.add(e5);
-
+		
+		npcModels.add(hp1);
+		npcModels.add(hp2);
+		
 		unlockedMapPath = "res/levels/right_room.tmx";
 		lockedMapPath = "res/levels/right_room_locked.tmx";
 	}

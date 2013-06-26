@@ -29,7 +29,8 @@ public class SoundController {
 				new String[] { "res/sound/axe/axe_swing.aif" }), UNARMED_SMASH(
 				new String[] { "res/sound/unarmed/melee_swing.aif" }), BOSS_DEATH(
 				new String[] { "res/sound/boss/ondeath/boss_death.aif" }), DONUT_FIRED(
-				new String[] { "res/sound/donut/donut.aif" });
+				new String[] { "res/sound/donut/donut.aif" }), POWERUP(
+				new String[] { "res/sound/misc/powerup.aif" });
 
 		private final String[] pathsToFiles;
 

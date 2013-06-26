@@ -33,9 +33,13 @@ public class LobbyRoomModel implements RoomModel {
 		CoworkerModel e2 = new CoworkerModel(12 * 32, 7 * 32);
 		CoworkerModel e3 = new CoworkerModel(25 * 32, 16 * 32);
 
+		HealthPickupModel hp1 = new HealthPickupModel(10 * 32, 11 * 32);
+
 		npcModels.add(e1);
 		npcModels.add(e2);
 		npcModels.add(e3);
+
+		npcModels.add(hp1);
 
 		lockedMapPath = "res/levels/lobby_all_locked.tmx";
 		unlockedMapPath = "res/levels/lobby_boss_locked.tmx";

@@ -1,8 +1,7 @@
 package se.chalmers.tda367.group15.game.models.weapons;
 
 /**
- * A weapon that can only be used in melee range. A melee weapon also gives the
- * hero 1/5th of the damage dealt back as health.
+ * A weapon that can only be used in melee range.
  * 
  * @author tholene
  * 

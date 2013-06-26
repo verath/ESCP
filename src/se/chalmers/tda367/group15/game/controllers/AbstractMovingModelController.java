@@ -240,18 +240,22 @@ abstract class AbstractMovingModelController {
 					&& otherModel.isAlive()) {
 				dynamicCollision = true;
 
-				if (model instanceof MeleeSwingModel
-						&& otherModel instanceof AbstractNpcModel) {
-					getGameController().getHeroController().incHealth();
-				}
 				if (model instanceof AbstractProjectileModel
 						&& otherModel instanceof AbstractProjectileModel) {
 					dynamicCollision = false;
 				} else if (model instanceof AbstractProjectileModel
 						&& otherModel instanceof AbstractCharacterModel) {
+
 					AbstractProjectileModel projectile = (AbstractProjectileModel) model;
 					int damage = projectile.getDamage();
 					otherModel.takeDamage(damage);
+					
+					//Ugly hack to only shake when hero takes damage
+					if (otherModel
+							.getClass()
+							.toString()
+							.equals("class se.chalmers.tda367.group15.game.models.HeroModel"))
+						getGameController().shakeScreen();
 
 					if (otherModel.getHealth() <= 0) {
 						otherModel.setAlive(false);

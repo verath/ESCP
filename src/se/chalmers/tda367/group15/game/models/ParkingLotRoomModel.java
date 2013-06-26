@@ -32,8 +32,7 @@ public class ParkingLotRoomModel implements RoomModel {
 		CoworkerModel e1 = new CoworkerModel(2 * 32, 5 * 32);
 		CoworkerModel e2 = new CoworkerModel(29 * 32, 11 * 32);
 		
-		HealthPickupModel hp1 = new HealthPickupModel(10 * 32, 20 * 32);
-		
+		HealthPickupModel hp1 = new HealthPickupModel(26 * 32, 3 * 32);
 
 		npcModels.add(e1);
 		npcModels.add(e2);
@@ -42,6 +41,8 @@ public class ParkingLotRoomModel implements RoomModel {
 
 		unlockedMapPath = "res/levels/parking_lot.tmx";
 		lockedMapPath = "res/levels/parking_lot_locked.tmx";
+		
+		
 	}
 
 	/**

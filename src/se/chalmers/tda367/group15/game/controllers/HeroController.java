@@ -60,6 +60,7 @@ public class HeroController extends AbstractMovingModelController {
 		model.addWeapon(new UnarmedModel());
 		model.addWeapon(new AxeModel());
 		model.addWeapon(new PistolModel());
+
 		model.setCurrentWeapon(model.getWeapons().get(0));
 
 		setModel(model);
@@ -326,12 +327,5 @@ public class HeroController extends AbstractMovingModelController {
 	@Override
 	public void render(GameContainer container, Graphics g) {
 		getView().render(container, g);
-	}
-
-	public void incHealth() {
-		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-		int heal = model.getCurrentWeapon().getDamage() / 5 + model.getHealth();
-		model.setHealth(heal > 100 ? 100 : heal);
-
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -25,7 +26,9 @@ import se.chalmers.tda367.group15.game.views.HUDView;
  * 
  */
 public class GameController {
-
+	private Random random;
+	private boolean shake;
+	private long timer = 0;
 	/**
 	 * A flag for if the game is over
 	 */
@@ -73,7 +76,7 @@ public class GameController {
 	 *            The state based game currently running.
 	 */
 	public void init(GameContainer container, StateBasedGame game) {
-
+		random = new Random();
 		// Reset the game over flags
 		gameOver = false;
 		gameWon = false;
@@ -168,11 +171,16 @@ public class GameController {
 	 *            normal rendering routines can also be used.
 	 */
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
+		if (shake) {
+			container.getGraphics().translate(random.nextInt(5) * 3, random.nextInt(5)*1);
+			shake = System.currentTimeMillis() - timer > 1000000;
+		}
 
 		roomsController.render(container, g);
 		heroController.render(container, g);
 
 		hudView.render(container, g);
+
 	}
 
 	/**
@@ -226,6 +234,11 @@ public class GameController {
 	 */
 	public ScoreController getScoreController() {
 		return this.scoreController;
+	}
+	
+	public void shakeScreen() {
+		shake = true;
+		timer = System.currentTimeMillis();
 	}
 
 }
