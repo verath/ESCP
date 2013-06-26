@@ -48,7 +48,10 @@ public class LeftWingRoomModel implements RoomModel {
 		CoworkerModel e14 = new CoworkerModel(18 * 32, 10 * 32);
 		CoworkerModel e15 = new CoworkerModel(18 * 32, 14 * 32);
 		CoworkerModel e16 = new CoworkerModel(18 * 32, 18 * 32);
-
+		
+		HealthPickupModel hp1 = new HealthPickupModel(30 * 32, 15 * 32);
+		HealthPickupModel hp2 = new HealthPickupModel(30 * 32, 18 * 32);
+		
 		npcModels.add(e1);
 		npcModels.add(e2);
 		npcModels.add(e3);
@@ -65,6 +68,9 @@ public class LeftWingRoomModel implements RoomModel {
 		npcModels.add(e14);
 		npcModels.add(e15);
 		npcModels.add(e16);
+		
+		npcModels.add(hp1);
+		npcModels.add(hp2);
 
 		unlockedMapPath = "res/levels/left_room.tmx";
 		lockedMapPath = "res/levels/left_room_locked.tmx";

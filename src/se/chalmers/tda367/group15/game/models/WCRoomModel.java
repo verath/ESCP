@@ -38,8 +38,8 @@ public class WCRoomModel implements RoomModel {
 		CoworkerModel e4 = new CoworkerModel(940, 600, 18, 32, 10, 24);
 		CoworkerModel e5 = new CoworkerModel(300, 400);
 		
-		HealthPickupModel hp1 = new HealthPickupModel(30 * 32, 15 * 32);
-		HealthPickupModel hp2 = new HealthPickupModel(30 * 32, 18 * 32);
+		HealthPickupModel hp1 = new HealthPickupModel(7 * 32, 3 * 32);
+		HealthPickupModel hp2 = new HealthPickupModel(26 * 32, 22 * 32);
 
 		npcModels.add(e1);
 		npcModels.add(e2);
