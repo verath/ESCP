@@ -4,6 +4,9 @@ import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
 
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -36,6 +39,9 @@ public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
 
+	/** This will be the current gamepad */
+	private Controller gamePad;
+
 	/**
 	 * Create a new controller for the hero.
 	 * 
@@ -62,6 +68,17 @@ public class HeroController extends AbstractMovingModelController {
 		model.addWeapon(new PistolModel());
 
 		model.setCurrentWeapon(model.getWeapons().get(0));
+
+		Controller[] ca = ControllerEnvironment.getDefaultEnvironment()
+				.getControllers();
+
+		for (int i = 0; i < ca.length; i++) {
+			if (ca[i].getType().equals(Controller.Type.GAMEPAD)) {
+				gamePad = ca[i];
+			}
+		}
+		if (gamePad != null)
+			System.out.println(gamePad.getName());
 
 		setModel(model);
 		setView(new CharacterView(model));
@@ -160,6 +177,7 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	private Point calculateNextPosition(Input input,
 			AbstractCharacterModel model, int delta) {
+
 		boolean goingUp = input.isKeyDown(KeyBindings.getBinding(Key.UP));
 		boolean goingDown = input.isKeyDown(KeyBindings.getBinding(Key.DOWN));
 		boolean goingRight = input.isKeyDown(KeyBindings.getBinding(Key.RIGHT));
