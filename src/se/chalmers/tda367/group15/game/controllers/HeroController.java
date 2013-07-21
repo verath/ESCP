@@ -38,13 +38,7 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
 public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
-	private Controller gamepad;
-	private boolean A;
-	private boolean B;
-	private boolean X;
-	private boolean Y;
-	private boolean LB;
-	private boolean RB;
+	private GamepadController gamepad;
 
 	/**
 	 * Create a new controller for the hero.
@@ -55,7 +49,8 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	public HeroController(GameController gameController) {
 		super(gameController);
-
+		
+		gamepad = new GamepadController();
 		HeroModel model = new HeroModel();
 
 		// configure model
@@ -76,25 +71,6 @@ public class HeroController extends AbstractMovingModelController {
 		setModel(model);
 		setView(new CharacterView(model));
 
-		try {
-			Controllers.create();
-		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Controllers.poll();
-		int indexOfGamepad = 0;
-		boolean gamepadExists = false;
-		for (int i = 0; i < Controllers.getControllerCount(); i++) {
-			System.out.println(Controllers.getController(i).getName());
-			if (Controllers.getController(i).getName().contains("360")) {
-				indexOfGamepad = i;
-				gamepadExists = true;
-			}
-		}
-		if (gamepadExists)
-			gamepad = Controllers.getController(indexOfGamepad);
-
 	}
 
 	/**
@@ -106,23 +82,14 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-		
-		if (gamepad != null) {
-			gamepad.poll();
-			A = gamepad.isButtonPressed(0);
-			B = gamepad.isButtonPressed(2);
-			X = gamepad.isButtonPressed(1);
-			Y = gamepad.isButtonPressed(3);
-			LB = gamepad.isButtonPressed(4);
-			RB = gamepad.isButtonPressed(5);
-		}
+
 		if (!model.isAlive()) {
 			getGameController().gameOver(false);
 			return;
 		}
 
 		Input input = container.getInput();
-
+		gamepad.update();
 		// Handle sprinting
 		if (input.isKeyDown(input.KEY_LSHIFT)) {
 			model.setVelocity(0.28f);
@@ -268,8 +235,7 @@ public class HeroController extends AbstractMovingModelController {
 
 		// Get status of mouse button
 		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
-		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
-				|| X;
+		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON);
 
 		// Get type of weapon currently equipped
 		boolean isRangedWeapon = weapon instanceof AbstractRangedWeaponModel;
