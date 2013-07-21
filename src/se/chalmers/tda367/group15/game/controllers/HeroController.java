@@ -39,7 +39,12 @@ public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
 	private Controller gamepad;
-	private boolean start;
+	private boolean A;
+	private boolean B;
+	private boolean X;
+	private boolean Y;
+	private boolean LB;
+	private boolean RB;
 
 	/**
 	 * Create a new controller for the hero.
@@ -78,8 +83,17 @@ public class HeroController extends AbstractMovingModelController {
 			e.printStackTrace();
 		}
 		Controllers.poll();
-
-		gamepad = Controllers.getController(1);
+		int indexOfGamepad = 0;
+		boolean gamepadExists = false;
+		for (int i = 0; i < Controllers.getControllerCount(); i++) {
+			System.out.println(Controllers.getController(i).getName());
+			if (Controllers.getController(i).getName().contains("360")) {
+				indexOfGamepad = i;
+				gamepadExists = true;
+			}
+		}
+		if (gamepadExists)
+			gamepad = Controllers.getController(indexOfGamepad);
 
 	}
 
@@ -92,10 +106,16 @@ public class HeroController extends AbstractMovingModelController {
 			Map<AbstractMovingModel, Float> dynamicBounds) {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
-
-		gamepad.poll();
-		start = gamepad.isButtonPressed(7);
-
+		
+		if (gamepad != null) {
+			gamepad.poll();
+			A = gamepad.isButtonPressed(0);
+			B = gamepad.isButtonPressed(2);
+			X = gamepad.isButtonPressed(1);
+			Y = gamepad.isButtonPressed(3);
+			LB = gamepad.isButtonPressed(4);
+			RB = gamepad.isButtonPressed(5);
+		}
 		if (!model.isAlive()) {
 			getGameController().gameOver(false);
 			return;
@@ -248,7 +268,8 @@ public class HeroController extends AbstractMovingModelController {
 
 		// Get status of mouse button
 		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
-		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON);
+		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
+				|| X;
 
 		// Get type of weapon currently equipped
 		boolean isRangedWeapon = weapon instanceof AbstractRangedWeaponModel;
