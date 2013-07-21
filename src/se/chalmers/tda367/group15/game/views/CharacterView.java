@@ -75,6 +75,7 @@ public class CharacterView implements View {
 			String path = model.getAnimationPath() + "/movement/"
 					+ weapon.getName() + "/";
 			Animation walkAnimation = getAnimationFromPath(path);
+			walkAnimation.setSpeed(model.getVelocity()*6);
 			walkAnimations.put(weapon, walkAnimation);
 
 			if (weapon instanceof AbstractMeleeWeaponModel) {

@@ -83,7 +83,13 @@ public class HeroController extends AbstractMovingModelController {
 		}
 
 		Input input = container.getInput();
-
+		
+		// Handle sprinting
+		if(input.isKeyDown(input.KEY_LSHIFT)) {
+			model.setVelocity(0.28f);
+		} else {
+			model.setVelocity(0.2f);
+		}
 		// Handle changing of weapons
 		changeWeapons(input, model);
 
