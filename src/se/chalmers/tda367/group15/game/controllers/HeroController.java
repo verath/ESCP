@@ -4,6 +4,9 @@ import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Controller;
+import org.lwjgl.input.Controllers;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -35,6 +38,8 @@ import se.chalmers.tda367.group15.game.views.CharacterView;
 public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
+	private Controller gamepad;
+	private boolean start;
 
 	/**
 	 * Create a new controller for the hero.
@@ -65,6 +70,17 @@ public class HeroController extends AbstractMovingModelController {
 
 		setModel(model);
 		setView(new CharacterView(model));
+
+		try {
+			Controllers.create();
+		} catch (LWJGLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Controllers.poll();
+
+		gamepad = Controllers.getController(1);
+
 	}
 
 	/**
@@ -77,15 +93,18 @@ public class HeroController extends AbstractMovingModelController {
 
 		AbstractCharacterModel model = (AbstractCharacterModel) getModel();
 
+		gamepad.poll();
+		start = gamepad.isButtonPressed(7);
+
 		if (!model.isAlive()) {
 			getGameController().gameOver(false);
 			return;
 		}
 
 		Input input = container.getInput();
-		
+
 		// Handle sprinting
-		if(input.isKeyDown(input.KEY_LSHIFT)) {
+		if (input.isKeyDown(input.KEY_LSHIFT)) {
 			model.setVelocity(0.28f);
 		} else {
 			model.setVelocity(0.2f);
