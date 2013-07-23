@@ -21,6 +21,22 @@ public class GamepadController {
 	private boolean Y;
 	private boolean LB;
 	private boolean RB;
+	private boolean BACK;
+	private boolean START;
+
+	private float LX;
+	private float LY;
+
+	private float RX;
+	private float RY;
+
+	public enum GamepadButton {
+		A, B, X, Y, LB, RB, BACK, START;
+	}
+
+	public enum GamepadAxis {
+		LEFT_STICK, RIGHT_STICK;
+	}
 
 	/**
 	 * Create a new GamepadController that will manage button and control stick
@@ -42,10 +58,10 @@ public class GamepadController {
 		 * This is not a failsafe method, but due to a rather limited API this
 		 * will have to do.
 		 */
+
 		int indexOfGamepad = 0;
 		boolean gamepadExists = false;
 		for (int i = 0; i < Controllers.getControllerCount(); i++) {
-			System.out.println(Controllers.getController(i).getName());
 			if (Controllers.getController(i).getName().contains("360")) {
 				indexOfGamepad = i;
 				gamepadExists = true;
@@ -53,8 +69,6 @@ public class GamepadController {
 		}
 		if (gamepadExists)
 			gamepad = Controllers.getController(indexOfGamepad);
-
-		
 	}
 
 	/**
@@ -62,20 +76,72 @@ public class GamepadController {
 	 * called by the client in order to query accurate information.
 	 */
 	public void update() {
-		// if (gamepad != null) {
-		// gamepad.poll();
-		// A = gamepad.isButtonPressed(0);
-		// B = gamepad.isButtonPressed(2);
-		// X = gamepad.isButtonPressed(1);
-		// Y = gamepad.isButtonPressed(3);
-		// LB = gamepad.isButtonPressed(4);
-		// RB = gamepad.isButtonPressed(5);
-		
+		if (gamepad != null) {
+			gamepad.poll();
+			A = gamepad.isButtonPressed(0);
+			B = gamepad.isButtonPressed(1);
+			X = gamepad.isButtonPressed(2);
+			Y = gamepad.isButtonPressed(3);
+			LB = gamepad.isButtonPressed(4);
+			RB = gamepad.isButtonPressed(5);
+			BACK = gamepad.isButtonPressed(6);
+			START = gamepad.isButtonPressed(7);
+
+			LX = gamepad.getAxisValue(1);
+			LY = gamepad.getAxisValue(0);
+
+			RX = gamepad.getAxisValue(3);
+			RY = gamepad.getAxisValue(2);
+		}
+
+		gamepad.setYAxisDeadZone(0.3f);
+		gamepad.setXAxisDeadZone(0.3f);
+		gamepad.setRXAxisDeadZone(0.3f);
+		gamepad.setRYAxisDeadZone(0.3f);
+
 		test();
 	}
 
 	void test() {
-			
-		System.out.println((gamepad.getAxisValue(0)));
+
+	}
+
+	public boolean isButtonDown(GamepadButton button) {
+		switch (button) {
+		case A:
+			return A;
+		case B:
+			return B;
+		case X:
+			return X;
+		case Y:
+			return Y;
+		case LB:
+			return LB;
+		case RB:
+			return RB;
+		case BACK:
+			return BACK;
+		case START:
+			return START;
+		default:
+			return false;
+		}
+	}
+
+	public float getLeftStickX() {
+		return LX;
+	}
+
+	public float getLeftStickY() {
+		return LY;
+	}
+
+	public float getRightStickX() {
+		return RX;
+	}
+
+	public float getRightStickY() {
+		return RY;
 	}
 }
