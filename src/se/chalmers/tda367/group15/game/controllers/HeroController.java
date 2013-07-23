@@ -1,17 +1,17 @@
 package se.chalmers.tda367.group15.game.controllers;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.awt.geom.Rectangle2D.Float;
 import java.util.List;
 import java.util.Map;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Controller;
-import org.lwjgl.input.Controllers;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Point;
 
+import se.chalmers.tda367.group15.game.controllers.GamepadController.GamepadButton;
 import se.chalmers.tda367.group15.game.controllers.SoundController.SoundEffect;
 import se.chalmers.tda367.group15.game.models.AbstractCharacterModel;
 import se.chalmers.tda367.group15.game.models.AbstractMovingModel;
@@ -39,6 +39,11 @@ public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
 	private GamepadController gamepad;
+	private Robot robot;
+	private float oldStickY = 0f;
+	private float oldStickX = 0f;
+	private int weaponIndex = 0;
+	private int weaponMod;
 
 	/**
 	 * Create a new controller for the hero.
@@ -49,7 +54,7 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	public HeroController(GameController gameController) {
 		super(gameController);
-		
+
 		gamepad = new GamepadController();
 		HeroModel model = new HeroModel();
 
@@ -68,8 +73,18 @@ public class HeroController extends AbstractMovingModelController {
 
 		model.setCurrentWeapon(model.getWeapons().get(0));
 
+		weaponMod = model.getWeapons().size();
+		System.out.println(weaponMod);
+
 		setModel(model);
 		setView(new CharacterView(model));
+
+		try {
+			robot = new Robot();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -89,9 +104,14 @@ public class HeroController extends AbstractMovingModelController {
 		}
 
 		Input input = container.getInput();
-		gamepad.update();
+		if (gamepad.exists()) {
+			gamepad.update();
+			container.setDefaultMouseCursor();
+		}
+
 		// Handle sprinting
-		if (input.isKeyDown(input.KEY_LSHIFT)) {
+		if (input.isKeyDown(input.KEY_LSHIFT)
+				|| gamepad.isButtonDown(GamepadButton.LB)) {
 			model.setVelocity(0.28f);
 		} else {
 			model.setVelocity(0.2f);
@@ -172,10 +192,26 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	private Point calculateNextPosition(Input input,
 			AbstractCharacterModel model, int delta) {
-		boolean goingUp = input.isKeyDown(KeyBindings.getBinding(Key.UP));
-		boolean goingDown = input.isKeyDown(KeyBindings.getBinding(Key.DOWN));
-		boolean goingRight = input.isKeyDown(KeyBindings.getBinding(Key.RIGHT));
-		boolean goingLeft = input.isKeyDown(KeyBindings.getBinding(Key.LEFT));
+
+		boolean stickUp = false;
+		boolean stickDown = false;
+		boolean stickRight = false;
+		boolean stickLeft = false;
+		if (gamepad.exists()) {
+			stickUp = gamepad.getLeftStickY() < 0;
+			stickDown = gamepad.getLeftStickY() > 0;
+			stickRight = gamepad.getLeftStickX() > 0;
+			stickLeft = gamepad.getLeftStickX() < 0;
+		}
+
+		boolean goingUp = input.isKeyDown(KeyBindings.getBinding(Key.UP))
+				|| stickUp;
+		boolean goingDown = input.isKeyDown(KeyBindings.getBinding(Key.DOWN))
+				|| stickDown;
+		boolean goingRight = input.isKeyDown(KeyBindings.getBinding(Key.RIGHT))
+				|| stickRight;
+		boolean goingLeft = input.isKeyDown(KeyBindings.getBinding(Key.LEFT))
+				|| stickLeft;
 
 		// Calculate move direction and move
 		float speedY = (goingUp ? 1 : 0) - (goingDown ? 1 : 0);
@@ -210,7 +246,24 @@ public class HeroController extends AbstractMovingModelController {
 		float mouseY = input.getMouseY();
 		float yDiff = (model.getHeight() / 2 + model.getY() - mouseY);
 		float xDiff = (model.getWidth() / 2 + model.getX() - mouseX);
-		model.setRotation(Math.toDegrees(Math.atan2(yDiff, xDiff)));
+		if (gamepad.exists()) {
+			float stickY = -gamepad.getRightStickY();
+			float stickX = -gamepad.getRightStickX();
+
+			if (stickY == 0f && stickX == 0f) {
+				stickY = oldStickY;
+				stickX = oldStickX;
+			}
+			double gamepadRotation = Math.toDegrees(Math.atan2(stickY, stickX));
+
+			oldStickY = stickY;
+			oldStickX = stickX;
+
+			model.setRotation(gamepadRotation);
+
+		} else {
+			model.setRotation(Math.toDegrees(Math.atan2(yDiff, xDiff)));
+		}
 	}
 
 	/**
@@ -235,7 +288,8 @@ public class HeroController extends AbstractMovingModelController {
 
 		// Get status of mouse button
 		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
-		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON);
+		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
+				|| gamepad.isButtonDown(GamepadButton.RB);
 
 		// Get type of weapon currently equipped
 		boolean isRangedWeapon = weapon instanceof AbstractRangedWeaponModel;
@@ -264,12 +318,22 @@ public class HeroController extends AbstractMovingModelController {
 	 *            Model to change weapons for.
 	 */
 	private void changeWeapons(Input input, AbstractCharacterModel model) {
-		if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_1))) {
-			model.setCurrentWeapon(model.getWeapons().get(0));
-		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_2))) {
-			model.setCurrentWeapon(model.getWeapons().get(1));
-		} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_3))) {
-			model.setCurrentWeapon(model.getWeapons().get(2));
+		if (gamepad.exists()) {
+			if (gamepad.isButtonDown(GamepadButton.B))
+				model.setCurrentWeapon(model.getWeapons().get(
+						(Math.abs(++weaponIndex % weaponMod))));
+			if (gamepad.isButtonDown(GamepadButton.Y))
+				model.setCurrentWeapon(model.getWeapons().get(
+						(Math.abs(--weaponIndex % weaponMod))));
+		} else {
+
+			if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_1))) {
+				model.setCurrentWeapon(model.getWeapons().get(0));
+			} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_2))) {
+				model.setCurrentWeapon(model.getWeapons().get(1));
+			} else if (input.isKeyPressed(KeyBindings.getBinding(Key.WEAPON_3))) {
+				model.setCurrentWeapon(model.getWeapons().get(2));
+			}
 		}
 	}
 

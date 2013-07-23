@@ -14,7 +14,9 @@ import org.lwjgl.input.Controllers;
 public class GamepadController {
 
 	private Controller gamepad;
-
+	
+	private boolean gamepadExists;
+	
 	private boolean A;
 	private boolean B;
 	private boolean X;
@@ -60,7 +62,7 @@ public class GamepadController {
 		 */
 
 		int indexOfGamepad = 0;
-		boolean gamepadExists = false;
+		gamepadExists = false;
 		for (int i = 0; i < Controllers.getControllerCount(); i++) {
 			if (Controllers.getController(i).getName().contains("360")) {
 				indexOfGamepad = i;
@@ -69,6 +71,8 @@ public class GamepadController {
 		}
 		if (gamepadExists)
 			gamepad = Controllers.getController(indexOfGamepad);
+		else
+			return;
 	}
 
 	/**
@@ -92,12 +96,12 @@ public class GamepadController {
 
 			RX = gamepad.getAxisValue(3);
 			RY = gamepad.getAxisValue(2);
-		}
 
-		gamepad.setYAxisDeadZone(0.3f);
-		gamepad.setXAxisDeadZone(0.3f);
-		gamepad.setRXAxisDeadZone(0.3f);
-		gamepad.setRYAxisDeadZone(0.3f);
+			gamepad.setYAxisDeadZone(0.2f);
+			gamepad.setXAxisDeadZone(0.2f);
+			gamepad.setRXAxisDeadZone(0.2f);
+			gamepad.setRYAxisDeadZone(0.2f);
+		}
 
 		test();
 	}
@@ -143,5 +147,9 @@ public class GamepadController {
 
 	public float getRightStickY() {
 		return RY;
+	}
+	
+	public boolean exists() {
+		return gamepadExists;
 	}
 }
