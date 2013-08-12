@@ -173,17 +173,6 @@ public class GamepadController {
 			return false;
 		}
 	}
-	
-	public boolean isButtonPressed(GamepadButton button) {
-		if(buttonDown) {
-			buttonDown = false;
-			return isButtonDown(button);
-		}else {
-			return false;
-		}
-		
-		
-	}
 
 	public float getLeftStickX() {
 		return LX;

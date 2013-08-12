@@ -278,7 +278,7 @@ public class HeroController extends AbstractMovingModelController {
 				.getCurrentWeapon().getFiringSpeed() / 4;
 
 		// Get status of mouse button
-		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || gamepad.isButtonPressed(GamepadButton.RB);
+		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || gamepad.isButtonDown(GamepadButton.RB);
 		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
 				|| gamepad.isButtonDown(GamepadButton.RB);
 
@@ -310,10 +310,10 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	private void changeWeapons(Input input, AbstractCharacterModel model) {
 		if (gamepad.exists()) {
-			if (gamepad.isButtonPressed(GamepadButton.B))
+			if (gamepad.isButtonDown(GamepadButton.B))
 				model.setCurrentWeapon(model.getWeapons().get(
 						(Math.abs(++weaponIndex % weaponMod))));
-			if (gamepad.isButtonPressed(GamepadButton.Y))
+			if (gamepad.isButtonDown(GamepadButton.Y))
 				model.setCurrentWeapon(model.getWeapons().get(
 						(Math.abs(--weaponIndex % weaponMod))));
 		} else {
