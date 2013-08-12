@@ -14,9 +14,13 @@ import org.lwjgl.input.Controllers;
 public class GamepadController {
 
 	private Controller gamepad;
-	
+
+	private boolean isMac = false;
+	private boolean isWindows = false;
+	private boolean isLinux = false;
+
 	private boolean gamepadExists;
-	
+
 	private boolean A;
 	private boolean B;
 	private boolean X;
@@ -45,6 +49,15 @@ public class GamepadController {
 	 * input.
 	 */
 	public GamepadController() {
+		/*
+		 * Quick hack for determining what OS the client is using. The drivers
+		 * for the xbox controller seems to map the buttons and sticks different
+		 * on different operating systems.
+		 */
+		String OS = System.getProperty("os.name").toLowerCase();
+		isMac = OS.contains("mac");
+		isWindows = OS.contains("win");
+		isLinux = OS.contains("nix");
 
 		try {
 			Controllers.create();
@@ -82,31 +95,56 @@ public class GamepadController {
 	public void update() {
 		if (gamepad != null) {
 			gamepad.poll();
-			A = gamepad.isButtonPressed(0);
-			B = gamepad.isButtonPressed(1);
-			X = gamepad.isButtonPressed(2);
-			Y = gamepad.isButtonPressed(3);
-			LB = gamepad.isButtonPressed(4);
-			RB = gamepad.isButtonPressed(5);
-			BACK = gamepad.isButtonPressed(6);
-			START = gamepad.isButtonPressed(7);
 
-			LX = gamepad.getAxisValue(1);
-			LY = gamepad.getAxisValue(0);
+			if (isWindows) {
+				A = gamepad.isButtonPressed(0);
+				B = gamepad.isButtonPressed(1);
+				X = gamepad.isButtonPressed(2);
+				Y = gamepad.isButtonPressed(3);
+				LB = gamepad.isButtonPressed(4);
+				RB = gamepad.isButtonPressed(5);
+				BACK = gamepad.isButtonPressed(6);
+				START = gamepad.isButtonPressed(7);
 
-			RX = gamepad.getAxisValue(3);
-			RY = gamepad.getAxisValue(2);
+				LX = gamepad.getAxisValue(1);
+				LY = gamepad.getAxisValue(0);
+
+				RX = gamepad.getAxisValue(3);
+				RY = gamepad.getAxisValue(2);
+
+			} else if (isMac) {
+
+				A = gamepad.isButtonPressed(11);
+				B = gamepad.isButtonPressed(12);
+				X = gamepad.isButtonPressed(13);
+				Y = gamepad.isButtonPressed(14);
+				LB = gamepad.isButtonPressed(8);
+				RB = gamepad.isButtonPressed(9);
+				BACK = gamepad.isButtonPressed(5);
+				START = gamepad.isButtonPressed(4);
+
+				LX = gamepad.getAxisValue(0);
+				LY = gamepad.getAxisValue(1);
+
+				RX = gamepad.getAxisValue(2);
+				RY = gamepad.getAxisValue(3);
+
+			} else if (isLinux) {
+
+				/*
+				 * ...the OS is Linux and I don't use that so somebody that does
+				 * would have to check the mappings for the controller
+				 */
+
+			} else {
+				// ...unsupported OS...?
+			}
 
 			gamepad.setYAxisDeadZone(0.2f);
 			gamepad.setXAxisDeadZone(0.2f);
 			gamepad.setRXAxisDeadZone(0.2f);
 			gamepad.setRYAxisDeadZone(0.2f);
 		}
-
-		test();
-	}
-
-	void test() {
 
 	}
 
@@ -148,7 +186,7 @@ public class GamepadController {
 	public float getRightStickY() {
 		return RY;
 	}
-	
+
 	public boolean exists() {
 		return gamepadExists;
 	}
