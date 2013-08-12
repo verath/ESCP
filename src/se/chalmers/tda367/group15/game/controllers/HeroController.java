@@ -39,7 +39,6 @@ public class HeroController extends AbstractMovingModelController {
 
 	private long swingTimer = 0;
 	private GamepadController gamepad;
-	private Robot robot;
 	private float oldStickY = 0f;
 	private float oldStickX = 0f;
 	private int weaponIndex = 0;
@@ -71,20 +70,12 @@ public class HeroController extends AbstractMovingModelController {
 		model.addWeapon(new AxeModel());
 		model.addWeapon(new PistolModel());
 
-		model.setCurrentWeapon(model.getWeapons().get(0));
+		model.setCurrentWeapon(model.getWeapons().get(weaponIndex));
 
 		weaponMod = model.getWeapons().size();
-		System.out.println(weaponMod);
-
+		
 		setModel(model);
 		setView(new CharacterView(model));
-
-		try {
-			robot = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 
@@ -108,7 +99,7 @@ public class HeroController extends AbstractMovingModelController {
 			gamepad.update();
 			container.setDefaultMouseCursor();
 		}
-
+			
 		// Handle sprinting
 		if (input.isKeyDown(input.KEY_LSHIFT)
 				|| gamepad.isButtonDown(GamepadButton.LB)) {
@@ -287,7 +278,7 @@ public class HeroController extends AbstractMovingModelController {
 				.getCurrentWeapon().getFiringSpeed() / 4;
 
 		// Get status of mouse button
-		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
+		boolean isMousePressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || gamepad.isButtonPressed(GamepadButton.RB);
 		boolean isMouseDown = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)
 				|| gamepad.isButtonDown(GamepadButton.RB);
 
@@ -319,10 +310,10 @@ public class HeroController extends AbstractMovingModelController {
 	 */
 	private void changeWeapons(Input input, AbstractCharacterModel model) {
 		if (gamepad.exists()) {
-			if (gamepad.isButtonDown(GamepadButton.B))
+			if (gamepad.isButtonPressed(GamepadButton.B))
 				model.setCurrentWeapon(model.getWeapons().get(
 						(Math.abs(++weaponIndex % weaponMod))));
-			if (gamepad.isButtonDown(GamepadButton.Y))
+			if (gamepad.isButtonPressed(GamepadButton.Y))
 				model.setCurrentWeapon(model.getWeapons().get(
 						(Math.abs(--weaponIndex % weaponMod))));
 		} else {

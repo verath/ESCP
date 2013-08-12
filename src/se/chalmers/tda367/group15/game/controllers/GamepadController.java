@@ -12,7 +12,9 @@ import org.lwjgl.input.Controllers;
  * 
  */
 public class GamepadController {
-
+	
+	private boolean buttonDown = true; 
+	
 	private Controller gamepad;
 
 	private boolean isMac = false;
@@ -149,6 +151,7 @@ public class GamepadController {
 	}
 
 	public boolean isButtonDown(GamepadButton button) {
+		buttonDown = true;
 		switch (button) {
 		case A:
 			return A;
@@ -169,6 +172,17 @@ public class GamepadController {
 		default:
 			return false;
 		}
+	}
+	
+	public boolean isButtonPressed(GamepadButton button) {
+		if(buttonDown) {
+			buttonDown = false;
+			return isButtonDown(button);
+		}else {
+			return false;
+		}
+		
+		
 	}
 
 	public float getLeftStickX() {
